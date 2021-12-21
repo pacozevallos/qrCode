@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "qrcode-3b121": {
+      "hosting": {
+        "qrCode": [
+          "qrcode-3b121"
+        ]
+      }
+    }
+  }
+}

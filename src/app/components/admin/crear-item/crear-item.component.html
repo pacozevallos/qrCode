@@ -1,0 +1,55 @@
+
+  <div class="">
+
+    <p class="h3">Crear Item</p>
+
+      <form [formGroup]="formItem" (submit)="onSubmit()" novalidate class="row gx-3">
+
+        <mat-form-field appearance="standard" class="col-12">
+          <mat-label>Categoría *</mat-label>
+          <!-- <input matInput type="text" formControlName="categoria"> -->
+          <mat-select formControlName="categoria">
+            <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</mat-option>
+            <mat-option class="text-secondary" (click)="openModalCrearCategoriaItem()">+ Agregar categoría</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- <div class="col-3">
+          <div class="d-grid">
+            <button type="button" class="btn btn-outline-primary myButton" (click)="openModalCrearCategoriaItem()">Crear</button>
+          </div>
+        </div> -->
+
+        <mat-form-field appearance="standard" class="col-12">
+          <mat-label>Nombre *</mat-label>
+          <input matInput type="text" formControlName="nombre">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard" class="col-12">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" formControlName="descripcion"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard" class="col-6">
+          <mat-label>Precio *</mat-label>
+          <input matInput type="number" formControlName="precio">
+        </mat-form-field>
+
+        <!-- <mat-form-field appearance="standard" class="col-6">
+          <mat-label>Precio descuento</mat-label>
+          <input matInput type="number" formControlName="precioDescuento">
+        </mat-form-field> -->
+
+        <div class="d-grid">
+          <button class="btn btn-primary myButton">
+            <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
+              <mat-spinner class="" [diameter]="24"></mat-spinner>
+            </span>
+            <span *ngIf="!loading">Crear item</span>
+          </button>
+        </div>
+
+      </form>
+
+
+  </div>

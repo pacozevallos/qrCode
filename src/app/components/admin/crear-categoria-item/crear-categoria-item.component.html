@@ -1,0 +1,42 @@
+<div>
+
+  <p class="h5">Agregar categoría</p>
+
+  <form [formGroup]="formCategoria" (ngSubmit)="onSubmit()" novalidate class="row gx-0">
+
+    
+    <!-- <div formArrayName="categorias" class="col-12">
+      <div class="d-flex" *ngFor="let descripcion of formCategoria.controls['categorias']['controls']; let i = index;">
+        <mat-form-field appearance="standard" class="w-100">
+          <mat-label>Categoria {{i+1}}</mat-label>
+          <input matInput [formControlName]="i" type="text">
+        </mat-form-field>
+        <div *ngIf="i !== 0" class="ms-2 pt-2">
+          <button mat-button matSuffix mat-icon-button (click)="eliminarCategoria(i)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mb-3 mb-md-5">
+      <button type="button" class="btn btn-light btn-sm px-2" (click)="agregarCategoria()">+</button>
+    </div> -->
+
+    <mat-form-field appearance="standard" class="col-12">
+      <mat-label>Categoria</mat-label>
+      <input matInput type="text" formControlName="categoria">
+    </mat-form-field>
+
+
+
+    <div class="d-grid">
+      <button class="btn btn-primary myButton">
+        <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
+          <mat-spinner class="" [diameter]="24"></mat-spinner>
+        </span>
+        <span *ngIf="!loading">Agregar</span>
+      </button>
+    </div>
+    
+  </form>
+</div>

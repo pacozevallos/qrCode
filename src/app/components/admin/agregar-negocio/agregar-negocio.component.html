@@ -1,0 +1,35 @@
+<div class="">
+  <p class="h4">Agregar negocio</p>
+  <form [formGroup]="formNegocio" (submit)="onSubmit()" novalidate class="row g-0">
+
+    <mat-form-field appearance="standard" class="col-12">
+      <mat-label>Tipo</mat-label>
+      <mat-select formControlName="tipo">
+        <mat-option *ngFor="let tipo of tiposNegocio" [value]="tipo">{{tipo}}</mat-option>
+      </mat-select>
+      <!-- <input matInput type="text" formControlName="tipo"> -->
+    </mat-form-field>
+
+    <mat-form-field appearance="standard" class="col-12">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text" formControlName="nombre">
+    </mat-form-field>
+
+  
+
+    <mat-form-field appearance="standard" class="col-12">
+      <mat-label>Dirección</mat-label>
+      <input matInput type="text" formControlName="direccion">
+    </mat-form-field>
+
+    <div class="d-grid">
+      <button class="btn btn-primary myButton">
+        <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
+          <mat-spinner class="" [diameter]="24"></mat-spinner>
+        </span>
+        <span *ngIf="!loading">Crear Negocio</span>
+      </button>
+    </div>
+
+  </form>
+</div>
