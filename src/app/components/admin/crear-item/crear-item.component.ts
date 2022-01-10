@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import { Item } from 'src/app/classes/item';
 import { Negocio } from 'src/app/classes/negocio';
 import { CrearCategoriaItemComponent } from '../crear-categoria-item/crear-categoria-item.component';
@@ -34,7 +34,7 @@ export class CrearItemComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data.id);
-    
+
     this.formItem = this.fb.group({
       categoria: ['', Validators.required],
       nombre: ['', Validators.required],
@@ -42,8 +42,8 @@ export class CrearItemComponent implements OnInit {
       precio: ['', Validators.required],
       // precioDescuento: [''],
       publicado: [false],
-      fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
-    })
+      fechaCreacion: [firebase.firestore.Timestamp.fromDate(new Date())]
+    });
 
     // traer solo categorias en tiempo real
     this.afs.doc('negocios/' + this.data.id).valueChanges().subscribe( (res: Negocio) => {

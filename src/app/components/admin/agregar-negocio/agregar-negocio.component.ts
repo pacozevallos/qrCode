@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 
 @Component({
   selector: 'app-agregar-negocio',
@@ -42,7 +42,7 @@ export class AgregarNegocioComponent implements OnInit {
       direccion: ['', Validators.required],
       categorias: new FormArray([]),
       id: [this.idNegocio, Validators.required],
-      fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
+      fechaCreacion: [firebase.firestore.Timestamp.fromDate(new Date())]
     });
   }
 

@@ -4,7 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Negocio } from 'src/app/classes/negocio';
 // import { arrayUnion } from "firebase/firestore";
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
 
 @Component({
   selector: 'app-crear-categoria-item',
@@ -25,7 +25,7 @@ export class CrearCategoriaItemComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data.id);
-    
+
     this.formCategoria = this.fb.group({
       // categorias: new FormArray([
       //   new FormControl('', [Validators.required])
@@ -56,7 +56,7 @@ export class CrearCategoriaItemComponent implements OnInit {
   updateCategorias() {
     this.afs.collection('negocios').doc(this.data.id).update({
       // categorias: arrayUnion(this.formCategoria.value.categorias)
-      categorias: firebase.default.firestore.FieldValue.arrayUnion(this.formCategoria.value.categoria)
+      categorias: firebase.firestore.FieldValue.arrayUnion(this.formCategoria.value.categoria)
     })
     .then( () => {
       this.dialogRef.close();

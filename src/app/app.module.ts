@@ -64,6 +64,7 @@ import { DetalleNegocioComponent } from './components/admin/detalle-negocio/deta
 import { ListaItemsComponent } from './components/admin/lista-items/lista-items.component';
 import { CrearCategoriaItemComponent } from './components/admin/crear-categoria-item/crear-categoria-item.component';
 import { EliminarItemComponent } from './components/admin/eliminar-item/eliminar-item.component';
+import { NegocioComponent } from './components/public/negocio/negocio.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { EliminarItemComponent } from './components/admin/eliminar-item/eliminar
     DetalleNegocioComponent,
     ListaItemsComponent,
     CrearCategoriaItemComponent,
-    EliminarItemComponent
+    EliminarItemComponent,
+    NegocioComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

@@ -28,8 +28,8 @@ export class FirebaseService {
   //   return this.afs.doc('negocios/' + idNegocio).valueChanges();
   // }
 
-  getAllItemsDocument(id: string) {
-    return this.afs.doc('negocios/' + id).collection('items', ref => ref
+  getAllItemsDocument(idNegocio: string) {
+    return this.afs.doc('negocios/' + idNegocio).collection('items', ref => ref
     // .orderBy('categoria', 'asc')
     ).snapshotChanges().pipe(
       map(actions => actions.map(a => {
