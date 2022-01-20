@@ -14,7 +14,35 @@ export class NegocioComponent implements OnInit {
 
   id: string;
   negocio: Negocio;
+  categorias = [];
   items: Item[] = [];
+  itemsGroup = [];
+
+  itemsPrev = [
+    { categoria: 'Sandwiches', nombre: 'Sandwich de Pollo',  precio: 12 },
+    { categoria: 'Sandwiches', nombre: 'Sandwich de Lomo',  precio: 12 },
+    { categoria: 'Helados', nombre: 'Helado de 1 bola', precio: 5 },
+    { categoria: 'Helados', nombre: 'Helado de 2 bolas', precio: 8 },
+    { categoria: 'Helados', nombre: 'Helado de 3 bolas', precio: 10 },
+  ];
+
+  itemsTest = [
+    {
+      categoria: 'Sandwiches',
+      items: [
+        { nombre: 'Sandwich de Pollo',  precio: 12 },
+        { nombre: 'Sandwich de Lomo',  precio: 12 },
+      ]
+    },
+    {
+      categoria: 'Helados',
+      items: [
+        { nombre: 'Helado de 1 bola', precio: 5 },
+        { nombre: 'Helado de 2 bolas', precio: 8 },
+        { nombre: 'Helado de 3 bolas', precio: 10 },
+      ]
+    },
+  ];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -32,10 +60,37 @@ export class NegocioComponent implements OnInit {
       this.fs.getItemsDocument(this.id).subscribe( res => {
         this.items = res;
         console.log(this.items);
-        const groupByCategory = this.items.map( product => {
+
+        this.categorias = this.items.map( product => {
           return product.categoria;
         });
-        console.log(groupByCategory);
+        console.log(this.categorias);
+
+
+        // this.itemsGroup = this.items.reduce((r, a) => {
+        //   r[a.categoria] = r[a.categoria] || [];
+        //   r[a.categoria].push(a);
+        //   return r;
+        // }, Object.create(null));
+        // console.log(this.itemsGroup);
+
+
+        // this.newArr = [];
+
+        const grp = this.items.reduce((group, product) => {
+          const { categoria } = product;
+          group[categoria] = group[categoria] ?? [];
+          group[categoria].push(product);
+          return group;
+        }, {});
+
+        // tslint:disable-next-line:forin
+        for (const obj in grp) {
+          this.itemsGroup.push({ categoria: obj, items: grp[obj] });
+        }
+        console.log(this.itemsGroup, 'newArr');
+
+
       });
     });
   }
