@@ -59,12 +59,6 @@ export class NegocioComponent implements OnInit {
       });
       this.fs.getItemsDocument(this.id).subscribe( res => {
         this.items = res;
-        console.log(this.items);
-
-        this.categorias = this.items.map( product => {
-          return product.categoria;
-        });
-        console.log(this.categorias);
 
 
         // this.itemsGroup = this.items.reduce((r, a) => {
@@ -73,22 +67,31 @@ export class NegocioComponent implements OnInit {
         //   return r;
         // }, Object.create(null));
         // console.log(this.itemsGroup);
-
-
         // this.newArr = [];
 
-        const grp = this.items.reduce((group, product) => {
-          const { categoria } = product;
-          group[categoria] = group[categoria] ?? [];
-          group[categoria].push(product);
-          return group;
-        }, {});
 
-        // tslint:disable-next-line:forin
-        for (const obj in grp) {
-          this.itemsGroup.push({ categoria: obj, items: grp[obj] });
-        }
-        console.log(this.itemsGroup, 'newArr');
+        // const grp = this.items.reduce((group, product) => {
+        //   const { categoria } = product;
+        //   group[categoria] = group[categoria] ?? [];
+        //   group[categoria].push(product);
+        //   return group;
+        // }, {});
+
+        // // tslint:disable-next-line:forin
+        // for (const obj in grp) {
+        //   this.itemsGroup.push({ categoria: obj, items: grp[obj] });
+        // }
+        // console.log(this.itemsGroup, 'newArr');
+
+
+        this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
+          const id = prev.findIndex((item) => item.categoria === categoria);
+          id >= 0
+            ? prev[id].items.push(items)
+            : prev.push({categoria, items: [items]});
+          return prev;
+        }, []);
+        console.log(this.itemsGroup);
 
 
       });

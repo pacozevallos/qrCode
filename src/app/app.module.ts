@@ -11,6 +11,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 
+// Material File input
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+
 
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -131,6 +134,7 @@ import { NegocioComponent } from './components/public/negocio/negocio.component'
     MatTooltipModule,
     MatBadgeModule,
     MatBottomSheetModule,
+    MaterialFileInputModule
   ],
   providers: [
     { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
