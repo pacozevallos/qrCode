@@ -4,6 +4,7 @@ export class Item {
   precioDescuento: number;
   categoria: string;
   image: string;
+  imageName: string;
   id: string;
   descripcion: string;
 }

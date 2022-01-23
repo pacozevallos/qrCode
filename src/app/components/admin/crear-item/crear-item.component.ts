@@ -51,10 +51,12 @@ export class CrearItemComponent implements OnInit {
     console.log(this.data.id);
 
     this.formItem = this.fb.group({
+      id: [ this.itemRef.id ],
       categoria: ['', Validators.required],
       nombre: ['', Validators.required],
       descripcion: [''],
       precio: ['', Validators.required],
+      precioDescuento: [''],
       image: ['', FileValidator.maxContentSize(this.maxSize)],
       imageName: [''],
       publicado: [false],
@@ -123,7 +125,7 @@ export class CrearItemComponent implements OnInit {
     // console.log(item.id);
 
     const file = this.selectedFile;
-    const filePath = `imagesItems/${this.data.id}/${this.itemRef.id}/${this.nameItem}`;
+    const filePath = `imagesItems/${this.data.id}/${this.itemRef.id}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 

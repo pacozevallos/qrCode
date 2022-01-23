@@ -16,7 +16,7 @@ export class ListaItemsComponent implements OnInit {
 
   @Input() idNegocio: string;
 
-  displayedColumns = [ 'nombre', 'categoria', 'precio', 'precioDescuento', 'publicado'];
+  displayedColumns = [ 'nombre', 'id', 'categoria', 'precio', 'precioDescuento', 'publicado', 'mas'];
   itemsData = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -46,7 +46,8 @@ export class ListaItemsComponent implements OnInit {
 
   openModalDelete(item) {
     const dialogRef = this.dialog.open(EliminarItemComponent, {
-      data: item
+      panelClass: 'dialogSmall',
+      data: {idNegocio_: this.idNegocio, item_: item}
     });
     dialogRef.afterClosed().subscribe();
   }

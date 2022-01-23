@@ -116,3 +116,10 @@ a, .btn-link {
 table {
   width: 100% !important;
 }
+
+.dialogSmall {
+  width: 420px !important;
+  @include media-breakpoint-only(xs) {
+    width: initial !important;
+  }
+}
