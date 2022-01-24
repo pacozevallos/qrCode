@@ -16,7 +16,7 @@ export class ListaItemsComponent implements OnInit {
 
   @Input() idNegocio: string;
 
-  displayedColumns = [ 'nombre', 'id', 'categoria', 'precio', 'precioDescuento', 'publicado', 'mas'];
+  displayedColumns = [ 'nombre', 'id', 'categoria', 'precio', 'precioDescuento', 'destacado', 'publicado', 'mas'];
   itemsData = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -50,6 +50,16 @@ export class ListaItemsComponent implements OnInit {
       data: {idNegocio_: this.idNegocio, item_: item}
     });
     dialogRef.afterClosed().subscribe();
+  }
+
+  updateDestacado(idNoticia, destacado) {
+    this.afs.doc('noticias/' + idNoticia).update({ destacado });
+  }
+
+  actualizarDestacado(itemId, $event) {
+    this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(itemId).update({
+      destacado: $event
+    });
   }
 
   trackByPublicado(item) {

@@ -40,6 +40,18 @@ export class FirebaseService {
   );
   }
 
+  getItemsDestacados(idNegocio: string) {
+    return this.afs.doc('negocios/' + idNegocio).collection('items', ref => ref
+    .where('publicado', '==', true )
+    .where('destacado', '==', true )
+    ).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Item;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+  }
 
   getItemsDocument(idNegocio: string) {
     return this.afs.doc('negocios/' + idNegocio).collection('items', ref => ref

@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { Item } from '../../../classes/item';
+// import Swiper core and required modules
+import SwiperCore, { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'app-negocio',
@@ -17,6 +19,41 @@ export class NegocioComponent implements OnInit {
   categorias = [];
   items: Item[] = [];
   itemsGroup = [];
+  itemsDestacados = [];
+
+  config: SwiperOptions = {
+    // slidesPerView: 5,
+    spaceBetween: 30,
+    // navigation: true,
+    pagination: { clickable: true },
+    // scrollbar: { draggable: true },
+    breakpoints: {
+      0: {
+        slidesPerView: 2,
+        spaceBetween: 15
+      },
+      576: {
+        slidesPerView: 3,
+        spaceBetween: 20
+      },
+      768: {
+        slidesPerView: 4,
+        spaceBetween: 20
+      },
+      992: {
+        slidesPerView: 4,
+        spaceBetween: 20
+      },
+      1200: {
+        slidesPerView: 5,
+        spaceBetween: 20
+      },
+      1400: {
+        slidesPerView: 5,
+        spaceBetween: 20
+      },
+    }
+  };
 
   itemsPrev = [
     { categoria: 'Sandwiches', nombre: 'Sandwich de Pollo',  precio: 12 },
@@ -53,36 +90,17 @@ export class NegocioComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       this.id = params.id;
+
+      this.fs.getItemsDestacados(this.id).subscribe( res => {
+        this.itemsDestacados = res;
+      });
+
       this.afs.collection('negocios').doc(this.id).valueChanges().subscribe( (res: Negocio) => {
         this.negocio = res;
         console.log(this.negocio);
       });
       this.fs.getItemsDocument(this.id).subscribe( res => {
         this.items = res;
-
-
-        // this.itemsGroup = this.items.reduce((r, a) => {
-        //   r[a.categoria] = r[a.categoria] || [];
-        //   r[a.categoria].push(a);
-        //   return r;
-        // }, Object.create(null));
-        // console.log(this.itemsGroup);
-        // this.newArr = [];
-
-
-        // const grp = this.items.reduce((group, product) => {
-        //   const { categoria } = product;
-        //   group[categoria] = group[categoria] ?? [];
-        //   group[categoria].push(product);
-        //   return group;
-        // }, {});
-
-        // // tslint:disable-next-line:forin
-        // for (const obj in grp) {
-        //   this.itemsGroup.push({ categoria: obj, items: grp[obj] });
-        // }
-        // console.log(this.itemsGroup, 'newArr');
-
 
         this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
           const id = prev.findIndex((item) => item.categoria === categoria);
@@ -97,5 +115,12 @@ export class NegocioComponent implements OnInit {
       });
     });
   }
+
+  // getItemsDestacados(id: string) {
+  //   this.fs.getItemsDestacados(id).subscribe( res => {
+  //     this.itemsDestacados = res;
+  //     console.log(this.itemsDestacados);
+  //   });
+  // }
 
 }

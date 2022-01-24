@@ -1,11 +1,19 @@
 <div class="container" *ngIf="negocio">
   <p class="h1">{{negocio.nombre}}</p>
 
-  <div *ngFor="let group of itemsGroup">
-    <p>{{group.categoria}}</p>
-    <ul>
-      <li *ngFor="let item of group.items">{{item.nombre}}</li>
-    </ul>
+  <p class="h3">Lo más pedido</p>
+
+  <swiper [config]="config">
+    <ng-template swiperSlide *ngFor="let item of itemsDestacados">
+      <app-card-item-destacado [item]="item"></app-card-item-destacado>
+    </ng-template>
+  </swiper>
+
+  <div class="my-3" *ngFor="let group of itemsGroup">
+    <p class="h3 fw-light">{{group.categoria}}</p>
+    <div class="grillaItems ps-3">
+      <app-card-item *ngFor="let item of group.items" [item]="item"></app-card-item>
+    </div>
   </div>
 
 </div>

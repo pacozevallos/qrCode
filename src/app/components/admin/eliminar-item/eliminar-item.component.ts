@@ -25,7 +25,6 @@ export class EliminarItemComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data);
-    
   }
 
   eliminarNoticia(imageName) {

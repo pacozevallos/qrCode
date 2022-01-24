@@ -14,6 +14,9 @@ import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 // Material File input
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 
+// Swiper
+import { SwiperModule } from 'swiper/angular';
+
 
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -68,6 +71,8 @@ import { ListaItemsComponent } from './components/admin/lista-items/lista-items.
 import { CrearCategoriaItemComponent } from './components/admin/crear-categoria-item/crear-categoria-item.component';
 import { EliminarItemComponent } from './components/admin/eliminar-item/eliminar-item.component';
 import { NegocioComponent } from './components/public/negocio/negocio.component';
+import { CardItemComponent } from './components/public/card-item/card-item.component';
+import { CardItemDestacadoComponent } from './components/public/card-item-destacado/card-item-destacado.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +92,9 @@ import { NegocioComponent } from './components/public/negocio/negocio.component'
     ListaItemsComponent,
     CrearCategoriaItemComponent,
     EliminarItemComponent,
-    NegocioComponent
+    NegocioComponent,
+    CardItemComponent,
+    CardItemDestacadoComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,
@@ -134,7 +141,8 @@ import { NegocioComponent } from './components/public/negocio/negocio.component'
     MatTooltipModule,
     MatBadgeModule,
     MatBottomSheetModule,
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    SwiperModule
   ],
   providers: [
     { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
