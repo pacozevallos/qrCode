@@ -5,7 +5,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { Item } from '../../../classes/item';
 // import Swiper core and required modules
-import SwiperCore, { SwiperOptions } from 'swiper';
+import SwiperCore, { SwiperOptions, Pagination } from 'swiper';
+// install Swiper modules
+SwiperCore.use([Pagination]);
 
 @Component({
   selector: 'app-negocio',
@@ -20,16 +22,15 @@ export class NegocioComponent implements OnInit {
   items: Item[] = [];
   itemsGroup = [];
   itemsDestacados = [];
+  ahora = new Date();
+  today: number = Date.now();
 
   config: SwiperOptions = {
-    // slidesPerView: 5,
-    spaceBetween: 30,
-    // navigation: true,
-    pagination: { clickable: true },
-    // scrollbar: { draggable: true },
+    spaceBetween: 20,
+    // pagination: { clickable: true },
     breakpoints: {
       0: {
-        slidesPerView: 2,
+        slidesPerView: 2.5,
         spaceBetween: 15
       },
       576: {

@@ -1,19 +1,39 @@
-<div class="container" *ngIf="negocio">
-  <p class="h1">{{negocio.nombre}}</p>
+<div class="container py-2 py-md-4" *ngIf="negocio">
 
-  <p class="h3">Lo más pedido</p>
+  <div class="d-flex align-items-center">
 
+    <div class="me-2 me-md-3 bg-primary rounded-1 px-2 pt-2 pb-1 text-center text-white">
+      <div class="h2 mb-0 fw-normal" style="line-height: 75%;">{{today | date:'d'}}</div>
+      <span class="small text-uppercase" style="line-height: 75%;">{{today | date:'LLL'}}</span>
+    </div>
+
+    <div>
+      <p class="h2 mb-0">{{negocio.nombre}}</p>
+      <p class="small fw-light mb-0 lh-1 text-muted">{{negocio.direccion}}</p>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="my-3 ps-2">
+  <p class="h4">Lo más pedido</p>
   <swiper [config]="config">
     <ng-template swiperSlide *ngFor="let item of itemsDestacados">
       <app-card-item-destacado [item]="item"></app-card-item-destacado>
     </ng-template>
+    <div class="swiper-pagination"></div>
   </swiper>
+</div>
 
+
+<div class="container">
   <div class="my-3" *ngFor="let group of itemsGroup">
     <p class="h3 fw-light">{{group.categoria}}</p>
+    <mat-divider class="mb-2"></mat-divider>
     <div class="grillaItems ps-3">
       <app-card-item *ngFor="let item of group.items" [item]="item"></app-card-item>
     </div>
   </div>
-
 </div>

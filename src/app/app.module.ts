@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -17,6 +17,10 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 // Swiper
 import { SwiperModule } from 'swiper/angular';
 
+// Español Angular
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs, 'es-ES');
 
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -147,6 +151,7 @@ import { CardItemDestacadoComponent } from './components/public/card-item-destac
   providers: [
     { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
     { provide: MatBottomSheetRef, useValue: {} },
+    { provide: LOCALE_ID, useValue: 'es-Es' }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
