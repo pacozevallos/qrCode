@@ -22,6 +22,8 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 registerLocaleData(localeEs, 'es-ES');
 
+import { QRCodeModule } from 'angularx-qrcode';
+
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -146,7 +148,8 @@ import { CardItemDestacadoComponent } from './components/public/card-item-destac
     MatBadgeModule,
     MatBottomSheetModule,
     MaterialFileInputModule,
-    SwiperModule
+    SwiperModule,
+    QRCodeModule
   ],
   providers: [
     { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import firebase from 'firebase/app';
+
+import { QRCodeComponent, QRCodeElementType, QRCodeErrorCorrectionLevel, QRCodeModule } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-agregar-negocio',
@@ -26,6 +28,10 @@ export class AgregarNegocioComponent implements OnInit {
     'Bar',
   ];
 
+  public myAngularxQrCode: string = null;
+
+  @ViewChild('parent') parent: ElementRef;
+
   constructor(
     private bottomSheetRef: MatBottomSheetRef<AgregarNegocioComponent>,
     private fb: FormBuilder,
@@ -33,6 +39,9 @@ export class AgregarNegocioComponent implements OnInit {
   ) {
     this.idNegocio = this.afs.collection('negocios').ref.doc().id;
     console.log(this.idNegocio);
+
+    this.myAngularxQrCode = `https://qrcode/${this.idNegocio}`;
+    console.log(this.myAngularxQrCode);
   }
 
   ngOnInit(): void {
@@ -62,6 +71,18 @@ export class AgregarNegocioComponent implements OnInit {
     });
   }
 
+  saveAsImage(parent) {
+    const parentElement = parent.nativeElement.querySelector('img').src;
+    const blobData = this.convertBase64ToBlob(parentElement);
+
+    const storageRef = firebase.storage().ref();
+    const ref = storageRef.child('qr.png');
+    ref.put(blobData)
+    .then( () => {
+      console.log('Uploaded a data_url string!');
+    });
+  }
+
   validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
@@ -71,6 +92,23 @@ export class AgregarNegocioComponent implements OnInit {
         this.validateAllFormFields(control);
       }
     });
+  }
+
+  private convertBase64ToBlob(Base64Image: any) {
+    // SPLIT INTO TWO PARTS
+    const parts = Base64Image.split(';base64,');
+    // HOLD THE CONTENT TYPE
+    const imageType = parts[0].split(':')[1];
+    // DECODE BASE64 STRING
+    const decodedData = window.atob(parts[1]);
+    // CREATE UNIT8ARRAY OF SIZE SAME AS ROW DATA LENGTH
+    const uInt8Array = new Uint8Array(decodedData.length);
+    // INSERT ALL CHARACTER CODE INTO UINT8ARRAY
+    for (let i = 0; i < decodedData.length; ++i) {
+      uInt8Array[i] = decodedData.charCodeAt(i);
+    }
+    // RETURN BLOB IMAGE AFTER CONVERSION
+    return new Blob([uInt8Array], { type: imageType });
   }
 
 }

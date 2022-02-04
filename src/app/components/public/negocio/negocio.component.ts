@@ -25,6 +25,8 @@ export class NegocioComponent implements OnInit {
   ahora = new Date();
   today: number = Date.now();
 
+  public myAngularxQrCode: string = null;
+
   config: SwiperOptions = {
     spaceBetween: 20,
     // pagination: { clickable: true },
@@ -86,11 +88,15 @@ export class NegocioComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private afs: AngularFirestore,
     private fs: FirebaseService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       this.id = params.id;
+      console.log(this.id);
+      this.myAngularxQrCode = `https://qrcode/${this.id}`;
+      console.log(this.myAngularxQrCode);
 
       this.fs.getItemsDestacados(this.id).subscribe( res => {
         this.itemsDestacados = res;

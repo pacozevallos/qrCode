@@ -121,8 +121,6 @@ export class CrearItemComponent implements OnInit {
 
 
   uploadFileCrearItem() {
-    // const item = this.afs.doc('negocios/' + this.data.id).collection('items').ref.doc();
-    // console.log(item.id);
 
     const file = this.selectedFile;
     const filePath = `imagesItems/${this.data.id}/${this.itemRef.id}`;
