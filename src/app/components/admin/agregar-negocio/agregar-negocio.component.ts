@@ -5,6 +5,11 @@ import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import firebase from 'firebase/app';
 
 import { QRCodeComponent, QRCodeElementType, QRCodeErrorCorrectionLevel, QRCodeModule } from 'angularx-qrcode';
+import { AngularFireStorage } from '@angular/fire/storage';
+
+import { base64StringToBlob } from 'blob-util';
+import { finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-agregar-negocio',
@@ -16,6 +21,7 @@ export class AgregarNegocioComponent implements OnInit {
   formNegocio: FormGroup;
   idNegocio: string;
   loading = false;
+  negocioRef: any;
 
   tiposNegocio = [
     'Restaurante',
@@ -28,6 +34,8 @@ export class AgregarNegocioComponent implements OnInit {
     'Bar',
   ];
 
+  downloadURL: Observable<string>;
+
   public myAngularxQrCode: string = null;
 
   @ViewChild('parent') parent: ElementRef;
@@ -35,12 +43,16 @@ export class AgregarNegocioComponent implements OnInit {
   constructor(
     private bottomSheetRef: MatBottomSheetRef<AgregarNegocioComponent>,
     private fb: FormBuilder,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private storage: AngularFireStorage,
   ) {
-    this.idNegocio = this.afs.collection('negocios').ref.doc().id;
-    console.log(this.idNegocio);
+    // this.idNegocio = this.afs.collection('negocios').ref.doc().id;
+    // console.log(this.idNegocio);
 
-    this.myAngularxQrCode = `https://qrcode/${this.idNegocio}`;
+    this.negocioRef = this.afs.collection('negocios').ref.doc();
+    console.log(this.negocioRef.id);
+
+    this.myAngularxQrCode = `https://qrcode-3b121.web.app/${this.negocioRef.id}`;
     console.log(this.myAngularxQrCode);
   }
 
@@ -50,7 +62,7 @@ export class AgregarNegocioComponent implements OnInit {
       tipo: ['', Validators.required],
       direccion: ['', Validators.required],
       categorias: new FormArray([]),
-      id: [this.idNegocio, Validators.required],
+      id: [this.negocioRef.id, Validators.required],
       fechaCreacion: [firebase.firestore.Timestamp.fromDate(new Date())]
     });
   }
@@ -58,7 +70,8 @@ export class AgregarNegocioComponent implements OnInit {
   onSubmit() {
     if (this.formNegocio.valid) {
       this.loading = true;
-      this.crearItem();
+      // this.crearItem();
+      this.uploadQrCodeAndCrearNegocio();
     } else {
       this.validateAllFormFields(this.formNegocio);
     }
@@ -71,17 +84,29 @@ export class AgregarNegocioComponent implements OnInit {
     });
   }
 
-  saveAsImage(parent) {
-    const parentElement = parent.nativeElement.querySelector('img').src;
-    const blobData = this.convertBase64ToBlob(parentElement);
+  saveImageQrCode() {
+    const canvas = document.getElementsByTagName('canvas');
+    const dataURL = canvas[0].toDataURL();
+    const myBase64 = dataURL.split(',');
+    console.log(myBase64[1]);
 
-    const storageRef = firebase.storage().ref();
-    const ref = storageRef.child('qr.png');
-    ref.put(blobData)
-    .then( () => {
-      console.log('Uploaded a data_url string!');
-    });
+    const contentType = 'image/png';
+    const b64Data = myBase64[1];
+    const myBlob = base64StringToBlob(b64Data, contentType);
+
+    const filePath = 'myPicture1.png';
+    const ref = this.storage.ref(filePath);
+    ref.put(myBlob);
   }
+
+  // mySet() {
+  //   const canvas = document.getElementById('parent') as HTMLCanvasElement;
+  //   const img = document.createElement('img');
+  //   canvas.toBlob( (blob) => {
+  //     img.src = URL.createObjectURL(blob);
+  //     console.log(blob);
+  //   }, 'image/png');
+  // }
 
   validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
@@ -94,21 +119,39 @@ export class AgregarNegocioComponent implements OnInit {
     });
   }
 
-  private convertBase64ToBlob(Base64Image: any) {
-    // SPLIT INTO TWO PARTS
-    const parts = Base64Image.split(';base64,');
-    // HOLD THE CONTENT TYPE
-    const imageType = parts[0].split(':')[1];
-    // DECODE BASE64 STRING
-    const decodedData = window.atob(parts[1]);
-    // CREATE UNIT8ARRAY OF SIZE SAME AS ROW DATA LENGTH
-    const uInt8Array = new Uint8Array(decodedData.length);
-    // INSERT ALL CHARACTER CODE INTO UINT8ARRAY
-    for (let i = 0; i < decodedData.length; ++i) {
-      uInt8Array[i] = decodedData.charCodeAt(i);
-    }
-    // RETURN BLOB IMAGE AFTER CONVERSION
-    return new Blob([uInt8Array], { type: imageType });
+  uploadQrCodeAndCrearNegocio() {
+
+    const canvas = document.getElementsByTagName('canvas');
+    const dataURL = canvas[0].toDataURL();
+    const myBase64 = dataURL.split(',');
+    // console.log(myBase64[1]);
+
+    const contentType = 'image/png';
+    const b64Data = myBase64[1];
+    const myBlob = base64StringToBlob(b64Data, contentType);
+
+    const filePath = `imagesQrCodes/${this.negocioRef.id}`;
+    const ref = this.storage.ref(filePath);
+    const task = ref.put(myBlob);
+
+
+    // this.uploadPercent = task.percentageChanges();
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        ref.getDownloadURL().toPromise().then( (url) => {
+          this.downloadURL = url;
+          this.negocioRef.set(this.formNegocio.value);
+
+          this.negocioRef.set({
+            qrCodeImage: this.downloadURL,
+            qrCodeImageName: filePath,
+          }, {merge: true});
+          this.bottomSheetRef.dismiss();
+          console.log( this.downloadURL );
+        }).catch(err => { console.log(err); } );
+      })
+    )
+    .subscribe();
   }
 
 }

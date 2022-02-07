@@ -120,6 +120,7 @@ export class CrearItemComponent implements OnInit {
   }
 
 
+
   uploadFileCrearItem() {
 
     const file = this.selectedFile;
