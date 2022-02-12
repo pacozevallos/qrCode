@@ -1,4 +1,4 @@
-<qrcode [qrdata]="myAngularxQrCode" [elementType]=" 'img' " [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+<!-- <qrcode [qrdata]="myAngularxQrCode" [elementType]=" 'img' " [width]="256" [errorCorrectionLevel]="'M'"></qrcode> -->
 
 
 
@@ -21,7 +21,8 @@
 </div>
 
 
-<div class="my-3 ps-2">
+
+<div class="container my-3 ps-2">
   <p class="h4">Lo más pedido</p>
   <swiper [config]="config">
     <ng-template swiperSlide *ngFor="let item of itemsDestacados">

@@ -36,7 +36,7 @@ export class AgregarNegocioComponent implements OnInit {
 
   downloadURL: Observable<string>;
 
-  public myAngularxQrCode: string = null;
+  public qrCodeData: string = '';
 
   @ViewChild('parent') parent: ElementRef;
 
@@ -52,8 +52,8 @@ export class AgregarNegocioComponent implements OnInit {
     this.negocioRef = this.afs.collection('negocios').ref.doc();
     console.log(this.negocioRef.id);
 
-    this.myAngularxQrCode = `https://qrcode-3b121.web.app/${this.negocioRef.id}`;
-    console.log(this.myAngularxQrCode);
+    this.qrCodeData = `https://qrcode-3b121.web.app/negocio/${this.negocioRef.id}`;
+    console.log(this.qrCodeData);
   }
 
   ngOnInit(): void {

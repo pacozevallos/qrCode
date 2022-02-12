@@ -18,18 +18,17 @@ const routes: Routes = [
     path: '', component: PublicComponent,
     children: [
       { path: '', component: InicioComponent },
-      { path: ':id', component: NegocioComponent },
+      { path: 'negocio/:id', component: NegocioComponent },
       { path: 'login', component: LoginComponent },
 
     ]
   },
   {
-    // path: 'admin', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },
-    path: 'admin', component: AdminComponent,
+    path: 'admin', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },
+    // path: 'admin', component: AdminComponent,
     children: [
-      { path: '', component: InicioAdminComponent },
-      { path: 'listaNegocios', component: ListaNegociosComponent },
-      { path: 'listaNegocios', component: ListaNegociosComponent },
+      { path: '', component: ListaNegociosComponent },
+      // { path: 'listaNegocios', component: ListaNegociosComponent },
       { path: 'listaNegocios/:id', component: DetalleNegocioComponent },
     ]
   },

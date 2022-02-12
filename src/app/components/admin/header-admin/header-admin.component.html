@@ -1,6 +1,34 @@
-<div class="bg-light">
+<!-- <div class="bg-light">
   <div class="container py-3 py-md-4">
-    <!-- <p class="lead mb-0">Admin qrCode</p> -->
     <a class="text-dark lead" routerLink="/admin/listaNegocios">Admin qrCode</a>
   </div>
+</div> -->
+
+<div class="bg-light">
+	<div class="container">
+		<div class="py-3 py-md-3 d-flex justify-content-between align-items-center">
+			<!-- <a class="" routerLink="/admin">
+        <img class="logoTuribus" src="https://firebasestorage.googleapis.com/v0/b/turibus-59f94.appspot.com/o/logoTuribus.svg?alt=media&token=4cab1ad7-f431-4cff-b370-029c3ba439ba">
+      </a> -->
+      <a class="text-dark lead" routerLink="/admin">Admin qrCode</a>
+			<div class="d-flex align-items-center" *ngIf="userId">
+				<div class="text-right mr-2">
+					<p class="mb-0 d-none d-md-block">{{email}}</p>
+				</div>
+				<!-- <img class="rounded-circle border mr-2" [src]="photoURL" width="60px"> -->
+				<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+					<mat-icon>more_vert</mat-icon>
+				</button>
+				<mat-menu #menu="matMenu">
+					<div class="d-block d-md-none">
+						<button mat-menu-item>{{email}}</button>
+						<mat-divider></mat-divider>
+					</div>
+					<button mat-menu-item (click)="logout()">
+						<span>Cerrar sesión</span>
+					</button>
+				</mat-menu>
+			</div>
+		</div>
+	</div>
 </div>
