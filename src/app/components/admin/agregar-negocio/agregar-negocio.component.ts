@@ -36,7 +36,7 @@ export class AgregarNegocioComponent implements OnInit {
 
   downloadURL: Observable<string>;
 
-  public qrCodeData: string = '';
+  public qrCodeData = '';
 
   @ViewChild('parent') parent: ElementRef;
 

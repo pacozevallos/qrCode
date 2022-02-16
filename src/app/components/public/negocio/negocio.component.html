@@ -38,7 +38,7 @@
     <p class="h3 fw-light">{{group.categoria}}</p>
     <mat-divider class="mb-2"></mat-divider>
     <div class="grillaItems ps-3">
-      <app-card-item *ngFor="let item of group.items" [item]="item"></app-card-item>
+      <app-card-item *ngFor="let item of group.items" [idNegocio]="id" [item]="item"></app-card-item>
     </div>
   </div>
 </div>

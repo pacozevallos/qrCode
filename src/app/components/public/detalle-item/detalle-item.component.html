@@ -1,0 +1,26 @@
+<div *ngIf="item">
+
+  <div class="imageDetalleItem p-3 p-md-4" [style.background-image]=" 'url(' + item.image + ')' ">
+    <a mat-mini-fab [routerLink]=" '/negocio/' + idNegocio ">
+      <i-tabler name="arrow-left" style="color: white;"></i-tabler>
+    </a>
+  </div>
+
+  <div class="container">
+
+    <div class="rounded shadow p-3 p-md-4">
+      <p class="h1">{{item.nombre}}</p>
+      <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
+      <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' ">S/. {{item.precio}}</span>
+      <p>{{item.descripcion}}</p>
+      <div class="d-grid">
+        <button class="btn btn-primary">Copiar link
+          <i-tabler class="ms-2" name="link" style="color: white;"></i-tabler>
+        </button>
+      </div>
+     
+    </div>
+
+  </div>
+
+</div>

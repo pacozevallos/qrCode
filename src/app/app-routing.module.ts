@@ -11,6 +11,7 @@ import { CrearItemComponent } from './components/admin/crear-item/crear-item.com
 import { ListaNegociosComponent } from './components/admin/lista-negocios/lista-negocios.component';
 import { DetalleNegocioComponent } from './components/admin/detalle-negocio/detalle-negocio.component';
 import { NegocioComponent } from './components/public/negocio/negocio.component';
+import { DetalleItemComponent } from './components/public/detalle-item/detalle-item.component';
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
     children: [
       { path: '', component: InicioComponent },
       { path: 'negocio/:id', component: NegocioComponent },
+      { path: 'negocio/:id/item/:id', component: DetalleItemComponent },
       { path: 'login', component: LoginComponent },
 
     ]

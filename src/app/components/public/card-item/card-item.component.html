@@ -1,15 +1,21 @@
-<div class="d-flex justify-content-between">
+<div class="position-relative">
 
-  <div class="w-100 me-2">
-    <p class="nombreItem mb-0 mt-1">{{item.nombre}}</p>
-    <span class="precioItem">S/. {{item.precio}}</span>
-    <span class="ms-2 text-decoration-line-through small text-muted" *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
+  <div class="d-flex justify-content-between">
+
+    <div class="w-100 me-2">
+      <p class="nombreItem mb-0 mt-1">{{item.nombre}}</p>
+
+      <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
+
+      <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " >S/. {{item.precio}}</span>
+      
+    </div>
+
+    <div class="">
+      <img class="imageItem rounded-1" [src]="item.image">
+    </div>
+
+    <a class="stretched-link" [routerLink]="  'item/' +  item.id"></a>
+
   </div>
-
-  <div class="">
-    <img class="imageItem rounded-1" [src]="item.image">
-  </div>
-
-  
-
 </div>

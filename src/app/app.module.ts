@@ -24,6 +24,9 @@ registerLocaleData(localeEs, 'es-ES');
 
 import { QRCodeModule } from 'angularx-qrcode';
 
+import { TablerIconsModule } from 'angular-tabler-icons';
+import * as TablerIcons from 'angular-tabler-icons/icons';
+
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -79,6 +82,7 @@ import { EliminarItemComponent } from './components/admin/eliminar-item/eliminar
 import { NegocioComponent } from './components/public/negocio/negocio.component';
 import { CardItemComponent } from './components/public/card-item/card-item.component';
 import { CardItemDestacadoComponent } from './components/public/card-item-destacado/card-item-destacado.component';
+import { DetalleItemComponent } from './components/public/detalle-item/detalle-item.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +104,8 @@ import { CardItemDestacadoComponent } from './components/public/card-item-destac
     EliminarItemComponent,
     NegocioComponent,
     CardItemComponent,
-    CardItemDestacadoComponent
+    CardItemDestacadoComponent,
+    DetalleItemComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,
@@ -149,7 +154,11 @@ import { CardItemDestacadoComponent } from './components/public/card-item-destac
     MatBottomSheetModule,
     MaterialFileInputModule,
     SwiperModule,
-    QRCodeModule
+    QRCodeModule,
+    TablerIconsModule.pick(TablerIcons)
+  ],
+  exports: [
+    TablerIconsModule
   ],
   providers: [
     { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },

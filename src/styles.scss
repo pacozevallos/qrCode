@@ -181,3 +181,13 @@ table {
 .swiper-pagination {
   bottom: calc(100% - 2rem);
 }
+
+.imageDetalleItem {
+  height: 240px;
+  background-size: cover;
+  background-position: center center;
+}
+
+.mat-icon {
+  vertical-align: middle;
+}
