@@ -7,4 +7,5 @@ export class Item {
   imageName: string;
   id: string;
   descripcion: string;
+  idNegocio: string;
 }

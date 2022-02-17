@@ -36,7 +36,7 @@ export class EditarItemComponent implements OnInit {
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<EditarItemComponent>,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: Item,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private fb: FormBuilder,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
@@ -50,11 +50,17 @@ export class EditarItemComponent implements OnInit {
     console.log(this.data);
     // this.categorias = this.data.categorias,
 
+    // traer solo categorias en tiempo real
+    this.afs.doc('negocios/' + this.data.idNegocio).valueChanges().subscribe( (res: Negocio) => {
+      this.categorias = res.categorias;
+      console.log(res);
+    });
+
     this.formItem = this.fb.group({
       id: [ this.data.id ],
-      categoria: [ this.data.categoria, Validators.required],
-      nombre: ['', Validators.required],
-      descripcion: [''],
+      categoria: [ this.data.item.categoria, Validators.required],
+      nombre: [this.data.item.nombre, Validators.required],
+      descripcion: [this.data.item.descripcion],
       precio: ['', Validators.required],
       precioDescuento: [''],
       image: ['', FileValidator.maxContentSize(this.maxSize)],
@@ -63,11 +69,7 @@ export class EditarItemComponent implements OnInit {
       fechaCreacion: [firebase.firestore.Timestamp.fromDate(new Date())]
     });
 
-    // traer solo categorias en tiempo real
-    this.afs.doc('negocios/' + this.data.id).valueChanges().subscribe( (res: Negocio) => {
-      this.categorias = res.categorias;
-      console.log(res);
-    });
+  
   }
 
   onSubmit() {

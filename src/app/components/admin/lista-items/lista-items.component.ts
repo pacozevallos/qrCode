@@ -48,7 +48,10 @@ export class ListaItemsComponent implements OnInit {
   }
   openModalEdit(item) {
     this.bottomSheet.open(EditarItemComponent, {
-      data: item
+      data: {
+        idNegocio: this.idNegocio,
+        item: item
+      }
     });
   }
 
