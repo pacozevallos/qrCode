@@ -27,14 +27,14 @@ export class EliminarItemComponent implements OnInit {
     console.log(this.data);
   }
 
-  eliminarNoticia(imageName) {
+  eliminarItem(imageName) {
     this.loader = true;
 
     // this.fs.deleteNoticia(itemId)
     this.afs.collection('negocios').doc(this.data.idNegocio_).collection('items').doc(this.data.item_.id).delete()
     .then(() => {
       this.dialogRef.close();
-      this.snackBar.open('Producto eliminado', 'CERRAR', {
+      this.snackBar.open('Item eliminado', 'CERRAR', {
         duration: 3000,
       });
       console.log('Item eliminado de Firestore');

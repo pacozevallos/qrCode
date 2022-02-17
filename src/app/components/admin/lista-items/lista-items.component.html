@@ -69,10 +69,10 @@
         </button>
         <mat-menu #menu="matMenu">
 
-          <!-- <button mat-menu-item [routerLink]=" '/admin/noticias/' + item.id + '/editar' ">
-            <mat-icon class="material-icons-outlined">edit</mat-icon>
+          <button mat-menu-item (click)="openModalEdit(item)">
+            <i-tabler class="me-2" name="pencil"></i-tabler>
             <span>Editar</span>
-          </button> -->
+          </button>
 
           <!-- <button mat-menu-item [routerLink]=" '/admin/noticias/' + item.id ">
             <mat-icon class="material-icons-outlined">sticky_note_2</mat-icon>
@@ -82,7 +82,7 @@
           <!-- <mat-divider></mat-divider> -->
 
           <button mat-menu-item (click)="openModalDelete(item)">
-            <mat-icon class="material-icons-outlined text-danger">delete</mat-icon>
+            <i-tabler class="me-2 text-danger" name="trash" ></i-tabler>
             <span class="text-danger">Eliminar</span>
           </button>
 

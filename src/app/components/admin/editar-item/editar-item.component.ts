@@ -8,15 +8,16 @@ import firebase from 'firebase/app';
 import { FileValidator } from 'ngx-material-file-input';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { Item } from 'src/app/classes/item';
 import { Negocio } from 'src/app/classes/negocio';
 import { CrearCategoriaItemComponent } from '../crear-categoria-item/crear-categoria-item.component';
 
 @Component({
-  selector: 'app-crear-item',
-  templateUrl: './crear-item.component.html',
-  styleUrls: ['./crear-item.component.scss']
+  selector: 'app-editar-item',
+  templateUrl: './editar-item.component.html',
+  styleUrls: ['./editar-item.component.scss']
 })
-export class CrearItemComponent implements OnInit {
+export class EditarItemComponent implements OnInit {
 
   formItem: FormGroup;
   idItem: string;
@@ -34,23 +35,24 @@ export class CrearItemComponent implements OnInit {
   actualSize: any;
 
   constructor(
-    private bottomSheetRef: MatBottomSheetRef<CrearItemComponent>,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
+    private bottomSheetRef: MatBottomSheetRef<EditarItemComponent>,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: Item,
     private fb: FormBuilder,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
     public dialog: MatDialog
   ) {
-    this.itemRef = this.afs.collection('negocios/').doc(this.data.id).collection('items').ref.doc();
-    console.log(this.itemRef.id);
+    // this.itemRef = this.afs.collection('negocios/').doc(this.data.id).collection('items').ref.doc();
+    // console.log(this.itemRef.id);
   }
 
   ngOnInit(): void {
-    console.log(this.data.id);
+    console.log(this.data);
+    // this.categorias = this.data.categorias,
 
     this.formItem = this.fb.group({
-      id: [ this.itemRef.id ],
-      categoria: ['', Validators.required],
+      id: [ this.data.id ],
+      categoria: [ this.data.categoria, Validators.required],
       nombre: ['', Validators.required],
       descripcion: [''],
       precio: ['', Validators.required],
@@ -64,9 +66,9 @@ export class CrearItemComponent implements OnInit {
     // traer solo categorias en tiempo real
     this.afs.doc('negocios/' + this.data.id).valueChanges().subscribe( (res: Negocio) => {
       this.categorias = res.categorias;
+      console.log(res);
     });
   }
-
 
   onSubmit() {
     if (this.formItem.valid) {

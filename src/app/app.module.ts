@@ -83,6 +83,7 @@ import { NegocioComponent } from './components/public/negocio/negocio.component'
 import { CardItemComponent } from './components/public/card-item/card-item.component';
 import { CardItemDestacadoComponent } from './components/public/card-item-destacado/card-item-destacado.component';
 import { DetalleItemComponent } from './components/public/detalle-item/detalle-item.component';
+import { EditarItemComponent } from './components/admin/editar-item/editar-item.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { DetalleItemComponent } from './components/public/detalle-item/detalle-i
     NegocioComponent,
     CardItemComponent,
     CardItemDestacadoComponent,
-    DetalleItemComponent
+    DetalleItemComponent,
+    EditarItemComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

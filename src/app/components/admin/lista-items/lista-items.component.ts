@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { EliminarItemComponent } from '../eliminar-item/eliminar-item.component';
+import { EditarItemComponent } from '../editar-item/editar-item.component';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-lista-items',
@@ -30,7 +32,8 @@ export class ListaItemsComponent implements OnInit {
   constructor(
     private fs: FirebaseService,
     private afs: AngularFirestore,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private bottomSheet: MatBottomSheet,
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +45,11 @@ export class ListaItemsComponent implements OnInit {
   actualizarPublicado(idItem, publicado) {
     // this.fs.updatePublicado(key, e);
     this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(idItem).update({publicado});
+  }
+  openModalEdit(item) {
+    this.bottomSheet.open(EditarItemComponent, {
+      data: item
+    });
   }
 
   openModalDelete(item) {
