@@ -50,7 +50,7 @@ export class ListaItemsComponent implements OnInit {
     this.bottomSheet.open(EditarItemComponent, {
       data: {
         idNegocio: this.idNegocio,
-        item: item
+        item
       }
     });
   }

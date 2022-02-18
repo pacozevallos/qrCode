@@ -6,7 +6,7 @@ import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bott
 import { MatDialog } from '@angular/material/dialog';
 import firebase from 'firebase/app';
 import { FileValidator } from 'ngx-material-file-input';
-import { Observable } from 'rxjs';
+import { Observable, merge } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Item } from 'src/app/classes/item';
 import { Negocio } from 'src/app/classes/negocio';
@@ -57,28 +57,24 @@ export class EditarItemComponent implements OnInit {
     });
 
     this.formItem = this.fb.group({
-      id: [ this.data.id ],
+      // id: [ this.data.item.id ],
       categoria: [ this.data.item.categoria, Validators.required],
       nombre: [this.data.item.nombre, Validators.required],
       descripcion: [this.data.item.descripcion],
-      precio: ['', Validators.required],
-      precioDescuento: [''],
+      precio: [this.data.item.precio, Validators.required],
+      precioDescuento: [this.data.item.precioDescuento],
       image: ['', FileValidator.maxContentSize(this.maxSize)],
       imageName: [''],
-      publicado: [false],
-      fechaCreacion: [firebase.firestore.Timestamp.fromDate(new Date())]
+      fechaEdicion: [firebase.firestore.Timestamp.fromDate(new Date())]
     });
 
-  
   }
 
   onSubmit() {
     if (this.formItem.valid) {
       this.loading = true;
-      // this.crearItem();
-      // this.uploadFileCrearItem();
       if (this.formItem.get('image').value === '') {
-        this.crearItem();
+        this.guardarCambios();
       } else {
         this.uploadFileCrearItem();
       }
@@ -87,10 +83,16 @@ export class EditarItemComponent implements OnInit {
     }
   }
 
-  crearItem() {
+  guardarCambios() {
     // this.afs.doc('items/' + this.idItem).set(this.formItem.value)
-    this.afs.doc('negocios/' + this.data.id).collection('items').doc(this.itemRef.id).set(this.formItem.value)
-    // this.itemRef.set(this.formItem.value)
+    this.afs.doc('negocios/' + this.data.idNegocio).collection('items').doc(this.data.item.id).update({
+      categoria: this.formItem.value.categoria,
+      nombre: this.formItem.value.nombre,
+      descripcion: this.formItem.value.descripcion,
+      precio: this.formItem.value.precio,
+      precioDescuento: this.formItem.value.precioDescuento,
+      fechaEdicion: this.formItem.value.fechaEdicion
+    })
     .then(() => {
       this.bottomSheetRef.dismiss();
       console.log('item creado');
@@ -125,8 +127,13 @@ export class EditarItemComponent implements OnInit {
 
   uploadFileCrearItem() {
 
+    this.itemRef = this.afs.doc('negocios/' + this.data.idNegocio).collection('items').doc(this.data.item.id);
+
+    // this.itemRef = this.afs.collection('negocios/').doc(this.data.id).collection('items').ref.doc();
+    // console.log(this.itemRef.id);
+
     const file = this.selectedFile;
-    const filePath = `imagesItems/${this.data.id}/${this.itemRef.id}`;
+    const filePath = `imagesItems/${this.data.idNegocio}/${this.data.item.id}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
@@ -136,14 +143,20 @@ export class EditarItemComponent implements OnInit {
         fileRef.getDownloadURL().toPromise().then( (url) => {
           this.downloadURL = url;
 
-          const objectItem = this.formItem.value;
-          delete objectItem.image;
+          // const objectItem = this.formItem.value;
+          // delete objectItem.image;
 
-          this.itemRef.set(objectItem);
-          this.itemRef.set({
+          // this.itemRef.set(objectItem);
+          this.itemRef.update({
+            categoria: this.formItem.value.categoria,
+            nombre: this.formItem.value.nombre,
+            descripcion: this.formItem.value.descripcion,
+            precio: this.formItem.value.precio,
+            precioDescuento: this.formItem.value.precioDescuento,
+            fechaEdicion: this.formItem.value.fechaEdicion,
             image: this.downloadURL,
             imageName: this.nameItem,
-          }, {merge: true});
+          });
           this.bottomSheetRef.dismiss();
           console.log( this.downloadURL );
         }).catch(err => { console.log(err); } );
@@ -156,6 +169,10 @@ export class EditarItemComponent implements OnInit {
   errorImagen() {
     return this.formItem.controls.image.hasError('required') ? 'La imagen es necesaria' :
     this.formItem.controls.image.hasError('maxContentSize') ? 'El peso no debe exceder los 5 MB' : '';
+  }
+
+  cancelar() {
+    this.bottomSheetRef.dismiss();
   }
 
 }
