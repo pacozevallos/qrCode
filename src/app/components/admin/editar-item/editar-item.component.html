@@ -2,11 +2,11 @@
   
   <div class="row gx-md-5">
 
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <img class="imageItemEdit rounded" [src]="data.item.image" alt="">
-    </div>
+    </div> -->
 
-    <div class="col-md-8">
+    <div class="col-md-12">
       <form [formGroup]="formItem" (submit)="onSubmit()" novalidate class="row gx-3">
 
         <mat-form-field appearance="standard" class="col-12">
@@ -56,8 +56,8 @@
           <!-- <span matPrefix>S/.&nbsp;</span> -->
         </mat-form-field>
 
-        <div class="d-grid gap-2 d-md-block mt-3">
-          <button class="btn btn-light" (click)="cancelar()" type="button">Cancelar</button>
+        <div class="d-grid mt-3">
+          <!-- <button class="btn btn-light" (click)="cancelar()" type="button">Cancelar</button> -->
           <button class="btn btn-primary">
             <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
               <mat-spinner class="" [diameter]="24"></mat-spinner>
@@ -68,6 +68,8 @@
         </div>
 
       </form>
+
+      <!-- <pre>{{formItem.value | json }}</pre> -->
     </div>
 
 

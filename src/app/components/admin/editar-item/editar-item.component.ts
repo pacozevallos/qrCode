@@ -57,7 +57,7 @@ export class EditarItemComponent implements OnInit {
     });
 
     this.formItem = this.fb.group({
-      // id: [ this.data.item.id ],
+      id: [ this.data.item.id ],
       categoria: [ this.data.item.categoria, Validators.required],
       nombre: [this.data.item.nombre, Validators.required],
       descripcion: [this.data.item.descripcion],
@@ -95,7 +95,7 @@ export class EditarItemComponent implements OnInit {
     })
     .then(() => {
       this.bottomSheetRef.dismiss();
-      console.log('item creado');
+      console.log('item actualizado');
     });
   }
 
