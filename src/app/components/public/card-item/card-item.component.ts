@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Item } from 'src/app/classes/item';
+import { DetalleItemComponent } from '../detalle-item/detalle-item.component';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-card-item',
@@ -11,9 +13,20 @@ export class CardItemComponent implements OnInit {
   @Input() idNegocio: string;
   @Input() item: Item;
 
-  constructor() { }
+  constructor(
+    private bottomSheet: MatBottomSheet
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  openBottomSheetDetalle(item) {
+    this.bottomSheet.open(DetalleItemComponent, {
+      data: {
+        idNegocio: this.idNegocio,
+        item
+      }
+    });
   }
 
 }
