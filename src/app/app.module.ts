@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 // Angularfire2
 import { environment } from '../environments/environment';
@@ -157,7 +158,8 @@ import { EditarItemComponent } from './components/admin/editar-item/editar-item.
     MaterialFileInputModule,
     SwiperModule,
     QRCodeModule,
-    TablerIconsModule.pick(TablerIcons)
+    TablerIconsModule.pick(TablerIcons),
+    DragDropModule
   ],
   exports: [
     TablerIconsModule

@@ -75,6 +75,7 @@ $custom-typography: mat-typography-config(
 html,
 body {
   height: 100%;
+  scroll-behavior: auto !important;
 }
 body {
   margin: 0;
@@ -168,19 +169,19 @@ table {
 }
 
 .imageItem {
-  width: 60px;
-  height: 60px;
+  width: 81px;
+  height: 72px;
   object-fit: cover;
 }
 
 .nombreItem {
   font-size: 0.95rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .precioItem {
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 // .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
@@ -220,4 +221,68 @@ table {
   object-fit: cover;
   width: 100%;
   height: 220px;
+}
+
+// Custom Acordion
+
+.mat-expansion-panel {
+  border-radius: 0 !important;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 0 16px 0 !important;
+}
+
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none;
+  border-bottom: 1px solid rgba($dark, 0.3);
+  color: inherit;
+  border-radius: 0rem !important;
+}
+
+.mat-expansion-panel-header {
+  padding: 2rem 1.2rem 2rem 0rem  !important;
+}
+
+.mat-expansion-panel-header-title {
+  display: inline !important;
+  align-items: center;
+  margin-right: 5rem !important;
+  @include media-breakpoint-only(xs) {
+    margin-right: 0.25rem !important;
+  }
+}
+
+.mat-expansion-panel-header-description {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  @include media-breakpoint-only(xs) {
+    display: inline !important;
+  }
+}
+
+.mat-accordion .mat-expansion-panel:first-of-type {
+  border-top-right-radius: 0rem !important;
+  border-top-left-radius: 0rem !important;
+}
+
+.mat-accordion .mat-expansion-panel:last-of-type {
+  border-bottom-right-radius: 0rem !important;
+  border-bottom-left-radius: 0rem !important;
+}
+
+// .mat-accordion .mat-expansion-panel:not(.mat-expanded),
+// .mat-accordion .mat-expansion-panel:not(.mat-expansion-panel-spacing) {
+//   // border-radius: 0rem !important;
+//   // margin-bottom: 0.5rem;
+// }
+
+.mat-expansion-panel-spacing {
+  margin: 0 !important;
+}
+
+.mat-expansion-panel-header-description,
+.mat-expansion-indicator::after {
+  color: $dark;
 }

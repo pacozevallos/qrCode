@@ -6,6 +6,8 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { Item } from '../../../classes/item';
 // import Swiper core and required modules
 import SwiperCore, { SwiperOptions, Pagination } from 'swiper';
+
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 // install Swiper modules
 SwiperCore.use([Pagination]);
 
@@ -106,9 +108,9 @@ export class NegocioComponent implements OnInit {
         this.negocio = res;
         console.log(this.negocio);
       });
+
       this.fs.getItemsDocument(this.id).subscribe( res => {
         this.items = res;
-
         this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
           const id = prev.findIndex((item) => item.categoria === categoria);
           id >= 0
@@ -117,11 +119,39 @@ export class NegocioComponent implements OnInit {
           return prev;
         }, []);
         console.log(this.itemsGroup);
-
-
       });
     });
   }
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.itemsGroup, event.previousIndex, event.currentIndex);
+    console.log(this.itemsGroup);
+  }
+
+
+
+  // drop(event: CdkDragDrop<any[]>) {
+  //   if (event.previousContainer === event.container) {
+  //     moveItemInArray(this.itemsGroup, event.previousIndex, event.currentIndex);
+  //   } else {
+  //     transferArrayItem(event.previousContainer.data,
+  //                       this.itemsGroup,
+  //                       event.previousIndex,
+  //                       event.currentIndex);
+  //     // if transfer, recalculate the order of previous (the list from drag)
+  //     event.previousContainer.data.forEach((x, index) => {
+  //         x.order = index;
+  //     });
+  //   }
+  //   // always, recalculate the order of the container (the list to drag)
+  //   this.itemsGroup.forEach((x, index) => {
+  //     x.order = index;
+  //   });
+  //   console.log(this.itemsGroup);
+  // }
+
+
 
   // getItemsDestacados(id: string) {
   //   this.fs.getItemsDestacados(id).subscribe( res => {

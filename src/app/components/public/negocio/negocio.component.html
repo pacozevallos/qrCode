@@ -22,7 +22,7 @@
 
 
 
-<div class="container my-3 ps-2">
+<div class="container my-3 ps-2" *ngIf="itemsDestacados.length > 0">
   <p class="h4">Lo más pedido</p>
   <swiper [config]="config">
     <ng-template swiperSlide *ngFor="let item of itemsDestacados">
@@ -34,11 +34,31 @@
 
 
 <div class="container">
-  <div class="my-3" *ngFor="let group of itemsGroup">
+
+  <!-- <div class="my-3" *ngFor="let group of itemsGroup">
     <p class="h3 fw-light">{{group.categoria}}</p>
     <mat-divider class="mb-2"></mat-divider>
     <div class="grillaItems ps-3">
       <app-card-item *ngFor="let item of group.items" [idNegocio]="id" [item]="item"></app-card-item>
     </div>
-  </div>
+  </div> -->
+
+  <mat-accordion [multi]="true">
+    <mat-expansion-panel *ngFor="let group of itemsGroup; let i = index" expanded="i">
+      <mat-expansion-panel-header>
+        <p class="h4 fw-light mb-0">{{group.categoria}}</p>
+      </mat-expansion-panel-header>
+      <div class="grillaItems ps-3">
+        <app-card-item *ngFor="let item of group.items" [idNegocio]="id" [item]="item"></app-card-item>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <!-- <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let group of itemsGroup" cdkDrag>{{group.categoria}}</div>
+  </div> -->
+
+  
+
 </div>
