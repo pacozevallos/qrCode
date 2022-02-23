@@ -22,9 +22,10 @@ export class CardItemComponent implements OnInit {
 
   openBottomSheetDetalle(item) {
     this.bottomSheet.open(DetalleItemComponent, {
+      panelClass: 'bottomSheetDetalleItem',
+      backdropClass: 'backDropBottomSheet',
       data: {
-        idNegocio: this.idNegocio,
-        item
+        idNegocio: this.idNegocio, item
       }
     });
   }

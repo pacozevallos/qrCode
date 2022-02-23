@@ -18,7 +18,7 @@ export class ListaItemsComponent implements OnInit {
 
   @Input() idNegocio: string;
 
-  displayedColumns = [ 'nombre', 'id', 'categoria', 'precio', 'precioDescuento', 'destacado', 'publicado', 'mas'];
+  displayedColumns = [ 'imagen', 'nombre', 'id', 'categoria', 'precio', 'precioDescuento', 'destacado', 'publicado', 'mas'];
   itemsData = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;

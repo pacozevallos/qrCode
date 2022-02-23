@@ -35,7 +35,7 @@ export class NegocioComponent implements OnInit {
     breakpoints: {
       0: {
         slidesPerView: 2.5,
-        spaceBetween: 15
+        spaceBetween: 12
       },
       576: {
         slidesPerView: 3,

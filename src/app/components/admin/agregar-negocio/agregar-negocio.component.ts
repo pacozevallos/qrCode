@@ -3,10 +3,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import firebase from 'firebase/app';
-
-import { QRCodeComponent, QRCodeElementType, QRCodeErrorCorrectionLevel, QRCodeModule } from 'angularx-qrcode';
+import { FileValidator } from 'ngx-material-file-input';
 import { AngularFireStorage } from '@angular/fire/storage';
-
 import { base64StringToBlob } from 'blob-util';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -34,11 +32,18 @@ export class AgregarNegocioComponent implements OnInit {
     'Bar',
   ];
 
-  downloadURL: Observable<string>;
+  // downloadURL: Observable<string>;
 
   public qrCodeData = '';
 
   @ViewChild('parent') parent: ElementRef;
+
+  selectedFile: FileList | null;
+  nameItem: any;
+  uploadPercent: Observable<number>;
+  downloadURL: Observable<string>;
+  readonly maxSize = 1048576 * 5;
+  actualSize: any;
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<AgregarNegocioComponent>,
@@ -46,6 +51,7 @@ export class AgregarNegocioComponent implements OnInit {
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
   ) {
+
     // this.idNegocio = this.afs.collection('negocios').ref.doc().id;
     // console.log(this.idNegocio);
 
@@ -59,6 +65,7 @@ export class AgregarNegocioComponent implements OnInit {
   ngOnInit(): void {
     this.formNegocio = this.fb.group({
       nombre: ['', Validators.required],
+      imageLogo: ['', FileValidator.maxContentSize(this.maxSize)],
       tipo: ['', Validators.required],
       direccion: ['', Validators.required],
       categorias: new FormArray([]),

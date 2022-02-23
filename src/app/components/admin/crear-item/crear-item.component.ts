@@ -33,6 +33,7 @@ export class CrearItemComponent implements OnInit {
   readonly maxSize = 1048576 * 5;
   actualSize: any;
 
+
   constructor(
     private bottomSheetRef: MatBottomSheetRef<CrearItemComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,

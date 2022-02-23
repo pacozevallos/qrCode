@@ -112,6 +112,7 @@ import { EditarItemComponent } from './components/admin/editar-item/editar-item.
   ],
   entryComponents: [
     CrearCategoriaItemComponent,
+    DetalleItemComponent
   ],
   imports: [
     BrowserModule,

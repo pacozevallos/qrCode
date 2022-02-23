@@ -199,6 +199,31 @@ table {
   background-position: center center;
 }
 
+.boxGradient {
+  background: linear-gradient(rgba(#27344d, 0.6) 0%, rgba($dark, 0)50%);
+}
+
+.backDropBottomSheet {
+  background: rgba($dark, 0.5);
+}
+
+.btn-circle-xs {
+  width: 42px;
+  height: 42px;
+  padding: 0px;
+  border-radius: 50%;
+  // border: none;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+// .cdk-overlay-dark-backdrop {
+//   background: rgba(0, 0, 0, 0.75);
+// }
+
 .mat-icon {
   vertical-align: middle;
 }
@@ -285,4 +310,34 @@ table {
 .mat-expansion-panel-header-description,
 .mat-expansion-indicator::after {
   color: $dark;
+}
+
+.bottomSheetDetalleItem {
+
+    padding: 0rem !important;
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+    // max-width: 500px;
+    // box-sizing: border-box;
+    // display: block;
+    // outline: 0;
+    // max-height: 80vh;
+    // overflow: auto;
+    @include media-breakpoint-only(xs) {
+      padding: 0rem !important;
+    }
+  
+}
+
+.mat-mini-fab .mat-button-wrapper {
+  line-height: normal !important;
+}
+
+.mat-mini-fab.mat-accent {
+  background-color: white !important;
+}
+
+.imageProductAdmin {
+  width: 80px;
+  height: 72px;
 }
