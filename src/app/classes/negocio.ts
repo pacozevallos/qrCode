@@ -6,4 +6,7 @@ export class Negocio {
   direccion: string;
   categorias = [];
   items = [];
+  qrCodeImage: string;
+  qrCodeImagename: string;
+  imageLoader: string;
 }

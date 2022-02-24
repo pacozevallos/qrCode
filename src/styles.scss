@@ -194,7 +194,7 @@ table {
 }
 
 .imageDetalleItem {
-  height: 240px;
+  height: 320px;
   background-size: cover;
   background-position: center center;
 }
@@ -340,4 +340,16 @@ table {
 .imageProductAdmin {
   width: 80px;
   height: 72px;
+}
+
+.mySpinnerNegocio {
+  .mat-spinner circle {
+    stroke: white;
+  }
+}
+
+.backLoaderNegocio {
+  background-position: center center;
+  background-size: cover;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }

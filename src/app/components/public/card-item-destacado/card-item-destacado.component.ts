@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Item } from 'src/app/classes/item';
+import { DetalleItemComponent } from '../detalle-item/detalle-item.component';
 
 @Component({
   selector: 'app-card-item-destacado',
@@ -8,11 +10,24 @@ import { Item } from 'src/app/classes/item';
 })
 export class CardItemDestacadoComponent implements OnInit {
 
+  @Input() idNegocio: string;
   @Input() item: Item;
 
-  constructor() { }
+  constructor(
+    private bottomSheet: MatBottomSheet
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  openBottomSheetDetalle(item) {
+    this.bottomSheet.open(DetalleItemComponent, {
+      panelClass: 'bottomSheetDetalleItem',
+      backdropClass: 'backDropBottomSheet',
+      data: {
+        idNegocio: this.idNegocio, item
+      }
+    });
   }
 
 }

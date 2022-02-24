@@ -27,6 +27,8 @@ export class NegocioComponent implements OnInit {
   ahora = new Date();
   today: number = Date.now();
 
+  loader: boolean;
+
   public myAngularxQrCode: string = null;
 
   config: SwiperOptions = {
@@ -106,6 +108,10 @@ export class NegocioComponent implements OnInit {
 
       this.afs.collection('negocios').doc(this.id).valueChanges().subscribe( (res: Negocio) => {
         this.negocio = res;
+        this.loader = true;
+        setTimeout(() => {
+          this.loader = false;
+        }, 3000);
         console.log(this.negocio);
       });
 

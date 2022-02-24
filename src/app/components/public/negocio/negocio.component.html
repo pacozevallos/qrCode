@@ -1,81 +1,72 @@
-<!-- <qrcode [qrdata]="myAngularxQrCode" [elementType]=" 'img' " [width]="256" [errorCorrectionLevel]="'M'"></qrcode> -->
+<div *ngIf="negocio">
 
 
-<div class="bg-primary">
-  <div class="container py-2 py-md-4 text-white" *ngIf="negocio">
+  <div class="backLoaderNegocio vh-100" [style.background-image]=" 'url(' + negocio.imageLoader + ')' " *ngIf="loader">
+    <div class="d-flex justify-content-center align-items-end h-75">
+      <span class="mySpinnerNegocio">
+        <mat-spinner diameter="36"></mat-spinner>
+      </span>
+    </div>
+   
+  </div>
 
-    <div class="d-flex justify-content-between align-items-center">
-  
-      <!-- <div class="me-2 me-md-3 bg-primary rounded-1 px-2 pt-2 pb-1 text-center text-white">
-        <div class="h2 mb-0 fw-normal" style="line-height: 75%;">{{today | date:'d'}}</div>
-        <span class="small text-uppercase" style="line-height: 75%;">{{today | date:'LLL'}}</span>
-      </div> -->
 
-      <div class="d-flex">
-        <div class="rounded-circle border d-flex justify-content-center align-items-center me-2" style="width: 54px; height: 54px;">
-          <span class="text-uppercase fw-bold h1 mb-0">{{negocio.nombre | slice:0:1}}</span>
+  <div *ngIf="!loader">
+
+    <div class="" style="background-color: #664445;">
+      <div class="container py-3 py-md-4 py-md-4 text-white">
+        <div class="d-flex justify-content-between align-items-center">
+          <!-- <div class="me-2 me-md-3 bg-primary rounded-1 px-2 pt-2 pb-1 text-center text-white">
+            <div class="h2 mb-0 fw-normal" style="line-height: 75%;">{{today | date:'d'}}</div>
+            <span class="small text-uppercase" style="line-height: 75%;">{{today | date:'LLL'}}</span>
+          </div> -->
+          <div class="d-flex">
+            <!-- <div class="rounded-circle border d-flex justify-content-center align-items-center me-2" style="width: 54px; height: 54px;">
+              <span class="text-uppercase h1 mb-0">{{negocio.nombre | slice:0:1}}</span>
+            </div> -->
+            <div>
+              <p class="h2 mb-1">{{negocio.nombre}}</p>
+              <p class="small fw-light mb-0 lh-1 text-white-50">{{negocio.direccion}}</p>
+            </div>
+          </div>
+          <!-- <div>
+            <i-tabler name="share" style="color: #fff; stroke-width: 1;"></i-tabler>
+          </div> -->
         </div>
+      </div>
+    </div>
     
-        <div>
-          <p class="h2 mb-1">{{negocio.nombre}}</p>
-          <p class="small fw-light mb-0 lh-1 text-white-50">{{negocio.direccion}}</p>
-        </div>
-      </div>
-
-     
-
-      <div>
-        <i-tabler name="share" style="color: #fff"></i-tabler>
-      </div>
-  
+    <div class="container my-3 pe-0" *ngIf="itemsDestacados.length > 0">
+      <p class="h4">Lo más pedido</p>
+      <swiper [config]="config">
+        <ng-template swiperSlide *ngFor="let item of itemsDestacados">
+          <app-card-item-destacado [idNegocio]="id" [item]="item"></app-card-item-destacado>
+        </ng-template>
+        <div class="swiper-pagination"></div>
+      </swiper>
+    </div>
+    
+    <div class="container">
+      <mat-accordion [multi]="true">
+        <mat-expansion-panel *ngFor="let group of itemsGroup; let i = index" expanded="i">
+          <mat-expansion-panel-header>
+            <p class="h4 fw-light mb-0">{{group.categoria}}</p>
+          </mat-expansion-panel-header>
+          <div class="grillaItems ps-3">
+            <app-card-item *ngFor="let item of group.items" [idNegocio]="id" [item]="item"></app-card-item>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
   
   </div>
-</div>
-
-
-
-
-
-
-
-<div class="container my-3 pe-0" *ngIf="itemsDestacados.length > 0">
-  <p class="h4">Lo más pedido</p>
-  <swiper [config]="config">
-    <ng-template swiperSlide *ngFor="let item of itemsDestacados">
-      <app-card-item-destacado [item]="item"></app-card-item-destacado>
-    </ng-template>
-    <div class="swiper-pagination"></div>
-  </swiper>
-</div>
-
-
-<div class="container">
-
-  <!-- <div class="my-3" *ngFor="let group of itemsGroup">
-    <p class="h3 fw-light">{{group.categoria}}</p>
-    <mat-divider class="mb-2"></mat-divider>
-    <div class="grillaItems ps-3">
-      <app-card-item *ngFor="let item of group.items" [idNegocio]="id" [item]="item"></app-card-item>
-    </div>
-  </div> -->
-
-  <mat-accordion [multi]="true">
-    <mat-expansion-panel *ngFor="let group of itemsGroup; let i = index" expanded="i">
-      <mat-expansion-panel-header>
-        <p class="h4 fw-light mb-0">{{group.categoria}}</p>
-      </mat-expansion-panel-header>
-      <div class="grillaItems ps-3">
-        <app-card-item *ngFor="let item of group.items" [idNegocio]="id" [item]="item"></app-card-item>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-
-  <!-- <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let group of itemsGroup" cdkDrag>{{group.categoria}}</div>
-  </div> -->
-
   
 
 </div>
+
+
+
+
+
+
+
