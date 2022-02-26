@@ -27,7 +27,9 @@ export class NegocioComponent implements OnInit {
   ahora = new Date();
   today: number = Date.now();
 
-  loader: boolean;
+  loader = true;
+  intro: boolean;
+  carta: boolean;
 
   public myAngularxQrCode: string = null;
 
@@ -108,10 +110,13 @@ export class NegocioComponent implements OnInit {
 
       this.afs.collection('negocios').doc(this.id).valueChanges().subscribe( (res: Negocio) => {
         this.negocio = res;
-        this.loader = true;
-        setTimeout(() => {
-          this.loader = false;
-        }, 3000);
+        this.loader = false;
+        this.intro = true;
+        this.carta = false;
+
+        // setTimeout(() => {
+        //   this.loader = false;
+        // }, 3000);
         console.log(this.negocio);
       });
 
@@ -127,6 +132,11 @@ export class NegocioComponent implements OnInit {
         console.log(this.itemsGroup);
       });
     });
+  }
+
+  goToCarta() {
+    this.intro = false;
+    this.carta = true;
   }
 
 

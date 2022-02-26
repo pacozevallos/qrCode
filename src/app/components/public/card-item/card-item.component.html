@@ -4,6 +4,7 @@
 
     <div class="w-100 me-2">
       <p class="nombreItem mb-0 mt-1">{{item.nombre}}</p>
+      <p class="small text-muted">{{item.descripcion | slice:0:60}}...</p>
 
       <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
 

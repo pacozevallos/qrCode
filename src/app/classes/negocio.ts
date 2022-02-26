@@ -8,5 +8,7 @@ export class Negocio {
   items = [];
   qrCodeImage: string;
   qrCodeImagename: string;
-  imageLoader: string;
+  imageIntro: string;
+  logo: string;
+  descripcionNegocio: string;
 }
