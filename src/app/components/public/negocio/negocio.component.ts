@@ -28,8 +28,6 @@ export class NegocioComponent implements OnInit {
   today: number = Date.now();
 
   loader = true;
-  intro: boolean;
-  carta: boolean;
 
   public myAngularxQrCode: string = null;
 
@@ -38,7 +36,7 @@ export class NegocioComponent implements OnInit {
     // pagination: { clickable: true },
     breakpoints: {
       0: {
-        slidesPerView: 2.5,
+        slidesPerView: 3.3,
         spaceBetween: 12
       },
       576: {
@@ -111,8 +109,6 @@ export class NegocioComponent implements OnInit {
       this.afs.collection('negocios').doc(this.id).valueChanges().subscribe( (res: Negocio) => {
         this.negocio = res;
         this.loader = false;
-        this.intro = true;
-        this.carta = false;
 
         // setTimeout(() => {
         //   this.loader = false;
@@ -134,10 +130,10 @@ export class NegocioComponent implements OnInit {
     });
   }
 
-  goToCarta() {
-    this.intro = false;
-    this.carta = true;
-  }
+  // goToCarta() {
+  //   this.intro = false;
+  //   this.carta = true;
+  // }
 
 
   drop(event: CdkDragDrop<string[]>) {
