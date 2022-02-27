@@ -9,7 +9,7 @@ $success: #06AB3E;
 $info: #009DF5;
 $warning: #FF9A00;
 $danger: #FA391F;
-$light: #F6F6F6;
+$light: #f5f0f0;
 $dark: #16181D;
 $text-muted: rgba($dark, 0.6);
 $superLight: rgba($dark, 0.1);
@@ -180,6 +180,12 @@ table {
   font-weight: 400;
 }
 
+.descripcionItem {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: rgba($dark, 0.5);
+}
+
 .precioItem {
   font-size: 1rem;
   font-weight: 700;
@@ -195,7 +201,7 @@ table {
 }
 
 .imageDetalleItem {
-  height: 420px;
+  height: 320px;
   background-size: cover;
   background-position: center center;
 }
@@ -353,4 +359,26 @@ table {
   background-position: center center;
   background-size: cover;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+
+.mat-tab-label {
+  padding: 0 0.75rem !important;
+}
+
+
+.mat-tab-header {
+  overflow-x: scroll !important;
+}
+
+.mat-tab-label-container {
+  overflow: visible !important;
+}
+
+.mat-tab-header::-webkit-scrollbar {
+  display: none !important;
+}
+
+.mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+  display: none !important;
 }

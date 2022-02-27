@@ -68,13 +68,13 @@
 
       <mat-tab-group>
         <mat-tab [label]="group.categoria" *ngFor="let group of itemsGroup">
-          <div class="grillaItems ps-3">
+          <div class="grillaItems py-3 px-2">
             <app-card-item *ngFor="let item of group.items" [idNegocio]="id" [item]="item"></app-card-item>
           </div>
         </mat-tab>
       </mat-tab-group>
 
-      <mat-accordion [multi]="true">
+      <!-- <mat-accordion [multi]="true">
         <mat-expansion-panel *ngFor="let group of itemsGroup; let i = index" expanded="i">
           <mat-expansion-panel-header>
             <p class="h4 fw-light mb-0">{{group.categoria}}</p>
@@ -83,7 +83,8 @@
             <app-card-item *ngFor="let item of group.items" [idNegocio]="id" [item]="item"></app-card-item>
           </div>
         </mat-expansion-panel>
-      </mat-accordion>
+      </mat-accordion> -->
+
     </div>
 
   </div>

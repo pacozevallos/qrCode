@@ -3,8 +3,8 @@
   <div class="d-flex justify-content-between">
 
     <div class="w-100 me-2">
-      <p class="nombreItem mb-0 mt-1">{{item.nombre}}</p>
-      <p class="small text-muted mb-1">{{item.descripcion | slice:0:30}}...</p>
+      <p class="nombreItem mb-0 mt-1 lh-1">{{item.nombre}}</p>
+      <p class="descripcionItem mb-0">{{item.descripcion | slice:0:32}}...</p>
       <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
       <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " >S/. {{item.precio}}</span>
     </div>
