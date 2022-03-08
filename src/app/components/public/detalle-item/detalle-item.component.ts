@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from 'src/app/classes/item';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ShareComponent } from '../share/share.component';
 
 @Component({
   selector: 'app-detalle-item',
@@ -13,37 +14,42 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class DetalleItemComponent implements OnInit {
 
   idNegocio: string;
-  // idItem: string;
+  idItem: string;
   item: any;
 
 
   constructor(
-    private matBottomSheetRef: MatBottomSheetRef<DetalleItemComponent>,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
+    // private matBottomSheetRef: MatBottomSheetRef<DetalleItemComponent>,
+    // @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private activatedRoute: ActivatedRoute,
     private afs: AngularFirestore,
-    private router: Router
+    private matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
 
-    // const myUrl = this.activatedRoute.snapshot.url;
-    // this.idNegocio = myUrl[1].path;
-    // this.idItem = myUrl[3].path;
+    const myUrl = this.activatedRoute.snapshot.url;
+    this.idNegocio = myUrl[1].path;
+    this.idItem = myUrl[3].path;
 
+    this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(this.idItem).valueChanges().subscribe( data => {
+      this.item = data;
+      console.log(data);
+    });
 
-    // this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(this.idItem).valueChanges().subscribe( data => {
-    //   this.item = data;
-    //   console.log(data);
-    // });
-
-    this.idNegocio = this.data.idNegocio;
-    this.item = this.data.item;
+    // this.idNegocio = this.data.idNegocio;
+    // this.item = this.data.item;
 
   }
 
-  cancelar() {
-    this.matBottomSheetRef.dismiss();
+  // cancelar() {
+  //   this.matBottomSheetRef.dismiss();
+  // }
+
+  openShare() {
+    this.matDialog.open(ShareComponent, {
+      panelClass: 'modalSmall'
+    });
   }
 
 }

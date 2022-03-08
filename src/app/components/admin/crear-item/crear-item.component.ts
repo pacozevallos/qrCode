@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import firebase from 'firebase/app';
@@ -56,6 +56,13 @@ export class CrearItemComponent implements OnInit {
       descripcion: [''],
       precio: ['', Validators.required],
       precioDescuento: [''],
+      precios: this.fb.array([
+        this.fb.group({
+          nombre: ['', Validators.required],
+          precio: ['', Validators.required],
+          precioDescuento: ['', Validators.required],
+        })
+      ]),
       image: ['', FileValidator.maxContentSize(this.maxSize)],
       imageName: [''],
       publicado: [false],
@@ -92,6 +99,20 @@ export class CrearItemComponent implements OnInit {
       this.bottomSheetRef.dismiss();
       console.log('item creado');
     });
+  }
+
+  agregarPrecio() {
+    (this.formItem.controls.precios as FormArray).push(
+      this.fb.group({
+        nombre: ['', Validators.required],
+        precio: ['', Validators.required],
+        precioDescuento: ['', Validators.required],
+      })
+    );
+  }
+
+  eliminarPrecio(index: number): void {
+    (this.formItem.controls.precios as FormArray).removeAt(index);
   }
 
   validateAllFormFields(formGroup: FormGroup) {

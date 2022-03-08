@@ -1,0 +1,19 @@
+<div>
+
+  <div class="buttonClose">
+    <button mat-icon-button (click)="cancelar()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <p class="h3">Comparte</p>
+  <mat-form-field appearance="outline" class="col-12">
+    <input matInput disabled [value]="myUrl" readonly>
+  </mat-form-field>
+  <div class="d-grid">
+    <button class="btn btn-primary" [cdkCopyToClipboard]="myUrl" (click)="hecho()">
+      <i-tabler name="link" style="color: #fff"></i-tabler>
+      <span class="ms-2">Copiar link</span>
+    </button>
+  </div>
+</div>

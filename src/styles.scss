@@ -17,6 +17,9 @@ $white: #fff;
 $btn-border-width: 2px;
 $btn-padding-y: 0.8rem;
 $btn-padding-x: 1.7rem;
+$btn-border-radius: 3rem;
+$btn-border-radius-sm: 3rem;
+$btn-border-radius-lg: 3rem;
 // Espacios
 $spacer: 1rem;
 $spacers: (
@@ -140,7 +143,7 @@ table {
   grid-template-columns: repeat(1, 1fr);
   @include media-breakpoint-only(xs) {
     grid-template-columns: repeat(1, 1fr);
-    gap: 0.75rem;
+    gap: 1rem;
   }
 }
 
@@ -153,7 +156,7 @@ table {
 
 .imageItemDestacado {
   width: 100%;
-  height: 90px;
+  height: 140px;
   object-fit: cover;
 }
 
@@ -169,8 +172,8 @@ table {
 }
 
 .imageItem {
-  width: 81px;
-  height: 72px;
+  width: 90px;
+  height: 81px;
   object-fit: cover;
   border-radius: $border-radius-lg;
 }
@@ -201,13 +204,13 @@ table {
 }
 
 .imageDetalleItem {
-  height: 320px;
+  height: 420px;
   background-size: cover;
   background-position: center center;
 }
 
 .boxGradient {
-  background: linear-gradient(rgba(#27344d, 0.6) 0%, rgba($dark, 0)50%);
+  background: linear-gradient(rgba($dark, 0.85) 0%, rgba($dark, 0)50%);
 }
 
 .backDropBottomSheet {
@@ -363,7 +366,7 @@ table {
 
 
 .mat-tab-label {
-  padding: 0 0.75rem !important;
+  padding: 0 0.95rem !important;
 }
 
 
@@ -381,4 +384,49 @@ table {
 
 .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
   display: none !important;
+}
+
+.mat-dialog-container {
+  position: relative !important;
+  border-radius: $border-radius-lg !important;
+  @include media-breakpoint-only(xs) {
+    border-radius: $border-radius-lg !important;
+    padding: 2.35rem !important;
+  }
+}
+
+.buttonClose {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+}
+
+
+.btn-circle {
+  width: 54px;
+  height: 54px;
+  padding: 6px 6px;
+  border-radius: 50%;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// style="color: #fff; width: 30px; height: 30px; stroke-width: 1.5;"
+
+.buttonHeader {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.iconHeader {
+  color: $white;
+  width: 30px !important;
+  height: 30px !important;
+  stroke-width: 1.2 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }

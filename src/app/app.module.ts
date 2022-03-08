@@ -28,6 +28,8 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
+import {ClipboardModule} from '@angular/cdk/clipboard';
+
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -85,6 +87,7 @@ import { CardItemComponent } from './components/public/card-item/card-item.compo
 import { CardItemDestacadoComponent } from './components/public/card-item-destacado/card-item-destacado.component';
 import { DetalleItemComponent } from './components/public/detalle-item/detalle-item.component';
 import { EditarItemComponent } from './components/admin/editar-item/editar-item.component';
+import { ShareComponent } from './components/public/share/share.component';
 
 @NgModule({
   declarations: [
@@ -108,11 +111,13 @@ import { EditarItemComponent } from './components/admin/editar-item/editar-item.
     CardItemComponent,
     CardItemDestacadoComponent,
     DetalleItemComponent,
-    EditarItemComponent
+    EditarItemComponent,
+    ShareComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,
-    DetalleItemComponent
+    DetalleItemComponent,
+    ShareComponent
   ],
   imports: [
     BrowserModule,
@@ -160,7 +165,8 @@ import { EditarItemComponent } from './components/admin/editar-item/editar-item.
     SwiperModule,
     QRCodeModule,
     TablerIconsModule.pick(TablerIcons),
-    DragDropModule
+    DragDropModule,
+    ClipboardModule
   ],
   exports: [
     TablerIconsModule

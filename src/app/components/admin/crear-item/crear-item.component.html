@@ -52,6 +52,43 @@
           <!-- <span matPrefix>S/.&nbsp;</span> -->
         </mat-form-field>
 
+        <div formArrayName="precios" class="col-12">
+          <div *ngFor="let precio of formItem.controls['precios']['controls']; let i = index;">
+            <div [formGroupName]="i" class="bg-light ps-3 pe-5 pb-2 pt-1 rounded position-relative mb-2">
+                <div class="row gx-3">
+                  <mat-form-field appearance="standard" class="col-12">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput type="text" formControlName="nombre">
+                  </mat-form-field>
+                  <mat-form-field appearance="standard" class="col-6">
+                    <mat-label>Precio</mat-label>
+                    <span matPrefix>S/. &nbsp;</span>
+                    <input matInput type="number" formControlName="precio" placeholder="0">
+                  </mat-form-field>
+                  <mat-form-field appearance="standard" class="col-6">
+                    <mat-label>Precio descuento</mat-label>
+                    <span matPrefix>S/. &nbsp;</span>
+                    <input matInput type="number" formControlName="precioDescuento">
+                  </mat-form-field>
+                </div>
+                <!-- <div class="pt-2">
+                  <button class="ms-2" matSuffix mat-icon-button (click)="eliminarPrecio(i)" [disabled]="i === 0">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div> -->
+                <div class="buttonClose">
+                  <button mat-icon-button (click)="eliminarPrecio(i)" [disabled]="i === 0">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3 mb-md-5">
+          <button type="button" class="btn btn-light btn-sm px-2" (click)="agregarPrecio()">Agregar</button>
+        </div>
+
         <div class="d-grid mt-3">
           <button class="btn btn-primary myButton">
             <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">

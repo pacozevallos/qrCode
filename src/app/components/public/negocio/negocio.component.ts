@@ -8,6 +8,8 @@ import { Item } from '../../../classes/item';
 import SwiperCore, { SwiperOptions, Pagination } from 'swiper';
 
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { ShareComponent } from '../share/share.component';
 // install Swiper modules
 SwiperCore.use([Pagination]);
 
@@ -36,7 +38,7 @@ export class NegocioComponent implements OnInit {
     // pagination: { clickable: true },
     breakpoints: {
       0: {
-        slidesPerView: 3.3,
+        slidesPerView: 2.3,
         spaceBetween: 12
       },
       576: {
@@ -91,7 +93,8 @@ export class NegocioComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private afs: AngularFirestore,
-    private fs: FirebaseService
+    private fs: FirebaseService,
+    private matDialog: MatDialog
   ) {
   }
 
@@ -171,5 +174,11 @@ export class NegocioComponent implements OnInit {
   //     console.log(this.itemsDestacados);
   //   });
   // }
+
+  openShare() {
+    this.matDialog.open(ShareComponent, {
+      panelClass: 'modalSmall'
+    });
+  }
 
 }
