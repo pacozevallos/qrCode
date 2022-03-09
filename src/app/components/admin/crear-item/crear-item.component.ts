@@ -24,6 +24,12 @@ export class CrearItemComponent implements OnInit {
   negocio;
   categorias;
   itemRef: any;
+  tipoPrecio = [
+    'Individual',
+    'Múltiple'
+  ];
+  individual = true;
+  multiple: boolean;
 
 
   selectedFile: FileList | null;
@@ -56,17 +62,29 @@ export class CrearItemComponent implements OnInit {
       descripcion: [''],
       precio: ['', Validators.required],
       precioDescuento: [''],
+      tipoPrecio: ['Individual', Validators.required],
       precios: this.fb.array([
         this.fb.group({
-          nombre: ['', Validators.required],
+          variante: ['', Validators.required],
           precio: ['', Validators.required],
-          precioDescuento: ['', Validators.required],
+          // precioDescuento: ['', Validators.required],
         })
       ]),
       image: ['', FileValidator.maxContentSize(this.maxSize)],
       imageName: [''],
       publicado: [false],
       fechaCreacion: [firebase.firestore.Timestamp.fromDate(new Date())]
+    });
+
+    this.formItem.get('tipoPrecio').valueChanges.subscribe( res => {
+      if (res === 'Individual') {
+        this.individual = true;
+        this.multiple = false;
+      }
+      if (res === 'Múltiple') {
+        this.individual = false;
+        this.multiple = true;
+      }
     });
 
     // traer solo categorias en tiempo real
@@ -104,9 +122,9 @@ export class CrearItemComponent implements OnInit {
   agregarPrecio() {
     (this.formItem.controls.precios as FormArray).push(
       this.fb.group({
-        nombre: ['', Validators.required],
+        variante: ['', Validators.required],
         precio: ['', Validators.required],
-        precioDescuento: ['', Validators.required],
+        // precioDescuento: ['', Validators.required],
       })
     );
   }
