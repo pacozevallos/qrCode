@@ -1,21 +1,16 @@
 <div *ngIf="item">
 
-  <div class="imageDetalleItem " [style.background-image]=" 'url(' + item.image + ')' ">
+  <div class="imageDetalleItem" [style.background-image]=" 'url(' + item.image + ')' ">
 
     <div class="boxGradient p-2 p-md-3 h-100">
-
     <div class="d-flex justify-content-between">
-
       <a mat-icon-button class="buttonHeader" [routerLink]=" '/negocio/' + idNegocio ">
         <i-tabler name="arrow-left" class="iconHeader"></i-tabler>
       </a>
-
       <button mat-icon-button class="buttonHeader" (click)="openShare()">
         <i-tabler name="share" class="iconHeader"></i-tabler>
       </button>
-
     </div>
-
   </div>
    
   </div>

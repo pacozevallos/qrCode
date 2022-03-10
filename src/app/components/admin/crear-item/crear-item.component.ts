@@ -65,9 +65,8 @@ export class CrearItemComponent implements OnInit {
       tipoPrecio: ['Individual', Validators.required],
       precios: this.fb.array([
         this.fb.group({
-          variante: ['', Validators.required],
-          precio: ['', Validators.required],
-          // precioDescuento: ['', Validators.required],
+          variante: [''],
+          precio: [''],
         })
       ]),
       image: ['', FileValidator.maxContentSize(this.maxSize)],
@@ -84,6 +83,21 @@ export class CrearItemComponent implements OnInit {
       if (res === 'Múltiple') {
         this.individual = false;
         this.multiple = true;
+
+        // this.formItem.controls.precios.valueChanges.subscribe( multiple => {
+        //   const control = this.formItem.controls.precios as FormArray;
+        //   for (const i in multiple) {
+        //     control.at(+i).get('variante')?.setValidators(Validators.required);
+        //     control.at(+i).get('precio')?.setValidators(Validators.required);
+        //   }
+        // });
+
+        const control = this.formItem.controls.precios as FormArray;
+        for (const i in res) {
+          control.at(+i).get('variante')?.setValidators(Validators.required);
+          // control.at(+i).get('precio')?.setValidators(Validators.required);
+        }
+
       }
     });
 
@@ -122,9 +136,8 @@ export class CrearItemComponent implements OnInit {
   agregarPrecio() {
     (this.formItem.controls.precios as FormArray).push(
       this.fb.group({
-        variante: ['', Validators.required],
-        precio: ['', Validators.required],
-        // precioDescuento: ['', Validators.required],
+        variante: [''],
+        precio: [''],
       })
     );
   }

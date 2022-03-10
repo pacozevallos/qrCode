@@ -2,5 +2,6 @@
   <img class="imageItemDestacado rounded-3" [src]="item.image">
   <p class="nombreItemDestacado mb-1 mt-2">{{item.nombre}}</p>
   <span class="precioItemDestacado">S/. {{item.precio}}</span>
-  <a type="button" class="stretched-link" (click)=" openBottomSheetDetalle(item)"></a>
+  <a class="stretched-link" [routerLink]="'item/' + item.id"></a>
+  <!-- <a type="button" class="stretched-link" (click)=" openBottomSheetDetalle(item)"></a> -->
 </div>
