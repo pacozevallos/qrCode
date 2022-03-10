@@ -63,12 +63,12 @@ export class CrearItemComponent implements OnInit {
       precio: ['', Validators.required],
       precioDescuento: [''],
       tipoPrecio: ['Individual', Validators.required],
-      precios: this.fb.array([
-        this.fb.group({
-          variante: [''],
-          precio: [''],
-        })
-      ]),
+      // precios: this.fb.array([
+      //   this.fb.group({
+      //     variante: [''],
+      //     precio: [''],
+      //   })
+      // ]),
       image: ['', FileValidator.maxContentSize(this.maxSize)],
       imageName: [''],
       publicado: [false],
@@ -84,19 +84,32 @@ export class CrearItemComponent implements OnInit {
         this.individual = false;
         this.multiple = true;
 
-        // this.formItem.controls.precios.valueChanges.subscribe( multiple => {
-        //   const control = this.formItem.controls.precios as FormArray;
-        //   for (const i in multiple) {
-        //     control.at(+i).get('variante')?.setValidators(Validators.required);
-        //     control.at(+i).get('precio')?.setValidators(Validators.required);
-        //   }
-        // });
+        this.formItem.get('precio').clearValidators();
 
-        const control = this.formItem.controls.precios as FormArray;
-        for (const i in res) {
-          control.at(+i).get('variante')?.setValidators(Validators.required);
-          // control.at(+i).get('precio')?.setValidators(Validators.required);
-        }
+        this.formItem.addControl('precios', this.fb.array([
+          this.fb.group({
+            variante: ['', Validators.required],
+            precio: ['']
+          })
+        ]) );
+
+        const arrayPrecios = this.formItem.controls.precios as FormArray;
+
+        arrayPrecios.at(0).get('variante').setValidators(Validators.required);
+        arrayPrecios.at(0).get('precio').setValidators(Validators.required);
+
+        this.formItem.controls.precios.valueChanges.subscribe( multiple => {
+          for (const i in multiple) {
+            arrayPrecios.at(+i).get('variante').setValidators(Validators.required);
+            arrayPrecios.at(+i).get('precio').setValidators(Validators.required);
+          }
+        });
+
+        // const control = this.formItem.controls.precios as FormArray;
+        // for (const i in res) {
+        //   control.at(+i).get('variante')?.setValidators(Validators.required);
+        //   control.at(+i).get('precio')?.setValidators(Validators.required);
+        // }
 
       }
     });
