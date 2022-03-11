@@ -32,6 +32,7 @@ const routes: Routes = [
       { path: '', component: ListaNegociosComponent },
       // { path: 'listaNegocios', component: ListaNegociosComponent },
       { path: 'listaNegocios/:id', component: DetalleNegocioComponent },
+      { path: 'listaNegocios/:id/crearItem', component: CrearItemComponent},
     ]
   },
   { path: '', redirectTo: 'es', pathMatch: 'full' },

@@ -76,41 +76,34 @@ export class CrearItemComponent implements OnInit {
     });
 
     this.formItem.get('tipoPrecio').valueChanges.subscribe( res => {
+
       if (res === 'Individual') {
         this.individual = true;
         this.multiple = false;
+        this.formItem.removeControl('precios');
+        this.formItem.addControl('precio', this.fb.control('', Validators.required));
+        this.formItem.addControl('precioDescuento', this.fb.control(''));
+       
       }
+
       if (res === 'Múltiple') {
         this.individual = false;
         this.multiple = true;
-
-        this.formItem.get('precio').clearValidators();
-
+        this.formItem.removeControl('precio');
+        this.formItem.removeControl('precioDescuento');
         this.formItem.addControl('precios', this.fb.array([
           this.fb.group({
             variante: ['', Validators.required],
-            precio: ['']
+            precio: ['', Validators.required]
           })
         ]) );
-
         const arrayPrecios = this.formItem.controls.precios as FormArray;
-
-        arrayPrecios.at(0).get('variante').setValidators(Validators.required);
-        arrayPrecios.at(0).get('precio').setValidators(Validators.required);
-
         this.formItem.controls.precios.valueChanges.subscribe( multiple => {
           for (const i in multiple) {
             arrayPrecios.at(+i).get('variante').setValidators(Validators.required);
             arrayPrecios.at(+i).get('precio').setValidators(Validators.required);
           }
         });
-
-        // const control = this.formItem.controls.precios as FormArray;
-        // for (const i in res) {
-        //   control.at(+i).get('variante')?.setValidators(Validators.required);
-        //   control.at(+i).get('precio')?.setValidators(Validators.required);
-        // }
-
       }
     });
 
