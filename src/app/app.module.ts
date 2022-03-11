@@ -88,6 +88,7 @@ import { CardItemDestacadoComponent } from './components/public/card-item-destac
 import { DetalleItemComponent } from './components/public/detalle-item/detalle-item.component';
 import { EditarItemComponent } from './components/admin/editar-item/editar-item.component';
 import { ShareComponent } from './components/public/share/share.component';
+import { CardItemAdminComponent } from './components/admin/card-item-admin/card-item-admin.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { ShareComponent } from './components/public/share/share.component';
     CardItemDestacadoComponent,
     DetalleItemComponent,
     EditarItemComponent,
-    ShareComponent
+    ShareComponent,
+    CardItemAdminComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

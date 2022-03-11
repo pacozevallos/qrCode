@@ -19,12 +19,12 @@ export class CrearCategoriaItemComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private afs: AngularFirestore,
-    @Inject(MAT_DIALOG_DATA) public data: Negocio,
+    @Inject(MAT_DIALOG_DATA) public data: string,
     private dialogRef: MatDialogRef<CrearCategoriaItemComponent>,
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data.id);
+    console.log(this.data);
 
     this.formCategoria = this.fb.group({
       // categorias: new FormArray([
@@ -54,7 +54,7 @@ export class CrearCategoriaItemComponent implements OnInit {
   }
 
   updateCategorias() {
-    this.afs.collection('negocios').doc(this.data.id).update({
+    this.afs.collection('negocios').doc(this.data).update({
       // categorias: arrayUnion(this.formCategoria.value.categorias)
       categorias: firebase.firestore.FieldValue.arrayUnion(this.formCategoria.value.categoria)
     })

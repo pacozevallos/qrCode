@@ -8,6 +8,8 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { EliminarItemComponent } from '../eliminar-item/eliminar-item.component';
 import { EditarItemComponent } from '../editar-item/editar-item.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { ActivatedRoute } from '@angular/router';
+import { Item } from 'src/app/classes/item';
 
 @Component({
   selector: 'app-lista-items',
@@ -17,6 +19,9 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 export class ListaItemsComponent implements OnInit {
 
   @Input() idNegocio: string;
+
+  items: Item[] = [];
+  itemsGroup = [];
 
   displayedColumns = [ 'imagen', 'nombre', 'id', 'categoria', 'precio', 'precioDescuento', 'destacado', 'publicado', 'mas'];
   itemsData = new MatTableDataSource();
@@ -29,17 +34,38 @@ export class ListaItemsComponent implements OnInit {
     this.itemsData.filter = filterValue;
   }
 
+
   constructor(
     private fs: FirebaseService,
     private afs: AngularFirestore,
     private dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+
     this.fs.getAllItemsDocument(this.idNegocio).subscribe( res => {
       this.itemsData.data = res;
     });
+
+
+    this.activatedRoute.params.subscribe( res => {
+
+    });
+
+    this.fs.getItemsDocument(this.idNegocio).subscribe( res => {
+      this.items = res;
+      this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
+        const id = prev.findIndex((item) => item.categoria === categoria);
+        id >= 0
+          ? prev[id].items.push(items)
+          : prev.push({categoria, items: [items]});
+        return prev;
+      }, []);
+      console.log(this.itemsGroup);
+    });
+
   }
 
   actualizarPublicado(idItem, publicado) {
