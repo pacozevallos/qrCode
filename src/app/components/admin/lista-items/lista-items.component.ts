@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { EliminarItemComponent } from '../eliminar-item/eliminar-item.component';
@@ -23,7 +23,7 @@ export class ListaItemsComponent implements OnInit {
   items: Item[] = [];
   itemsGroup = [];
 
-  displayedColumns = [ 'imagen', 'nombre', 'id', 'categoria', 'precio', 'precioDescuento', 'destacado', 'publicado', 'mas'];
+  displayedColumns = [ 'imagen', 'nombre', 'categoria', 'destacado', 'publicado', 'mas'];
   itemsData = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -49,12 +49,20 @@ export class ListaItemsComponent implements OnInit {
       this.itemsData.data = res;
     });
 
+    this.itemsData.paginator = this.paginator;
+    // Ordenar por categoría
+    this.sort.sort(({
+      id: 'categoria',
+      start: 'asc'
+    }) as MatSortable);
+    this.itemsData.sort = this.sort;
+
 
     this.activatedRoute.params.subscribe( res => {
 
     });
 
-    this.fs.getItemsDocument(this.idNegocio).subscribe( res => {
+    this.fs.getAllItemsDocument(this.idNegocio).subscribe( res => {
       this.items = res;
       this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
         const id = prev.findIndex((item) => item.categoria === categoria);

@@ -1,12 +1,17 @@
-<div class="container py-3 py-md-4" *ngIf="negocio">
+<div class="">
+  <div class="container py-3 py-md-4" *ngIf="negocio">
 
-  <p class="display-4">{{negocio.nombre}}</p>
-
-  <div class="d-flex justify-content-between align-items-center">
-    <p class="h4 mb-0">Items</p>
-    <!-- <button class="btn btn-primary myButton" (click)="addItem()">Crear item</button> -->
-    <a class="btn btn-primary" routerLink="crearItem">Crear item</a>
+    <p class="display-4">{{negocio.nombre}}</p>
+  
+    <div class="d-flex justify-content-between align-items-center">
+      <p class="h4 mb-0">Items</p>
+      <!-- <button class="btn btn-primary myButton" (click)="addItem()">Crear item</button> -->
+      <a class="btn btn-primary" routerLink="crearItem">
+        <!-- <i-tabler name="plus" class="me-1"></i-tabler> -->
+        <span>CREAR ITEM</span>
+      </a>
+    </div>
+    <app-lista-items [idNegocio]="negocio.id"></app-lista-items>
+  
   </div>
-  <app-lista-items [idNegocio]="negocio.id"></app-lista-items>
-
 </div>

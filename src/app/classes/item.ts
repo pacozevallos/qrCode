@@ -8,4 +8,5 @@ export class Item {
   id: string;
   descripcion: string;
   idNegocio: string;
+  publicado: boolean;
 }
