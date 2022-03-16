@@ -113,18 +113,21 @@ a, .btn-link {
 
 .mat-bottom-sheet-container {
   padding: 2rem !important;
-  border-top-left-radius: 1rem !important;
-  border-top-right-radius: 1rem !important;
-  // max-width: 500px;
-  // box-sizing: border-box;
-  // display: block;
-  // outline: 0;
-  // max-height: 80vh;
-  // overflow: auto;
+  // border-top-left-radius: 1rem !important;
+  // border-top-right-radius: 1rem !important;
   @include media-breakpoint-only(xs) {
     padding: 1.5rem !important;
   }
 }
+ 
+.myBottomSheetFull {
+  @include media-breakpoint-only(xs) {
+    height: 100vh !important;
+    max-height: 100vh !important;
+  }
+  
+}
+
 
 table {
   width: 100% !important;
@@ -456,4 +459,10 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   @include media-breakpoint-only(xs) {
     padding: 0rem 0.25rem !important;
   }
+}
+
+.buttonClose {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
 }

@@ -44,23 +44,23 @@ export class CrearItemComponent implements OnInit {
 
 
   constructor(
-    // private bottomSheetRef: MatBottomSheetRef<CrearItemComponent>,
-    // @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
+    private bottomSheetRef: MatBottomSheetRef<CrearItemComponent>,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
     private fb: FormBuilder,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute
   ) {
-    const myUrl = this.activatedRoute.snapshot.url;
-    this.idNegocio = myUrl[1].path;
+    // const myUrl = this.activatedRoute.snapshot.url;
+    // this.idNegocio = myUrl[1].path;
 
-    this.itemRef = this.afs.collection('negocios/').doc(this.idNegocio).collection('items').ref.doc();
+    this.itemRef = this.afs.collection('negocios/').doc(this.data.id).collection('items').ref.doc();
     console.log(this.itemRef.id);
   }
 
   ngOnInit(): void {
-    console.log(this.idNegocio);
+    console.log(this.data.id);
 
     this.formItem = this.fb.group({
       id: [ this.itemRef.id ],
@@ -114,7 +114,7 @@ export class CrearItemComponent implements OnInit {
     });
 
     // traer solo categorias en tiempo real
-    this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
+    this.afs.doc('negocios/' + this.data.id).valueChanges().subscribe( (res: Negocio) => {
       this.categorias = res.categorias;
     });
   }
@@ -137,10 +137,10 @@ export class CrearItemComponent implements OnInit {
 
   crearItem() {
     // this.afs.doc('items/' + this.idItem).set(this.formItem.value)
-    this.afs.doc('negocios/' + this.idNegocio).collection('items').doc(this.itemRef.id).set(this.formItem.value)
+    this.afs.doc('negocios/' + this.data.id).collection('items').doc(this.itemRef.id).set(this.formItem.value)
     // this.itemRef.set(this.formItem.value)
     .then(() => {
-      // this.bottomSheetRef.dismiss();
+      this.bottomSheetRef.dismiss();
       console.log('item creado');
     });
   }
@@ -171,7 +171,7 @@ export class CrearItemComponent implements OnInit {
 
   openModalCrearCategoriaItem() {
     this.dialog.open(CrearCategoriaItemComponent, {
-      data: this.idNegocio
+      data: this.data.id
     });
   }
 
@@ -187,7 +187,7 @@ export class CrearItemComponent implements OnInit {
   uploadFileCrearItem() {
 
     const file = this.selectedFile;
-    const filePath = `imagesItems/${this.idNegocio}/${this.itemRef.id}`;
+    const filePath = `imagesItems/${this.data.id}/${this.itemRef.id}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
@@ -211,6 +211,10 @@ export class CrearItemComponent implements OnInit {
       })
     )
     .subscribe();
+  }
+
+  cancelar() {
+    this.bottomSheetRef.dismiss();
   }
 
 

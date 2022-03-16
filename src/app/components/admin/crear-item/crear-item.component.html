@@ -1,10 +1,16 @@
-<div class="container py-3 pb-md-6">
+<div class="">
 
   <div class="row">
 
-    <div class="col-md-6">
+    <div class="col-md-12">
 
-      <p class="h3">Crear Item</p>
+      <div class="buttonClose">
+        <button mat-icon-button (click)="cancelar()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <p class="h2">Crear Item</p>
 
       <form [formGroup]="formItem" (submit)="onSubmit()" novalidate class="row gx-3">
 
@@ -126,11 +132,6 @@
 
     </div>
 
-
-
-    <div class="col-md-6">
-
-    </div>
 
   </div>
 </div>

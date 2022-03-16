@@ -4,4 +4,11 @@
   <span class="precioItemDestacado">S/. {{item.precio}}</span>
   <a class="stretched-link" [routerLink]="'item/' + item.id"></a>
   <!-- <a type="button" class="stretched-link" (click)=" openBottomSheetDetalle(item)"></a> -->
+
+  <div>
+    <div *ngFor="let precio of item.precios">
+      <p class="mb-0">{{precio.variante}}</p>
+      <span class="precioItemDestacado">S/. {{precio.precio}}</span>
+    </div>
+  </div>
 </div>

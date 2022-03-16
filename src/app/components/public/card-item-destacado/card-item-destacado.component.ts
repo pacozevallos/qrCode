@@ -12,12 +12,15 @@ export class CardItemDestacadoComponent implements OnInit {
 
   @Input() idNegocio: string;
   @Input() item: Item;
+  precios;
 
   constructor(
     private bottomSheet: MatBottomSheet
   ) { }
 
   ngOnInit(): void {
+    this.precios = this.item.precios?.fill( fil => fil.precio === 'precio');
+    console.log(this.precios);
   }
 
   openBottomSheetDetalle(item) {

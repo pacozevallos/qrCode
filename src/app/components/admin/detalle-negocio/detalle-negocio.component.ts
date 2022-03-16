@@ -43,6 +43,7 @@ export class DetalleNegocioComponent implements OnInit {
 
   addItem() {
     this.bottomSheet.open(CrearItemComponent, {
+      panelClass: 'myBottomSheetFull',
       data: this.negocio
     });
   }
