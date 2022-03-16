@@ -466,3 +466,13 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   top: 0.35rem;
   right: 0.35rem;
 }
+
+.grillaPreciosMultiple {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.extraSmall {
+  font-size: 0.75rem;
+}

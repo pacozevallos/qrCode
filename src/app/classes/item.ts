@@ -9,5 +9,5 @@ export class Item {
   descripcion: string;
   idNegocio: string;
   publicado: boolean;
-  precios?: any[]
+  precios: any[];
 }

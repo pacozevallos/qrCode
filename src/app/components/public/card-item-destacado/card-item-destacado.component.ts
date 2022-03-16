@@ -12,15 +12,19 @@ export class CardItemDestacadoComponent implements OnInit {
 
   @Input() idNegocio: string;
   @Input() item: Item;
-  precios;
+  precioMin: number;
 
   constructor(
     private bottomSheet: MatBottomSheet
   ) { }
 
   ngOnInit(): void {
-    this.precios = this.item.precios?.fill( fil => fil.precio === 'precio');
-    console.log(this.precios);
+    if (this.item.precios) {
+      const precios = this.item.precios.map( res => res.precio);
+      this.precioMin = Math.min(...precios);
+    } else {
+      console.log('No hay precios múltiples');
+    }
   }
 
   openBottomSheetDetalle(item) {

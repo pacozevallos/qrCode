@@ -5,10 +5,15 @@
   <a class="stretched-link" [routerLink]="'item/' + item.id"></a>
   <!-- <a type="button" class="stretched-link" (click)=" openBottomSheetDetalle(item)"></a> -->
 
-  <div>
+  <div class="grillaPreciosMultiple">
     <div *ngFor="let precio of item.precios">
-      <p class="mb-0">{{precio.variante}}</p>
-      <span class="precioItemDestacado">S/. {{precio.precio}}</span>
+      <p class="text-muted mb-0 extraSmall">{{precio.variante}}</p>
+      <span class="fw-bold small">S/. {{precio.precio}}</span>
     </div>
   </div>
+
+  <!-- <div>
+    <span class="text-muted small me-1">Desde</span><span class="precioItemDestacado">S/. {{precioMin}}</span>
+  </div> -->
+
 </div>
