@@ -1,19 +1,30 @@
 <div class="rounded-3 position-relative">
   <img class="imageItemDestacado rounded-3" [src]="item.image">
   <p class="nombreItemDestacado mb-1 mt-2">{{item.nombre}}</p>
-  <span class="precioItemDestacado">S/. {{item.precio}}</span>
-  <a class="stretched-link" [routerLink]="'item/' + item.id"></a>
+
+  <div *ngIf="!item.precios">
+    <!-- <span class="precioItemDestacado">S/. {{item.precio}}</span> -->
+    <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
+      <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " >S/. {{item.precio}}</span>
+  </div>
+
+  <!-- <span class="precioItemDestacado">S/. {{item.precio}}</span>
+  <a class="stretched-link" [routerLink]="'item/' + item.id"></a> -->
+
   <!-- <a type="button" class="stretched-link" (click)=" openBottomSheetDetalle(item)"></a> -->
 
-  <div class="grillaPreciosMultiple">
+  <!-- <div class="grillaPreciosMultiple">
     <div *ngFor="let precio of item.precios">
       <p class="text-muted mb-0 extraSmall">{{precio.variante}}</p>
       <span class="fw-bold small">S/. {{precio.precio}}</span>
     </div>
+  </div> -->
+
+  <div *ngIf="item.precios">
+    <span class="text-muted extraSmall me-2">Desde</span>
+    <span class="precioItemDestacado">S/. {{precioMin}}</span>
   </div>
 
-  <!-- <div>
-    <span class="text-muted small me-1">Desde</span><span class="precioItemDestacado">S/. {{precioMin}}</span>
-  </div> -->
+  <a class="stretched-link" [routerLink]="'item/' + item.id"></a>
 
 </div>

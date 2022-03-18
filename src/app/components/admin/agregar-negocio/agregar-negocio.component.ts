@@ -32,6 +32,14 @@ export class AgregarNegocioComponent implements OnInit {
     'Bar',
   ];
 
+  redesSociales = [
+    'Instagram',
+    'Facebook',
+    'TikTok',
+    'Youtube',
+    'WhatsApp'
+  ];
+
   // downloadURL: Observable<string>;
 
   public qrCodeData = '';
@@ -65,10 +73,16 @@ export class AgregarNegocioComponent implements OnInit {
   ngOnInit(): void {
     this.formNegocio = this.fb.group({
       nombre: ['', Validators.required],
-      imageLogo: ['', FileValidator.maxContentSize(this.maxSize)],
+      // imageLogo: ['', FileValidator.maxContentSize(this.maxSize)],
       tipo: ['', Validators.required],
       direccion: ['', Validators.required],
       categorias: new FormArray([]),
+      redes: this.fb.array([
+        this.fb.group({
+          nombre: [''],
+          url: [''],
+        })
+      ]),
       id: [this.negocioRef.id, Validators.required],
       fechaCreacion: [firebase.firestore.Timestamp.fromDate(new Date())]
     });
@@ -89,6 +103,19 @@ export class AgregarNegocioComponent implements OnInit {
     .then(() => {
       this.bottomSheetRef.dismiss();
     });
+  }
+
+  agregarRed() {
+    (this.formNegocio.controls.redes as FormArray).push(
+      this.fb.group({
+        nombre: [''],
+        url: [''],
+      })
+    );
+  }
+
+  eliminarRed(index: number): void {
+    (this.formNegocio.controls.redes as FormArray).removeAt(index);
   }
 
   saveImageQrCode() {
@@ -137,7 +164,7 @@ export class AgregarNegocioComponent implements OnInit {
     const b64Data = myBase64[1];
     const myBlob = base64StringToBlob(b64Data, contentType);
 
-    const filePath = `imagesQrCodes/${this.negocioRef.id}`;
+    const filePath = `imagesQrCodes/${this.negocioRef.id}.png`;
     const ref = this.storage.ref(filePath);
     const task = ref.put(myBlob);
 
@@ -159,6 +186,10 @@ export class AgregarNegocioComponent implements OnInit {
       })
     )
     .subscribe();
+  }
+
+  cancelar() {
+    this.bottomSheetRef.dismiss();
   }
 
 }

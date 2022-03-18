@@ -59,6 +59,7 @@ export class CrearItemComponent implements OnInit {
     console.log(this.itemRef.id);
   }
 
+
   ngOnInit(): void {
     console.log(this.data.id);
 
@@ -185,9 +186,10 @@ export class CrearItemComponent implements OnInit {
 
 
   uploadFileCrearItem() {
+    const nombreImage = this.nameItem.split('.');
 
     const file = this.selectedFile;
-    const filePath = `imagesItems/${this.data.id}/${this.itemRef.id}`;
+    const filePath = `imagesItems/${this.data.id}/${this.itemRef.id}.${nombreImage[1]}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
@@ -205,7 +207,7 @@ export class CrearItemComponent implements OnInit {
             image: this.downloadURL,
             imageName: this.nameItem,
           }, {merge: true});
-          // this.bottomSheetRef.dismiss();
+          this.bottomSheetRef.dismiss();
           console.log( this.downloadURL );
         }).catch(err => { console.log(err); } );
       })

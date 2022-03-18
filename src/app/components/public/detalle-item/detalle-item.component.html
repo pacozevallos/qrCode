@@ -2,14 +2,21 @@
 
   <div class="imageDetalleItem" [style.background-image]=" 'url(' + item.image + ')' ">
 
-    <div class="boxGradient p-2 p-md-3 h-100">
+    <div class="p-2 p-md-3 h-100">
     <div class="d-flex justify-content-between">
-      <a mat-icon-button class="buttonHeader" [routerLink]=" '/negocio/' + idNegocio ">
+
+      <!-- <a mat-icon-button class="buttonHeader" [routerLink]=" '/negocio/' + idNegocio ">
         <i-tabler name="arrow-left" class="iconHeader"></i-tabler>
+      </a> -->
+
+      <a mat-mini-fab [routerLink]=" '/negocio/' + idNegocio ">
+        <i-tabler name="arrow-left"></i-tabler>
       </a>
-      <button mat-icon-button class="buttonHeader" (click)="openShare()">
-        <i-tabler name="share" class="iconHeader"></i-tabler>
+
+      <button mat-mini-fab (click)="openShare()">
+        <i-tabler name="share"></i-tabler>
       </button>
+
     </div>
   </div>
    
