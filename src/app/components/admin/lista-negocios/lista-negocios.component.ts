@@ -28,7 +28,10 @@ export class ListaNegociosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.fs.getAllNegocios().subscribe( res => {
+    // this.fs.getAllNegocios().subscribe( res => {
+    //   this.negocios = res;
+    // });
+    this.fs.getNegociosPropios().subscribe( res => {
       this.negocios = res;
     });
   }

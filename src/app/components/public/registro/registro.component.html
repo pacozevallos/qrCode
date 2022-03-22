@@ -1,0 +1,53 @@
+<div class="container pt-3 pt-md-5">
+
+  <div class="col-md-6 mx-auto text-center">
+
+    <p class="h2">Regístrate</p>
+
+    <div class="d-grid my-3">
+      <button class="btn btn-danger" (click)="googleLogin()">
+        <i-tabler name="brand-google" class="me-2"></i-tabler>
+        Regístrate con Google
+      </button>
+    </div>
+
+    <p class="text-muted">o</p>
+
+    <form [formGroup]="formRegistro" (ngSubmit)="emailSignUp()" novalidate>
+
+      <mat-form-field appearance="standard" class="w-100">
+        <mat-label>E-mail</mat-label>
+        <input type="email" matInput placeholder="Ingresa tu E-mail" formControlName="email">
+        <mat-error *ngIf="formRegistro.controls['email'].invalid">{{ errorEmail() }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" class="w-100">
+        <mat-label>Contraseña</mat-label>
+        <input type="password" matInput formControlName="password" placeholder="Password" [type]="hide ? 'password' : 'text'">
+        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon class="text-muted">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="formRegistro.controls['password'].invalid">{{ errorPassword() }}</mat-error>
+        <mat-hint align="end">Mínimo 6 caracteres.</mat-hint>
+      </mat-form-field>
+
+      <div class="d-grid mt-3">
+        <button type="submit" class="btn btn-light">Regístrarme</button>
+      </div>
+    </form>
+
+
+
+    <div class="mt-5">
+      <p class="extraSmall text-muted">Al hacer clic en "Regístrate con Google" o "Regístrate con Facebook" está aceptando los <u><a class="" [routerLink]="['/terminosCondiciones']">términos y condiciones</a></u> del servicio.</p>
+    </div>
+
+  </div>
+
+  <div class="col-md-4 mt-4 mt-md-0">
+    <!-- <h3 class="font-weight-light text-center text-md-left">Regístrate</h3> -->
+
+    <!-- </mat-card> -->
+  </div>
+
+</div>

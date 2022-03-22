@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import firebase from 'firebase/app';
@@ -34,6 +34,15 @@ export class EditarItemComponent implements OnInit {
   readonly maxSize = 1048576 * 5;
   actualSize: any;
 
+  tipoPrecio = [
+    'Individual',
+    'Múltiple'
+  ];
+  individual = true;
+  multiple: boolean;
+
+  categoria: string;
+
   constructor(
     private bottomSheetRef: MatBottomSheetRef<EditarItemComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
@@ -63,9 +72,63 @@ export class EditarItemComponent implements OnInit {
       descripcion: [this.data.item.descripcion],
       precio: [this.data.item.precio, Validators.required],
       precioDescuento: [this.data.item.precioDescuento],
+      tipoPrecio: [this.data.item.tipoPrecio, Validators.required],
       image: ['', FileValidator.maxContentSize(this.maxSize)],
       imageName: [''],
       fechaEdicion: [firebase.firestore.Timestamp.fromDate(new Date())]
+    });
+
+    if (this.data.item.tipoPrecio === 'Individual') {
+      this.individual = true;
+      this.multiple = false;
+    }
+
+    if (this.data.item.tipoPrecio === 'Múltiple') {
+      this.individual = false;
+      this.multiple = true;
+      this.formItem.removeControl('precio');
+      this.formItem.removeControl('precioDescuento');
+      this.formItem.addControl('precios', this.fb.array([]));
+      this.data.item.precios.forEach(element => {
+        const arrayPrecios = this.formItem.controls.precios as FormArray;
+        arrayPrecios.push(
+          this.fb.group({
+            variante: [element.variante, Validators.required],
+            precio: [element.precio, Validators.required],
+          })
+        );
+      });
+    }
+
+    this.formItem.get('tipoPrecio').valueChanges.subscribe( res => {
+
+      if (res === 'Individual') {
+        this.individual = true;
+        this.multiple = false;
+        this.formItem.removeControl('precios');
+        this.formItem.addControl('precio', this.fb.control('', Validators.required));
+        this.formItem.addControl('precioDescuento', this.fb.control(''));
+      }
+
+      if (res === 'Múltiple') {
+        this.individual = false;
+        this.multiple = true;
+        this.formItem.removeControl('precio');
+        this.formItem.removeControl('precioDescuento');
+        this.formItem.addControl('precios', this.fb.array([
+          this.fb.group({
+            variante: ['', Validators.required],
+            precio: ['', Validators.required]
+          })
+        ]) );
+        const arrayPrecios = this.formItem.controls.precios as FormArray;
+        this.formItem.controls.precios.valueChanges.subscribe( multiple => {
+          for (const i in multiple) {
+            arrayPrecios.at(+i).get('variante').setValidators(Validators.required);
+            arrayPrecios.at(+i).get('precio').setValidators(Validators.required);
+          }
+        });
+      }
     });
 
   }
@@ -84,19 +147,26 @@ export class EditarItemComponent implements OnInit {
   }
 
   guardarCambios() {
-    // this.afs.doc('items/' + this.idItem).set(this.formItem.value)
-    this.afs.doc('negocios/' + this.data.idNegocio).collection('items').doc(this.data.item.id).update({
-      categoria: this.formItem.value.categoria,
-      nombre: this.formItem.value.nombre,
-      descripcion: this.formItem.value.descripcion,
-      precio: this.formItem.value.precio,
-      precioDescuento: this.formItem.value.precioDescuento,
-      fechaEdicion: this.formItem.value.fechaEdicion
-    })
+    const item = this.formItem.value;
+    ['image', 'imageName'].forEach(e => delete item[e]);
+    this.afs.doc('negocios/' + this.data.idNegocio).collection('items').doc(this.data.item.id).update(item)
     .then(() => {
       this.bottomSheetRef.dismiss();
       console.log('item actualizado');
     });
+  }
+
+  agregarPrecio() {
+    (this.formItem.controls.precios as FormArray).push(
+      this.fb.group({
+        variante: [''],
+        precio: [''],
+      })
+    );
+  }
+
+  eliminarPrecio(index: number): void {
+    (this.formItem.controls.precios as FormArray).removeAt(index);
   }
 
   validateAllFormFields(formGroup: FormGroup) {
@@ -111,8 +181,15 @@ export class EditarItemComponent implements OnInit {
   }
 
   openModalCrearCategoriaItem() {
-    this.dialog.open(CrearCategoriaItemComponent, {
-      data: this.data
+    const dialogRef = this.dialog.open(CrearCategoriaItemComponent, {
+      data: {
+        idNegocio: this.data.idNegocio,
+        categoria: this.categoria
+      }
+    });
+    dialogRef.afterClosed().subscribe( result => {
+      console.log(result);
+      this.formItem.get('categoria').setValue(result);
     });
   }
 
@@ -143,20 +220,12 @@ export class EditarItemComponent implements OnInit {
         fileRef.getDownloadURL().toPromise().then( (url) => {
           this.downloadURL = url;
 
-          // const objectItem = this.formItem.value;
-          // delete objectItem.image;
+          const item = this.formItem.value;
+          const image = this.downloadURL;
+          const imageName = this.nameItem;
+          const newItem = { ...item, image, imageName };
+          this.itemRef.update(newItem);
 
-          // this.itemRef.set(objectItem);
-          this.itemRef.update({
-            categoria: this.formItem.value.categoria,
-            nombre: this.formItem.value.nombre,
-            descripcion: this.formItem.value.descripcion,
-            precio: this.formItem.value.precio,
-            precioDescuento: this.formItem.value.precioDescuento,
-            fechaEdicion: this.formItem.value.fechaEdicion,
-            image: this.downloadURL,
-            imageName: this.nameItem,
-          });
           this.bottomSheetRef.dismiss();
           console.log( this.downloadURL );
         }).catch(err => { console.log(err); } );

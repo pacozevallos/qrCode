@@ -10,4 +10,5 @@ export class Item {
   idNegocio: string;
   publicado: boolean;
   precios: any[];
+  tipoPrecio: string;
 }

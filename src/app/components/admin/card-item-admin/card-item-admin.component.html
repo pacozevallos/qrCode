@@ -1,22 +1,63 @@
-<div class="position-relative bg-white rounded-3">
+<div class="position-relative bg-white rounded border">
 
   <div class="d-flex justify-content-between">
 
-    <div class="me-2">
+    <div class="">
       <img class="imageItemAdmin rounded-start" [src]="item.image">
     </div>
 
-    <div class="w-100">
-      <p class="nombreItem mb-0 mt-1 lh-1">{{item.nombre}}</p>
-      <p class="descripcionItem mb-0">{{item.descripcion | slice:0:32}}...</p>
-      <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
-      <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " >S/. {{item.precio}}</span>
+    <div class="d-flex p-2 w-100">
+
+      <div class="w-100">
+        <span class="myBadgePillCategoriaAdmin">{{item.categoria}}</span>
+        <p class="my-1 lh-1">{{item.nombre}}</p>
+        <p class="descripcionItem mb-2">{{item.descripcion | slice:0:24}}...</p>
+
+        <div *ngIf="item.tipoPrecio === 'Individual' ">
+          <span class="fw-bold small">S/. {{item.precio}}</span>
+        </div>
+
+        <!-- <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
+        <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " >S/. {{item.precio}}</span> -->
+
+        <div class="grillaPreciosMultiple" *ngIf="item.tipoPrecio === 'Múltiple' ">
+          <div *ngFor="let precio of item.precios | slice:0:3 ">
+            <p class="text-muted mb-0 extraSmall lh-1">{{precio.variante}}</p>
+            <span class="fw-bold small">S/. {{precio.precio}}</span>
+          </div>
+        </div>
+
+      </div>
+  
+      <div class="d-flex align-items-end flex-column">
+
+        <div class="">
+          <mat-slide-toggle color="primary" #toggle [checked]="item.publicado" (change)="actualizarPublicado(item.id, $event)">
+          </mat-slide-toggle>
+        </div>
+
+        <div class="mt-auto">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon class="material-icons-outlined">more_vert</mat-icon>
+          </button>
+        </div>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openModalEdit(item)">
+            <i-tabler class="me-2" name="pencil"></i-tabler>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="openModalDelete(item)">
+            <i-tabler class="me-2 text-danger" name="trash"></i-tabler>
+            <span class="text-danger">Eliminar</span>
+          </button>
+        </mat-menu>
+
+      </div>
+
     </div>
 
-    <div>
-      <mat-slide-toggle color="primary" #toggle [ngModel]="item.publicado" (ngModelChange)="actualizarPublicado(item.id, $event)">
-      </mat-slide-toggle>
-    </div>
+    
 
     <!-- <a class="stretched-link" [routerLink]="'item/' + item.id"></a> -->
     <!-- <a type="button" class="stretched-link" (click)=" openBottomSheetDetalle(item)"></a> -->

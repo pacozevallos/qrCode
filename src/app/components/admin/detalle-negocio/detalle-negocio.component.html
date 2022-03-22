@@ -1,17 +1,31 @@
-<div class="">
-  <div class="container py-3 py-md-4" *ngIf="negocio">
 
-    <p class="display-4">{{negocio.nombre}}</p>
-  
-    <div class="d-flex justify-content-between align-items-center">
-      <p class="h4 mb-0">Items</p>
-      <button class="btn btn-primary" (click)="addItem()">Crear item</button>
-      <!-- <a class="btn btn-primary" routerLink="crearItem">
-        <i-tabler name="plus" class="me-1"></i-tabler>
-        <span>CREAR ITEM</span>
-      </a> -->
+  <div class="" *ngIf="negocio">
+
+    <div class="bgLight">
+      <div class="container py-3 py-md-4">
+        <p class="h2 textPrimaryDark mb-0">Administrador</p>
+        <p class="textPrimaryDark mb-0 text-uppercase">{{negocio.nombre}}</p>
+      </div>
     </div>
-    <app-lista-items [idNegocio]="negocio.id"></app-lista-items>
+
+    <div class="container">
+
+      <div class="d-flex justify-content-between align-items-center my-3 my-md-4">
+        <p class="lead mb-0">Items</p>
+        <button class="btn btn-primary" (click)="addItem()">
+          <i-tabler name="plus" class="me-1"></i-tabler>
+          Crear item</button>
+        <!-- <a class="btn btn-primary" routerLink="crearItem">
+          <i-tabler name="plus" class="me-1"></i-tabler>
+          <span>CREAR ITEM</span>
+        </a> -->
+      </div>
+  
+      <app-lista-items [idNegocio]="negocio.id"></app-lista-items>
+    </div>
+
+  
+   
   
   </div>
-</div>
+

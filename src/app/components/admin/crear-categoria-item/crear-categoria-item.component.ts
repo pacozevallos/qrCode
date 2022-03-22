@@ -6,6 +6,11 @@ import { Negocio } from 'src/app/classes/negocio';
 // import { arrayUnion } from "firebase/firestore";
 import firebase from 'firebase/app';
 
+export interface DialogData {
+  idNegocio: string;
+  categoria: string;
+}
+
 @Component({
   selector: 'app-crear-categoria-item',
   templateUrl: './crear-categoria-item.component.html',
@@ -17,10 +22,10 @@ export class CrearCategoriaItemComponent implements OnInit {
   loading = false;
 
   constructor(
+    public dialogRef: MatDialogRef<CrearCategoriaItemComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private fb: FormBuilder,
     private afs: AngularFirestore,
-    @Inject(MAT_DIALOG_DATA) public data: string,
-    private dialogRef: MatDialogRef<CrearCategoriaItemComponent>,
   ) { }
 
   ngOnInit(): void {
@@ -30,7 +35,7 @@ export class CrearCategoriaItemComponent implements OnInit {
       // categorias: new FormArray([
       //   new FormControl('', [Validators.required])
       // ]),
-      categoria: ['', Validators.required]
+      categoria: [this.data.categoria, Validators.required]
     });
   }
 
@@ -54,12 +59,15 @@ export class CrearCategoriaItemComponent implements OnInit {
   }
 
   updateCategorias() {
-    this.afs.collection('negocios').doc(this.data).update({
+    this.afs.collection('negocios').doc(this.data.idNegocio).update({
       // categorias: arrayUnion(this.formCategoria.value.categorias)
       categorias: firebase.firestore.FieldValue.arrayUnion(this.formCategoria.value.categoria)
     })
     .then( () => {
-      this.dialogRef.close();
+      this.dialogRef.close(this.formCategoria.value.categoria);
+      // this.dialogRef.afterClosed().subscribe( data => {
+      //   console.log(data);
+      // });
     });
   }
 

@@ -3,20 +3,22 @@ $border-radius: 0.85rem;
 $border-radius-lg: 1.3rem;
 
 //colores
-$primary: #1563a6;
+$primary: #0e78d4;
 $secondary: #F8CB4F;
 $success: #06AB3E;
 $info: #009DF5;
 $warning: #FF9A00;
 $danger: #FA391F;
-$light: #f3f1eb;
+$light: #eff3f7;
 $dark: #16181D;
 $text-muted: rgba($dark, 0.6);
 $superLight: rgba($dark, 0.1);
 $white: #fff;
+
+//buttons
 $btn-border-width: 2px;
 $btn-padding-y: 0.8rem;
-$btn-padding-x: 1.7rem;
+$btn-padding-x: 1.3rem;
 $btn-border-radius: 3rem;
 $btn-border-radius-sm: 3rem;
 $btn-border-radius-lg: 3rem;
@@ -67,11 +69,13 @@ $enable-cssgrid: true;
 
 // Fonts Google
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 // Custom theme Angular Material
 @import "~@angular/material/theming";
 $custom-typography: mat-typography-config(
-  $font-family: "Rubik" !important,
+  $font-family: "Poppins" !important,
 );
 @include mat-core($custom-typography);
 
@@ -82,7 +86,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: "Rubik";
+  font-family: "Poppins";
   color: $dark;
 }
 
@@ -93,6 +97,14 @@ a, .btn-link {
 *:focus {
   outline: 0px !important;
   // box-shadow: none !important;
+}
+
+.textPrimaryDark {
+  color: darken($primary, 10%);
+}
+
+.bgLight {
+  background-color: rgba($primary, 0.15);
 }
 
 .mat-button-focus-overlay {
@@ -150,6 +162,16 @@ table {
   }
 }
 
+.grillaItemsAdmin {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(1, 1fr);
+  @include media-breakpoint-only(xs) {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0.5rem;
+  }
+}
+
 .letraInicial {
   width: 72px;
   height: 72px;
@@ -190,6 +212,7 @@ table {
   font-size: 0.78rem;
   font-weight: 400;
   color: rgba($dark, 0.5);
+  line-height: 120%;
 }
 
 .precioItem {
@@ -198,8 +221,8 @@ table {
 }
 
 .imageItemAdmin {
-  width: 72px;
-  height: 72px;
+  width: 81px;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -474,5 +497,15 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 }
 
 .extraSmall {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
+}
+
+.myBadgePillCategoriaAdmin {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  color: $primary;
+  background-color: rgba($primary, 0.1);
+  border-radius: 3rem;
+  padding: 0.15rem 0.5rem;
 }

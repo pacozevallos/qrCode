@@ -2,12 +2,14 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
+import * as firebase from 'firebase/app';
 import { FileValidator } from 'ngx-material-file-input';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { base64StringToBlob } from 'blob-util';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-negocio',
@@ -54,10 +56,11 @@ export class AgregarNegocioComponent implements OnInit {
   actualSize: any;
 
   constructor(
-    private bottomSheetRef: MatBottomSheetRef<AgregarNegocioComponent>,
+    // private bottomSheetRef: MatBottomSheetRef<AgregarNegocioComponent>,
     private fb: FormBuilder,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
+    private router: Router
   ) {
 
     // this.idNegocio = this.afs.collection('negocios').ref.doc().id;
@@ -68,9 +71,12 @@ export class AgregarNegocioComponent implements OnInit {
 
     this.qrCodeData = `https://qrcode-3b121.web.app/negocio/${this.negocioRef.id}`;
     console.log(this.qrCodeData);
+
   }
 
   ngOnInit(): void {
+    const user = firebase.default.auth().currentUser;
+
     this.formNegocio = this.fb.group({
       nombre: ['', Validators.required],
       // imageLogo: ['', FileValidator.maxContentSize(this.maxSize)],
@@ -84,7 +90,8 @@ export class AgregarNegocioComponent implements OnInit {
         })
       ]),
       id: [this.negocioRef.id, Validators.required],
-      fechaCreacion: [firebase.firestore.Timestamp.fromDate(new Date())]
+      autorId: [user.uid],
+      fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
     });
   }
 
@@ -101,7 +108,7 @@ export class AgregarNegocioComponent implements OnInit {
   crearItem() {
     this.afs.doc('negocios/' + this.idNegocio).set(this.formNegocio.value)
     .then(() => {
-      this.bottomSheetRef.dismiss();
+      // this.bottomSheetRef.dismiss();
     });
   }
 
@@ -180,7 +187,8 @@ export class AgregarNegocioComponent implements OnInit {
             qrCodeImage: this.downloadURL,
             qrCodeImageName: filePath,
           }, {merge: true});
-          this.bottomSheetRef.dismiss();
+          this.router.navigate(['/admin/listaNegocios']);
+          // this.bottomSheetRef.dismiss();
           console.log( this.downloadURL );
         }).catch(err => { console.log(err); } );
       })
@@ -188,8 +196,8 @@ export class AgregarNegocioComponent implements OnInit {
     .subscribe();
   }
 
-  cancelar() {
-    this.bottomSheetRef.dismiss();
-  }
+  // cancelar() {
+  //   this.bottomSheetRef.dismiss();
+  // }
 
 }

@@ -10,6 +10,7 @@ import { EditarItemComponent } from '../editar-item/editar-item.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ActivatedRoute } from '@angular/router';
 import { Item } from 'src/app/classes/item';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-lista-items',
@@ -50,12 +51,12 @@ export class ListaItemsComponent implements OnInit {
     });
 
     this.itemsData.paginator = this.paginator;
-    // Ordenar por categoría
-    this.sort.sort(({
-      id: 'categoria',
-      start: 'asc'
-    }) as MatSortable);
-    this.itemsData.sort = this.sort;
+
+    // this.sort.sort(({
+    //   id: 'categoria',
+    //   start: 'asc'
+    // }) as MatSortable);
+    // this.itemsData.sort = this.sort;
 
 
     this.activatedRoute.params.subscribe( res => {
@@ -64,6 +65,8 @@ export class ListaItemsComponent implements OnInit {
 
     this.fs.getAllItemsDocument(this.idNegocio).subscribe( res => {
       this.items = res;
+      console.log(this.items);
+
       this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
         const id = prev.findIndex((item) => item.categoria === categoria);
         id >= 0
@@ -76,10 +79,13 @@ export class ListaItemsComponent implements OnInit {
 
   }
 
-  actualizarPublicado(idItem, publicado) {
+  actualizarPublicado(idItem, change: MatSlideToggleChange) {
     // this.fs.updatePublicado(key, e);
-    this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(idItem).update({publicado});
+    this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(idItem).update({
+      publicado: change.checked
+    });
   }
+
   openModalEdit(item) {
     this.bottomSheet.open(EditarItemComponent, {
       data: {

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
 import { map } from 'rxjs/operators';
 import { Item } from '../classes/item';
+import { Negocio } from 'src/app/classes/negocio';
 
 @Injectable({
   providedIn: 'root'
@@ -24,13 +26,29 @@ export class FirebaseService {
   );
   }
 
+  getNegociosPropios() {
+    const user = firebase.default.auth().currentUser;
+    return this.afs.collection('negocios', (ref) => ref
+      .where('autorId', '==', user.uid)
+      // .orderBy('dataMetadata.fechaCreacion', 'desc')
+      ).snapshotChanges().pipe(
+        map((actions) =>
+          actions.map((a) => {
+            const data = a.payload.doc.data() as Negocio;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          })
+        )
+      );
+  }
+
   // getNegocio(idNegocio: string) {
   //   return this.afs.doc('negocios/' + idNegocio).valueChanges();
   // }
 
   getAllItemsDocument(idNegocio: string) {
     return this.afs.doc('negocios/' + idNegocio).collection('items', ref => ref
-    // .orderBy('categoria', 'asc')
+    .orderBy('categoria', 'asc')
     ).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Item;

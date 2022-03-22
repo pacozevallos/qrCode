@@ -1,8 +1,10 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase/app';
+import { User } from '../classes/user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class AuthService {
   displayName: string;
 
   constructor(
-    private afAuth: AngularFireAuth,
+    public auth: AngularFireAuth,
     private afs: AngularFirestore,
     public router: Router,
     public snackBar: MatSnackBar,
@@ -21,22 +23,47 @@ export class AuthService {
   ) { }
 
   emailLogin(email: string, password: string ) {
-    return this.afAuth
+    return this.auth
       .signInWithEmailAndPassword(email, password)
       .then(credential => {
         // this.notify.update('Welcome to Firestarter!!!', 'success');
         // return this.updateUserData(credential.user)
         // this.pushUserDataEmail(credential.user)
         console.log('Usuario logueado');
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/admin/listaNegocios']);
       })
       .catch(error => {
         this.handleError(error);
       });
   }
 
+  googleLogin() {
+    this.auth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider());
+  }
+
+  emailSignUp(email: string, password: string) {
+    return this.auth.createUserWithEmailAndPassword(email, password)
+      .then(credential => {
+        this.router.navigate(['/admin/listaNegocios']);
+      })
+      .catch(error => {
+        this.handleError(error);
+      });
+  }
+
+  pushUserDataEmail(user: User) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: this.displayName
+      // displayName: user.displayName
+    };
+    userRef.set(data, { merge: true });
+  }
+
   signOut() {
-    this.afAuth.signOut().then(() => {
+    this.auth.signOut().then(() => {
         this.router.navigate(['/login']);
     });
   }

@@ -12,6 +12,8 @@ import { ListaNegociosComponent } from './components/admin/lista-negocios/lista-
 import { DetalleNegocioComponent } from './components/admin/detalle-negocio/detalle-negocio.component';
 import { NegocioComponent } from './components/public/negocio/negocio.component';
 import { DetalleItemComponent } from './components/public/detalle-item/detalle-item.component';
+import { AgregarNegocioComponent } from './components/admin/agregar-negocio/agregar-negocio.component';
+import { RegistroComponent } from './components/public/registro/registro.component';
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
 
 const routes: Routes = [
@@ -21,6 +23,7 @@ const routes: Routes = [
       { path: '', component: InicioComponent },
       { path: 'negocio/:id', component: NegocioComponent },
       { path: 'negocio/:id/item/:id', component: DetalleItemComponent },
+      { path: 'registro', component: RegistroComponent },
       { path: 'login', component: LoginComponent },
 
     ]
@@ -29,8 +32,8 @@ const routes: Routes = [
     path: 'admin', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },
     // path: 'admin', component: AdminComponent,
     children: [
-      { path: '', component: ListaNegociosComponent },
-      // { path: 'listaNegocios', component: ListaNegociosComponent },
+      { path: 'listaNegocios', component: ListaNegociosComponent },
+      { path: 'listaNegocios/crearNegocio', component: AgregarNegocioComponent },
       { path: 'listaNegocios/:id', component: DetalleNegocioComponent },
       { path: 'listaNegocios/:id/crearItem', component: CrearItemComponent},
     ]

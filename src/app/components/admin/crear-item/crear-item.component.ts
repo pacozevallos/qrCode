@@ -41,6 +41,7 @@ export class CrearItemComponent implements OnInit {
   actualSize: any;
 
   idNegocio: string;
+  categoria: string;
 
 
   constructor(
@@ -58,7 +59,6 @@ export class CrearItemComponent implements OnInit {
     this.itemRef = this.afs.collection('negocios/').doc(this.data.id).collection('items').ref.doc();
     console.log(this.itemRef.id);
   }
-
 
   ngOnInit(): void {
     console.log(this.data.id);
@@ -171,8 +171,15 @@ export class CrearItemComponent implements OnInit {
   }
 
   openModalCrearCategoriaItem() {
-    this.dialog.open(CrearCategoriaItemComponent, {
-      data: this.data.id
+    const dialogRef = this.dialog.open(CrearCategoriaItemComponent, {
+      data: {
+        idNegocio: this.data.id,
+        categoria: this.categoria
+      }
+    });
+    dialogRef.afterClosed().subscribe( result => {
+      console.log(result);
+      this.formItem.get('categoria').setValue(result);
     });
   }
 

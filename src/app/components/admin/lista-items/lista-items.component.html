@@ -10,8 +10,13 @@
 </mat-accordion> -->
 
 
+<div class="grillaItemsAdmin">
+  <app-card-item-admin *ngFor="let item of items; let i = index; trackBy: trackByPublicado" [idNegocio]="idNegocio" [item]="item"></app-card-item-admin>
+</div>
 
-<div class="table-responsive">
+
+
+<!-- <div class="table-responsive">
 
   <table mat-table [dataSource]="itemsData" matSort class="example-table" [trackBy]="trackByPublicado">
 
@@ -100,4 +105,4 @@
 </div>
 
 <mat-paginator [pageSize]="50" [pageSizeOptions]="[20, 50, 100]" [showFirstLastButtons]="true">
-</mat-paginator>
+</mat-paginator> -->
