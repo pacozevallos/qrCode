@@ -56,7 +56,7 @@ export class AgregarNegocioComponent implements OnInit {
   actualSize: any;
 
   constructor(
-    // private bottomSheetRef: MatBottomSheetRef<AgregarNegocioComponent>,
+    private bottomSheetRef: MatBottomSheetRef<AgregarNegocioComponent>,
     private fb: FormBuilder,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
@@ -196,8 +196,8 @@ export class AgregarNegocioComponent implements OnInit {
     .subscribe();
   }
 
-  // cancelar() {
-  //   this.bottomSheetRef.dismiss();
-  // }
+  cancelar() {
+    this.bottomSheetRef.dismiss();
+  }
 
 }
