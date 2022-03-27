@@ -104,6 +104,7 @@ export class CrearItemComponent implements OnInit {
             precio: ['', Validators.required]
           })
         ]) );
+
         const arrayPrecios = this.formItem.controls.precios as FormArray;
         this.formItem.controls.precios.valueChanges.subscribe( multiple => {
           for (const i in multiple) {

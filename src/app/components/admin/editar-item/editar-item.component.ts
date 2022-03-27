@@ -83,6 +83,7 @@ export class EditarItemComponent implements OnInit {
       this.multiple = false;
     }
 
+
     if (this.data.item.tipoPrecio === 'Múltiple') {
       this.individual = false;
       this.multiple = true;
@@ -120,7 +121,7 @@ export class EditarItemComponent implements OnInit {
             variante: ['', Validators.required],
             precio: ['', Validators.required]
           })
-        ]) );
+        ]));
         const arrayPrecios = this.formItem.controls.precios as FormArray;
         this.formItem.controls.precios.valueChanges.subscribe( multiple => {
           for (const i in multiple) {

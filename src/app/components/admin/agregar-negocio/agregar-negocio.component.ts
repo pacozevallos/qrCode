@@ -35,11 +35,38 @@ export class AgregarNegocioComponent implements OnInit {
   ];
 
   redesSociales = [
-    'Instagram',
-    'Facebook',
-    'TikTok',
-    'Youtube',
-    'WhatsApp'
+    {
+      nombre: 'Tripadvisor',
+      icon: 'brand-tripadvisor'
+    },
+    {
+      nombre: 'TikTok',
+      icon: 'brand-tiktok'
+    },
+    {
+      nombre: 'Instagram',
+      icon: 'brand-instagram'
+    },
+    {
+      nombre: 'Facebook',
+      icon: 'brand-facebook'
+    },
+    {
+      nombre: 'WhatsApp',
+      icon: 'brand-whatsapp'
+    },
+    {
+      nombre: 'Youtube',
+      icon: 'brand-youtube'
+    },
+    {
+      nombre: 'Linkedin',
+      icon: 'brand-linkedin'
+    },
+    {
+      nombre: 'Twitter',
+      icon: 'brand-twitter'
+    },
   ];
 
   // downloadURL: Observable<string>;
@@ -80,19 +107,41 @@ export class AgregarNegocioComponent implements OnInit {
     this.formNegocio = this.fb.group({
       nombre: ['', Validators.required],
       // imageLogo: ['', FileValidator.maxContentSize(this.maxSize)],
-      tipo: ['', Validators.required],
+      tipo: [''],
       direccion: ['', Validators.required],
       categorias: new FormArray([]),
       redes: this.fb.array([
-        this.fb.group({
-          nombre: [''],
-          url: [''],
-        })
+        // this.fb.group({
+        //   nombre: ['Facebook'],
+        //   url: [''],
+        //   icon: ['Facebook']
+        // })
       ]),
       id: [this.negocioRef.id, Validators.required],
       autorId: [user.uid],
       fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
     });
+
+    // const arrayRedes = this.formNegocio.controls.redes as FormArray;
+
+    // this.formNegocio.addControl('redes', this.fb.array([
+    //   this.fb.group({
+    //     nombre: ['Facebook'],
+    //     url: [''],
+    //     icon: ['']
+    //   })
+    // ]));
+
+    this.formNegocio.controls.redes.valueChanges.subscribe( redes => {
+      const control = this.formNegocio.controls.redes as FormArray;
+      for (const i in redes) {
+        control.at(+i).get('nombre').valueChanges.subscribe( res => {
+          const red = this.redesSociales.find( find => find.nombre === res);
+          control.at(+i).get('icon').setValue(red.icon);
+        });
+      }
+    });
+
   }
 
   onSubmit() {
@@ -108,7 +157,7 @@ export class AgregarNegocioComponent implements OnInit {
   crearItem() {
     this.afs.doc('negocios/' + this.idNegocio).set(this.formNegocio.value)
     .then(() => {
-      // this.bottomSheetRef.dismiss();
+      this.bottomSheetRef.dismiss();
     });
   }
 
@@ -117,6 +166,7 @@ export class AgregarNegocioComponent implements OnInit {
       this.fb.group({
         nombre: [''],
         url: [''],
+        icon: ['']
       })
     );
   }
@@ -188,7 +238,7 @@ export class AgregarNegocioComponent implements OnInit {
             qrCodeImageName: filePath,
           }, {merge: true});
           this.router.navigate(['/admin/listaNegocios']);
-          // this.bottomSheetRef.dismiss();
+          this.bottomSheetRef.dismiss();
           console.log( this.downloadURL );
         }).catch(err => { console.log(err); } );
       })

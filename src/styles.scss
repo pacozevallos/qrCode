@@ -266,9 +266,6 @@ table {
 //   background: rgba(0, 0, 0, 0.75);
 // }
 
-.mat-icon {
-  vertical-align: middle;
-}
 
 .mat-dialog-container {
   position: relative;
@@ -448,12 +445,15 @@ table {
 }
 
 // style="color: #fff; width: 30px; height: 30px; stroke-width: 1.5;"
-
-.buttonHeader {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
+.mat-icon-button .mat-button-wrapper>* {
+  vertical-align: baseline !important;
 }
+
+// .buttonHeader {
+//   display: flex !important;
+//   justify-content: center !important;
+//   align-items: center !important;
+// }
 
 .iconHeader {
   color: $white;
