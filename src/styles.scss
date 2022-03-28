@@ -417,6 +417,17 @@ table {
   display: none !important;
 }
 
+.dialogNoPadding {
+  .mat-dialog-container {
+    position: relative !important;
+    border-radius: $border-radius-lg !important;
+    @include media-breakpoint-only(xs) {
+      border-radius: $border-radius-lg !important;
+      padding: 0rem !important;
+    }
+  }
+}
+
 .mat-dialog-container {
   position: relative !important;
   border-radius: $border-radius-lg !important;
@@ -454,6 +465,10 @@ table {
 //   justify-content: center !important;
 //   align-items: center !important;
 // }
+
+.iconTabler {
+  height: auto !important;
+}
 
 .iconHeader {
   color: $white;
@@ -508,4 +523,8 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   background-color: rgba($primary, 0.1);
   border-radius: 3rem;
   padding: 0.15rem 0.5rem;
+}
+
+.chrome-picker {
+  width: 100% !important;
 }

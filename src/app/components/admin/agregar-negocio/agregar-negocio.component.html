@@ -16,21 +16,36 @@
 
 
     <p class="h3">Crear Negocio</p>
-    <form [formGroup]="formNegocio" (submit)="onSubmit()" novalidate class="row g-0">
+    <form [formGroup]="formNegocio" (submit)="onSubmit()" novalidate class="row gx-3 gx-md-4">
 
       <mat-form-field appearance="standard" class="col-12">
         <mat-label>Nombre del negocio</mat-label>
         <input matInput type="text" formControlName="nombre">
       </mat-form-field>
 
-      <color-sketch color="#fff" (onChangeComplete)="handleChange($event)"></color-sketch>
-
       <mat-form-field appearance="standard" class="col-12">
+        <mat-label>Color</mat-label>
+        <input matInput type="text" formControlName="color">
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" class="col-6">
         <mat-label>Tipo</mat-label>
         <mat-select formControlName="tipo">
           <mat-option *ngFor="let tipo of tiposNegocio" [value]="tipo">{{tipo}}</mat-option>
         </mat-select>
       </mat-form-field>
+
+      <div class="col-6">
+        <div class="d-flex">
+          <div class="rounded-1 w-100 h-100 shadow-sm border border-4 border-white text-white p-2" [style.background-color]="color">
+            <span>color</span>
+          </div>
+          <button type="button" mat-icon-button (click)="openModalCrearColor()">
+            <i-tabler name="palette" class="iconTabler"></i-tabler>
+          </button>
+        </div>
+       
+      </div>
 
       <mat-form-field appearance="standard" class="col-12">
         <mat-label>Dirección</mat-label>

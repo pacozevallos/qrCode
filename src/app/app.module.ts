@@ -31,6 +31,7 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 
 import { ColorSketchModule } from 'ngx-color/sketch';
+import { ColorChromeModule } from 'ngx-color/chrome';
 
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -92,6 +93,7 @@ import { EditarItemComponent } from './components/admin/editar-item/editar-item.
 import { ShareComponent } from './components/public/share/share.component';
 import { CardItemAdminComponent } from './components/admin/card-item-admin/card-item-admin.component';
 import { RegistroComponent } from './components/public/registro/registro.component';
+import { ColorComponent } from './components/public/color/color.component';
 
 @NgModule({
   declarations: [
@@ -118,7 +120,8 @@ import { RegistroComponent } from './components/public/registro/registro.compone
     EditarItemComponent,
     ShareComponent,
     CardItemAdminComponent,
-    RegistroComponent
+    RegistroComponent,
+    ColorComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,
@@ -174,6 +177,7 @@ import { RegistroComponent } from './components/public/registro/registro.compone
     DragDropModule,
     ClipboardModule,
     ColorSketchModule,
+    ColorChromeModule,
   ],
   exports: [
     TablerIconsModule

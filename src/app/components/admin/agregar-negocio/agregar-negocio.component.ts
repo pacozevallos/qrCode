@@ -11,6 +11,8 @@ import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ColorEvent } from 'ngx-color';
+import { ColorComponent } from '../../public/color/color.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-agregar-negocio',
@@ -70,6 +72,8 @@ export class AgregarNegocioComponent implements OnInit {
     },
   ];
 
+  color = '#0e78d4';
+
   // downloadURL: Observable<string>;
 
   public qrCodeData = '';
@@ -88,7 +92,8 @@ export class AgregarNegocioComponent implements OnInit {
     private fb: FormBuilder,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
 
     // this.idNegocio = this.afs.collection('negocios').ref.doc().id;
@@ -107,6 +112,7 @@ export class AgregarNegocioComponent implements OnInit {
 
     this.formNegocio = this.fb.group({
       nombre: ['', Validators.required],
+      color: ['', Validators.required],
       // imageLogo: ['', FileValidator.maxContentSize(this.maxSize)],
       tipo: [''],
       direccion: ['', Validators.required],
@@ -147,6 +153,18 @@ export class AgregarNegocioComponent implements OnInit {
 
   handleChange($event: ColorEvent) {
     console.log($event.color);
+  }
+
+
+  openModalCrearColor() {
+    const dialogRef = this.dialog.open(ColorComponent, {
+      panelClass: 'dialogNoPadding',
+      data: this.color,
+    });
+    dialogRef.afterClosed().subscribe( result => {
+      console.log(result);
+      this.color = result;
+    });
   }
 
   onSubmit() {
