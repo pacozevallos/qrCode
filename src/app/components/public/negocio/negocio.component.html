@@ -26,7 +26,7 @@
 
   <div>
 
-    <div class="bg-primary">
+    <div [style.background-color]="negocio.color" >
 
       <div class="container py-3 py-md-4 py-md-4 text-white">
 
@@ -54,17 +54,30 @@
               </a>
             </div> -->
 
-            <div class="col" *ngFor="let red of negocio.redes">
+            <!-- <div class="" *ngFor="let red of negocio.redes">
               <a mat-icon-button [href]="red.url" target="blank">
-                <i-tabler name="brand-instagram" class="iconHeader"></i-tabler>
+                <i-tabler [name]="red.icon" class="iconHeader"></i-tabler>
               </a>
-            </div>
+            </div> -->
 
-            <div class="col">
+            <div class="">
               <button mat-icon-button (click)="openShare()">
                 <i-tabler name="share" class="iconHeader"></i-tabler>
               </button>
             </div>
+
+            <div class="ms-1">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <i-tabler name="dots-vertical" class="iconHeader"></i-tabler>
+              </button>
+              <mat-menu #menu="matMenu">
+                <a mat-menu-item *ngFor="let red of negocio.redes" [href]="red.url" target="blank">
+                  <i-tabler [name]="red.icon"></i-tabler>
+                  <span class="ms-2">{{red.nombre}}</span>
+                </a>
+              </mat-menu>
+            </div>
+
 
           </div>
 
@@ -74,6 +87,8 @@
       </div>
 
     </div>
+
+    <color-sketch color="#fff" (onChangeComplete)="handleChange($event)"></color-sketch>
 
     <div class="bg-light py-3">
       <div class="container pe-0" *ngIf="itemsDestacados.length > 0">

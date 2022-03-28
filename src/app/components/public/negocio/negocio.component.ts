@@ -10,6 +10,7 @@ import SwiperCore, { SwiperOptions, Pagination } from 'swiper';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { ShareComponent } from '../share/share.component';
+import { ColorEvent } from 'ngx-color';
 // install Swiper modules
 SwiperCore.use([Pagination]);
 
@@ -137,6 +138,25 @@ export class NegocioComponent implements OnInit {
   //   this.intro = false;
   //   this.carta = true;
   // }
+
+  handleChange($event: ColorEvent) {
+    console.log($event.color);
+    // color = {
+    //   hex: '#333',
+    //   rgb: {
+    //     r: 51,
+    //     g: 51,
+    //     b: 51,
+    //     a: 1,
+    //   },
+    //   hsl: {
+    //     h: 0,
+    //     s: 0,
+    //     l: .20,
+    //     a: 1,
+    //   },
+    // }
+  }
 
 
   drop(event: CdkDragDrop<string[]>) {

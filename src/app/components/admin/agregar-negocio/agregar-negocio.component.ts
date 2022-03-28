@@ -10,6 +10,7 @@ import { base64StringToBlob } from 'blob-util';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { ColorEvent } from 'ngx-color';
 
 @Component({
   selector: 'app-agregar-negocio',
@@ -142,6 +143,10 @@ export class AgregarNegocioComponent implements OnInit {
       }
     });
 
+  }
+
+  handleChange($event: ColorEvent) {
+    console.log($event.color);
   }
 
   onSubmit() {

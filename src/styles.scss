@@ -444,10 +444,10 @@ table {
   align-items: center;
 }
 
-// style="color: #fff; width: 30px; height: 30px; stroke-width: 1.5;"
-.mat-icon-button .mat-button-wrapper>* {
-  vertical-align: baseline !important;
-}
+
+// .mat-icon-button .mat-button-wrapper>* {
+//   vertical-align: baseline !important;
+// }
 
 // .buttonHeader {
 //   display: flex !important;
@@ -458,7 +458,7 @@ table {
 .iconHeader {
   color: $white;
   width: 30px !important;
-  height: 30px !important;
+  height: auto !important;
   stroke-width: 1.2 !important;
 }
 

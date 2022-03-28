@@ -30,6 +30,8 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 
 import {ClipboardModule} from '@angular/cdk/clipboard';
 
+import { ColorSketchModule } from 'ngx-color/sketch';
+
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -170,7 +172,8 @@ import { RegistroComponent } from './components/public/registro/registro.compone
     QRCodeModule,
     TablerIconsModule.pick(TablerIcons),
     DragDropModule,
-    ClipboardModule
+    ClipboardModule,
+    ColorSketchModule,
   ],
   exports: [
     TablerIconsModule

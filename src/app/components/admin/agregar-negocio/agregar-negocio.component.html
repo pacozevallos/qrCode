@@ -23,6 +23,8 @@
         <input matInput type="text" formControlName="nombre">
       </mat-form-field>
 
+      <color-sketch color="#fff" (onChangeComplete)="handleChange($event)"></color-sketch>
+
       <mat-form-field appearance="standard" class="col-12">
         <mat-label>Tipo</mat-label>
         <mat-select formControlName="tipo">

@@ -12,4 +12,5 @@ export class Negocio {
   logo: string;
   descripcionNegocio: string;
   redes = [];
+  color: string;
 }
