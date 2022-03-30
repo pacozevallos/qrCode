@@ -417,13 +417,15 @@ table {
   display: none !important;
 }
 
-.dialogNoPadding {
+.dialogColor {
   .mat-dialog-container {
     position: relative !important;
     border-radius: $border-radius-lg !important;
     @include media-breakpoint-only(xs) {
-      border-radius: $border-radius-lg !important;
+      border-radius: $border-radius-sm !important;
       padding: 0rem !important;
+      width: 80vw !important;
+      height: 100% !important;
     }
   }
 }

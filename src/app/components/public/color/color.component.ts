@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ColorEvent } from 'ngx-color';
 
@@ -9,23 +9,19 @@ import { ColorEvent } from 'ngx-color';
 })
 export class ColorComponent implements OnInit {
 
-  color;
+  newColor;
 
   constructor(
     private dialogRef: MatDialogRef<ColorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
   }
 
   changeColor($event: ColorEvent) {
     console.log($event.color);
-    this.color = $event.color.hex;
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close(this.data);
+    return this.newColor = $event.color.hex;
   }
 
 }

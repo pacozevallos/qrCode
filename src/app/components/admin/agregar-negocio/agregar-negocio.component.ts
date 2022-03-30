@@ -112,7 +112,7 @@ export class AgregarNegocioComponent implements OnInit {
 
     this.formNegocio = this.fb.group({
       nombre: ['', Validators.required],
-      color: ['', Validators.required],
+      color: [ this.color, Validators.required ],
       // imageLogo: ['', FileValidator.maxContentSize(this.maxSize)],
       tipo: [''],
       direccion: ['', Validators.required],
@@ -158,13 +158,22 @@ export class AgregarNegocioComponent implements OnInit {
 
   openModalCrearColor() {
     const dialogRef = this.dialog.open(ColorComponent, {
-      panelClass: 'dialogNoPadding',
+      panelClass: 'dialogColor',
       data: this.color,
+      // disableClose: true
     });
     dialogRef.afterClosed().subscribe( result => {
       console.log(result);
-      this.color = result;
+      if( result != undefined) {
+        this.color = result;
+        this.formNegocio.get('color').setValue(this.color);
+      }
     });
+    // dialogRef.componentInstance.color.subscribe( res => {
+    //   console.log(res);
+    //   this.color = res;
+    //   this.formNegocio.get('color').setValue(this.color);
+    // })
   }
 
   onSubmit() {

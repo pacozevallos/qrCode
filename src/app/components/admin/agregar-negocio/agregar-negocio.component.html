@@ -24,33 +24,37 @@
       </mat-form-field>
 
       <mat-form-field appearance="standard" class="col-12">
-        <mat-label>Color</mat-label>
-        <input matInput type="text" formControlName="color">
+        <mat-label>Dirección</mat-label>
+        <input matInput type="text" formControlName="direccion">
       </mat-form-field>
 
       <mat-form-field appearance="standard" class="col-6">
-        <mat-label>Tipo</mat-label>
+        <mat-label>Rubro</mat-label>
         <mat-select formControlName="tipo">
           <mat-option *ngFor="let tipo of tiposNegocio" [value]="tipo">{{tipo}}</mat-option>
         </mat-select>
       </mat-form-field>
 
+      <!-- <mat-form-field appearance="standard" class="col-6">
+        <mat-label>Color</mat-label>
+        <input matInput type="text" formControlName="color">
+        <button type="button" mat-icon-button matSuffix (click)="openModalCrearColor()">
+          <mat-icon class="material-icons-outlined">format_color_fill</mat-icon>
+        </button>
+      </mat-form-field> -->
+
       <div class="col-6">
-        <div class="d-flex">
-          <div class="rounded-1 w-100 h-100 shadow-sm border border-4 border-white text-white p-2" [style.background-color]="color">
-            <span>color</span>
+        <div class="d-flex align-items-center">
+          <div class="rounded-1 w-100 h-100 shadow border border-4 border-white text-white p-2 text-center" [style.background-color]="color">
+            <span>Color</span>
           </div>
-          <button type="button" mat-icon-button (click)="openModalCrearColor()">
+          <button class="ms-1" type="button" mat-icon-button (click)="openModalCrearColor()">
             <i-tabler name="palette" class="iconTabler"></i-tabler>
           </button>
         </div>
-       
       </div>
 
-      <mat-form-field appearance="standard" class="col-12">
-        <mat-label>Dirección</mat-label>
-        <input matInput type="text" formControlName="direccion">
-      </mat-form-field>
+      
 
 
       <!-- <p class="lead mt-3">Redes sociales</p> -->
@@ -91,14 +95,14 @@
       </div>
 
       <div class="col-12 mb-3 mb-md-5">
-        <button type="button" class="btn btn-link btn-sm px-0" (click)="agregarRed()">
+        <button type="button" class="btn btn-link btn-sm px-0" [style.color]="color" (click)="agregarRed()">
           <i-tabler name="plus" class="me-1" style="width: 18px; height: 18px;"></i-tabler>
           Agregar red social
         </button>
       </div>
 
       <div class="d-grid mt-2">
-        <button class="btn btn-primary myButton">
+        <button class="btn btn-primary" [style.background-color]="color" [style.borderColor]="color">
           <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
             <mat-spinner class="" [diameter]="24"></mat-spinner>
           </span>
