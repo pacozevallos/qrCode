@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { ColorEvent } from 'ngx-color';
 import { ColorComponent } from '../../public/color/color.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-agregar-negocio',
@@ -25,53 +26,8 @@ export class AgregarNegocioComponent implements OnInit {
   idNegocio: string;
   loading = false;
   negocioRef: any;
-
-  tiposNegocio = [
-    'Restaurante',
-    'Restobar',
-    'Cafetería',
-    'Heladería',
-    'Juguería',
-    'Discoteca',
-    'Pub',
-    'Bar',
-  ];
-
-  redesSociales = [
-    {
-      nombre: 'Tripadvisor',
-      icon: 'brand-tripadvisor'
-    },
-    {
-      nombre: 'TikTok',
-      icon: 'brand-tiktok'
-    },
-    {
-      nombre: 'Instagram',
-      icon: 'brand-instagram'
-    },
-    {
-      nombre: 'Facebook',
-      icon: 'brand-facebook'
-    },
-    {
-      nombre: 'WhatsApp',
-      icon: 'brand-whatsapp'
-    },
-    {
-      nombre: 'Youtube',
-      icon: 'brand-youtube'
-    },
-    {
-      nombre: 'Linkedin',
-      icon: 'brand-linkedin'
-    },
-    {
-      nombre: 'Twitter',
-      icon: 'brand-twitter'
-    },
-  ];
-
+  redesSociales = [];
+  tiposNegocio = [];
   color = '#0e78d4';
 
   // downloadURL: Observable<string>;
@@ -93,7 +49,8 @@ export class AgregarNegocioComponent implements OnInit {
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private ds: DataService
   ) {
 
     // this.idNegocio = this.afs.collection('negocios').ref.doc().id;
@@ -109,6 +66,8 @@ export class AgregarNegocioComponent implements OnInit {
 
   ngOnInit(): void {
     const user = firebase.default.auth().currentUser;
+    this.redesSociales = this.ds.redesSociales;
+    this.tiposNegocio = this.ds.tiposNegocio;
 
     this.formNegocio = this.fb.group({
       nombre: ['', Validators.required],
@@ -143,7 +102,7 @@ export class AgregarNegocioComponent implements OnInit {
       const control = this.formNegocio.controls.redes as FormArray;
       for (const i in redes) {
         control.at(+i).get('nombre').valueChanges.subscribe( res => {
-          const red = this.redesSociales.find( find => find.nombre === res);
+          const red = this.ds.redesSociales.find( find => find.nombre === res);
           control.at(+i).get('icon').setValue(red.icon);
         });
       }

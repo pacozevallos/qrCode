@@ -6,6 +6,9 @@ import { Negocio } from 'src/app/classes/negocio';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { CrearItemComponent } from '../crear-item/crear-item.component';
 import { map } from 'rxjs/operators';
+import { EditarItemComponent } from '../editar-item/editar-item.component';
+import { EditarNegocioComponent } from '../editar-negocio/editar-negocio.component';
+import { VistaQrComponent } from '../vista-qr/vista-qr.component';
 
 @Component({
   selector: 'app-detalle-negocio',
@@ -39,6 +42,20 @@ export class DetalleNegocioComponent implements OnInit {
       // this.bottomSheetRef.containerInstance._animationStateChanged = this.negocio;
 
     });
+  }
+
+  verCodigoQr() {
+    this.bottomSheet.open(VistaQrComponent, {
+      // panelClass: 'myBottomSheetFull',
+      data: this.negocio
+    })
+  }
+
+  editarNegocio() {
+    this.bottomSheet.open(EditarNegocioComponent, {
+      // panelClass: 'myBottomSheetFull',
+      data: this.negocio
+    })
   }
 
   addItem() {

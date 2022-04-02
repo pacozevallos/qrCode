@@ -242,7 +242,7 @@ table {
 }
 
 .boxGradient {
-  background: linear-gradient(rgba($dark, 0.85) 0%, rgba($dark, 0)50%);
+  background: linear-gradient(rgba($dark, 0.85) 0%, rgba($dark, 0) 50%);
 }
 
 .backDropBottomSheet {
@@ -458,9 +458,33 @@ table {
 }
 
 
-// .mat-icon-button .mat-button-wrapper>* {
-//   vertical-align: baseline !important;
+// .mat-icon-button {
+//   .mat-button-wrapper {
+//     display: flex !important;
+//     align-items: center !important;
+//     justify-content: center !important;
+//   }
 // }
+
+// .myIconTabler {
+//   width: 30px !important;
+//   height: auto !important;
+//   stroke-width: 1.2 !important;
+// }
+
+
+
+.mat-icon-button .mat-button-wrapper {
+  line-height: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.iconTablerLg {
+  width: 30px !important;
+  height: 30px !important;
+  stroke-width: 1.5 !important;
+}
 
 // .buttonHeader {
 //   display: flex !important;
@@ -468,9 +492,9 @@ table {
 //   align-items: center !important;
 // }
 
-.iconTabler {
-  height: auto !important;
-}
+// .iconTabler {
+//   height: auto !important;
+// }
 
 .iconHeader {
   color: $white;

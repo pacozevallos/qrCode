@@ -1,21 +1,14 @@
-<div class="d-none">
-  <qrcode [qrdata]="qrCodeData" [width]="400" [errorCorrectionLevel]="'M'"></qrcode>
-</div>
+<p class="h3">Editar Negocio</p>
 
-<!-- <button class="btn btn-primary" (click)="saveAsImage()">Download QR Code Image</button> -->
+<div class="buttonClose">
+  <button mat-icon-button (click)="cancelar()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
 
 
 <div class="">
 
-  <div class="buttonClose">
-    <button mat-icon-button (click)="cancelar()">
-      <!-- <mat-icon>close</mat-icon> -->
-      <i-tabler name="x"></i-tabler>
-    </button>
-  </div>
-
-
-    <p class="h3">Crear Negocio</p>
     <form [formGroup]="formNegocio" (submit)="onSubmit()" novalidate class="row gx-3 gx-md-4">
 
       <mat-form-field appearance="standard" class="col-12">
@@ -106,7 +99,7 @@
           <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
             <mat-spinner class="" [diameter]="24"></mat-spinner>
           </span>
-          <span *ngIf="!loading">Crear Negocio</span>
+          <span *ngIf="!loading">Editar Negocio</span>
         </button>
       </div>
 
@@ -115,3 +108,4 @@
     <!-- <pre>{{formNegocio.value | json}}</pre> -->
 
 </div>
+

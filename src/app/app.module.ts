@@ -94,6 +94,8 @@ import { ShareComponent } from './components/public/share/share.component';
 import { CardItemAdminComponent } from './components/admin/card-item-admin/card-item-admin.component';
 import { RegistroComponent } from './components/public/registro/registro.component';
 import { ColorComponent } from './components/public/color/color.component';
+import { EditarNegocioComponent } from './components/admin/editar-negocio/editar-negocio.component';
+import { VistaQrComponent } from './components/admin/vista-qr/vista-qr.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +123,9 @@ import { ColorComponent } from './components/public/color/color.component';
     ShareComponent,
     CardItemAdminComponent,
     RegistroComponent,
-    ColorComponent
+    ColorComponent,
+    EditarNegocioComponent,
+    VistaQrComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

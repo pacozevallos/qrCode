@@ -14,6 +14,7 @@ import { NegocioComponent } from './components/public/negocio/negocio.component'
 import { DetalleItemComponent } from './components/public/detalle-item/detalle-item.component';
 import { AgregarNegocioComponent } from './components/admin/agregar-negocio/agregar-negocio.component';
 import { RegistroComponent } from './components/public/registro/registro.component';
+import { VistaQrComponent } from './components/admin/vista-qr/vista-qr.component';
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
 
 const routes: Routes = [
