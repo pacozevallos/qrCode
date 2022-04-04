@@ -16,7 +16,7 @@ export class ColorComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: string,
   ) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
   }
 
   changeColor($event: ColorEvent) {

@@ -79,7 +79,7 @@ export class CrearItemComponent implements OnInit {
       // ]),
       image: ['', FileValidator.maxContentSize(this.maxSize)],
       imageName: [''],
-      publicado: [false],
+      publicado: [true],
       fechaCreacion: [firebase.firestore.Timestamp.fromDate(new Date())]
     });
 

@@ -19,6 +19,23 @@ export class DetalleNegocioComponent implements OnInit {
 
   idNegocio: string;
   negocio;
+  opciones = [
+    {
+      nombre: 'Compartir negocio',
+      icon: 'share',
+      function: () => this.verCodigoQr()
+    },
+    {
+      nombre: 'Editar negocio',
+      icon: 'pencil',
+      function: () => this.editarNegocio()
+    },
+    {
+      nombre: 'Mi cuenta',
+      icon: 'user',
+      function: () => this.editarNegocio()
+    }
+  ];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -48,19 +65,19 @@ export class DetalleNegocioComponent implements OnInit {
     this.bottomSheet.open(VistaQrComponent, {
       // panelClass: 'myBottomSheetFull',
       data: this.negocio
-    })
+    });
   }
 
   editarNegocio() {
     this.bottomSheet.open(EditarNegocioComponent, {
       // panelClass: 'myBottomSheetFull',
       data: this.negocio
-    })
+    });
   }
 
   addItem() {
     this.bottomSheet.open(CrearItemComponent, {
-      panelClass: 'myBottomSheetFull',
+      // panelClass: 'myBottomSheetFull',
       data: this.negocio
     });
   }

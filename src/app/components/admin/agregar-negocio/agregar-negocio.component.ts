@@ -123,7 +123,7 @@ export class AgregarNegocioComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe( result => {
       console.log(result);
-      if( result != undefined) {
+      if ( result !== undefined) {
         this.color = result;
         this.formNegocio.get('color').setValue(this.color);
       }

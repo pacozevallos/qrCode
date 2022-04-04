@@ -1,0 +1,25 @@
+<div *ngIf="item">
+
+  <div class="d-flex justify-content-end">
+    <button mat-icon-button class="ms-1" *ngFor="let option of opciones">
+      <i-tabler [name]="option.icon"></i-tabler>
+    </button>
+  </div>
+
+  
+
+  <div class="imageDetalleItemAdmin" [style.background-image]=" 'url(' + item.image + ')' ">
+  </div>
+
+  <div class="">
+
+    <div class="">
+      <p class="h1">{{item.nombre}}</p>
+      <p>{{item.descripcion}}</p>
+      <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
+      <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' ">S/. {{item.precio}}</span>     
+    </div>
+
+  </div>
+
+</div>

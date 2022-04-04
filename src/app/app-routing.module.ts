@@ -30,13 +30,15 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'admin', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },
+    path: 'admin', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: {
+      authGuardPipe: redirectUnauthorizedToLogin
+    },
     // path: 'admin', component: AdminComponent,
     children: [
-      { path: 'listaNegocios', component: ListaNegociosComponent },
-      { path: 'listaNegocios/crearNegocio', component: AgregarNegocioComponent },
-      { path: 'listaNegocios/:id', component: DetalleNegocioComponent },
-      { path: 'listaNegocios/:id/crearItem', component: CrearItemComponent},
+      { path: '', component: ListaNegociosComponent },
+      // { path: 'crearNegocio', component: AgregarNegocioComponent },
+      { path: ':id', component: DetalleNegocioComponent },
+      // { path: ':id/crearItem', component: CrearItemComponent},
     ]
   },
   { path: '', redirectTo: 'es', pathMatch: 'full' },

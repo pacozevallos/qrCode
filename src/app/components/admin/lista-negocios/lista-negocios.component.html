@@ -7,19 +7,34 @@
 
   <div class="d-flex justify-content-between align-items-center">
     <p class="h1 mb-0">Negocios</p>
-    <button class="btn btn-primary" (click)="addNegocio()">Crear negocio</button>
+    <!-- <button class="btn btn-primary" (click)="addNegocio()">Crear negocio</button> -->
     <!-- <a class="btn btn-primary" routerLink="crearNegocio">Crear Negocio</a> -->
   </div>
 
-  <div class="my-4 my-md-6">
-    <div class="grid" style="--bs-gap: 0.5rem;">
+  <div class="my-3 my-md-4">
+    <div class="grid" style="--bs-gap: 1rem;">
+
       <div class="rounded border g-col-12 g-col-md-4 p-4 position-relative" *ngFor="let negocio of negocios">
         <div class="d-flex align-items-center">
           <div class="rounded-circle border d-flex justify-content-center align-items-center text-uppercase fw-bold h3 mb-0 me-2" style="width: 60px; height: 60px;">{{negocio.nombre | slice:0:1}}</div>
           <p class="mb-0 lead">{{negocio.nombre}}</p>
         </div>
-        <a class="stretched-link" [routerLink]=" '/admin/listaNegocios/' + negocio.id "></a>
+        <a class="stretched-link" [routerLink]=" '/admin/' + negocio.id "></a>
       </div>
+
+
+        <div class="position-relative d-flex justify-content-center align-items-center g-col-12 g-col-md-4 rounded p-3 border border-primary border-3">
+          <div class="me-2">
+            <i-tabler name="plus" style="width: 30px; height: 30px; stroke-width: 2;"></i-tabler>
+          </div>
+          <span class="h6 mb-0">Agrega un negocio</span>
+          <a type="button" class="stretched-link" (click)="addNegocio()"></a>
+        </div>
+
+      
+
+     
+
     </div>
   </div>
 

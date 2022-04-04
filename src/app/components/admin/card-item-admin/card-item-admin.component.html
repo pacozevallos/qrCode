@@ -10,57 +10,60 @@
 
       <div class="w-100">
         <span class="myBadgePillCategoriaAdmin">{{item.categoria}}</span>
-        <p class="my-1 lh-1">{{item.nombre}}</p>
+        <p class="mt-2 mb-1 lh-1">{{item.nombre}}</p>
         <p class="descripcionItem mb-2">{{item.descripcion | slice:0:24}}...</p>
 
-        <div *ngIf="item.tipoPrecio === 'Individual' ">
+        <div class="" *ngIf="item.tipoPrecio === 'Individual' ">
           <span class="fw-bold small">S/. {{item.precio}}</span>
         </div>
 
         <!-- <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
         <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " >S/. {{item.precio}}</span> -->
 
-        <div class="grillaPreciosMultiple" *ngIf="item.tipoPrecio === 'Múltiple' ">
+        <!-- <div class="grillaPreciosMultiple" *ngIf="item.tipoPrecio === 'Múltiple' ">
           <div *ngFor="let precio of item.precios | slice:0:3 ">
             <p class="text-muted mb-0 extraSmall lh-1">{{precio.variante}}</p>
             <span class="fw-bold small">S/. {{precio.precio}}</span>
           </div>
+        </div> -->
+
+        <div *ngIf="item.precios">
+          <span class="text-muted extraSmall me-2">Desde</span>
+          <span class="fw-bold small">S/. {{precioMin}}</span>
         </div>
 
       </div>
-  
-      <div class="d-flex align-items-end flex-column">
 
-        <div class="">
+      <div class="buttonMoreItemAdmin encima">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon class="material-icons-outlined">more_vert</mat-icon>
+        </button>
+      </div>
+
+      <!-- <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+          <label class="form-check-label" for="flexSwitchCheckChecked">Visible</label>
+        </div> -->
+
+      <!-- <div class="mt-auto d-flex align-items-center">
+          <span class="small me-2">Visible</span>
           <mat-slide-toggle color="primary" #toggle [checked]="item.publicado" (change)="actualizarPublicado(item.id, $event)">
           </mat-slide-toggle>
-        </div>
+        </div> -->
 
-        <div class="mt-auto">
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon class="material-icons-outlined">more_vert</mat-icon>
-          </button>
-        </div>
-
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="openModalEdit(item)">
-            <i-tabler class="me-2" name="pencil"></i-tabler>
-            <span>Editar</span>
-          </button>
-          <button mat-menu-item (click)="openModalDelete(item)">
-            <i-tabler class="me-2 text-danger" name="trash"></i-tabler>
-            <span class="text-danger">Eliminar</span>
-          </button>
-        </mat-menu>
-
-      </div>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let option of opciones" (click)="option.function()">
+          <i-tabler [name]="option.icon"></i-tabler>
+          <span class="ms-2">{{option.nombre}}</span>
+        </button>
+      </mat-menu>
 
     </div>
-
-    
 
     <!-- <a class="stretched-link" [routerLink]="'item/' + item.id"></a> -->
     <!-- <a type="button" class="stretched-link" (click)=" openBottomSheetDetalle(item)"></a> -->
 
   </div>
+
+  <a class="stretched-link" (click)="detalleItem()"></a>
 </div>

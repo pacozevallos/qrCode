@@ -17,7 +17,6 @@ export class DetalleItemComponent implements OnInit {
   idItem: string;
   item: any;
 
-
   constructor(
     // private matBottomSheetRef: MatBottomSheetRef<DetalleItemComponent>,
     // @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,

@@ -96,6 +96,7 @@ import { RegistroComponent } from './components/public/registro/registro.compone
 import { ColorComponent } from './components/public/color/color.component';
 import { EditarNegocioComponent } from './components/admin/editar-negocio/editar-negocio.component';
 import { VistaQrComponent } from './components/admin/vista-qr/vista-qr.component';
+import { DetalleItemAdminComponent } from './components/admin/detalle-item-admin/detalle-item-admin.component';
 
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import { VistaQrComponent } from './components/admin/vista-qr/vista-qr.component
     RegistroComponent,
     ColorComponent,
     EditarNegocioComponent,
-    VistaQrComponent
+    VistaQrComponent,
+    DetalleItemAdminComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

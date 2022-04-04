@@ -6,16 +6,18 @@
 
 <div class="bg-light">
 	<div class="container">
-		<div class="py-3 py-md-3 d-flex justify-content-between align-items-center">
-			<!-- <a class="" routerLink="/admin">
-        <img class="logoTuribus" src="https://firebasestorage.googleapis.com/v0/b/turibus-59f94.appspot.com/o/logoTuribus.svg?alt=media&token=4cab1ad7-f431-4cff-b370-029c3ba439ba">
-      </a> -->
-      <a class="text-dark" routerLink="/admin/listaNegocios">{{email}}</a>
+		<div class="py-2 py-md-3 d-flex justify-content-between align-items-center">
+
+			<a class="lead text-dark" routerLink="/admin">
+        <span>Administrador</span>
+      </a>
+
+      <!-- <a class="text-dark" routerLink="/admin/listaNegocios">{{email}}</a> -->
 
 			<div class="d-flex align-items-center" *ngIf="userId">
-				<!-- <div class="text-right mr-2">
+				<div class="text-right mr-2">
 					<p class="mb-0 d-none d-md-block">{{email}}</p>
-				</div> -->
+				</div>
 				<!-- <img class="rounded-circle border mr-2" [src]="photoURL" width="60px"> -->
 				<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
 					<mat-icon>more_vert</mat-icon>

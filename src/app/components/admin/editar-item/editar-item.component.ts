@@ -43,7 +43,6 @@ export class EditarItemComponent implements OnInit {
 
   categoria: string;
 
-  
   constructor(
     private bottomSheetRef: MatBottomSheetRef<EditarItemComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,

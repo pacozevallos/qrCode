@@ -38,7 +38,7 @@ export class ListaNegociosComponent implements OnInit {
 
   addNegocio() {
     this.bottomSheet.open(AgregarNegocioComponent, {
-      panelClass: 'myBottomSheetFull',
+      // panelClass: 'myBottomSheetFull',
       // data: this.paquetesRegulares
     });
   }
