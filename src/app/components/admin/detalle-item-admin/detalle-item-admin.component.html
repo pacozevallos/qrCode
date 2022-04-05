@@ -8,16 +8,25 @@
 
   
 
-  <div class="imageDetalleItemAdmin" [style.background-image]=" 'url(' + item.image + ')' ">
+  <div class="imageDetalleItemAdmin rounded" [style.background-image]=" 'url(' + item.image + ')' ">
   </div>
+
+  <!-- <div class="col-4">
+    <img [src]="item.image" alt="" width="100%">
+  </div> -->
 
   <div class="">
 
     <div class="">
       <p class="h1">{{item.nombre}}</p>
       <p>{{item.descripcion}}</p>
-      <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
-      <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' ">S/. {{item.precio}}</span>     
+      <!-- <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
+      <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' ">S/. {{item.precio}}</span> -->
+      <p class="fw-bold">S/. {{item.precio}}</p>
+      <div class="d-grid">
+        <button class="btn btn-primary">Editar item</button>
+      </div>
+      
     </div>
 
   </div>
