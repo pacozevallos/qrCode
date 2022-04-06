@@ -27,6 +27,11 @@ export class CardItemAdminComponent implements OnInit {
       function: () => this.editarItem()
     },
     {
+      nombre: 'Destacar',
+      icon: 'star',
+      function: () => this.editarItem()
+    },
+    {
       nombre: 'Compartir',
       icon: 'share',
       function: () => this.compartirItem()

@@ -12,7 +12,7 @@
           <p class="h3 mb-0">{{negocio.nombre}}</p>
           <div>
             <button mat-icon-button class="ms-1" *ngFor="let option of opciones | slice:0:2" (click)="option.function()">
-              <i-tabler [name]="option.icon" class="iconTablerLg"></i-tabler>
+              <i-tabler [name]="option.icon"></i-tabler>
             </button>
             <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
               <i-tabler name="dots-vertical" class="iconTablerLg"></i-tabler>
