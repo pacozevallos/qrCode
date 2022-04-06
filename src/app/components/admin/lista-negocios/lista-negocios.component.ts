@@ -7,6 +7,10 @@ import { AgregarNegocioComponent } from '../agregar-negocio/agregar-negocio.comp
 import { AngularFireStorage } from '@angular/fire/storage';
 
 import { base64StringToBlob } from 'blob-util';
+import { Router } from '@angular/router';
+import { EditarNegocioComponent } from '../editar-negocio/editar-negocio.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ShareComponent } from '../../public/share/share.component';
 
 
 @Component({
@@ -18,13 +22,38 @@ export class ListaNegociosComponent implements OnInit {
 
   negocios;
 
+  opciones = [
+    {
+      nombre: 'Ver items',
+      icon: 'list-details',
+      function: (negocio) => this.verItems(negocio)
+    },
+    {
+      nombre: 'Editar',
+      icon: 'pencil',
+      function: (negocio) => this.editarNegocio(negocio)
+    },
+    {
+      nombre: 'Compartir',
+      icon: 'share',
+      function: (negocio) => this.compartirNegocio(negocio)
+    },
+    {
+      nombre: 'Eliminar',
+      icon: 'trash',
+      function: () => this.eliminarNegocio()
+    }
+  ];
+
   public myAngularxQrCode = 'golxlkPQPcyGhnoLD6xO';
 
   constructor(
     private bottomSheet: MatBottomSheet,
     private afs: AngularFirestore,
     private fs: FirebaseService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private router: Router,
+    private matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -84,6 +113,26 @@ export class ListaNegociosComponent implements OnInit {
     }
     // RETURN BLOB IMAGE AFTER CONVERSION
     return new Blob([uInt8Array], { type: imageType });
+  }
+
+  verItems(negocio) {
+    this.router.navigate(['admin/' + negocio.id]);
+  }
+
+  editarNegocio(negocio) {
+    this.bottomSheet.open(EditarNegocioComponent, {
+      data: negocio
+    });
+  }
+
+  compartirNegocio(negocio) {
+    this.matDialog.open(ShareComponent, {
+      data: `/negocio/${negocio.id}`
+    });
+  }
+
+  eliminarNegocio() {
+
   }
 
 }

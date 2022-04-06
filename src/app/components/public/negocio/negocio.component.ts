@@ -176,6 +176,7 @@ export class NegocioComponent implements OnInit {
   //   });
   // }
 
+
   openShare() {
     this.matDialog.open(ShareComponent, {
       panelClass: 'modalSmall'

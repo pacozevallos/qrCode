@@ -597,3 +597,13 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .encima {
   z-index: 1000;
 }
+
+.grillaNegociosAdmin {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  @include media-breakpoint-only(xs) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+

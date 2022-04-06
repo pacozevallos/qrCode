@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -14,13 +14,20 @@ export class ShareComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<ShareComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private snackbar: MatSnackBar
   ) {
 
   }
 
+  // const dataURL = canvas[0].toDataURL();
+  // const myBase64 = dataURL.split(',');
+
   ngOnInit(): void {
+    console.log(this.data);
     this.myUrl = window.location.href;
+    const extract = this.myUrl + this.data;
+    console.log(extract);
   }
 
   cancelar() {
