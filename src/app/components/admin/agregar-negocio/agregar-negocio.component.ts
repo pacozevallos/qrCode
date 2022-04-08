@@ -228,7 +228,7 @@ export class AgregarNegocioComponent implements OnInit {
             qrCodeImage: this.downloadURL,
             qrCodeImageName: filePath,
           }, {merge: true});
-          this.router.navigate(['/admin/listaNegocios']);
+          // this.router.navigate(['/admin/listaNegocios']);
           this.bottomSheetRef.dismiss();
           console.log( this.downloadURL );
         }).catch(err => { console.log(err); } );

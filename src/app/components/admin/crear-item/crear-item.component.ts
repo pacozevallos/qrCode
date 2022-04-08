@@ -69,7 +69,7 @@ export class CrearItemComponent implements OnInit {
       nombre: ['', Validators.required],
       descripcion: [''],
       precio: ['', Validators.required],
-      precioDescuento: [''],
+      // precioDescuento: [''],
       tipoPrecio: ['Individual', Validators.required],
       // precios: this.fb.array([
       //   this.fb.group({
@@ -80,6 +80,7 @@ export class CrearItemComponent implements OnInit {
       image: ['', FileValidator.maxContentSize(this.maxSize)],
       imageName: [''],
       publicado: [true],
+      destacado: [false],
       fechaCreacion: [firebase.firestore.Timestamp.fromDate(new Date())]
     });
 

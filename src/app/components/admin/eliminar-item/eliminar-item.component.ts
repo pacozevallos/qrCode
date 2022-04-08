@@ -41,7 +41,9 @@ export class EliminarItemComponent implements OnInit {
 
     });
 
-    this.storage.ref(`imagesItems/${this.data.idNegocio_}/${this.data.item_.id}`).delete();
+    
+    const formatImage = this.data.item_.imageName.split('.')
+    this.storage.ref(`imagesItems/${this.data.idNegocio_}/${this.data.item_.id}.${formatImage[1]}`).delete();
   }
 
   cancelar() {

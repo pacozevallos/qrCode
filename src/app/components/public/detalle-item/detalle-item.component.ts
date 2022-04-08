@@ -45,9 +45,10 @@ export class DetalleItemComponent implements OnInit {
   //   this.matBottomSheetRef.dismiss();
   // }
 
-  openShare() {
+  compartirItem() {
     this.matDialog.open(ShareComponent, {
-      panelClass: 'modalSmall'
+      panelClass: 'modalSmall',
+      data: `/negocio/${this.idNegocio}/item/${this.idItem}`
     });
   }
 

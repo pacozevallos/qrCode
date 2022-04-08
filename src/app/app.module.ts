@@ -97,6 +97,8 @@ import { ColorComponent } from './components/public/color/color.component';
 import { EditarNegocioComponent } from './components/admin/editar-negocio/editar-negocio.component';
 import { VistaQrComponent } from './components/admin/vista-qr/vista-qr.component';
 import { DetalleItemAdminComponent } from './components/admin/detalle-item-admin/detalle-item-admin.component';
+import { EliminarNegocioComponent } from './components/admin/eliminar-negocio/eliminar-negocio.component';
+import { AdicionalesComponent } from './components/admin/adicionales/adicionales.component';
 
 @NgModule({
   declarations: [
@@ -127,7 +129,9 @@ import { DetalleItemAdminComponent } from './components/admin/detalle-item-admin
     ColorComponent,
     EditarNegocioComponent,
     VistaQrComponent,
-    DetalleItemAdminComponent
+    DetalleItemAdminComponent,
+    EliminarNegocioComponent,
+    AdicionalesComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

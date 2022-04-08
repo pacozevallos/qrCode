@@ -4,6 +4,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import firebase from 'firebase/app';
 import { FileValidator } from 'ngx-material-file-input';
 import { Observable, merge } from 'rxjs';
@@ -67,11 +68,13 @@ export class EditarItemComponent implements OnInit {
 
     this.formItem = this.fb.group({
       id: [ this.data.item.id ],
+      destacado: [this.data.item.destacado, Validators.required],
+      publicado: [ this.data.item.publicado, Validators.required],
       categoria: [ this.data.item.categoria, Validators.required],
       nombre: [this.data.item.nombre, Validators.required],
       descripcion: [this.data.item.descripcion],
       precio: [this.data.item.precio, Validators.required],
-      precioDescuento: [this.data.item.precioDescuento],
+      // precioDescuento: [this.data.item.precioDescuento],
       tipoPrecio: [this.data.item.tipoPrecio, Validators.required],
       image: ['', FileValidator.maxContentSize(this.maxSize)],
       imageName: [''],
@@ -168,6 +171,13 @@ export class EditarItemComponent implements OnInit {
 
   eliminarPrecio(index: number): void {
     (this.formItem.controls.precios as FormArray).removeAt(index);
+  }
+
+  actualizarPublicado(idItem, change: MatSlideToggleChange) {
+    // this.fs.updatePublicado(key, e);
+    this.afs.collection('negocios').doc(this.data.idNegocio).collection('items').doc(idItem).update({
+      publicado: change.checked
+    });
   }
 
   validateAllFormFields(formGroup: FormGroup) {

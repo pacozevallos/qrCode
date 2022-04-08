@@ -24,10 +24,10 @@ export class ShareComponent implements OnInit {
   // const myBase64 = dataURL.split(',');
 
   ngOnInit(): void {
-    console.log(this.data);
-    this.myUrl = window.location.href;
-    const extract = this.myUrl + this.data;
-    console.log(extract);
+    const newUrl = window.location.href;
+    this.myUrl = newUrl.replace('/admin', this.data)
+    console.log(this.myUrl);
+    
   }
 
   cancelar() {

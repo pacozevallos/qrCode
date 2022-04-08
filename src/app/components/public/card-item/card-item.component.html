@@ -3,11 +3,31 @@
   <div class="d-flex justify-content-between">
 
     <div class="w-100 me-2">
-      <p class="nombreItem mb-0 mt-1 lh-1">{{item.nombre}}</p>
-      <p class="descripcionItem mb-0">{{item.descripcion | slice:0:32}}...</p>
+      <p class="nombreItem mb-1 lh-1">{{item.nombre}}</p>
+      <p class="descripcionItem mb-1">{{item.descripcion | slice:0:32}}...</p>
       
-      <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
-      <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " >S/. {{item.precio}}</span>
+      <!-- <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
+      <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " >S/. {{item.precio}}</span> -->
+
+      <div class="d-flex justify-content-start align-items-center">
+
+        <div *ngIf="item.tipoPrecio === 'Individual' ">
+          <span class="fw-bold small">S/. {{item.precio}}</span>
+        </div>
+    
+        <div *ngIf="item.tipoPrecio === 'Múltiple' ">
+          <span class="text-muted extraSmall me-1">Desde</span>
+          <span class="fw-bold small">S/. {{precioMin}}</span>
+        </div>
+
+        <div class="ms-2" *ngIf="negocio">
+          <p class="extraSmall text-muted mb-0" *ngFor="let regla of negocio.reglas | slice:0:1">({{regla}})</p>
+        </div>
+
+      </div>
+
+      
+
     </div>
 
     <div class="">

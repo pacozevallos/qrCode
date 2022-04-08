@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { EditarNegocioComponent } from '../editar-negocio/editar-negocio.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ShareComponent } from '../../public/share/share.component';
+import { EliminarNegocioComponent } from '../eliminar-negocio/eliminar-negocio.component';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class ListaNegociosComponent implements OnInit {
     {
       nombre: 'Eliminar',
       icon: 'trash',
-      function: () => this.eliminarNegocio()
+      function: (negocio) => this.eliminarNegocio(negocio)
     }
   ];
 
@@ -131,8 +132,10 @@ export class ListaNegociosComponent implements OnInit {
     });
   }
 
-  eliminarNegocio() {
-
+  eliminarNegocio(negocio) {
+    this.matDialog.open(EliminarNegocioComponent, {
+      data: negocio
+    })
   }
 
 }

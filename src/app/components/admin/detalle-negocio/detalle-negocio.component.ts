@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { EditarItemComponent } from '../editar-item/editar-item.component';
 import { EditarNegocioComponent } from '../editar-negocio/editar-negocio.component';
 import { VistaQrComponent } from '../vista-qr/vista-qr.component';
+import { AdicionalesComponent } from '../adicionales/adicionales.component';
 
 @Component({
   selector: 'app-detalle-negocio',
@@ -20,20 +21,20 @@ export class DetalleNegocioComponent implements OnInit {
   idNegocio: string;
   negocio;
   opciones = [
+    // {
+    //   nombre: 'Compartir negocio',
+    //   icon: 'share',
+    //   function: () => this.verCodigoQr()
+    // },
     {
-      nombre: 'Compartir negocio',
-      icon: 'share',
-      function: () => this.verCodigoQr()
+      nombre: 'Agregar reglas',
+      icon: 'adjustments',
+      function: () => this.adicionales()
     },
     {
-      nombre: 'Editar negocio',
-      icon: 'pencil',
-      function: () => this.editarNegocio()
-    },
-    {
-      nombre: 'Mi cuenta',
-      icon: 'user',
-      function: () => this.editarNegocio()
+      nombre: 'Agregar item',
+      icon: 'plus',
+      function: () => this.agregarItem()
     }
   ];
 
@@ -75,11 +76,17 @@ export class DetalleNegocioComponent implements OnInit {
     });
   }
 
-  addItem() {
+  agregarItem() {
     this.bottomSheet.open(CrearItemComponent, {
       // panelClass: 'myBottomSheetFull',
       data: this.negocio
     });
+  }
+
+  adicionales() {
+    this.bottomSheet.open(AdicionalesComponent, {
+      data:this.negocio
+    })
   }
 
 

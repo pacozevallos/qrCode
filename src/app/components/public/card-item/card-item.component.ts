@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Item } from 'src/app/classes/item';
 import { DetalleItemComponent } from '../detalle-item/detalle-item.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Negocio } from 'src/app/classes/negocio';
 
 @Component({
   selector: 'app-card-item',
@@ -12,12 +14,22 @@ export class CardItemComponent implements OnInit {
 
   @Input() idNegocio: string;
   @Input() item: Item;
+  precioMin: number;
+  negocio: Negocio
 
   constructor(
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private afs: AngularFirestore
   ) { }
 
   ngOnInit(): void {
+    if (this.item.precios) {
+      const precios = this.item.precios.map( res => res.precio);
+      this.precioMin = Math.min(...precios);
+    } else {
+      console.log('No hay precios múltiples');
+    };
+    this.getReglasNegocio()
   }
 
   openBottomSheetDetalle(item) {
@@ -27,6 +39,12 @@ export class CardItemComponent implements OnInit {
       data: {
         idNegocio: this.idNegocio, item
       }
+    });
+  }
+
+  getReglasNegocio() {
+    this.afs.collection('negocios').doc(this.idNegocio)?.valueChanges().subscribe( (res: Negocio) => {
+      this.negocio = res;
     });
   }
 
