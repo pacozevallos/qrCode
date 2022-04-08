@@ -23,19 +23,24 @@ export class AdicionalesComponent implements OnInit {
 
   ngOnInit(): void {
     this.formConfiguraciones = this.fb.group({
-      // reglas: [this.data.reglas]
-      // reglas: this.fb.array([
-      //   this.fb.control([''])
-      // ]),
+      reglas: this.fb.array([
+        // this.fb.control('')
+      ]),
     });
 
-    this.formConfiguraciones.addControl('reglas', this.fb.array([]));
-    this.data.reglas.forEach( element => {
-      const arrayReglas = this.formConfiguraciones.controls.reglas as FormArray;
+    const arrayReglas = this.formConfiguraciones.controls.reglas as FormArray;
+    if (typeof this.data.reglas === 'undefined' ) {
       arrayReglas.push(
-        this.fb.control(element)
+        this.fb.control('')
       );
-    });
+    }
+    if (this.data.reglas?.length >= 1 ) {
+      this.data.reglas.forEach( element => {
+        arrayReglas.push(
+          this.fb.control(element)
+        );
+      });
+    }
   }
 
   onSubmit() {

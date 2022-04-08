@@ -69,7 +69,7 @@ export class CardItemAdminComponent implements OnInit {
     });
   }
 
-  
+
   // actualizarDestacado(itemId, $event) {
   //   this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(itemId).update({
   //     destacado: $event

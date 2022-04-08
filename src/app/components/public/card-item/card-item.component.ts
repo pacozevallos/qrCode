@@ -15,7 +15,7 @@ export class CardItemComponent implements OnInit {
   @Input() idNegocio: string;
   @Input() item: Item;
   precioMin: number;
-  negocio: Negocio
+  negocio: Negocio;
 
   constructor(
     private bottomSheet: MatBottomSheet,
@@ -28,8 +28,8 @@ export class CardItemComponent implements OnInit {
       this.precioMin = Math.min(...precios);
     } else {
       console.log('No hay precios múltiples');
-    };
-    this.getReglasNegocio()
+    }
+    this.getReglasNegocio();
   }
 
   openBottomSheetDetalle(item) {

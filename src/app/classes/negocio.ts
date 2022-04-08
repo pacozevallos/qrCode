@@ -13,5 +13,5 @@ export class Negocio {
   descripcionNegocio: string;
   redes = [];
   color: string;
-  reglas = []
+  reglas = [];
 }

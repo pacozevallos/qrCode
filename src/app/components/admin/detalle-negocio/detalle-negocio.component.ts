@@ -85,8 +85,8 @@ export class DetalleNegocioComponent implements OnInit {
 
   adicionales() {
     this.bottomSheet.open(AdicionalesComponent, {
-      data:this.negocio
-    })
+      data: this.negocio
+    });
   }
 
 

@@ -25,9 +25,8 @@ export class ShareComponent implements OnInit {
 
   ngOnInit(): void {
     const newUrl = window.location.href;
-    this.myUrl = newUrl.replace('/admin', this.data)
+    this.myUrl = newUrl.replace('/admin', this.data);
     console.log(this.myUrl);
-    
   }
 
   cancelar() {

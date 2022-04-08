@@ -91,6 +91,9 @@ export class NegocioComponent implements OnInit {
     },
   ];
 
+  myRgba: any;
+
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private afs: AngularFirestore,
@@ -114,6 +117,11 @@ export class NegocioComponent implements OnInit {
         this.negocio = res;
         this.loader = false;
 
+        const RGB = '#ffabcd';
+        const A = '0.5';
+        // tslint:disable-next-line:max-line-length
+        this.myRgba = '(' + parseInt(RGB.substring(1, 3), 16) + ', ' + parseInt(RGB.substring(3, 5), 16 ) + ', ' + parseInt(RGB.substring (5, 7 ), 16) + ' , ' + A + ' )';
+
         // setTimeout(() => {
         //   this.loader = false;
         // }, 3000);
@@ -132,6 +140,7 @@ export class NegocioComponent implements OnInit {
         console.log(this.itemsGroup);
       });
     });
+
   }
 
   // goToCarta() {

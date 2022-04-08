@@ -27,38 +27,15 @@
   <div>
 
     <div [style.background-color]="negocio.color" >
-
       <div class="container py-3 py-md-4 py-md-4 text-white">
-
         <div class="d-flex justify-content-between align-items-center">
-
           <div class="">
             <div>
               <p class="h2 mb-1">{{negocio.nombre}}</p>
               <p class="small fw-light mb-0 lh-sm opacity-75">{{negocio.direccion}}</p>
             </div>
           </div>
-
-
           <div class="d-flex">
-
-            <!-- <div class="col">
-              <a mat-icon-button href="https://www.instagram.com/aulitacafe" target="blank">
-                <i-tabler name="brand-instagram" class="iconHeader"></i-tabler>
-              </a>
-            </div>
-
-            <div class="col">
-              <a mat-icon-button href="https://www.facebook.com/aulitacusco" target="blank">
-                <i-tabler name="brand-facebook" class="iconHeader"></i-tabler>
-              </a>
-            </div> -->
-
-            <!-- <div class="" *ngFor="let red of negocio.redes">
-              <a mat-icon-button [href]="red.url" target="blank">
-                <i-tabler [name]="red.icon" class="iconHeader"></i-tabler>
-              </a>
-            </div> -->
 
             <div class="">
               <button mat-icon-button (click)="openShare()">
@@ -66,7 +43,6 @@
               </button>
             </div>
 
-            
             <div class="ms-1" *ngIf="negocio.redes.length >= 1">
               <button mat-icon-button [matMenuTriggerFor]="menu">
                 <i-tabler name="dots-vertical" class="iconHeader"></i-tabler>
@@ -79,17 +55,13 @@
               </mat-menu>
             </div>
 
-
           </div>
 
-
         </div>
-
       </div>
-
     </div>
 
-    <div class="bg-light py-3">
+    <div class="py-3 backLight" [ngStyle]="{ 'background': myRgba }" >
       <div class="container pe-0" *ngIf="itemsDestacados.length > 0">
         <p class="h3">Lo más pedido</p>
         <swiper [config]="config">

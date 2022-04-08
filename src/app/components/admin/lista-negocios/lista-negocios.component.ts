@@ -135,7 +135,7 @@ export class ListaNegociosComponent implements OnInit {
   eliminarNegocio(negocio) {
     this.matDialog.open(EliminarNegocioComponent, {
       data: negocio
-    })
+    });
   }
 
 }

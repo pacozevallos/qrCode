@@ -35,7 +35,7 @@ export class EditarNegocioComponent implements OnInit {
     this.redesSociales = this.ds.redesSociales;
     this.tiposNegocio = this.ds.tiposNegocio;
     this.color = this.data.color;
-    
+
     this.formNegocio = this.fb.group({
       nombre: [this.data.nombre, Validators.required],
       color: [ this.data.color, Validators.required],
@@ -119,7 +119,7 @@ export class EditarNegocioComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe( result => {
       console.log(result);
-      if( result != undefined) {
+      if ( result !== undefined) {
         this.color = result;
         this.formNegocio.get('color').setValue(this.color);
       }
