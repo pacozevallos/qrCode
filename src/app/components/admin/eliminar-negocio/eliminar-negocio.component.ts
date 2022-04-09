@@ -35,7 +35,7 @@ export class EliminarNegocioComponent implements OnInit {
         duration: 3000,
       });
     });
-    this.storage.ref(`imagesItems/${this.data.id}`).delete();
+    this.storage.ref(`imagesItems/${this.data.id}/`).delete();
   }
 
   cancelar() {

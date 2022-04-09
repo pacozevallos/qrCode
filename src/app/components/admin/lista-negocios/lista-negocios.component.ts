@@ -12,6 +12,7 @@ import { EditarNegocioComponent } from '../editar-negocio/editar-negocio.compone
 import { MatDialog } from '@angular/material/dialog';
 import { ShareComponent } from '../../public/share/share.component';
 import { EliminarNegocioComponent } from '../eliminar-negocio/eliminar-negocio.component';
+import { VistaQrComponent } from '../vista-qr/vista-qr.component';
 
 
 @Component({
@@ -136,12 +137,16 @@ export class ListaNegociosComponent implements OnInit {
 
   compartirNegocio(negocio) {
     this.matDialog.open(ShareComponent, {
-      data: `/negocio/${negocio.id}`
+      // data: `/negocio/${negocio.id}`
+      data: negocio
     });
   }
 
   verCodigoQr(negocio) {
-
+    this.bottomSheet.open(VistaQrComponent, {
+      // panelClass: 'myBottomSheetFull',
+      data: negocio
+    });
   }
 
   eliminarNegocio(negocio) {

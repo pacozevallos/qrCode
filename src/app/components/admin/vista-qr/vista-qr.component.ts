@@ -9,12 +9,15 @@ import { Negocio } from 'src/app/classes/negocio';
 })
 export class VistaQrComponent implements OnInit {
 
+  urlImage: string;
+
   constructor(
     private bottomSheetRef: MatBottomSheetRef<VistaQrComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
   ) { }
 
   ngOnInit(): void {
+    console.log(this.data);
   }
 
   cancelar() {
