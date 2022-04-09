@@ -1,4 +1,4 @@
-<div class="vh-100 bg-primary" *ngIf="loader">
+<div class="vh-100" *ngIf="loader">
   <div class="d-flex justify-content-center align-items-center h-100">
     <span class="mySpinnerNegocio">
       <mat-spinner diameter="36"></mat-spinner>
@@ -38,7 +38,7 @@
           <div class="d-flex">
 
             <div class="">
-              <button mat-icon-button (click)="openShare()">
+              <button mat-icon-button (click)="compartirNegocio()">
                 <i-tabler name="share" class="iconHeader"></i-tabler>
               </button>
             </div>
@@ -61,9 +61,9 @@
       </div>
     </div>
 
-    <div class="py-3 backLight" [ngStyle]="{ 'background': myRgba }" >
+    <div class="py-3 bg-light">
       <div class="container pe-0" *ngIf="itemsDestacados.length > 0">
-        <p class="h3">Lo más pedido</p>
+        <p class="h3 mb-2">Lo más pedido</p>
         <swiper [config]="config">
           <ng-template swiperSlide *ngFor="let item of itemsDestacados">
             <app-card-item-destacado [idNegocio]="id" [item]="item"></app-card-item-destacado>

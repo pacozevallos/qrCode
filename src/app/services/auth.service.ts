@@ -30,7 +30,7 @@ export class AuthService {
         // return this.updateUserData(credential.user)
         // this.pushUserDataEmail(credential.user)
         console.log('Usuario logueado');
-        this.router.navigate(['/admin/listaNegocios']);
+        this.router.navigate(['/admin']);
       })
       .catch(error => {
         this.handleError(error);
@@ -44,7 +44,7 @@ export class AuthService {
   emailSignUp(email: string, password: string) {
     return this.auth.createUserWithEmailAndPassword(email, password)
       .then(credential => {
-        this.router.navigate(['/admin/listaNegocios']);
+        this.router.navigate(['/admin']);
       })
       .catch(error => {
         this.handleError(error);

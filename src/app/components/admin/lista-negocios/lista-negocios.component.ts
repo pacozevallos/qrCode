@@ -22,6 +22,7 @@ import { EliminarNegocioComponent } from '../eliminar-negocio/eliminar-negocio.c
 export class ListaNegociosComponent implements OnInit {
 
   negocios;
+  items = [];
 
   opciones = [
     {
@@ -30,17 +31,22 @@ export class ListaNegociosComponent implements OnInit {
       function: (negocio) => this.verItems(negocio)
     },
     {
-      nombre: 'Editar',
+      nombre: 'Editar negocio',
       icon: 'pencil',
       function: (negocio) => this.editarNegocio(negocio)
     },
     {
-      nombre: 'Compartir',
+      nombre: 'Ver código QR',
+      icon: 'qrcode',
+      function: (negocio) => this.verCodigoQr(negocio)
+    },
+    {
+      nombre: 'Compartir link',
       icon: 'share',
       function: (negocio) => this.compartirNegocio(negocio)
     },
     {
-      nombre: 'Eliminar',
+      nombre: 'Eliminar negocio',
       icon: 'trash',
       function: (negocio) => this.eliminarNegocio(negocio)
     }
@@ -64,6 +70,8 @@ export class ListaNegociosComponent implements OnInit {
     this.fs.getNegociosPropios().subscribe( res => {
       this.negocios = res;
     });
+
+    // this.items = this.afs.collection('negocios').doc()
   }
 
   addNegocio() {
@@ -130,6 +138,10 @@ export class ListaNegociosComponent implements OnInit {
     this.matDialog.open(ShareComponent, {
       data: `/negocio/${negocio.id}`
     });
+  }
+
+  verCodigoQr(negocio) {
+
   }
 
   eliminarNegocio(negocio) {
