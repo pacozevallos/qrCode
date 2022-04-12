@@ -10,6 +10,7 @@ import { Negocio } from 'src/app/classes/negocio';
 export class VistaQrComponent implements OnInit {
 
   urlImage: string;
+  loader = true;
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<VistaQrComponent>,
@@ -18,6 +19,10 @@ export class VistaQrComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data);
+  }
+
+  detectarCargado() {
+    this.loader = false;
   }
 
   cancelar() {

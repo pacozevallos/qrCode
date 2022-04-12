@@ -6,4 +6,21 @@
   </button>
 </div>
 
-<img [src]="data.qrCodeImage" alt="" width="100%">
+<div class="d-flex justify-content-center align-items-center" style="height: 327px;">
+
+    <span class="mySpinnerDark" *ngIf="loader">
+      <mat-spinner diameter="36"></mat-spinner>
+    </span>
+
+    <div>
+      <img [src]="data.qrCodeImage" (load)="detectarCargado()" width="100%" height="auto">
+    </div>
+  
+</div>
+
+<div class="d-grid">
+  <button class="btn btn-primary" [cdkCopyToClipboard]="data.qrCodeImage">Copiar imagen</button>
+</div>
+
+
+
