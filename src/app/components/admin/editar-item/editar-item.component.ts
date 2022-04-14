@@ -215,6 +215,8 @@ export class EditarItemComponent implements OnInit {
 
   uploadFileCrearItem() {
 
+    const nombreImage = this.nameItem.split('.');
+
     this.itemRef = this.afs.doc('negocios/' + this.data.idNegocio).collection('items').doc(this.data.item.id);
 
     // this.itemRef = this.afs.collection('negocios/').doc(this.data.id).collection('items').ref.doc();
@@ -233,7 +235,7 @@ export class EditarItemComponent implements OnInit {
 
           const item = this.formItem.value;
           const image = this.downloadURL;
-          const imageName = this.nameItem;
+          const imageName = `${this.itemRef.id}.${nombreImage[1]}`;
           const newItem = { ...item, image, imageName };
           this.itemRef.update(newItem);
 

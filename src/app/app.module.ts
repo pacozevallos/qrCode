@@ -99,6 +99,7 @@ import { VistaQrComponent } from './components/admin/vista-qr/vista-qr.component
 import { DetalleItemAdminComponent } from './components/admin/detalle-item-admin/detalle-item-admin.component';
 import { EliminarNegocioComponent } from './components/admin/eliminar-negocio/eliminar-negocio.component';
 import { AdicionalesComponent } from './components/admin/adicionales/adicionales.component';
+import { AgregarRedesComponent } from './components/admin/agregar-redes/agregar-redes.component';
 
 @NgModule({
   declarations: [
@@ -131,7 +132,8 @@ import { AdicionalesComponent } from './components/admin/adicionales/adicionales
     VistaQrComponent,
     DetalleItemAdminComponent,
     EliminarNegocioComponent,
-    AdicionalesComponent
+    AdicionalesComponent,
+    AgregarRedesComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

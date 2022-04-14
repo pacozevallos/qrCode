@@ -61,7 +61,7 @@ export class CrearItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data.id);
+    // console.log(this.data.id);
 
     this.formItem = this.fb.group({
       id: [ this.itemRef.id ],
@@ -118,7 +118,7 @@ export class CrearItemComponent implements OnInit {
 
     // traer solo categorias en tiempo real
     this.afs.doc('negocios/' + this.data.id).valueChanges().subscribe( (res: Negocio) => {
-      this.categorias = res.categorias;
+      this.categorias = res?.categorias;
     });
   }
 
@@ -215,7 +215,7 @@ export class CrearItemComponent implements OnInit {
           this.itemRef.set(objectItem);
           this.itemRef.set({
             image: this.downloadURL,
-            imageName: this.nameItem,
+            imageName: `${this.itemRef.id}.${nombreImage[1]}`,
           }, {merge: true});
           this.bottomSheetRef.dismiss();
           console.log( this.downloadURL );

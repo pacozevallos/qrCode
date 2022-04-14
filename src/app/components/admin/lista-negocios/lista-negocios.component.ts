@@ -14,6 +14,7 @@ import { ShareComponent } from '../../public/share/share.component';
 import { EliminarNegocioComponent } from '../eliminar-negocio/eliminar-negocio.component';
 import { VistaQrComponent } from '../vista-qr/vista-qr.component';
 import { AdicionalesComponent } from '../adicionales/adicionales.component';
+import { AgregarRedesComponent } from '../agregar-redes/agregar-redes.component';
 
 
 @Component({
@@ -44,11 +45,16 @@ export class ListaNegociosComponent implements OnInit {
     },
     {
       nombre: 'Compartir link',
-      icon: 'share',
+      icon: 'link',
       function: (negocio) => this.compartirNegocio(negocio)
     },
     {
-      nombre: 'Otras configuraciones',
+      nombre: 'Agregar redes sociales',
+      icon: 'share',
+      function: (negocio) => this.agregarRedes(negocio)
+    },
+    {
+      nombre: 'Añadir reglas',
       icon: 'settings',
       function: (negocio) => this.otrasConfiguraciones(negocio)
     },
@@ -151,6 +157,12 @@ export class ListaNegociosComponent implements OnInit {
   verCodigoQr(negocio) {
     this.bottomSheet.open(VistaQrComponent, {
       // panelClass: 'myBottomSheetFull',
+      data: negocio
+    });
+  }
+
+  agregarRedes(negocio) {
+    this.bottomSheet.open(AgregarRedesComponent, {
       data: negocio
     });
   }

@@ -14,6 +14,7 @@ import { ColorEvent } from 'ngx-color';
 import { ColorComponent } from '../../public/color/color.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-agregar-negocio',
@@ -29,6 +30,7 @@ export class AgregarNegocioComponent implements OnInit {
   redesSociales = [];
   tiposNegocio = [];
   color = '#0e78d4';
+  filteredOptions: Observable<string[]>;
 
   // downloadURL: Observable<string>;
 
@@ -59,7 +61,7 @@ export class AgregarNegocioComponent implements OnInit {
     this.negocioRef = this.afs.collection('negocios').ref.doc();
     console.log(this.negocioRef.id);
 
-    this.qrCodeData = `https://qrcode-3b121.web.app/negocio/${this.negocioRef.id}`;
+    this.qrCodeData = `https://taaripay.com/negocio/${this.negocioRef.id}`;
     console.log(this.qrCodeData);
 
   }
@@ -108,6 +110,18 @@ export class AgregarNegocioComponent implements OnInit {
       }
     });
 
+
+    this.filteredOptions = this.formNegocio.get('tipo').valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this.filter(value))
+      );
+
+  }
+
+  private filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.tiposNegocio.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   handleChange($event: ColorEvent) {

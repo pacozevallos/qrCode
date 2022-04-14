@@ -7,8 +7,9 @@ export class DataService {
 
   constructor() { }
 
-  tiposNegocio = [
+  tiposNegocio: string[] = [
     'Restaurante',
+    'Hotelería',
     'Restobar',
     'Cafetería',
     'Heladería',
