@@ -5,55 +5,52 @@
     </button>
   </div>
 
-  <p class="h2 mb-3">Otras configuraciones</p>
-  <p class="lead">Reglas</p>
+  <p class="h2 mb-3">Agregar redes sociales</p>
 
   <form [formGroup]="formRedes" (ngSubmit)="onSubmit()" novalidate class="row gx-3">
 
-     <p class="lead mt-3" *ngIf="formRedes.controls['redes']['controls'].length >= 1">Redes sociales</p>
-
-      <div formArrayName="redes" class="col-12">
-        <div *ngFor="let precio of formRedes.controls['redes']['controls']; let i = index;">
-          <div [formGroupName]="i" class="d-flex">
-            <div class="row gx-3 w-100">
-              <mat-form-field appearance="standard" class="col-5">
-                <mat-label>Red social</mat-label>
-                <mat-select formControlName="nombre">
-                  <mat-option *ngFor="let red of redesSociales" [value]="red.nombre">{{red.nombre}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field appearance="standard" class="col-7">
-                <mat-label>Link</mat-label>
-                <input matInput type="text" formControlName="url">
-              </mat-form-field>
-            </div>
-            <div class="pt-1">
-              <button class="ms-2" matSuffix mat-icon-button (click)="eliminarRed(i)">
-                <i-tabler name="trash"></i-tabler>
-              </button>
-            </div>
+    <div formArrayName="redes" class="col-12">
+      <div *ngFor="let precio of formRedes.controls['redes']['controls']; let i = index;">
+        <div [formGroupName]="i" class="d-flex">
+          <div class="row gx-3 w-100">
+            <mat-form-field appearance="standard" class="col-5">
+              <mat-label>Red social</mat-label>
+              <mat-select formControlName="nombre">
+                <mat-option *ngFor="let red of redesSociales" [value]="red.nombre">{{red.nombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="standard" class="col-7">
+              <mat-label>Link</mat-label>
+              <input matInput type="text" formControlName="url">
+            </mat-form-field>
+          </div>
+          <div class="pt-1">
+            <button class="ms-2" matSuffix mat-icon-button (click)="eliminarRed(i)">
+              <i-tabler name="trash"></i-tabler>
+            </button>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="col-12 mb-3 mb-md-5">
-        <button type="button" class="btn btn-link btn-sm px-0" (click)="agregarRed()">
-          <i-tabler name="plus" class="me-1" style="width: 18px; height: 18px;"></i-tabler>
-          Agregar red social
-        </button>
-      </div>
+    <div class="col-12 mb-3 mb-md-5">
+      <button type="button" class="btn btn-link btn-sm px-0" (click)="agregarRed()">
+        <i-tabler name="plus" class="me-1" style="width: 18px; height: 18px;"></i-tabler>
+        Agregar red social
+      </button>
+    </div>
 
     <div class="d-grid mt-3">
       <button class="btn btn-primary myButton">
         <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
           <mat-spinner class="" [diameter]="24"></mat-spinner>
         </span>
-        <span *ngIf="!loading">Guardar configuraciones</span>
+        <span *ngIf="!loading">Guardar</span>
       </button>
     </div>
 
   </form>
 
-  <!-- <pre>{{formConfiguraciones.value | json }}</pre> -->
+  <!-- <pre>{{formRedes.value | json }}</pre> -->
 
 </div>

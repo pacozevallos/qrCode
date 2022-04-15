@@ -38,15 +38,15 @@ export class EliminarNegocioComponent implements OnInit {
 
     // Eliminar todas las imágenes de los items del negocio
     const itemsFilter = this.items.filter( fil => fil.imageName !== '');
-    if( this.items.length >= 1) {
+    if ( this.items.length >= 1) {
       itemsFilter.forEach( element => {
         this.storage.ref(`imagesItems/${this.data.id}/${element.imageName}`).delete();
-      });  
+      });
     }
 
     // Eliminar todos los items de la base de datos Firestore
     this.items.forEach( element => {
-      this.afs.collection('negocios').doc(this.data.id).collection('items').doc(element.id).delete()
+      this.afs.collection('negocios').doc(this.data.id).collection('items').doc(element.id).delete();
     });
 
     // Eliminar negocio de la base de datos Firestore
@@ -57,7 +57,6 @@ export class EliminarNegocioComponent implements OnInit {
         duration: 3000
       });
       console.log('negocio eliminado');
-      
     });
 
   }

@@ -31,18 +31,8 @@ export class AgregarRedesComponent implements OnInit {
       redes: this.fb.array([]),
     });
 
-    this.formRedes.controls.redes.valueChanges.subscribe( redes => {
-      const control = this.formRedes.controls.redes as FormArray;
-      for (const i in redes) {
-        control.at(+i).get('nombre').valueChanges.subscribe( res => {
-          const red = this.ds.redesSociales.find( find => find.nombre === res);
-          control.at(+i).get('icon').setValue(red.icon);
-        });
-      }
-    });
-
     const arrayRedes = this.formRedes.controls.redes as FormArray;
-    if (typeof this.data.reglas === 'undefined' ) {
+    if (typeof this.data.redes === 'undefined' ) {
       arrayRedes.push(
         this.fb.group({
           nombre: [''],
@@ -62,6 +52,16 @@ export class AgregarRedesComponent implements OnInit {
         );
       });
     }
+
+    this.formRedes.controls.redes.valueChanges.subscribe( redes => {
+      const control = this.formRedes.controls.redes as FormArray;
+      for (const i in redes) {
+        control.at(+i).get('nombre').valueChanges.subscribe( res => {
+          const red = this.ds.redesSociales.find( find => find.nombre === res);
+          control.at(+i).get('icon').setValue(red.icon);
+        });
+      }
+    });
 
 
   }

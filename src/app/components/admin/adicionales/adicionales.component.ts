@@ -13,6 +13,12 @@ export class AdicionalesComponent implements OnInit {
 
   formConfiguraciones: FormGroup;
   loading: boolean;
+  lista = [
+    '"Delivery + S/. 5"',
+    '"Servicio a la habitación + S/. 5"',
+    '"Horario de atención 13:00 h - 23:00 h"',
+
+  ];
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<AdicionalesComponent>,

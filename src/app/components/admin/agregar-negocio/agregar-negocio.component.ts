@@ -128,7 +128,6 @@ export class AgregarNegocioComponent implements OnInit {
     console.log($event.color);
   }
 
-
   openModalCrearColor() {
     const dialogRef = this.dialog.open(ColorComponent, {
       panelClass: 'dialogColor',

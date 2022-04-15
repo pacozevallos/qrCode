@@ -4,6 +4,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import * as firebase from 'firebase/app';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { Negocio } from 'src/app/classes/negocio';
 import { DataService } from 'src/app/services/data.service';
 import { ColorComponent } from '../../public/color/color.component';
@@ -20,6 +22,7 @@ export class EditarNegocioComponent implements OnInit {
   color: string;
   redesSociales = [];
   tiposNegocio = [];
+  filteredOptions: Observable<string[]>;
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<EditarNegocioComponent>,
@@ -67,6 +70,17 @@ export class EditarNegocioComponent implements OnInit {
       }
     });
 
+    this.filteredOptions = this.formNegocio.get('tipo').valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this.filter(value))
+      );
+
+  }
+
+  private filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.tiposNegocio.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   onSubmit() {

@@ -54,7 +54,7 @@ export class ListaNegociosComponent implements OnInit {
       function: (negocio) => this.agregarRedes(negocio)
     },
     {
-      nombre: 'Añadir reglas',
+      nombre: 'Agregar condiciones',
       icon: 'settings',
       function: (negocio) => this.otrasConfiguraciones(negocio)
     },
