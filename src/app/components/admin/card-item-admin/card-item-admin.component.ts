@@ -103,8 +103,8 @@ export class CardItemAdminComponent implements OnInit {
     const dialogRef = this.matDialog.open(EliminarItemComponent, {
       panelClass: 'dialogSmall',
       data: {
-        idNegocio_: this.idNegocio,
-        item_: this.item
+        idNegocio: this.idNegocio,
+        item: this.item
       }
     });
     dialogRef.afterClosed().subscribe();

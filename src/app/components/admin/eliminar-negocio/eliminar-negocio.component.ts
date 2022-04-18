@@ -32,6 +32,7 @@ export class EliminarNegocioComponent implements OnInit {
     });
   }
 
+
   eliminarNegocio() {
 
     this.loader = true;

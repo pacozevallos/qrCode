@@ -100,6 +100,7 @@ import { DetalleItemAdminComponent } from './components/admin/detalle-item-admin
 import { EliminarNegocioComponent } from './components/admin/eliminar-negocio/eliminar-negocio.component';
 import { AdicionalesComponent } from './components/admin/adicionales/adicionales.component';
 import { AgregarRedesComponent } from './components/admin/agregar-redes/agregar-redes.component';
+import { UpgradeComponent } from './components/admin/upgrade/upgrade.component';
 
 @NgModule({
   declarations: [
@@ -133,7 +134,8 @@ import { AgregarRedesComponent } from './components/admin/agregar-redes/agregar-
     DetalleItemAdminComponent,
     EliminarNegocioComponent,
     AdicionalesComponent,
-    AgregarRedesComponent
+    AgregarRedesComponent,
+    UpgradeComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

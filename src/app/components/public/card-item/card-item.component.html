@@ -1,8 +1,8 @@
 <div class="position-relative">
 
-  <div class="d-flex justify-content-between">
+  <div class="d-flex">
 
-    <div class="w-100 me-2">
+    <div class="">
       <p class="nombreItem mb-1 lh-sm">{{item.nombre}}</p>
       <p class="descripcionItem mb-1" *ngIf="item.descripcion">{{item.descripcion | slice:0:32}}...</p>
       
@@ -26,16 +26,32 @@
 
       </div>
 
-      
+    </div>
+
+    <div class="contenedorImage ms-2">
+
+      <div class="loader imageItem border" *ngIf="loader">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <span class="mySpinnerDark" >
+            <mat-spinner diameter="24"></mat-spinner>
+          </span>
+        </div>
+      </div>
+
+      <div class="image">
+        <img class="imageItem" [src]="item.image" (load)="detectarCargado()">
+      </div>
 
     </div>
 
-    <div class="">
-      <img class="imageItem" [src]="item.image">
-    </div>
+  
+    
 
-    <a class="stretched-link" [routerLink]="'item/' + item.id"></a>
+    
+
+   
     <!-- <a type="button" class="stretched-link" (click)=" openBottomSheetDetalle(item)"></a> -->
 
   </div>
+  <a class="stretched-link" [routerLink]="'item/' + item.id"></a>
 </div>

@@ -26,6 +26,7 @@ export class NegocioComponent implements OnInit {
   categorias = [];
   items: Item[] = [];
   itemsGroup = [];
+  activeLink = this.itemsGroup[0];
   itemsDestacados = [];
   ahora = new Date();
   today: number = Date.now();

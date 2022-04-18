@@ -24,26 +24,26 @@ export class EliminarItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data);
+    console.log(this.data.item.id);
   }
 
-  eliminarItem(imageName) {
+  eliminarItem() {
+
     this.loader = true;
 
-    // this.fs.deleteNoticia(itemId)
-    this.afs.collection('negocios').doc(this.data.idNegocio_).collection('items').doc(this.data.item_.id).delete()
+    // Eliminar imagen de storage
+    this.storage.ref(`imagesItems/${this.data.idNegocio}/${this.data.item.imageName}`).delete();
+
+    // Eliminar item de base de datos Firestore
+    this.afs.collection('negocios').doc(this.data.idNegocio).collection('items').doc(this.data.item.id).delete()
     .then(() => {
       this.dialogRef.close();
       this.snackBar.open('Item eliminado', 'CERRAR', {
         duration: 3000,
       });
       console.log('Item eliminado de Firestore');
-
     });
 
-
-    const formatImage = this.data.item_.imageName.split('.');
-    this.storage.ref(`imagesItems/${this.data.idNegocio_}/${this.data.item_.id}.${formatImage[1]}`).delete();
   }
 
   cancelar() {

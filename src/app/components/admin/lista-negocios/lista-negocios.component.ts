@@ -15,6 +15,8 @@ import { EliminarNegocioComponent } from '../eliminar-negocio/eliminar-negocio.c
 import { VistaQrComponent } from '../vista-qr/vista-qr.component';
 import { AdicionalesComponent } from '../adicionales/adicionales.component';
 import { AgregarRedesComponent } from '../agregar-redes/agregar-redes.component';
+import * as firebase from 'firebase/app';
+import { UpgradeComponent } from '../upgrade/upgrade.component';
 
 
 @Component({
@@ -26,6 +28,7 @@ export class ListaNegociosComponent implements OnInit {
 
   negocios;
   items = [];
+  user = firebase.default.auth().currentUser;
 
   opciones = [
     {
@@ -77,21 +80,31 @@ export class ListaNegociosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.fs.getAllNegocios().subscribe( res => {
-    //   this.negocios = res;
-    // });
-    this.fs.getNegociosPropios().subscribe( res => {
-      this.negocios = res;
+    if (this.user.uid === '3oa8paObQSeXA5X1H97PD78AhAj2' || this.user.uid === 'J0oBKmPwKXQNHbjKrcuqHImvdV52' || this.user.uid === 'ooEFajXGEyahVruhnWDgxS6aEbO2') {
+      this.fs.getAllNegocios().subscribe( res => {
+        this.negocios = res;
+      });
+    } else {
+      this.fs.getNegociosPropios().subscribe( res => {
+        this.negocios = res;
     });
+    }
 
     // this.items = this.afs.collection('negocios').doc()
   }
 
   addNegocio() {
-    this.bottomSheet.open(AgregarNegocioComponent, {
-      // panelClass: 'myBottomSheetFull',
-      // data: this.paquetesRegulares
-    });
+    if (this.user.uid === '3oa8paObQSeXA5X1H97PD78AhAj2' || this.user.uid === 'J0oBKmPwKXQNHbjKrcuqHImvdV52' || this.user.uid === 'ooEFajXGEyahVruhnWDgxS6aEbO2') {
+      this.bottomSheet.open(AgregarNegocioComponent);
+    } else {
+      if (this.negocios.length === 0) {
+        this.bottomSheet.open(AgregarNegocioComponent);
+      } else {
+        this.matDialog.open(UpgradeComponent, {
+        });
+      }
+    }
+
   }
 
   convertBlobToBase64 = (blob) => new Promise((resolve, reject) => {

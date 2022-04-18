@@ -72,6 +72,7 @@ export class AgregarNegocioComponent implements OnInit {
     this.tiposNegocio = this.ds.tiposNegocio;
 
     this.formNegocio = this.fb.group({
+      image: ['', FileValidator.maxContentSize(this.maxSize)],
       nombre: ['', Validators.required],
       color: [ this.color, Validators.required ],
       // imageLogo: ['', FileValidator.maxContentSize(this.maxSize)],
@@ -229,7 +230,6 @@ export class AgregarNegocioComponent implements OnInit {
     const ref = this.storage.ref(filePath);
     const task = ref.put(myBlob);
 
-
     // this.uploadPercent = task.percentageChanges();
     task.snapshotChanges().pipe(
       finalize(() => {
@@ -252,6 +252,17 @@ export class AgregarNegocioComponent implements OnInit {
 
   cancelar() {
     this.bottomSheetRef.dismiss();
+  }
+
+  detectFiles(event) {
+    this.selectedFile = event.target.files[0];
+    this.nameItem = event.target.files[0].name;
+    console.log(this.nameItem);
+  }
+
+  errorImagen() {
+    return this.formNegocio.controls.image.hasError('required') ? 'La imagen es necesaria' :
+    this.formNegocio.controls.image.hasError('maxContentSize') ? 'El peso no debe exceder los 5 MB' : '';
   }
 
 }

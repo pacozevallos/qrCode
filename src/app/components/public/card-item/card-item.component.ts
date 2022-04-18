@@ -16,6 +16,7 @@ export class CardItemComponent implements OnInit {
   @Input() item: Item;
   precioMin: number;
   negocio: Negocio;
+  loader = true;
 
   constructor(
     private bottomSheet: MatBottomSheet,
@@ -46,6 +47,10 @@ export class CardItemComponent implements OnInit {
     this.afs.collection('negocios').doc(this.idNegocio)?.valueChanges().subscribe( (res: Negocio) => {
       this.negocio = res;
     });
+  }
+
+  detectarCargado() {
+    this.loader = false;
   }
 
 }

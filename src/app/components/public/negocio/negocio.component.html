@@ -35,20 +35,27 @@
               <p class="small fw-light mb-0 lh-sm opacity-75">{{negocio.direccion}}</p>
             </div>
           </div>
-          <div class="d-flex">
 
-            <div class="">
+          <div class="d-flex align-items-center ms-2">
+
+            <div class="me-1">
               <button mat-icon-button (click)="compartirNegocio()">
                 <i-tabler name="share" class="iconHeader"></i-tabler>
               </button>
             </div>
 
-            <div class="ms-1" *ngIf="negocio.redes.length >= 1">
+            <div class="">
+              <a class="d-flex justify-content-center align-items-center" mat-icon-button *ngFor="let red of negocio.redes | slice:0:1" [href]="red.url" target="blank">
+                <i-tabler [name]="red.icon" class="iconHeader"></i-tabler>
+              </a>
+            </div>
+
+            <div class="" *ngIf="negocio.redes.length >= 1">
               <button mat-icon-button [matMenuTriggerFor]="menu">
                 <i-tabler name="dots-vertical" class="iconHeader"></i-tabler>
               </button>
               <mat-menu #menu="matMenu">
-                <a mat-menu-item *ngFor="let red of negocio.redes" [href]="red.url" target="blank">
+                <a mat-menu-item *ngFor="let red of negocio.redes | slice:1:10" [href]="red.url" target="blank">
                   <i-tabler [name]="red.icon"></i-tabler>
                   <span class="ms-2">{{red.nombre}}</span>
                 </a>
@@ -85,6 +92,12 @@
           </div>
         </mat-tab>
       </mat-tab-group>
+
+      <!-- <nav mat-tab-nav-bar tabPanel="tabPanel">
+        <a mat-tab-link *ngFor="let link of itemsGroup" (click)="activeLink = link.categoria" [active]="activeLink == link.categoria"> {{link.categoria}}</a>
+      </nav>
+      <mat-tab-nav-panel #tabPanel>1</mat-tab-nav-panel>
+      <mat-tab-nav-panel #tabPanel2>2</mat-tab-nav-panel> -->
 
       <!-- <mat-accordion [multi]="true">
         <mat-expansion-panel *ngFor="let group of itemsGroup; let i = index" expanded="i">

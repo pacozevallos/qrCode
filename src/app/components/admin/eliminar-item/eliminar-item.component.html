@@ -6,10 +6,11 @@
   </div>
   <p class="h4 mt-2 mt-md-0">Eliminar Item</p>
   <div class="my-3 my-md-4">
-    <p class="">Esta acción no se puede deshacer.</p>
+    <p class="mb-1">Esta acción no se puede deshacer.</p>
+    <span class="extraSmall text-muted font-monospace">Código: {{data.item.id}}</span>
   </div>
   <div class="d-grid">
-    <button type="submit" class="btn btn-danger py-2 px-3" (click)="eliminarItem(data.item_.imageName)">
+    <button type="submit" class="btn btn-danger py-2 px-3" (click)="eliminarItem()">
       <span class="myColorSpinnerWhite d-flex justify-content-center" *ngIf="loader">
         <mat-spinner class="text-center" [diameter]="24"></mat-spinner>
       </span>
