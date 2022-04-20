@@ -1,0 +1,33 @@
+<p class="h3">Agregar logo</p>
+
+<div class="buttonClose">
+  <button mat-icon-button (click)="cancelar()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<form [formGroup]="formLogoNegocio" (submit)="onSubmit()" novalidate class="row gx-3 gx-md-4">
+
+  <mat-form-field appearance="standard" class="col-12">
+    <mat-label>Imagen logo</mat-label>
+    <ngx-mat-file-input #removableInput formControlName="imageLogo" placeholder="Seleccionar imagen" accept=".jpg, .jpeg, .png" (change)="detectFiles($event)"></ngx-mat-file-input>
+    <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
+      <mat-icon>clear</mat-icon>
+    </button>
+    <mat-icon matSuffix *ngIf="removableInput.empty">image_search</mat-icon>
+    <mat-error *ngIf="errorImagen()">{{errorImagen()}}</mat-error>
+    <mat-hint>Tamaño recomendado: 240 x 240 px.</mat-hint>
+    <mat-hint align="end">Peso máximo: 5 MB</mat-hint>
+  </mat-form-field>
+
+  <div class="d-grid mt-4">
+    <button class="btn btn-primary">
+      <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loader">
+        <mat-spinner class="" [diameter]="24"></mat-spinner>
+      </span>
+      <span *ngIf="!loader">Agregar logo</span>
+    </button>
+  </div>
+
+</form>
+

@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ShareComponent } from '../share/share.component';
+import { Negocio } from 'src/app/classes/negocio';
 
 @Component({
   selector: 'app-detalle-item',
@@ -16,6 +17,7 @@ export class DetalleItemComponent implements OnInit {
   idNegocio: string;
   idItem: string;
   item: any;
+  negocio: Negocio;
 
   constructor(
     // private matBottomSheetRef: MatBottomSheetRef<DetalleItemComponent>,
@@ -36,6 +38,10 @@ export class DetalleItemComponent implements OnInit {
       console.log(data);
     });
 
+    this.afs.collection('negocios').doc(this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
+      this.negocio = res;
+    });
+
     // this.idNegocio = this.data.idNegocio;
     // this.item = this.data.item;
 
@@ -48,7 +54,11 @@ export class DetalleItemComponent implements OnInit {
   compartirItem() {
     this.matDialog.open(ShareComponent, {
       panelClass: 'modalSmall',
-      data: `/negocio/${this.idNegocio}/item/${this.idItem}`
+      // data: `/negocio/${this.idNegocio}/item/${this.idItem}`
+      data: {
+        negocio: this.negocio,
+        item: this.item
+      }
     });
   }
 

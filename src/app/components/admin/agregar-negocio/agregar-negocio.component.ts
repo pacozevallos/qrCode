@@ -72,7 +72,7 @@ export class AgregarNegocioComponent implements OnInit {
     this.tiposNegocio = this.ds.tiposNegocio;
 
     this.formNegocio = this.fb.group({
-      image: ['', FileValidator.maxContentSize(this.maxSize)],
+      // image: ['', FileValidator.maxContentSize(this.maxSize)],
       nombre: ['', Validators.required],
       color: [ this.color, Validators.required ],
       // imageLogo: ['', FileValidator.maxContentSize(this.maxSize)],

@@ -101,6 +101,8 @@ import { EliminarNegocioComponent } from './components/admin/eliminar-negocio/el
 import { AdicionalesComponent } from './components/admin/adicionales/adicionales.component';
 import { AgregarRedesComponent } from './components/admin/agregar-redes/agregar-redes.component';
 import { UpgradeComponent } from './components/admin/upgrade/upgrade.component';
+import { LogoNegocioComponent } from './components/admin/logo-negocio/logo-negocio.component';
+import { CardNegocioAdminComponent } from './components/admin/card-negocio-admin/card-negocio-admin.component';
 
 @NgModule({
   declarations: [
@@ -135,7 +137,9 @@ import { UpgradeComponent } from './components/admin/upgrade/upgrade.component';
     EliminarNegocioComponent,
     AdicionalesComponent,
     AgregarRedesComponent,
-    UpgradeComponent
+    UpgradeComponent,
+    LogoNegocioComponent,
+    CardNegocioAdminComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

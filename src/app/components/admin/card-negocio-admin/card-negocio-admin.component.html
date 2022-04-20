@@ -1,0 +1,53 @@
+<div class="position-relative rounded p-4 text-white h-100 shadow" [style.background-color]="negocio.color">
+
+  <div class="d-flex justify-content-between">
+
+    <div class="d-flex align-items-center">
+
+      <div class="bg-white rounded-circle me-2 me-md-3">
+        <img [src]="negocio.imageLogo" class="logoNegocio" *ngIf="negocio.imageLogo">
+        <div class="text-dark logoNegocio d-flex justify-content-center align-items-center" *ngIf="!negocio.imageLogo">
+          <span class="h3 mb-0 fw-bold">{{negocio.nombre | slice:0:1}}</span>
+        </div>
+      </div>
+
+      <div>
+        <p class="mb-0 h4 fw-light">{{negocio.nombre}}</p>
+        <p class="mb-0 small text-white-50">{{items?.length}} items</p>
+      </div>
+      
+    </div>
+
+    <button mat-icon-button class="encima" style="margin-right: -1rem;" [matMenuTriggerFor]="menu">
+      <i-tabler name="dots-vertical"></i-tabler>
+    </button>
+
+    <mat-menu #menu="matMenu">
+
+      <button mat-menu-item *ngFor="let option of opciones" (click)="option.function(negocio)" class="d-block d-md-none">
+        <i-tabler [name]="option.icon"></i-tabler>
+        <span class="ms-2">{{option.nombre}}</span>
+      </button>
+
+      <button mat-menu-item *ngFor="let option of opciones | slice:7:8" (click)="option.function(negocio)" class="d-none d-md-block">
+        <i-tabler [name]="option.icon"></i-tabler>
+        <span class="ms-2">{{option.nombre}}</span>
+      </button>
+
+    </mat-menu>
+
+  </div>
+
+  <div class="mt-3 d-none d-md-block">
+    <div *ngFor="let option of opciones | slice:0:7; last as last">
+      <button class="encima text-white" mat-menu-item (click)="option.function(negocio)">
+        <i-tabler [name]="option.icon"></i-tabler>
+        <span class="ms-2">{{option.nombre}}</span>
+      </button>
+      <mat-divider *ngIf="!last"></mat-divider>
+    </div>
+  </div>
+
+  <a class="stretched-link" [routerLink]=" '/admin/' + negocio.id "></a>
+
+</div>

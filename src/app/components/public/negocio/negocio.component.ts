@@ -190,7 +190,9 @@ export class NegocioComponent implements OnInit {
   compartirNegocio() {
     this.matDialog.open(ShareComponent, {
       panelClass: 'modalSmall',
-      data: this.negocio
+      data: {
+        negocio: this.negocio
+      }
     });
   }
 

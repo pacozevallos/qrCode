@@ -10,12 +10,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ShareComponent implements OnInit {
 
-  myUrl;
+  urlShare;
 
   constructor(
     private dialogRef: MatDialogRef<ShareComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private router: Router
+
   ) {
 
   }
@@ -25,9 +27,33 @@ export class ShareComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data);
-    const newUrl = window.location.href;
-    this.myUrl = newUrl.replace('/admin', `/negocio/${this.data.id}`);
-    console.log(this.myUrl);
+    const currentUrl = window.location.href;
+    console.log(currentUrl);
+    console.log(this.router.url);
+    
+
+    if(this.router.url === `/negocio/${this.data.negocio.id}`) {
+      this.urlShare = currentUrl;
+    }
+
+    if(this.router.url === `/negocio/${this.data.negocio.id}/item/${this.data.item?.id}`) {
+      this.urlShare = currentUrl;
+    }
+
+    if(this.router.url === '/admin') {
+      const urlNegocio = currentUrl.replace(`admin`, `negocio/${this.data.negocio.id}`);
+      this.urlShare = urlNegocio
+    }
+
+    if(this.router.url === `/admin/${this.data.negocio.id}`) {
+      const urlNegocio = currentUrl.replace(`admin`, `negocio`);
+      console.log(urlNegocio);
+      this.urlShare = urlNegocio + `/item/${this.data.item.id}`;
+      console.log(this.urlShare);
+    }
+
+    
+
   }
 
   cancelar() {

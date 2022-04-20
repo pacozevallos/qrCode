@@ -8,6 +8,7 @@ import { ShareComponent } from '../../public/share/share.component';
 import { EditarItemComponent } from '../editar-item/editar-item.component';
 import { EliminarItemComponent } from '../eliminar-item/eliminar-item.component';
 import { DetalleItemAdminComponent } from '../detalle-item-admin/detalle-item-admin.component';
+import { Negocio } from 'src/app/classes/negocio';
 
 @Component({
   selector: 'app-card-item-admin',
@@ -19,6 +20,8 @@ export class CardItemAdminComponent implements OnInit {
   @Input() idNegocio: string;
   @Input() item: Item;
   precioMin: number;
+  loader = true;
+  negocio: Negocio;
 
   opciones = [
     {
@@ -26,11 +29,11 @@ export class CardItemAdminComponent implements OnInit {
       icon: 'pencil',
       function: () => this.editarItem()
     },
-    {
-      nombre: 'Destacar',
-      icon: 'star',
-      function: () => this.editarItem()
-    },
+    // {
+    //   nombre: 'Destacar',
+    //   icon: 'star',
+    //   function: () => this.editarItem()
+    // },
     {
       nombre: 'Compartir',
       icon: 'share',
@@ -50,6 +53,11 @@ export class CardItemAdminComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.afs.collection('negocios').doc(this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
+      this.negocio = res;
+    });
+    
     if (this.item.precios) {
       const precios = this.item.precios.map( res => res.precio);
       this.precioMin = Math.min(...precios);
@@ -112,8 +120,16 @@ export class CardItemAdminComponent implements OnInit {
 
   compartirItem() {
     this.matDialog.open(ShareComponent, {
-      panelClass: 'modalSmall'
+      panelClass: 'modalSmall',
+      data: {
+        negocio: this.negocio,
+        item: this.item
+      }
     });
+  }
+
+  detectarCargado() {
+    this.loader = false;
   }
 
 }

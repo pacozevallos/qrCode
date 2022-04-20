@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'qrCode';
+
+  constructor() { }
+
+  ngOnInit(): void {
+    this.onresize();
+  }
+
+  onresize() {
+    window.innerHeight;
+  }
 }

@@ -17,6 +17,7 @@ import { AdicionalesComponent } from '../adicionales/adicionales.component';
 import { AgregarRedesComponent } from '../agregar-redes/agregar-redes.component';
 import * as firebase from 'firebase/app';
 import { UpgradeComponent } from '../upgrade/upgrade.component';
+import { LogoNegocioComponent } from '../logo-negocio/logo-negocio.component';
 
 
 @Component({
@@ -30,43 +31,7 @@ export class ListaNegociosComponent implements OnInit {
   items = [];
   user = firebase.default.auth().currentUser;
 
-  opciones = [
-    {
-      nombre: 'Ver items',
-      icon: 'list-details',
-      function: (negocio) => this.verItems(negocio)
-    },
-    {
-      nombre: 'Editar negocio',
-      icon: 'pencil',
-      function: (negocio) => this.editarNegocio(negocio)
-    },
-    {
-      nombre: 'Ver código QR',
-      icon: 'qrcode',
-      function: (negocio) => this.verCodigoQr(negocio)
-    },
-    {
-      nombre: 'Compartir link',
-      icon: 'link',
-      function: (negocio) => this.compartirNegocio(negocio)
-    },
-    {
-      nombre: 'Agregar redes sociales',
-      icon: 'share',
-      function: (negocio) => this.agregarRedes(negocio)
-    },
-    {
-      nombre: 'Agregar condiciones',
-      icon: 'settings',
-      function: (negocio) => this.otrasConfiguraciones(negocio)
-    },
-    {
-      nombre: 'Eliminar negocio',
-      icon: 'trash',
-      function: (negocio) => this.eliminarNegocio(negocio)
-    }
-  ];
+  
 
   public myAngularxQrCode = 'golxlkPQPcyGhnoLD6xO';
 
@@ -150,46 +115,6 @@ export class ListaNegociosComponent implements OnInit {
     return new Blob([uInt8Array], { type: imageType });
   }
 
-  verItems(negocio) {
-    this.router.navigate(['admin/' + negocio.id]);
-  }
-
-  editarNegocio(negocio) {
-    this.bottomSheet.open(EditarNegocioComponent, {
-      data: negocio
-    });
-  }
-
-  compartirNegocio(negocio) {
-    this.matDialog.open(ShareComponent, {
-      // data: `/negocio/${negocio.id}`
-      data: negocio
-    });
-  }
-
-  verCodigoQr(negocio) {
-    this.bottomSheet.open(VistaQrComponent, {
-      // panelClass: 'myBottomSheetFull',
-      data: negocio
-    });
-  }
-
-  agregarRedes(negocio) {
-    this.bottomSheet.open(AgregarRedesComponent, {
-      data: negocio
-    });
-  }
-
-  otrasConfiguraciones(negocio) {
-    this.bottomSheet.open(AdicionalesComponent, {
-      data: negocio
-    });
-  }
-
-  eliminarNegocio(negocio) {
-    this.matDialog.open(EliminarNegocioComponent, {
-      data: negocio
-    });
-  }
+  
 
 }

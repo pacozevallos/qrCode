@@ -24,6 +24,11 @@ export class CardItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    // this.afs.collection('negocios').doc(this.idNegocio).valueChanges().subscribe( res => {
+    //   this.items = res;
+    // });
+
     if (this.item.precios) {
       const precios = this.item.precios.map( res => res.precio);
       this.precioMin = Math.min(...precios);

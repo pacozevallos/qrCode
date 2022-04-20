@@ -82,7 +82,14 @@ $custom-typography: mat-typography-config(
 body {
   margin: 0;
   font-family: "Poppins";
-  // color: $dark;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
+html {
+  height: -webkit-fill-available;
 }
 
 a, .btn-link {
@@ -596,9 +603,10 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .grillaNegociosAdmin {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  gap: 1.2rem;
   @include media-breakpoint-only(xs) {
     grid-template-columns: repeat(1, 1fr);
+    gap: 0.7rem;
   }
 }
 
@@ -612,5 +620,15 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 
 .image, .loader {
   grid-area: 1 / 1;
+}
+
+.logoNegocio {
+  object-fit: cover;
+  width: 72px;
+  height: 72px;
+  @include media-breakpoint-only(xs) {
+    width: 48px;
+    height: 48px;
+  }
 }
 

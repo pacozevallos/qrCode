@@ -28,34 +28,49 @@
 
     <div [style.background-color]="negocio.color" >
       <div class="container py-3 py-md-4 py-md-4 text-white">
+
         <div class="d-flex justify-content-between align-items-center">
-          <div class="">
-            <div>
-              <p class="h2 mb-1">{{negocio.nombre}}</p>
-              <p class="small fw-light mb-0 lh-sm opacity-75">{{negocio.direccion}}</p>
+
+          <div class="d-flex align-items-center">
+
+            <div class="bg-white rounded-circle me-2 me-md-3">
+              <img [src]="negocio.imageLogo" class="logoNegocio" *ngIf="negocio.imageLogo">
+              <div class="text-dark logoNegocio d-flex justify-content-center align-items-center" *ngIf="!negocio.imageLogo">
+                <span class="h3 mb-0 fw-bold">{{negocio.nombre | slice:0:1}}</span>
+              </div>
             </div>
+
+            <div class="">
+              <div>
+                <p class="h3 mb-0">{{negocio.nombre}}</p>
+                <p class="extraSmall fw-light mb-0 lh-sm opacity-75">{{negocio.direccion}}</p>
+              </div>
+            </div>
+
           </div>
+
+         
 
           <div class="d-flex align-items-center ms-2">
 
-            <div class="me-1">
+            <div class="">
               <button mat-icon-button (click)="compartirNegocio()">
                 <i-tabler name="share" class="iconHeader"></i-tabler>
               </button>
             </div>
 
-            <div class="">
+            <!-- <div class="">
               <a class="d-flex justify-content-center align-items-center" mat-icon-button *ngFor="let red of negocio.redes | slice:0:1" [href]="red.url" target="blank">
                 <i-tabler [name]="red.icon" class="iconHeader"></i-tabler>
               </a>
-            </div>
+            </div> -->
 
             <div class="" *ngIf="negocio.redes.length >= 1">
               <button mat-icon-button [matMenuTriggerFor]="menu">
                 <i-tabler name="dots-vertical" class="iconHeader"></i-tabler>
               </button>
               <mat-menu #menu="matMenu">
-                <a mat-menu-item *ngFor="let red of negocio.redes | slice:1:10" [href]="red.url" target="blank">
+                <a mat-menu-item *ngFor="let red of negocio.redes" [href]="red.url" target="blank">
                   <i-tabler [name]="red.icon"></i-tabler>
                   <span class="ms-2">{{red.nombre}}</span>
                 </a>

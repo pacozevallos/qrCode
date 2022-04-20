@@ -1,10 +1,10 @@
 <div class="position-relative">
 
-  <div class="d-flex">
+  <div class="d-flex justify-content-between">
 
     <div class="">
       <p class="nombreItem mb-1 lh-sm">{{item.nombre}}</p>
-      <p class="descripcionItem mb-1" *ngIf="item.descripcion">{{item.descripcion | slice:0:32}}...</p>
+      <p class="descripcionItem mb-1" *ngIf="item.descripcion">{{item.descripcion | slice:0:28}}...</p>
       
       <!-- <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
       <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " >S/. {{item.precio}}</span> -->
@@ -39,7 +39,7 @@
       </div>
 
       <div class="image">
-        <img class="imageItem" [src]="item.image" (load)="detectarCargado()">
+        <img class="imageItem shadow" [src]="item.image || negocio?.imageLogo || 'https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/imagePhoto.jpg?alt=media&token=0288065f-7ae4-4322-a6b3-7be67a74fa7c' " (load)="detectarCargado()">
       </div>
 
     </div>

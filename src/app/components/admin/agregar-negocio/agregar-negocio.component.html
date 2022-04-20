@@ -18,7 +18,7 @@
     <p class="h3">Crear Negocio</p>
     <form [formGroup]="formNegocio" (submit)="onSubmit()" novalidate class="row gx-3 gx-md-4">
 
-      <mat-form-field appearance="standard" class="col-12">
+      <!-- <mat-form-field appearance="standard" class="col-12">
         <mat-label>Imagen logo</mat-label>
         <ngx-mat-file-input #removableInput formControlName="image" placeholder="Seleccionar imagen" accept=".jpg, .jpeg, .png" (change)="detectFiles($event)"></ngx-mat-file-input>
         <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
@@ -27,7 +27,7 @@
         <mat-icon matSuffix *ngIf="removableInput.empty">image_search</mat-icon>
         <mat-error *ngIf="errorImagen()">{{errorImagen()}}</mat-error>
         <mat-hint>Peso máximo: 5 MB</mat-hint>
-      </mat-form-field>
+      </mat-form-field> -->
 
       <mat-form-field appearance="standard" class="col-12">
         <mat-label>Nombre del negocio</mat-label>

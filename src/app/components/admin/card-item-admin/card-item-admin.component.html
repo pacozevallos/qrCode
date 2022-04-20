@@ -2,8 +2,21 @@
 
   <div class="d-flex justify-content-between">
 
-    <div class="">
+    <!-- <div class="">
       <img class="imageItemAdmin rounded-start" [src]="item.image">
+    </div> -->
+
+    <div class="contenedorImage">
+      <div class="loader imageItemAdmin rounded-start border" *ngIf="loader">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <span class="mySpinnerDark" >
+            <mat-spinner diameter="24"></mat-spinner>
+          </span>
+        </div>
+      </div>
+      <div class="image">
+        <img class="imageItemAdmin rounded-start shadow-sm" [src]="item.image || negocio?.imageLogo || 'https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/imagePhoto.jpg?alt=media&token=0288065f-7ae4-4322-a6b3-7be67a74fa7c' " (load)="detectarCargado()">
+      </div>
     </div>
 
     <div class="d-flex p-2 w-100">
