@@ -4,27 +4,26 @@
   </div>
 </div> -->
 
-<div class="bg-light">
+<div class="bg-light" *ngIf="user">
 	<div class="container">
 		<div class="py-2 py-md-3 d-flex justify-content-between align-items-center">
 
 			<a class="lead text-dark" routerLink="/admin">
-        <span>Administrador</span>
+				<img class="logoTaaripayAdmin" src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/home%2FlogoTaaripay.svg?alt=media&token=de2c5381-9d52-4aac-a6c3-7fd77ce026c0" alt="">
       </a>
 
-      <!-- <a class="text-dark" routerLink="/admin/listaNegocios">{{email}}</a> -->
 
-			<div class="d-flex align-items-center" *ngIf="userId">
-				<div class="text-right mr-2">
-					<p class="mb-0 d-none d-md-block">{{email}}</p>
-				</div>
-				<!-- <img class="rounded-circle border mr-2" [src]="photoURL" width="60px"> -->
-				<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-					<mat-icon>more_vert</mat-icon>
+			<div class="d-flex align-items-center" >
+				<p class="mb-0 me-2">{{user.displayName || user.email}}</p>
+				<!-- <button class="photoUser" [matMenuTriggerFor]="menu">
+						<img class="" src="https://media-exp1.licdn.com/dms/image/C5603AQETYOc7RHHB9Q/profile-displayphoto-shrink_200_200/0/1517498194143?e=1661990400&v=beta&t=9oQl4SMZUmgpperLo9voBNSEFV8YxJcXup-6XRV0khM" alt="">
+				</button> -->
+				<button mat-icon-button [matMenuTriggerFor]="menu">
+					<i-tabler name="dots-vertical"></i-tabler>
 				</button>
 				<mat-menu #menu="matMenu">
-					<div class="d-block d-md-none">
-						<button mat-menu-item>{{email}}</button>
+					<div class="">
+						<button mat-menu-item>{{user.email}}</button>
 						<mat-divider></mat-divider>
 					</div>
 					<button mat-menu-item (click)="logout()">
@@ -32,6 +31,7 @@
 					</button>
 				</mat-menu>
 			</div>
+
       
 		</div>
 	</div>

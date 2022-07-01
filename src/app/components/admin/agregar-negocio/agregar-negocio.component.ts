@@ -29,7 +29,7 @@ export class AgregarNegocioComponent implements OnInit {
   negocioRef: any;
   redesSociales = [];
   tiposNegocio = [];
-  color = '#0e78d4';
+  color = '#1456D8';
   filteredOptions: Observable<string[]>;
 
   // downloadURL: Observable<string>;

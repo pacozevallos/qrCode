@@ -31,6 +31,7 @@ export class AuthService {
         // this.pushUserDataEmail(credential.user)
         console.log('Usuario logueado');
         this.router.navigate(['/admin']);
+        // window.open('/admin', '_blank');
       })
       .catch(error => {
         this.handleError(error);
@@ -41,14 +42,27 @@ export class AuthService {
     this.auth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider());
   }
 
-  emailSignUp(email: string, password: string) {
-    return this.auth.createUserWithEmailAndPassword(email, password)
-      .then(credential => {
+  emailSignUp(nombre: string, email: string, password: string) {
+    return this.auth.createUserWithEmailAndPassword(email, password,)
+      .then( credential => {
         this.router.navigate(['/admin']);
+        credential.user.updateProfile({
+          displayName: nombre
+        });
+        this.saveUserEmail(nombre, credential.user);
       })
-      .catch(error => {
+      .catch( error => {
         this.handleError(error);
       });
+  }
+
+  saveUserEmail(nombre, user) {
+    return this.afs.collection('users').add({
+      displayName: nombre,
+      uid: user.uid,
+      email: user.email,
+      fechaCreacion: firebase.default.firestore.FieldValue.serverTimestamp(),
+    });
   }
 
   pushUserDataEmail(user: User) {
@@ -69,7 +83,7 @@ export class AuthService {
   }
 
   // Si hay un error, registro de consola y notificación con Mat SnackBar a Usuario
-  private handleError(error) {
+  handleError(error) {
     console.error(error);
 
     // Utilizar ngZone para los SnackBar

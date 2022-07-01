@@ -56,19 +56,23 @@ export class ListaNegociosComponent implements OnInit {
     }
 
     // this.items = this.afs.collection('negocios').doc()
+
   }
 
   addNegocio() {
-    if (this.user.uid === '3oa8paObQSeXA5X1H97PD78AhAj2' || this.user.uid === 'J0oBKmPwKXQNHbjKrcuqHImvdV52' || this.user.uid === 'ooEFajXGEyahVruhnWDgxS6aEbO2') {
-      this.bottomSheet.open(AgregarNegocioComponent);
-    } else {
-      if (this.negocios.length === 0) {
-        this.bottomSheet.open(AgregarNegocioComponent);
-      } else {
-        this.matDialog.open(UpgradeComponent, {
-        });
-      }
-    }
+
+    // if (this.user.uid === '3oa8paObQSeXA5X1H97PD78AhAj2' || this.user.uid === 'J0oBKmPwKXQNHbjKrcuqHImvdV52' || this.user.uid === 'ooEFajXGEyahVruhnWDgxS6aEbO2') {
+    //   this.bottomSheet.open(AgregarNegocioComponent);
+    // } else {
+    //   if (this.negocios.length === 0) {
+    //     this.bottomSheet.open(AgregarNegocioComponent);
+    //   } else {
+    //     this.matDialog.open(UpgradeComponent, {
+    //     });
+    //   }
+    // }
+
+    this.bottomSheet.open(AgregarNegocioComponent);
 
   }
 

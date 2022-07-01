@@ -9,10 +9,12 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderAdminComponent implements OnInit {
 
-  userId: string;
-  displayName: string;
-  email: string;
-  photoURL: string;
+  // userId: string;
+  // displayName: string;
+  // email: string;
+  // photoURL: string;
+
+  user;
 
   constructor(
     public auth: AuthService,
@@ -21,13 +23,14 @@ export class HeaderAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.afAuth.authState.subscribe( user => {
-      if (user) {
-        this.userId = user.uid;
-        this.displayName = user.displayName;
-        this.email = user.email;
-        this.photoURL = user.photoURL;
-      }
-      // console.log(user?.uid);
+      this.user = user;
+      // if (user) {
+      //   this.userId = user.uid;
+      //   this.displayName = user.displayName;
+      //   this.email = user.email;
+      //   this.photoURL = user.photoURL;
+      // }
+      console.log(user);
     });
   }
 

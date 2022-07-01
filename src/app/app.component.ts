@@ -11,10 +11,10 @@ export class AppComponent {
   constructor() { }
 
   ngOnInit(): void {
-    this.onresize();
+    // this.onresize();
   }
 
-  onresize() {
-    window.innerHeight;
-  }
+  // onresize() {
+  //   window.innerHeight;
+  // }
 }

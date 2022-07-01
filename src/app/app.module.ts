@@ -196,6 +196,7 @@ import { CardNegocioAdminComponent } from './components/admin/card-negocio-admin
     ClipboardModule,
     ColorSketchModule,
     ColorChromeModule,
+    
   ],
   exports: [
     TablerIconsModule

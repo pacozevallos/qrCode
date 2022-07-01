@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-registro',
@@ -14,18 +15,24 @@ export class RegistroComponent implements OnInit {
   formRegistro: FormGroup;
   hide = true;
 
+  caracteristicas = [];
+
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private ds: DataService
   ) { }
 
   ngOnInit(): void {
     this.formRegistro = this.fb.group ({
+      nombre: ['', Validators.required],
       email: [ '', [Validators.required, Validators.email] ],
       password: [ '', Validators.required ],
     });
+
+    this.caracteristicas = this.ds.caracteristicas;
   }
 
   googleLogin() {
@@ -33,13 +40,17 @@ export class RegistroComponent implements OnInit {
   }
 
   emailSignUp() {
-    this.auth.emailSignUp(this.formRegistro.value.email, this.formRegistro.value.password)
+    this.auth.emailSignUp(this.formRegistro.value.nombre, this.formRegistro.value.email, this.formRegistro.value.password)
     .then( data  => {
       // this.auth.actualizarNombre(this.formRegistro.value.nombre)
       // .then( echo => {
       //   this.router.navigate(['/publicarAviso']);
       // });
     });
+  }
+
+  errorNombre() {
+    return this.formRegistro.controls.email.hasError('required') ? 'El nombre es necesario.' : '';
   }
 
   errorEmail() {

@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import { map } from 'rxjs/operators';
 import { Item } from '../classes/item';
 import { Negocio } from 'src/app/classes/negocio';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { Negocio } from 'src/app/classes/negocio';
 export class FirebaseService {
 
   constructor(
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private afAuth: AngularFireAuth
   ) { }
 
   getAllNegocios() {
@@ -83,6 +85,12 @@ export class FirebaseService {
         return { id, ...data };
       }))
   );
+  }
+
+  getUserCurrent() {
+    this.afAuth.authState.subscribe( user => {
+      return user;
+    });
   }
 
 

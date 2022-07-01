@@ -1,1 +1,55 @@
-<p>inicio works!</p>
+<div class="bgBannerHome">
+  <app-header></app-header>
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+    <div class="boxCaptionBanner text-center text-md-start">
+      <p class="display-4 fw-bold mb-0 mb-md-3">Tu catálogo digital en tiempo real</p>
+      <p class="lead">¿Vendes algo? Muestra a tus clientes tu galería de productos.</p>
+      <div class="d-inline-flex flex-column flex-md-row">
+        <a class="btn btn-primary shadow-lg me-2" routerLink="/registro">Quiero mi catálogo</a>
+        <a class="btn btn-link text-dark" routerLink="/demos">Ver demos</a>
+      </div>
+    </div>
+    <div class="">
+      <img class="imgBanner" src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/home%2FphoneCommerce.png?alt=media&token=a4ed52bc-bd61-4d16-9590-14b1febe8352" alt="">
+    </div>
+  </div>
+</div>
+
+
+<div class="container py-6 py-md-7">
+  <p class="h1 fw-light mb-5 mb-md-6">Funciones</p>
+  <div class="grillaCaracteristicas">
+    <div class="d-flex flex-row flex-md-column px-2" *ngFor="let item of caracteristicas">
+      <div class="mb-3 me-3">
+        <img class="imageCaracteristica rounded-circle" [src]="item.image" alt="">
+      </div>
+      <div>
+        <p class="h5">{{item.titulo}}</p>
+        <p class="small text-muted">{{item.descripcion}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="bg-success py-5 py-md-7">
+  <div class="d-flex justify-content-center">
+    <div class="text-center">
+      <p class="h1 mb-4">¿Dudas?</p>
+      <p class="lead">Llámanos o escríbenos</p>
+  
+     
+        <div class="d-grid gap-2">
+          <a class="btn btn-outline-dark" href="tel:999905016" target="_blank">
+            <i-tabler class="me-1" name="phone"></i-tabler>
+            999 905 016</a>
+          <a class="btn btn-outline-dark" href="https://wa.me/51999905016" target="_blank">
+            <i-tabler class="me-1" name="brand-whatsapp"></i-tabler>
+            WhatsApp</a>
+        </div>
+    </div>
+  
+    
+
+  </div>
+</div>

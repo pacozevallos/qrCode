@@ -1,1 +1,27 @@
-<p>header works!</p>
+<div class="">
+  <div class="container py-3 py-md-4 d-flex justify-content-between align-items-center">
+    <a routerLink="/"><img class="logoTaaripay"
+        src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/home%2FlogoTaaripay.svg?alt=media&token=de2c5381-9d52-4aac-a6c3-7fd77ce026c0"
+        alt=""></a>
+
+    <div>
+      <!-- <a class="btn btn-primary" routerLink="/registro">Quiero mi catálogo</a> -->
+      <a class="btn btn-outline-dark mx-3" routerLink="/login">Login</a>
+      <button mat-icon-button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+        aria-controls="offcanvasRight">
+        <i-tabler name="menu"></i-tabler>
+      </button>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+          <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          ...
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

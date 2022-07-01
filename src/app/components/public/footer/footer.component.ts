@@ -7,6 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  legales = [
+    {
+      nombre: 'Libro de reclamaciones',
+      url: '/libroReclamaciones'
+    },
+    {
+      nombre: 'Términos y condiciones',
+      url: '/terminosCondiciones'
+    },
+    {
+      nombre: 'Política de privacidad',
+      url: '/politicaPrivacidad'
+    },
+    // {
+    //   nombre: 'Derechos ARCO',
+    //   url: '/derechosArco'
+    // },
+  ]
+
   constructor() { }
 
   ngOnInit(): void {

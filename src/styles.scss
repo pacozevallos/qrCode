@@ -3,11 +3,11 @@ $border-radius: 0.85rem;
 $border-radius-lg: 1.3rem;
 
 //colores
-$primary: #0e78d4;
+$primary: #1456D8;
 $secondary: #F8CB4F;
-$success: #06AB3E;
+$success: #23E47C;
 $info: #009DF5;
-$warning: #FF9A00;
+$warning: #FFCD38;
 $danger: #FA391F;
 $light: #eff3f7;
 $dark: #16181D;
@@ -19,9 +19,11 @@ $white: #fff;
 $btn-border-width: 2px;
 $btn-padding-y: 0.8rem;
 $btn-padding-x: 1.3rem;
-$btn-border-radius: 3rem;
-$btn-border-radius-sm: 3rem;
-$btn-border-radius-lg: 3rem;
+$btn-padding-y-sm: 0.6rem;
+$btn-padding-x-sm: 1rem;
+$btn-border-radius: 0.4rem;
+$btn-border-radius-sm: 0.3rem;
+$btn-border-radius-lg: 0.5rem;
 // Espacios
 $spacer: 1rem;
 $spacers: (
@@ -71,17 +73,18 @@ $enable-cssgrid: true;
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 // Custom theme Angular Material
 @import "~@angular/material/theming";
 $custom-typography: mat-typography-config(
-  $font-family: "Poppins" !important,
+  $font-family: "Space Grotesk" !important,
 );
 @include mat-core($custom-typography);
 
 body {
   margin: 0;
-  font-family: "Poppins";
+  font-family: "Space Grotesk";
   min-height: 100vh;
   min-height: -webkit-fill-available;
   height: 100%;
@@ -611,7 +614,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 }
 
 .cdk-overlay-dark-backdrop {
-  background: rgba(0, 0, 0, 0.65) !important;
+  background: rgba(0, 0, 0, 0.8) !important;
 }
 
 .contenedorImage {
@@ -632,3 +635,111 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   }
 }
 
+.logoTaaripay {
+  width: 180px;
+  height: auto;
+  @include media-breakpoint-only(xs) {
+    width: 140px;
+  }
+}
+
+
+.bgBannerHome{
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/home%2Fback1.jpg?alt=media&token=74a34b56-cad9-4b50-ba63-3cd298d56878');
+  background-position: center center;
+  background-size: cover;
+}
+
+.boxCaptionBanner {
+  width: 530px;
+  @include media-breakpoint-only(xs) {
+    width: 100%;
+  }
+}
+
+.imgBanner {
+  height: 560px;
+  @include media-breakpoint-only(xs) {
+    width: 90%;
+    height: auto;
+  }
+}
+
+.headerFloat {
+  position: absolute;
+  width: 100%;
+}
+
+.imageCaracteristica {
+  object-fit: cover;
+  width: 180px;
+  height: 180px;
+  @include media-breakpoint-only(xs) {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+.grillaCaracteristicas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5rem;
+  @include media-breakpoint-only(xs) {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 3rem;
+  }
+}
+
+.imgRegistro {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/registro%2ForderOnline.jpg?alt=media&token=1eccd9ce-c141-4684-b96b-b57640014ba9');
+  background-position: center center;
+  background-size: cover;
+  height: 100%;
+  border-radius: 1rem 0rem 0rem 1rem;
+  @include media-breakpoint-only(xs) {
+    height: 200px;
+    border-radius: 1rem 1rem 0rem 0rem;
+  }
+}
+
+.boxForm {
+  border-radius: 0rem 1rem 1rem 0rem;
+  @include media-breakpoint-only(xs) {
+    border-radius: 0rem 0rem 1rem 1rem;
+  }
+
+}
+
+.logoTaaripayAdmin {
+  width: 140px;
+  height: auto;
+  @include media-breakpoint-only(xs) {
+    width: 120px;
+  }
+}
+
+
+
+.photoUser {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0rem 0.5rem 1rem rgba($dark, 0.2);
+  border: none;
+  padding: 0px;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba($light, 0.35);
+  }
+
+}
+
+.photoUser:hover {
+  img {
+    border: 3px solid rgba($dark, 0.1);
+  }
+}

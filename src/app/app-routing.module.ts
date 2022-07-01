@@ -15,7 +15,7 @@ import { DetalleItemComponent } from './components/public/detalle-item/detalle-i
 import { AgregarNegocioComponent } from './components/admin/agregar-negocio/agregar-negocio.component';
 import { RegistroComponent } from './components/public/registro/registro.component';
 import { VistaQrComponent } from './components/admin/vista-qr/vista-qr.component';
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   {
@@ -24,15 +24,12 @@ const routes: Routes = [
       { path: '', component: InicioComponent },
       { path: 'negocio/:id', component: NegocioComponent },
       { path: 'negocio/:id/item/:id', component: DetalleItemComponent },
-      // { path: 'registro', component: RegistroComponent },
+      { path: 'registro', component: RegistroComponent },
       { path: 'login', component: LoginComponent },
-
     ]
   },
   {
-    path: 'admin', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: {
-      authGuardPipe: redirectUnauthorizedToLogin
-    },
+    path: 'admin', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin},
     // path: 'admin', component: AdminComponent,
     children: [
       { path: '', component: ListaNegociosComponent },
@@ -41,15 +38,15 @@ const routes: Routes = [
       // { path: ':id/crearItem', component: CrearItemComponent},
     ]
   },
-  { path: '', redirectTo: 'es', pathMatch: 'full' },
+  // { path: '', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    scrollPositionRestoration: 'enabled',
-    anchorScrolling: 'enabled',
+    // scrollPositionRestoration: 'enabled',
+    // anchorScrolling: 'enabled',
     // onSameUrlNavigation: 'reload',
-    scrollOffset: [0, 64]
+    // scrollOffset: [0, 64]
   })],
   exports: [RouterModule]
 })

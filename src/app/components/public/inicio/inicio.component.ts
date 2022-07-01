@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-inicio',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
-  constructor() { }
+  caracteristicas = [];
+
+  constructor(
+    private ds: DataService
+  ) { }
 
   ngOnInit(): void {
+    this.caracteristicas = this.ds.caracteristicas;
   }
 
 }
