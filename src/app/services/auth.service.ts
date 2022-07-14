@@ -22,6 +22,30 @@ export class AuthService {
     public readonly ngZone: NgZone,
   ) { }
 
+  emailSignUp(nombre: string, email: string, password: string) {
+    return this.auth.createUserWithEmailAndPassword(email, password,)
+      .then( credential => {
+        this.router.navigate(['/admin/elegirPlan']);
+        credential.user.updateProfile({
+          displayName: nombre
+        });
+        this.saveUserEmail(nombre, credential.user);
+      })
+      .catch( error => {
+        this.handleError(error);
+      });
+  }
+
+  saveUserEmail(nombre, user) {
+    return this.afs.collection('users').add({
+      displayName: nombre,
+      uid: user.uid,
+      email: user.email,
+      plan: 'Free',
+      fechaCreacion: firebase.default.firestore.FieldValue.serverTimestamp(),
+    });
+  }
+
   emailLogin(email: string, password: string ) {
     return this.auth
       .signInWithEmailAndPassword(email, password)
@@ -42,27 +66,15 @@ export class AuthService {
     this.auth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider());
   }
 
-  emailSignUp(nombre: string, email: string, password: string) {
-    return this.auth.createUserWithEmailAndPassword(email, password,)
-      .then( credential => {
-        this.router.navigate(['/admin']);
-        credential.user.updateProfile({
-          displayName: nombre
-        });
-        this.saveUserEmail(nombre, credential.user);
-      })
-      .catch( error => {
-        this.handleError(error);
-      });
-  }
-
-  saveUserEmail(nombre, user) {
-    return this.afs.collection('users').add({
-      displayName: nombre,
-      uid: user.uid,
-      email: user.email,
-      fechaCreacion: firebase.default.firestore.FieldValue.serverTimestamp(),
+  resetPasword(email) {
+    return this.auth.sendPasswordResetEmail(email)
+    .then( () => {
+      console.log('email enviado');
+    })
+    .catch((error) => {
+      console.log(error);
     });
+
   }
 
   pushUserDataEmail(user: User) {
@@ -93,4 +105,5 @@ export class AuthService {
       });
     });
   }
+
 }

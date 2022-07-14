@@ -1,0 +1,30 @@
+<div class="container py-3" *ngIf="user">
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb extraSmall">
+      <li class="breadcrumb-item"><a routerLink="/admin">Inicio</a></li>
+      <li class="breadcrumb-item"><a routerLink="/admin/cuenta">Cuenta</a></li>
+      <li class="breadcrumb-item active">Cambiar contraseña</li>
+    </ol>
+  </nav>
+
+  <div class="border rounded p-3 p-md-4 mb-3" >
+    <p class="h2">Cambiar contraseña</p>
+    <p class="my-4">Te enviaremos un enlace a tu correo: <strong>{{user.email}}</strong> con las instrucciones para actualizar tu contraseña.</p>
+    <div class="d-grid gap-2 d-md-flex">
+      <!-- <button class="btn btn-primary" (click)="cambiarContrasenia(user.email)">Enviar instrucciones al correo</button> -->
+      <button class="btn btn-outline-primary" (click)="cambiarContrasenia(user.email)">
+        <span class="spinnerOutlinePrimary d-flex justify-content-center" *ngIf="loading">
+          <mat-spinner class="text-center" [diameter]="24" class="float-left mr-2"></mat-spinner>
+        </span>
+        <span *ngIf="!loading">Enviar instrucciones al correo</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="aviso">
+    <strong>Listo {{user.displayName}}!</strong> Hemos enviado las instrucciones a tu correo. Recuerda revisar tu bandeja de SPAM.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+</div>

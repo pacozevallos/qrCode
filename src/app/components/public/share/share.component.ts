@@ -22,6 +22,7 @@ export class ShareComponent implements OnInit {
 
   }
 
+  
   // const dataURL = canvas[0].toDataURL();
   // const myBase64 = dataURL.split(',');
 
@@ -46,11 +47,20 @@ export class ShareComponent implements OnInit {
     }
 
     if(this.router.url === `/admin/${this.data.negocio.id}`) {
-      const urlNegocio = currentUrl.replace(`admin`, `negocio`);
-      console.log(urlNegocio);
-      this.urlShare = urlNegocio + `/item/${this.data.item.id}`;
-      console.log(this.urlShare);
+      this.urlShare = `${window.location.origin}/negocio/${this.data.negocio.id}`;
     }
+
+    if(this.router.url === `/admin/${this.data.negocio.id}/productos/${this.data.item.id}`) {
+      this.urlShare = `${window.location.origin}/negocio/${this.data.negocio.id}/item/${this.data.item.id}`;
+    }
+    
+
+    // if(this.router.url === `/admin/${this.data.negocio.id}`) {
+    //   const urlNegocio = currentUrl.replace(`admin`, `negocio`);
+    //   console.log(urlNegocio);
+    //   this.urlShare = urlNegocio + `/item/${this.data.item.id}`;
+    //   console.log(this.urlShare);
+    // }
 
     
 

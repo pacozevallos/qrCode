@@ -9,9 +9,30 @@
   </mat-expansion-panel>
 </mat-accordion> -->
 
+<div class="myPositionBottom">
+  <button class="btn btn-primary btn-circle-lg shadow" (click)="agregarItem()">
+    <i-tabler name="plus"></i-tabler>
+  </button>
+</div>
 
-<div class="grillaItemsAdmin">
-  <app-card-item-admin *ngFor="let item of items; let i = index; trackBy: trackByPublicado" [idNegocio]="idNegocio" [item]="item"></app-card-item-admin>
+<div class="container py-3">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex align-items-center">
+      <button class="me-1" mat-icon-button [routerLink]=" '/admin/' + idNegocio">
+        <i-tabler name="arrow-left"></i-tabler>
+      </button>
+      <p class="h3 mb-0">Productos</p>
+    </div>
+    <button class="btn btn-outline-primary btn-sm" (click)="agregarItem()">
+        <i-tabler name="plus"></i-tabler>
+    </button>
+  </div>
+
+  <div class="grillaItemsAdmin">
+    <app-card-item-admin *ngFor="let item of items; let i = index; trackBy: trackByPublicado" [idNegocio]="idNegocio" [item]="item"></app-card-item-admin>
+  </div>
+
 </div>
 
 

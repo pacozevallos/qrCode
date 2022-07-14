@@ -87,6 +87,10 @@ export class FirebaseService {
   );
   }
 
+  getUsersFirestore() {
+    return this.afs.collection('users').valueChanges();
+  }
+
   getUserCurrent() {
     this.afAuth.authState.subscribe( user => {
       return user;

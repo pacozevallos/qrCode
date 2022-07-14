@@ -1,22 +1,21 @@
 <div class="bgBannerHome">
-  <app-header></app-header>
   <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
-    <div class="boxCaptionBanner text-center text-md-start">
+    <div class="boxCaptionBanner text-center text-md-start mt-4 mt-md-0">
       <p class="display-4 fw-bold mb-0 mb-md-3">Tu catálogo digital en tiempo real</p>
       <p class="lead">¿Vendes algo? Muestra a tus clientes tu galería de productos.</p>
       <div class="d-inline-flex flex-column flex-md-row">
         <a class="btn btn-primary shadow-lg me-2" routerLink="/registro">Quiero mi catálogo</a>
-        <a class="btn btn-link text-dark" routerLink="/demos">Ver demos</a>
+        <!-- <a class="btn btn-link text-dark" routerLink="/demos">Ver demos</a> -->
       </div>
     </div>
-    <div class="">
+    <div class="mt-3 mt-md-0">
       <img class="imgBanner" src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/home%2FphoneCommerce.png?alt=media&token=a4ed52bc-bd61-4d16-9590-14b1febe8352" alt="">
     </div>
   </div>
 </div>
 
 
-<div class="container py-6 py-md-7">
+<div class="container py-5 py-md-6">
   <p class="h1 fw-light mb-5 mb-md-6">Funciones</p>
   <div class="grillaCaracteristicas">
     <div class="d-flex flex-row flex-md-column px-2" *ngFor="let item of caracteristicas">
@@ -39,7 +38,7 @@
       <p class="lead">Llámanos o escríbenos</p>
   
      
-        <div class="d-grid gap-2">
+        <div class="d-flex gap-2 flex-column flex-md-row">
           <a class="btn btn-outline-dark" href="tel:999905016" target="_blank">
             <i-tabler class="me-1" name="phone"></i-tabler>
             999 905 016</a>

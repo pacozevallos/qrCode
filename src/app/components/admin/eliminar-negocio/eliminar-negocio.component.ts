@@ -37,7 +37,7 @@ export class EliminarNegocioComponent implements OnInit {
 
     this.loader = true;
 
-    // Eliminar todas las imágenes de los items del negocio
+    // Eliminar todas las imágenes de los items del negocio en Storage
     const itemsFilter = this.items.filter( fil => fil.imageName !== '');
     if ( this.items.length >= 1) {
       itemsFilter.forEach( element => {

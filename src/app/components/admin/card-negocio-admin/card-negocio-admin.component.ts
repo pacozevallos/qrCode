@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ShareComponent } from '../../public/share/share.component';
 import { AdicionalesComponent } from '../adicionales/adicionales.component';
+import { AgregarCelularComponent } from '../agregar-celular/agregar-celular.component';
 import { AgregarRedesComponent } from '../agregar-redes/agregar-redes.component';
 import { EditarNegocioComponent } from '../editar-negocio/editar-negocio.component';
 import { EliminarNegocioComponent } from '../eliminar-negocio/eliminar-negocio.component';
@@ -22,15 +23,15 @@ export class CardNegocioAdminComponent implements OnInit {
 
   opciones = [
     {
-      nombre: 'Ver items',
+      nombre: 'Agregar productos',
       icon: 'list-details',
       function: (negocio) => this.verItems(negocio)
     },
-    {
-      nombre: 'Editar negocio',
-      icon: 'pencil',
-      function: (negocio) => this.editarNegocio(negocio)
-    },
+    // {
+    //   nombre: 'Agregar whatsApp',
+    //   icon: 'brand-whatsApp',
+    //   function: (negocio) => this.agregarWhatsApp(negocio)
+    // },
     {
       nombre: 'Agregar logo',
       icon: 'plus',
@@ -52,10 +53,16 @@ export class CardNegocioAdminComponent implements OnInit {
       function: (negocio) => this.agregarRedes(negocio)
     },
     {
-      nombre: 'Agregar condiciones',
-      icon: 'settings',
-      function: (negocio) => this.otrasConfiguraciones(negocio)
+      nombre: 'Editar negocio',
+      icon: 'pencil',
+      function: (negocio) => this.editarNegocio(negocio)
     },
+    // {
+    //   nombre: 'Agregar condiciones',
+    //   icon: 'settings',
+    //   function: (negocio) => this.otrasConfiguraciones(negocio)
+    // },
+  
     {
       nombre: 'Eliminar negocio',
       icon: 'trash',
@@ -64,6 +71,7 @@ export class CardNegocioAdminComponent implements OnInit {
   ];
 
   items = [];
+
 
   constructor(
     private matDialog: MatDialog,
@@ -126,6 +134,12 @@ export class CardNegocioAdminComponent implements OnInit {
 
   eliminarNegocio(negocio) {
     this.matDialog.open(EliminarNegocioComponent, {
+      data: negocio
+    });
+  }
+
+  agregarWhatsApp(negocio) {
+    this.bottomSheet.open(AgregarCelularComponent, {
       data: negocio
     });
   }

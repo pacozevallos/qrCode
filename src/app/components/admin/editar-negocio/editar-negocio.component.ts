@@ -41,9 +41,10 @@ export class EditarNegocioComponent implements OnInit {
 
     this.formNegocio = this.fb.group({
       nombre: [this.data.nombre, Validators.required],
+      numeroWhatsApp: [this.data.numeroWhatsApp, [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
       color: [ this.data.color, Validators.required],
       tipo: [this.data.tipo],
-      direccion: [this.data.direccion, Validators.required],
+      direccion: [this.data.direccion],
       categorias: [this.data.categorias],
       fechaEdicion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
     });
@@ -125,6 +126,7 @@ export class EditarNegocioComponent implements OnInit {
     (this.formNegocio.controls.redes as FormArray).removeAt(index);
   }
 
+  
   openModalCrearColor() {
     const dialogRef = this.dialog.open(ColorComponent, {
       panelClass: 'dialogColor',
@@ -147,6 +149,18 @@ export class EditarNegocioComponent implements OnInit {
 
   cancelar() {
     this.bottomSheetRef.dismiss();
+  }
+
+
+  errorNombreNegocio() {
+    return this.formNegocio.controls.nombre.hasError('required') ? 'Ingresa un nombre' : '';
+  }
+
+  errorWhatsApp() {
+    return this.formNegocio.controls.numeroWhatsApp.hasError('required') ? 'Ingresa un número' :
+    this.formNegocio.controls.numeroWhatsApp.hasError('pattern') ? 'Solo se admiten números.' :
+    this.formNegocio.controls.numeroWhatsApp.hasError('minlength') ? 'Mínimo 9 caracteres' :
+    this.formNegocio.controls.numeroWhatsApp.hasError('maxlength') ? 'No debe exceder 9 caracteres' : '';
   }
 
 }

@@ -72,34 +72,17 @@ export class AgregarNegocioComponent implements OnInit {
     this.tiposNegocio = this.ds.tiposNegocio;
 
     this.formNegocio = this.fb.group({
-      // image: ['', FileValidator.maxContentSize(this.maxSize)],
       nombre: ['', Validators.required],
-      color: [ this.color, Validators.required ],
-      // imageLogo: ['', FileValidator.maxContentSize(this.maxSize)],
+      numeroWhatsApp: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
+      direccion: [''],
       tipo: [''],
-      direccion: ['', Validators.required],
+      color: [ this.color, Validators.required ],
       categorias: new FormArray([]),
-      redes: this.fb.array([
-        // this.fb.group({
-        //   nombre: ['Facebook'],
-        //   url: [''],
-        //   icon: ['Facebook']
-        // })
-      ]),
+      redes: this.fb.array([]),
       id: [this.negocioRef.id, Validators.required],
       autorId: [user.uid],
       fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
     });
-
-    // const arrayRedes = this.formNegocio.controls.redes as FormArray;
-
-    // this.formNegocio.addControl('redes', this.fb.array([
-    //   this.fb.group({
-    //     nombre: ['Facebook'],
-    //     url: [''],
-    //     icon: ['']
-    //   })
-    // ]));
 
     this.formNegocio.controls.redes.valueChanges.subscribe( redes => {
       const control = this.formNegocio.controls.redes as FormArray;
@@ -258,6 +241,17 @@ export class AgregarNegocioComponent implements OnInit {
     this.selectedFile = event.target.files[0];
     this.nameItem = event.target.files[0].name;
     console.log(this.nameItem);
+  }
+
+  errorNombreNegocio() {
+    return this.formNegocio.controls.nombre.hasError('required') ? 'Ingresa un nombre' : '';
+  }
+
+  errorWhatsApp() {
+    return this.formNegocio.controls.numeroWhatsApp.hasError('required') ? 'Ingresa un número' :
+    this.formNegocio.controls.numeroWhatsApp.hasError('pattern') ? 'Solo se admiten números.' :
+    this.formNegocio.controls.numeroWhatsApp.hasError('minlength') ? 'Mínimo 9 caracteres' :
+    this.formNegocio.controls.numeroWhatsApp.hasError('maxlength') ? 'No debe exceder 9 caracteres' : '';
   }
 
   errorImagen() {

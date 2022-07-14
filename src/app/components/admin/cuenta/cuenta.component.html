@@ -1,0 +1,22 @@
+<div class="container py-3">
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb extraSmall">
+      <li class="breadcrumb-item"><a routerLink="/admin">Inicio</a></li>
+      <li class="breadcrumb-item active text-muted">Cuenta</li>
+    </ol>
+  </nav>
+
+  <div class="border rounded p-3 p-md-4 mb-3">
+    <p class="h2 mb-3">Cuenta</p>
+    <span class="small text-muted">Nombre</span>
+    <p class="">{{user.displayName}}</p>
+    <span class="small text-muted">Correo electrónico</span>
+    <p class="">{{user.email}}</p>
+    <div class="d-grid gap-2 d-md-flex mt-4">
+      <a class="btn btn-outline-primary" routerLink="/admin/actualizarDatos">Actualizar datos</a>
+      <a class="btn btn-outline-primary" routerLink="/admin/contrasenia">Cambiar contraseña</a>
+    </div>
+  </div>
+
+</div>

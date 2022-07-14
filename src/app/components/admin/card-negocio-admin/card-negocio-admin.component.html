@@ -29,7 +29,7 @@
         <span class="ms-2">{{option.nombre}}</span>
       </button>
 
-      <button mat-menu-item *ngFor="let option of opciones | slice:7:8" (click)="option.function(negocio)" class="d-none d-md-block">
+      <button mat-menu-item *ngFor="let option of opciones | slice:-1" (click)="option.function(negocio)" class="d-none d-md-block">
         <i-tabler [name]="option.icon"></i-tabler>
         <span class="ms-2">{{option.nombre}}</span>
       </button>
@@ -39,7 +39,7 @@
   </div>
 
   <div class="mt-3 d-none d-md-block">
-    <div *ngFor="let option of opciones | slice:0:7; last as last">
+    <div *ngFor="let option of opciones | slice:0:6; last as last">
       <button class="encima text-white" mat-menu-item (click)="option.function(negocio)">
         <i-tabler [name]="option.icon"></i-tabler>
         <span class="ms-2">{{option.nombre}}</span>

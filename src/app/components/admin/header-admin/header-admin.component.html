@@ -22,12 +22,13 @@
 					<i-tabler name="dots-vertical"></i-tabler>
 				</button>
 				<mat-menu #menu="matMenu">
-					<div class="">
+					<!-- <div class="">
 						<button mat-menu-item>{{user.email}}</button>
 						<mat-divider></mat-divider>
-					</div>
-					<button mat-menu-item (click)="logout()">
-						<span>Cerrar sesión</span>
+					</div> -->
+					<button mat-menu-item (click)="item.function()" *ngFor="let item of linksAdmin">
+						<i-tabler [name]="item.icon" class="me-2 text-muted"></i-tabler>
+						<span>{{item.nombre}}</span>
 					</button>
 				</mat-menu>
 			</div>
@@ -36,3 +37,12 @@
 		</div>
 	</div>
 </div>
+
+
+<!-- <div class="">
+	<div class="container">
+		<div class="d-flex justify-content-center small">
+			<span class="text-muted me-1">Vende por WhatsApp</span> <a routerLink="/admin/plan">Cambiar a Plan Power</a>
+		</div>
+	</div>
+</div> -->

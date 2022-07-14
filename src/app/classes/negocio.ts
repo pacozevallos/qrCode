@@ -16,4 +16,5 @@ export class Negocio {
   redes = [];
   color: string;
   reglas = [];
+  numeroWhatsApp: number;
 }

@@ -103,6 +103,20 @@ import { AgregarRedesComponent } from './components/admin/agregar-redes/agregar-
 import { UpgradeComponent } from './components/admin/upgrade/upgrade.component';
 import { LogoNegocioComponent } from './components/admin/logo-negocio/logo-negocio.component';
 import { CardNegocioAdminComponent } from './components/admin/card-negocio-admin/card-negocio-admin.component';
+import { CuentaComponent } from './components/admin/cuenta/cuenta.component';
+import { PlanComponent } from './components/admin/plan/plan.component';
+import { ContraseniaComponent } from './components/admin/contrasenia/contrasenia.component';
+import { ActualizarDatosComponent } from './components/admin/actualizar-datos/actualizar-datos.component';
+import { SelectPLanComponent } from './components/admin/select-plan/select-plan.component';
+import { AgregarCelularComponent } from './components/admin/agregar-celular/agregar-celular.component';
+import { HeaderNegocioComponent } from './components/public/header-negocio/header-negocio.component';
+import { ContentNegocioComponent } from './components/public/content-negocio/content-negocio.component';
+import { DestacadosNegocioComponent } from './components/public/destacados-negocio/destacados-negocio.component';
+import { ItemsNegocioComponent } from './components/public/items-negocio/items-negocio.component';
+import { FooterNegocioComponent } from './components/public/footer-negocio/footer-negocio.component';
+import { CompartirNegocioComponent } from './components/public/compartir-negocio/compartir-negocio.component';
+import { CompartirItemComponent } from './components/public/compartir-item/compartir-item.component';
+import { GraciasPlanPowerComponent } from './components/admin/gracias-plan-power/gracias-plan-power.component';
 
 @NgModule({
   declarations: [
@@ -139,7 +153,21 @@ import { CardNegocioAdminComponent } from './components/admin/card-negocio-admin
     AgregarRedesComponent,
     UpgradeComponent,
     LogoNegocioComponent,
-    CardNegocioAdminComponent
+    CardNegocioAdminComponent,
+    CuentaComponent,
+    PlanComponent,
+    ContraseniaComponent,
+    ActualizarDatosComponent,
+    SelectPLanComponent,
+    AgregarCelularComponent,
+    HeaderNegocioComponent,
+    ContentNegocioComponent,
+    DestacadosNegocioComponent,
+    ItemsNegocioComponent,
+    FooterNegocioComponent,
+    CompartirNegocioComponent,
+    CompartirItemComponent,
+    GraciasPlanPowerComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

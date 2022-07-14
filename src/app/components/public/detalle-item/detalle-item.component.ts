@@ -1,11 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Item } from 'src/app/classes/item';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ShareComponent } from '../share/share.component';
 import { Negocio } from 'src/app/classes/negocio';
+import { CompartirItemComponent } from '../compartir-item/compartir-item.component';
 
 @Component({
   selector: 'app-detalle-item',
@@ -14,24 +15,23 @@ import { Negocio } from 'src/app/classes/negocio';
 })
 export class DetalleItemComponent implements OnInit {
 
+
   idNegocio: string;
   idItem: string;
   item: any;
   negocio: Negocio;
 
   constructor(
-    // private matBottomSheetRef: MatBottomSheetRef<DetalleItemComponent>,
-    // @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private activatedRoute: ActivatedRoute,
     private afs: AngularFirestore,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
 
-    const myUrl = this.activatedRoute.snapshot.url;
-    this.idNegocio = myUrl[1].path;
-    this.idItem = myUrl[3].path;
+    this.idNegocio = this.activatedRoute.parent.snapshot.params.id;
+    this.idItem = this.activatedRoute.snapshot.params.id;
 
     this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(this.idItem).valueChanges().subscribe( data => {
       this.item = data;
@@ -42,19 +42,13 @@ export class DetalleItemComponent implements OnInit {
       this.negocio = res;
     });
 
-    // this.idNegocio = this.data.idNegocio;
-    // this.item = this.data.item;
 
   }
 
-  // cancelar() {
-  //   this.matBottomSheetRef.dismiss();
-  // }
 
   compartirItem() {
-    this.matDialog.open(ShareComponent, {
+    this.matDialog.open(CompartirItemComponent, {
       panelClass: 'modalSmall',
-      // data: `/negocio/${this.idNegocio}/item/${this.idItem}`
       data: {
         negocio: this.negocio,
         item: this.item

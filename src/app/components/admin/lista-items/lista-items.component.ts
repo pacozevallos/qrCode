@@ -11,6 +11,8 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ActivatedRoute } from '@angular/router';
 import { Item } from 'src/app/classes/item';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { Negocio } from 'src/app/classes/negocio';
+import { CrearItemComponent } from '../crear-item/crear-item.component';
 
 @Component({
   selector: 'app-lista-items',
@@ -19,8 +21,9 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 })
 export class ListaItemsComponent implements OnInit {
 
-  @Input() idNegocio: string;
-
+  // @Input() idNegocio: string;
+  idNegocio: string;
+  negocio: Negocio;
   items: Item[] = [];
   itemsGroup = [];
 
@@ -46,6 +49,14 @@ export class ListaItemsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.activatedRoute.params.subscribe( params => {
+      this.idNegocio = params.id;
+      this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
+        this.negocio = res;
+      });
+    });
+
+
     this.fs.getAllItemsDocument(this.idNegocio).subscribe( res => {
       this.itemsData.data = res;
     });
@@ -59,10 +70,7 @@ export class ListaItemsComponent implements OnInit {
     // this.itemsData.sort = this.sort;
 
 
-    this.activatedRoute.params.subscribe( res => {
-
-    });
-
+   
     this.fs.getAllItemsDocument(this.idNegocio).subscribe( res => {
       this.items = res;
       console.log(this.items);
@@ -77,6 +85,13 @@ export class ListaItemsComponent implements OnInit {
       console.log(this.itemsGroup);
     });
 
+  }
+
+  agregarItem() {
+    this.bottomSheet.open(CrearItemComponent, {
+      // panelClass: 'myBottomSheetFull',
+      data: this.negocio
+    });
   }
 
   actualizarPublicado(idItem, change: MatSlideToggleChange) {

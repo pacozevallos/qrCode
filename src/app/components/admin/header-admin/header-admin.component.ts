@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -16,22 +17,51 @@ export class HeaderAdminComponent implements OnInit {
 
   user;
 
+  linksAdmin = [
+    {
+      nombre: 'Cuenta',
+      icon: 'user',
+      function: () => this.goToCuenta()
+    },
+    {
+      nombre: 'Plan',
+      icon: 'star',
+      function: () => this.goToPlan()
+    },
+    {
+      nombre: 'Cambiar contraseña',
+      icon: 'key',
+      function: () => this.goToContrasenia()
+    },
+    {
+      nombre: 'Cerrar sesión',
+      icon: 'power',
+      function: () => this.logout()
+    }
+  ];
+
   constructor(
     public auth: AuthService,
     public afAuth: AngularFireAuth,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.afAuth.authState.subscribe( user => {
       this.user = user;
-      // if (user) {
-      //   this.userId = user.uid;
-      //   this.displayName = user.displayName;
-      //   this.email = user.email;
-      //   this.photoURL = user.photoURL;
-      // }
-      console.log(user);
     });
+  }
+
+  goToCuenta() {
+    this.router.navigate(['/admin/cuenta']);
+  }
+
+  goToPlan() {
+    this.router.navigate(['/admin/plan']);
+  }
+
+  goToContrasenia() {
+    this.router.navigate(['/admin/contrasenia']);
   }
 
   logout() {

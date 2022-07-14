@@ -23,8 +23,8 @@
 
       <div class="w-100">
         <span class="myBadgePillCategoriaAdmin">{{item.categoria}}</span>
-        <p class="mt-2 mb-1 lh-sm">{{item.nombre}}</p>
-        <p class="descripcionItem mb-2">{{item.descripcion | slice:0:24}}...</p>
+        <p class="mt-2 mb-1 lh-sm small">{{item.nombre}}</p>
+        <!-- <p class="descripcionItem mb-2">{{item.descripcion | slice:0:24}}...</p> -->
 
         <div class="d-flex justify-content-between">
 
@@ -87,8 +87,10 @@
 
     <!-- <a class="stretched-link" [routerLink]="'item/' + item.id"></a> -->
     <!-- <a type="button" class="stretched-link" (click)=" openBottomSheetDetalle(item)"></a> -->
+    <a class="stretched-link" [routerLink]="item.id"></a>
 
   </div>
 
-  <!-- <a class="stretched-link" (click)="detalleItem()"></a> -->
+  
+
 </div>

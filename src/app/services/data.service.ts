@@ -85,6 +85,38 @@ export class DataService {
       descripcion: 'Incluye el color de tu marca en tu catálogo y muéstrales a tus clientes la identidad de tu marca',
       image: 'https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/home%2FmanoStore.png?alt=media&token=59d93a56-c9a8-44a0-bf93-11daaa721c36'
     },
+  ];
+
+  planes = [
+    {
+      nombre: 'Power',
+      precio: '1 mes gratis, luego pagas S/. 9.90 al mes',
+      descuento: '-90%',
+      caracteristicas : [
+        'Productos ilimitados',
+        'Vende por WhatsApp',
+        'Personaliza tu negocio',
+        'Cambios en tiempo real',
+        'Comparte con código QR',
+        'Asistencia técnica para crear tu catálogo'
+      ],
+      nameButton: 'Empezar prueba gratuita',
+      urlButton: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c93808481e5f3990181e9845f3b00fb'
+    },
+    {
+      nombre: 'Free',
+      precio: 'Gratis siempre',
+      descuento: '',
+      caracteristicas : [
+        'Hasta 20 productos',
+        'Vende por WhatsApp',
+        'Personaliza tu negocio',
+        'Cambios en tiempo real',
+        'Comparte con código QR',
+      ],
+      nameButton: 'Lo quiero',
+      urlButton: '/admin'
+    },
   ]
 
 }

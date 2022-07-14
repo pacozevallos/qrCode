@@ -1,0 +1,41 @@
+<div class="container py-3" *ngIf="user">
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb extraSmall">
+      <li class="breadcrumb-item"><a routerLink="/admin">Inicio</a></li>
+      <li class="breadcrumb-item"><a routerLink="/admin/cuenta">Cuenta</a></li>
+      <li class="breadcrumb-item active">Actualizar datos</li>
+    </ol>
+  </nav>
+
+  <div class="border rounded p-3 p-md-4 mb-3" >
+    <p class="h2 mb-3">Actualizar datos</p>
+
+    <form [formGroup]="formDatos" (ngSubmit)="onSubmit()" novalidate class="row col-md-6 mb-3">
+      <mat-form-field appearance="standard" class="col-12">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" formControlName="nombre">
+        <mat-error *ngIf="formDatos.controls['nombre'].invalid">{{ errorNombre() }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="standard" class="col-12">
+        <mat-label>Email</mat-label>
+        <input matInput type="text" formControlName="email">
+        <mat-error *ngIf="formDatos.controls['email'].invalid">{{ errorEmail() }}</mat-error>
+      </mat-form-field>
+    </form>
+
+    <div style="width: 200px;">
+      <div class="d-grid gap-2">
+        <button class="btn btn-outline-primary" (click)="onSubmit()">
+          <span class="spinnerOutlinePrimary d-flex justify-content-center" *ngIf="loading">
+            <mat-spinner class="text-center" [diameter]="24" class="float-left mr-2"></mat-spinner>
+          </span>
+          <span *ngIf="!loading">Actualizar datos</span>
+        </button>
+      </div>
+    </div>
+
+  
+  </div>
+
+</div>

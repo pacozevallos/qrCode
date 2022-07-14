@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,6 +16,7 @@ export class RegistroComponent implements OnInit {
   hide = true;
 
   caracteristicas = [];
+  loading: boolean;
 
   constructor(
     private auth: AuthService,
@@ -29,10 +30,19 @@ export class RegistroComponent implements OnInit {
     this.formRegistro = this.fb.group ({
       nombre: ['', Validators.required],
       email: [ '', [Validators.required, Validators.email] ],
-      password: [ '', Validators.required ],
+      password: [ '', [Validators.required, Validators.minLength(6)]],
     });
 
     this.caracteristicas = this.ds.caracteristicas;
+  }
+
+  onSubmit() {
+    if (this.formRegistro.valid) {
+      this.loading = true;
+      this.emailSignUp();
+    } else {
+      this.validateAllFormFields(this.formRegistro);
+    }
   }
 
   googleLogin() {
@@ -49,8 +59,19 @@ export class RegistroComponent implements OnInit {
     });
   }
 
+  validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
+  }
+
   errorNombre() {
-    return this.formRegistro.controls.email.hasError('required') ? 'El nombre es necesario.' : '';
+    return this.formRegistro.controls.nombre.hasError('required') ? 'El nombre es necesario.' : '';
   }
 
   errorEmail() {

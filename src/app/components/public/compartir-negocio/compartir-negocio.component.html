@@ -1,0 +1,28 @@
+<div>
+
+  <div class="buttonClose">
+    <button mat-icon-button (click)="cancelar()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <p class="h3">Compartir tienda</p>
+
+  <div class="my-3">
+    <a class="small text-break" [style.color]="this.data.color" [href]="urlShare" target="blank">{{urlShare}}</a>
+  </div>
+
+
+
+  <mat-form-field appearance="outline" class="col-12 d-none" >
+    <input matInput disabled [value]="urlShare" readonly>
+  </mat-form-field>
+
+  <div class="d-grid">
+    <button class="btn text-white" [style]=" 'background-color: '+ this.data.color + '' " [cdkCopyToClipboard]="urlShare" (click)="hecho()">
+      <i-tabler name="link" style="color: #fff"></i-tabler>
+      <span class="ms-2">Copiar link</span>
+    </button>
+  </div>
+
+</div>
