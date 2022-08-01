@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class EliminarNegocioComponent implements OnInit {
     private snackBar: MatSnackBar,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
-    private fs: FirebaseService
+    private fs: FirebaseService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -58,6 +60,7 @@ export class EliminarNegocioComponent implements OnInit {
         duration: 3000
       });
       console.log('negocio eliminado');
+      this.router.navigate(['/admin'])
     });
 
   }

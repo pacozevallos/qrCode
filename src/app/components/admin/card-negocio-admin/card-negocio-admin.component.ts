@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { User } from 'src/app/classes/user';
 import { ShareComponent } from '../../public/share/share.component';
 import { AdicionalesComponent } from '../adicionales/adicionales.component';
 import { AgregarCelularComponent } from '../agregar-celular/agregar-celular.component';
@@ -71,18 +73,24 @@ export class CardNegocioAdminComponent implements OnInit {
   ];
 
   items = [];
+  user: User;
 
 
   constructor(
     private matDialog: MatDialog,
     private router: Router,
     private bottomSheet: MatBottomSheet,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private auth: AngularFireAuth
   ) { }
 
   ngOnInit(): void {
-    console.log(this.negocio);
-
+ 
+    this.afs.collection('users').valueChanges().subscribe( res => {
+      this.user = res.find( (find: User) => find.uid === this.negocio.autorId);
+    });
+    
+    
     this.afs.collection('negocios').doc(this.negocio.id).collection('items').valueChanges().subscribe( res => {
       this.items = res;
     });

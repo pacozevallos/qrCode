@@ -41,7 +41,7 @@ export class EditarNegocioComponent implements OnInit {
 
     this.formNegocio = this.fb.group({
       nombre: [this.data.nombre, Validators.required],
-      numeroWhatsApp: [this.data.numeroWhatsApp, [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
+      numeroWhatsApp: [this.data.numeroWhatsApp, [Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
       color: [ this.data.color, Validators.required],
       tipo: [this.data.tipo],
       direccion: [this.data.direccion],

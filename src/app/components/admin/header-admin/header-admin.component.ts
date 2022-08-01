@@ -24,7 +24,7 @@ export class HeaderAdminComponent implements OnInit {
       function: () => this.goToCuenta()
     },
     {
-      nombre: 'Plan',
+      nombre: 'Mi plan',
       icon: 'star',
       function: () => this.goToPlan()
     },

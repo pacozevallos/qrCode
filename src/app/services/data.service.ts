@@ -101,7 +101,9 @@ export class DataService {
         'Asistencia técnica para crear tu catálogo'
       ],
       nameButton: 'Empezar prueba gratuita',
-      urlButton: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c93808481e5f3990181e9845f3b00fb'
+      urlButton: 'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-8K665214Y89547137MLSBCUQ'
+      // urlButton: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c93808481e5f3990181e9845f3b00fb'
+      // urlButton: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c938084822156eb0182380e3363071f'
     },
     {
       nombre: 'Free',

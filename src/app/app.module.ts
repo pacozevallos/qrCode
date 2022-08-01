@@ -117,6 +117,9 @@ import { FooterNegocioComponent } from './components/public/footer-negocio/foote
 import { CompartirNegocioComponent } from './components/public/compartir-negocio/compartir-negocio.component';
 import { CompartirItemComponent } from './components/public/compartir-item/compartir-item.component';
 import { GraciasPlanPowerComponent } from './components/admin/gracias-plan-power/gracias-plan-power.component';
+import { GraciasPlanComponent } from './components/admin/gracias-plan/gracias-plan.component';
+import { ContraseniaPublicComponent } from './components/public/contrasenia-public/contrasenia-public.component';
+import { ContraseniaGraciasComponent } from './components/public/contrasenia-gracias/contrasenia-gracias.component';
 
 @NgModule({
   declarations: [
@@ -167,7 +170,10 @@ import { GraciasPlanPowerComponent } from './components/admin/gracias-plan-power
     FooterNegocioComponent,
     CompartirNegocioComponent,
     CompartirItemComponent,
-    GraciasPlanPowerComponent
+    GraciasPlanPowerComponent,
+    GraciasPlanComponent,
+    ContraseniaPublicComponent,
+    ContraseniaGraciasComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

@@ -42,15 +42,7 @@ export class PlanComponent implements OnInit {
 
     })
 
-    
-
-    
-
-    
-
-
-
-
+  
   
   }
 

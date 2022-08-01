@@ -51,38 +51,38 @@ export class DetalleNegocioComponent implements OnInit {
     //   function: () => this.agregarItem()
     // },
     {
-      nombre: 'Ver / agregar productos',
+      nombre: 'Productos',
       icon: 'list-details',
       function: (negocio) => this.verItems(negocio)
     },
     {
-      nombre: 'Editar negocio',
+      nombre: 'Editar',
       icon: 'pencil',
       function: (negocio) => this.editarNegocio(negocio)
     },
     {
-      nombre: 'Agregar whatsApp',
+      nombre: 'WhatsApp',
       icon: 'brand-whatsApp',
       function: (negocio) => this.agregarWhatsApp(negocio)
     },
     {
-      nombre: 'Agregar logotipo',
-      icon: 'plus',
+      nombre: 'Logotipo',
+      icon: 'user-circle',
       function: (negocio) => this.agregarLogo(negocio)
     },
     {
-      nombre: 'Mostrar código QR',
+      nombre: 'Código QR',
       icon: 'qrcode',
       function: (negocio) => this.verCodigoQr(negocio)
     },
     {
       nombre: 'Compartir link',
-      icon: 'link',
+      icon: 'share',
       function: (negocio) => this.compartirNegocio(negocio)
     },
     {
-      nombre: 'Agregar red social',
-      icon: 'share',
+      nombre: 'Redes sociales',
+      icon: 'brand-facebook',
       function: (negocio) => this.agregarRedes(negocio)
     },
     

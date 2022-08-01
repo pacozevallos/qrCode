@@ -30,18 +30,43 @@
               </button>
             </mat-menu>
           </div>
+
         </div>
 
-        <div class="grillaOpciones">
-          <button class="btn btn-outline-primary" *ngFor="let option of opciones" (click)="option.function(negocio)">
-            <div class="d-flex flex-column justify-content-center">
-              <span class="mb-2">
-                <i-tabler [name]="option.icon"></i-tabler>
-              </span>
-              <span class="lh-sm px-2">{{option.nombre}}</span>
+
+
+        <div class="row gx-md-6 gy-4">
+
+          <div class="col-md-6">
+            <div class="grillaOpciones">
+              <button class="btn btn-outline-primary" *ngFor="let option of opciones | slice:0:4" (click)="option.function(negocio)">
+                <div class="d-flex flex-column justify-content-center py-1 py-md-2">
+                  <span class="mb-3 mb-md-4">
+                    <i-tabler [name]="option.icon" class="iconOptionDetalleNegocio"></i-tabler>
+                  </span>
+                  <span class="lh-sm small fw-lighter">{{option.nombre}}</span>
+                </div>
+              </button>
             </div>
-          </button>
+          </div>
+
+          <div class="col-md-6">
+            <div *ngFor="let option of opciones | slice:4:20; last as last">
+              <button class="encima" mat-menu-item (click)="option.function(negocio)">
+                <i-tabler class="me-2" [name]="option.icon"></i-tabler>
+                <span class="ms-2">{{option.nombre}}</span>
+              </button>
+              <mat-divider *ngIf="!last"></mat-divider>
+            </div>
+          </div>
+
         </div>
+
+      
+
+        
+
+
 
         
         <!-- <mat-accordion>

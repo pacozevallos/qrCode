@@ -73,7 +73,7 @@ export class AgregarNegocioComponent implements OnInit {
 
     this.formNegocio = this.fb.group({
       nombre: ['', Validators.required],
-      numeroWhatsApp: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
+      numeroWhatsApp: ['', [Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
       direccion: [''],
       tipo: [''],
       color: [ this.color, Validators.required ],

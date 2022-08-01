@@ -32,7 +32,7 @@ export class AuthService {
         this.saveUserEmail(nombre, credential.user);
       })
       .catch( error => {
-        this.handleError(error);
+        this.handleError(error)
       });
   }
 
@@ -69,10 +69,13 @@ export class AuthService {
   resetPasword(email) {
     return this.auth.sendPasswordResetEmail(email)
     .then( () => {
-      console.log('email enviado');
+      this.snackBar.open(`Instrucciones enviadas a: ${email}`, 'CERRAR', {
+        duration: 9000,
+      });
+      // this.router.navigate(['/graciasContrasenia'])
     })
     .catch((error) => {
-      console.log(error);
+      this.handleError(error);
     });
 
   }
@@ -94,15 +97,11 @@ export class AuthService {
     });
   }
 
-  // Si hay un error, registro de consola y notificación con Mat SnackBar a Usuario
+
   handleError(error) {
     console.error(error);
-
-    // Utilizar ngZone para los SnackBar
-    this.ngZone.run(() => {
-      this.snackBar.open(error.message, 'CERRAR', {
-        duration: 5000,
-      });
+    this.snackBar.open(error.message, 'CERRAR', {
+      duration: 9000,
     });
   }
 

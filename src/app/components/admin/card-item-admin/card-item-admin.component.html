@@ -47,10 +47,9 @@
             <span class="fw-bold small">S/. {{precioMin}}</span>
           </div>
 
-          <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center encima">
             <span class="small me-2">Visible</span>
-            <mat-slide-toggle color="primary" #toggle [checked]="item.publicado"
-              (change)="actualizarPublicado(item.id, $event)">
+            <mat-slide-toggle color="primary" #toggle [checked]="item.publicado" (change)="actualizarPublicado(item.id, $event)">
             </mat-slide-toggle>
           </div>
 

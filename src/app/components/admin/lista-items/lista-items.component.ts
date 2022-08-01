@@ -73,13 +73,14 @@ export class ListaItemsComponent implements OnInit {
    
     this.fs.getAllItemsDocument(this.idNegocio).subscribe( res => {
       this.items = res;
-      console.log(this.items);
-
+      // console.log(this.items);
+      
       this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
         const id = prev.findIndex((item) => item.categoria === categoria);
+        const cat = 'xxx';
         id >= 0
-          ? prev[id].items.push(items)
-          : prev.push({categoria, items: [items]});
+          ? prev[id].items.push({...items, categoria})
+          : prev.push({categoria, items: [{...items, categoria}]});
         return prev;
       }, []);
       console.log(this.itemsGroup);

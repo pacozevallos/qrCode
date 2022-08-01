@@ -22,9 +22,9 @@
       </mat-form-field>
 
       <mat-form-field appearance="standard" class="col-12">
-        <mat-label>Número WhatsApp</mat-label>
+        <mat-label>Número WhatsApp (recomendado)</mat-label>
         <span matPrefix>+51 &nbsp;</span>
-        <input matInput formControlName="numeroWhatsApp">
+        <input matInput type="number" formControlName="numeroWhatsApp" placeholder="999999999">
         <mat-error *ngIf="errorWhatsApp()">{{errorWhatsApp()}}</mat-error>
       </mat-form-field>
 

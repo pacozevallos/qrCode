@@ -30,6 +30,7 @@ export class DetalleItemComponent implements OnInit {
 
   ngOnInit(): void {
 
+    
     this.idNegocio = this.activatedRoute.parent.snapshot.params.id;
     this.idItem = this.activatedRoute.snapshot.params.id;
 
