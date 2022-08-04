@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { DataService } from 'src/app/services/data.service';
 
@@ -32,21 +32,21 @@ export class AgregarRedesComponent implements OnInit {
     });
 
     const arrayRedes = this.formRedes.controls.redes as FormArray;
-    if (typeof this.data.redes === 'undefined' ) {
-      arrayRedes.push(
-        this.fb.group({
-          nombre: [''],
-          url: [''],
-          icon: ['']
-        })
-      );
-    }
+    // if (this.data.redes === undefined ) {
+    //   arrayRedes.push(
+    //     this.fb.group({
+    //       nombre: ['', Validators.required],
+    //       url: ['', Validators.required],
+    //       icon: ['']
+    //     })
+    //   );
+    // }
     if (this.data.redes?.length >= 1 ) {
       this.data.redes.forEach( element => {
         arrayRedes.push(
           this.fb.group({
-            nombre: [element.nombre],
-            url: [element.url],
+            nombre: [element.nombre, Validators.required],
+            url: [element.url, Validators.required],
             icon: [element.icon]
           })
         );
@@ -62,6 +62,7 @@ export class AgregarRedesComponent implements OnInit {
         });
       }
     });
+    
 
 
   }
@@ -97,8 +98,8 @@ export class AgregarRedesComponent implements OnInit {
   agregarRed() {
     (this.formRedes.controls.redes as FormArray).push(
       this.fb.group({
-        nombre: [''],
-        url: [''],
+        nombre: ['', Validators.required],
+        url: ['', Validators.required],
         icon: ['']
       })
     );

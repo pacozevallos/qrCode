@@ -216,6 +216,7 @@ export class DetalleNegocioComponent implements OnInit {
 
   eliminarNegocio(negocio) {
     this.matDialog.open(EliminarNegocioComponent, {
+      panelClass: 'dialogSmall',
       data: negocio
     });
   }

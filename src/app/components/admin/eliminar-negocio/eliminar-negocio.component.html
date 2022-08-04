@@ -4,12 +4,24 @@
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  <p class="h4 mt-2 mt-md-0">Eliminar Negocio</p>
-  <div class="my-3 my-md-4">
+  <p class="h4 mt-2 mt-md-0 mb-3">Eliminar Negocio</p>
+
+  <!-- <div class="my-3 my-md-4">
+    <i-tabler name="alert-triangle" class="text-danger"></i-tabler>
     <p class="">Esta acción no se puede deshacer.</p>
+  </div> -->
+
+  <div class="alert alert-danger d-flex align-items-center border-0" role="alert">
+    <span class="me-2">
+      <i-tabler name="alert-triangle" class="text-danger"></i-tabler>
+    </span>
+    <span class="small">Esta acción no se puede deshacer.</span>
   </div>
+
+  <p class="extraSmall text-muted">Esto eliminará todo el negocio, los productos que contenga y toda la configuración que haya realizado. Además de ello las personas con las que haya compartido su negocio ya no podrán verlo.</p>
+
   <div class="d-grid">
-    <button type="submit" class="btn btn-danger py-2 px-3" (click)="eliminarNegocio()">
+    <button type="submit" class="btn btn-outline-danger py-2 px-3" (click)="eliminarNegocio()">
       <span class="myColorSpinnerWhite d-flex justify-content-center" *ngIf="loader">
         <mat-spinner class="text-center" [diameter]="24"></mat-spinner>
       </span>

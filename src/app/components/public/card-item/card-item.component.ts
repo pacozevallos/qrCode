@@ -33,7 +33,7 @@ export class CardItemComponent implements OnInit {
       const precios = this.item.precios.map( res => res.precio);
       this.precioMin = Math.min(...precios);
     } else {
-      console.log('No hay precios múltiples');
+      // console.log('No hay precios múltiples');
     }
     this.getReglasNegocio();
   }

@@ -47,6 +47,12 @@ export class EliminarNegocioComponent implements OnInit {
       });
     }
 
+    // Eliminar image QR Code de Storage
+    this.storage.ref(this.data.qrCodeImageName).delete();
+
+     // Eliminar logo de Storage
+     this.storage.ref(`imagesLogosNegocios/${this.data.imageLogoName}`).delete();
+
     // Eliminar todos los items de la base de datos Firestore
     this.items.forEach( element => {
       this.afs.collection('negocios').doc(this.data.id).collection('items').doc(element.id).delete();

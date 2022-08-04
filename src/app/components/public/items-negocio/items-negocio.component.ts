@@ -33,7 +33,7 @@ export class ItemsNegocioComponent implements OnInit {
             : prev.push({categoria, items: [items]});
           return prev;
         }, []);
-        console.log(this.itemsGroup);
+        // console.log(this.itemsGroup);
       });
 
     });

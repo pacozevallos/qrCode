@@ -4,4 +4,5 @@ export class User {
   photoURL?: string;
   displayName?: string;
   plan?: string;
+  id?: string;
 }

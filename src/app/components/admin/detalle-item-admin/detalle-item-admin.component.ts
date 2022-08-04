@@ -8,6 +8,7 @@ import { Item } from 'src/app/classes/item';
 import { Negocio } from 'src/app/classes/negocio';
 import { EditarItemComponent } from '../editar-item/editar-item.component';
 import { EliminarItemComponent } from '../eliminar-item/eliminar-item.component';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-detalle-item-admin',
@@ -39,6 +40,8 @@ export class DetalleItemAdminComponent implements OnInit {
     }
   ];
 
+  acciones = [];
+
   constructor(
     private afs: AngularFirestore,
     private activatedRoute: ActivatedRoute,
@@ -59,6 +62,22 @@ export class DetalleItemAdminComponent implements OnInit {
       
       this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(this.idItem).valueChanges().subscribe( data => {
         this.item = data;
+
+        this.acciones = [
+          {
+            nombre: 'Visible',
+            descripcion: 'Muestra u oculta este producto',
+            checked: this.item.publicado,
+            function: (idItem, change: MatSlideToggleChange) => this.actualizarPublicado(idItem, change)
+          },
+          {
+            nombre: 'Destacado',
+            descripcion: 'Muestra este producto en la zona de Destacados',
+            checked: this.item.destacado,
+            function: (idItem, change: MatSlideToggleChange) => this.actualizarDestacado(idItem, change)
+          },
+        ]
+
       });
 
     });
@@ -94,6 +113,18 @@ export class DetalleItemAdminComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe();
+  }
+
+  actualizarPublicado(idItem, change: MatSlideToggleChange) {
+    this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(idItem).update({
+      publicado: change.checked
+    });
+  }
+
+  actualizarDestacado(idItem, change: MatSlideToggleChange) {
+    this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(idItem).update({
+      destacado: change.checked
+    });
   }
 
 }

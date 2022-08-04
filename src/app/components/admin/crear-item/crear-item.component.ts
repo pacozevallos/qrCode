@@ -27,7 +27,7 @@ export class CrearItemComponent implements OnInit {
   itemRef: any;
   tipoPrecio = [
     'Individual',
-    'Múltiple'
+    'Variable'
   ];
   individual = true;
   multiple: boolean;
@@ -95,7 +95,7 @@ export class CrearItemComponent implements OnInit {
         this.formItem.addControl('precioDescuento', this.fb.control(''));
       }
 
-      if (res === 'Múltiple') {
+      if (res === 'Variable') {
         this.individual = false;
         this.multiple = true;
         this.formItem.removeControl('precio');

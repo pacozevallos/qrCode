@@ -120,6 +120,9 @@ import { GraciasPlanPowerComponent } from './components/admin/gracias-plan-power
 import { GraciasPlanComponent } from './components/admin/gracias-plan/gracias-plan.component';
 import { ContraseniaPublicComponent } from './components/public/contrasenia-public/contrasenia-public.component';
 import { ContraseniaGraciasComponent } from './components/public/contrasenia-gracias/contrasenia-gracias.component';
+import { PagoExitoPLanMensualComponent } from './components/admin/pago-exito-plan-mensual/pago-exito-plan-mensual.component';
+import { PagoExitoPLanAnualComponent } from './components/admin/pago-exito-plan-anual/pago-exito-plan-anual.component';
+import { CambiarPLanComponent } from './components/admin/cambiar-plan/cambiar-plan.component';
 
 @NgModule({
   declarations: [
@@ -173,7 +176,10 @@ import { ContraseniaGraciasComponent } from './components/public/contrasenia-gra
     GraciasPlanPowerComponent,
     GraciasPlanComponent,
     ContraseniaPublicComponent,
-    ContraseniaGraciasComponent
+    ContraseniaGraciasComponent,
+    PagoExitoPLanMensualComponent,
+    PagoExitoPLanAnualComponent,
+    CambiarPLanComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

@@ -41,41 +41,46 @@ export class EditarNegocioComponent implements OnInit {
 
     this.formNegocio = this.fb.group({
       nombre: [this.data.nombre, Validators.required],
-      numeroWhatsApp: [this.data.numeroWhatsApp, [Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
+
+      // numeroWhatsApp: [this.data.numeroWhatsApp, [Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
+      // tipo: [this.data.tipo],
+      // direccion: [this.data.direccion],
+      // categorias: [this.data.categorias],
+
       color: [ this.data.color, Validators.required],
-      tipo: [this.data.tipo],
-      direccion: [this.data.direccion],
-      categorias: [this.data.categorias],
       fechaEdicion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
     });
 
-    this.formNegocio.addControl('redes', this.fb.array([]));
-    this.data.redes.forEach( element => {
-      const arrayRedes = this.formNegocio.controls.redes as FormArray;
-      arrayRedes.push(
-        this.fb.group({
-          nombre: [element.nombre],
-          url: [element.url],
-          icon: [element.icon]
-        })
-      );
-    });
+    // this.formNegocio.addControl('redes', this.fb.array([]));
 
-    this.formNegocio.controls.redes.valueChanges.subscribe( redes => {
-      const control = this.formNegocio.controls.redes as FormArray;
-      for (const i in redes) {
-        control.at(+i).get('nombre').valueChanges.subscribe( res => {
-          const red = this.ds.redesSociales.find( find => find.nombre === res);
-          control.at(+i).get('icon').setValue(red.icon);
-        });
-      }
-    });
+    // this.data.redes.forEach( element => {
+    //   const arrayRedes = this.formNegocio.controls.redes as FormArray;
+    //   arrayRedes.push(
+    //     this.fb.group({
+    //       nombre: [element.nombre],
+    //       url: [element.url],
+    //       icon: [element.icon]
+    //     })
+    //   );
+    // });
 
-    this.filteredOptions = this.formNegocio.get('tipo').valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this.filter(value))
-      );
+
+    // this.formNegocio.controls.redes.valueChanges.subscribe( redes => {
+    //   const control = this.formNegocio.controls.redes as FormArray;
+    //   for (const i in redes) {
+    //     control.at(+i).get('nombre').valueChanges.subscribe( res => {
+    //       const red = this.ds.redesSociales.find( find => find.nombre === res);
+    //       control.at(+i).get('icon').setValue(red.icon);
+    //     });
+    //   }
+    // });
+
+
+    // this.filteredOptions = this.formNegocio.get('tipo').valueChanges
+    //   .pipe(
+    //     startWith(''),
+    //     map(value => this.filter(value))
+    //   );
 
   }
 

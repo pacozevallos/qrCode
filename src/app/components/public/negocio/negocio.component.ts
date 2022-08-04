@@ -106,9 +106,9 @@ export class NegocioComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       this.id = params.id;
-      console.log(this.id);
+      // console.log(this.id);
       this.myAngularxQrCode = `https://qrcode/${this.id}`;
-      console.log(this.myAngularxQrCode);
+      // console.log(this.myAngularxQrCode);
 
       this.fs.getItemsDestacados(this.id).subscribe( res => {
         this.itemsDestacados = res;
@@ -126,7 +126,7 @@ export class NegocioComponent implements OnInit {
         // setTimeout(() => {
         //   this.loader = false;
         // }, 3000);
-        console.log(this.negocio);
+        // console.log(this.negocio);
       });
 
       this.fs.getItemsDocument(this.id).subscribe( res => {
@@ -138,7 +138,7 @@ export class NegocioComponent implements OnInit {
             : prev.push({categoria, items: [items]});
           return prev;
         }, []);
-        console.log(this.itemsGroup);
+        // console.log(this.itemsGroup);
       });
     });
 

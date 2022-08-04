@@ -76,11 +76,11 @@
             <div *ngFor="let precio of formItem.controls['precios']['controls']; let i = index;">
               <div [formGroupName]="i" class="d-flex">
                 <div class="row gx-3">
-                  <mat-form-field appearance="standard" class="col-6">
+                  <mat-form-field appearance="standard" class="col-8">
                     <mat-label>Variante</mat-label>
                     <input matInput type="text" formControlName="variante">
                   </mat-form-field>
-                  <mat-form-field appearance="standard" class="col-6">
+                  <mat-form-field appearance="standard" class="col-4">
                     <mat-label>Precio</mat-label>
                     <span matPrefix>S/. &nbsp;</span>
                     <input matInput type="number" formControlName="precio">
@@ -109,7 +109,7 @@
           <div class="col-12 mb-3 mb-md-5">
             <button type="button" class="btn btn-light btn-sm px-2" (click)="agregarPrecio()">
               <i-tabler name="plus" class="me-1" style="width: 18px; height: 18px;"></i-tabler>
-              Agregar precio
+              Agregar variante
             </button>
           </div>
         </div>

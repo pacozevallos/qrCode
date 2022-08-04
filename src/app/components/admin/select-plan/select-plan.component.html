@@ -4,9 +4,9 @@
 
     <!-- <nav aria-label="breadcrumb">
       <ol class="breadcrumb extraSmall">
-        <li class="breadcrumb-item"><a routerLink="/admin">Inicio</a></li>
-        <li class="breadcrumb-item"><a routerLink="/admin/plan">Plan</a></li>
-        <li class="breadcrumb-item active">Elegir Plan</li>
+        <li class="breadcrumb-plan"><a routerLink="/admin">Inicio</a></li>
+        <li class="breadcrumb-plan"><a routerLink="/admin/plan">Plan</a></li>
+        <li class="breadcrumb-plan active">Elegir Plan</li>
       </ol>
     </nav> -->
 
@@ -20,8 +20,7 @@
           <div>
             <div>
               <p class="h1 mb-3">Elige tu plan</p>
-              <p class="h5 fw-light mb-3 mb-md-4 d-none d-md-block">Crea tu catálogo y brinda una imagen profesional de tu negocio a un
-                precio realmente bajo</p>
+              <p class="h5 fw-light mb-3 mb-md-4 d-none d-md-block">Crea tu catálogo y brinda una imagen profesional de tu negocio a un precio realmente bajo.</p>
             </div>
             <!-- <div>
               <p class="h5">¿Necesitas ayuda?</p>
@@ -37,47 +36,64 @@
 
         <div class="row g-3 g-md-4">
 
-          <div *ngFor="let item of planes" class="col-md-6">
+          <div *ngFor="let plan of planes" class="col-md-6">
 
-            <div class="bg-white rounded p-3 p-md-4 border border-3"
-              [ngClass]=" item.nombre === 'Power' ? 'border-primary shadow' : '' ">
+            <div class="bg-white rounded p-3 p-md-4 border border-3" [ngClass]=" plan.nombre === 'Plan Power' ? 'border-primary shadow' : '' ">
 
+              <div class="d-flex justify-content-between align-plans-center mb-3">
+                <p class="h3 fw-bold mb-0">{{plan.nombre}}</p>
 
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <p class="h2 mb-0">{{item.nombre}}</p>
-                <div class="offer d-flex justify-content-center align-items-center bg-warning shadow-sm px-3 py-2"
-                  *ngIf="item.nombre === 'Power'">
-                  <div class="d-flex align-items-center text-primary">
-                    <span class="h3 fw-bolder mb-0 me-2">{{item.descuento}}</span>
+                <!-- <div class="offer d-flex justify-content-center align-plans-center bg-warning shadow-sm px-3 py-2"
+                  *ngIf="plan.nombre === 'Plan Power'">
+                  <div class="d-flex align-plans-center text-primary">
+                    <span class="h3 fw-bolder mb-0 me-2">{{plan.descuento}}</span>
                     <span>DSCTO.</span>
                   </div>
+                </div> -->
+
+              </div>
+
+              <div>
+
+                <mat-radio-group class="" color="primary">
+                  <mat-radio-button class="me-3" *ngFor="let opcion of plan.opciones" [checked]="opcion.selected" (change)="radioChange($event)" [value]="opcion.nombre">{{opcion.nombre}}</mat-radio-button>
+                </mat-radio-group>
+
+                <div class="mt-3" *ngFor="let opcion of plan.opciones">
+                  <span class="h5 mb-0" *ngIf="estado === opcion.nombre ">S/ {{opcion.precio | number:'1.2-2'}} {{opcion.description}}</span>
                 </div>
+
               </div>
 
 
-              <div class=" mb-3" [ngClass]=" item.nombre === 'Power' ? 'text-primary' : '' ">
-                <span class="h5">{{item.precio}}</span>
-              </div>
+              
+              <p class="h5 mb-0">{{plan.subtitulo}}</p>
+            
 
-              <div class="mb-3 mb-md-4">
-                <div *ngFor="let caracateristica of item.caracteristicas" class="d-flex my-1">
-                  <i-tabler name="check" class="me-2" [ngClass]=" item.nombre === 'Power' ? 'text-success' : '' ">
+              <div class="my-3">
+                <div *ngFor="let caracateristica of plan.caracteristicas" class="d-flex my-1">
+                  <i-tabler name="check" class="me-2" [ngClass]=" plan.nombre === 'Plan Power' ? 'text-success' : '' ">
                   </i-tabler>
                   <span class="small pt-1">{{caracateristica}}</span>
                 </div>
               </div>
 
               <div class="d-grid">
-                <a [ngClass]=" item.nombre === 'Power' ? 'btn btn-primary shadow' : 'btn btn-outline-dark' "
-                  [href]="item.urlButton" target="_blank">{{item.nameButton}}</a>
+                <a [ngClass]=" plan.nombre === 'Plan Power' ? 'btn btn-primary shadow' : 'btn btn-outline-dark' " [href]="goToUrl(plan.nombre)" target="_blank">{{plan.nameButton}}
+                  <span *ngIf="plan.nombre === 'Plan Power' ">
+                    <span *ngFor="let opcion of plan.opciones">
+                      <span *ngIf="estado === opcion.nombre ">{{opcion.nombre}} S/ {{opcion.precio | number:'1.2-2'}}</span>
+                    </span>
+                  </span>
+                </a>
               </div>
 
-              <div class="d-flex justify-content-center mt-3 mt-md-4" *ngIf="item.nombre === 'Power'">
+              <div class="d-flex justify-content-center mt-3 mt-md-4" *ngIf="plan.nombre === 'Plan Power'">
                 <div>
                   <span class="me-2 text-muted extraSmall">Paga seguro con</span>
                   <span>
                     <img class="logoMercadoPago"
-                      src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/logoPayPal.png?alt=media&token=3334c50c-13d1-468d-b7be-6fc52360cf93"
+                      src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/logoMercadoPago.png?alt=media&token=0a694653-2c89-45c2-8d09-5482223a4cc3"
                       alt="">
                   </span>
                 </div>

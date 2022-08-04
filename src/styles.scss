@@ -17,11 +17,13 @@ $white: #fff;
 
 //buttons
 $btn-border-width: 2px;
-$btn-font-weight: 600;
+$btn-font-weight: 500;
 $btn-padding-y: 0.8rem;
 $btn-padding-x: 1.3rem;
 $btn-padding-y-sm: 0.5rem;
 $btn-padding-x-sm: 0.75rem;
+$btn-padding-y-lg: 1rem;
+$btn-padding-x-lg: 1.5rem;
 $btn-border-radius: 0.4rem;
 $btn-border-radius-sm: 0.3rem;
 $btn-border-radius-lg: 0.5rem;
@@ -260,9 +262,12 @@ table {
 }
 
 .imageDetalleItem {
-  height: 320px;
+  height: 240px;
   background-size: cover;
   background-position: center center;
+  @include media-breakpoint-only(xs) {
+    height: 240px;
+  }
 }
 
 .imageDetalleItemAdmin {
@@ -580,11 +585,11 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .myBadgePillCategoriaAdmin {
   font-size: 0.6rem;
   text-transform: uppercase;
-  letter-spacing: 0.15rem;
+  letter-spacing: 0.1rem;
   color: $primary;
   background-color: rgba($primary, 0.1);
   border-radius: 3rem;
-  padding: 0.15rem 0.5rem;
+  padding: 0.25rem 0.5rem;
 }
 
 .chrome-picker {
@@ -747,7 +752,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   width: 140px;
   height: auto;
   @include media-breakpoint-only(xs) {
-    width: 120px;
+    width: 90px;
   }
 }
 
@@ -829,4 +834,15 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 
 .sticky-top {
   z-index: 101;
+}
+
+.mat-form-field {
+ font-size: 1rem !important;
+}
+
+.buttonActivePlanMensual {
+  width: 270px;
+  @include media-breakpoint-only(xs) {
+    width: 100%;
+  }
 }

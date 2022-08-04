@@ -41,7 +41,7 @@ export class AuthService {
       displayName: nombre,
       uid: user.uid,
       email: user.email,
-      plan: 'Free',
+      plan: 'Plan Free',
       fechaCreacion: firebase.default.firestore.FieldValue.serverTimestamp(),
     });
   }

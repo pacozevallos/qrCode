@@ -1,4 +1,4 @@
-<div class="container py-2 py-md-5">
+<div class="container py-2 py-md-5" *ngIf="negocio">
 
   <div class="row gx-md-6 gy-3" *ngIf="item">
 
@@ -30,17 +30,19 @@
         </div>
         <p class="h2 fw-bold my-2">S/. {{item.precio}}</p>
         <p class="small">{{item.descripcion}}</p>
-        <button class="btn btn-success shadow d-none d-md-block">
+
+        <a class="btn btn-primary d-none d-md-inline-block" [style.background-color]="negocio.color" [style.borderColor]="negocio.color" [href]="messageWhatsApp" target="_blank" *ngIf="negocio.numeroWhatsApp">
+          <i-tabler class="me-2" name="brand-whatsApp"></i-tabler>
           <span>Pedir por WhatsApp</span>
-          <i-tabler class="ms-2" name="brand-whatsApp"></i-tabler>
-        </button>
+        </a>
+
       </div>
 
-      <div class="d-flex gap-2 p-1 bg-white myShadowTop d-block d-md-none fixed-bottom" style="z-index: 10;" *ngIf="negocio.numeroWhatsApp">
-        <button class="btn btn-success w-100">
+      <div class="d-flex gap-2 p-2 bg-white myShadowTop d-block d-md-none fixed-bottom" style="z-index: 10;" *ngIf="negocio.numeroWhatsApp">
+        <a class="btn btn-primary w-100" [style.background-color]="negocio.color" [style.borderColor]="negocio.color" [href]="messageWhatsApp" target="_blank" >
+          <i-tabler class="me-2" name="brand-whatsApp"></i-tabler>
           <span>Pedir por WhatsApp</span>
-          <i-tabler class="ms-2" name="brand-whatsApp"></i-tabler>
-        </button>
+        </a>
       </div>
 
     </div>

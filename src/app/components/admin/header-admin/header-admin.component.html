@@ -6,7 +6,7 @@
 
 <div class="bg-light" *ngIf="user">
 	<div class="container">
-		<div class="py-2 py-md-3 d-flex justify-content-between align-items-center">
+		<div class="py-3 d-flex justify-content-between align-items-center">
 
 			<a class="lead mb-0" routerLink="/admin">
 				<img class="logoTaaripayAdmin" src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/home%2FlogoTaaripay.svg?alt=media&token=de2c5381-9d52-4aac-a6c3-7fd77ce026c0" alt="">
@@ -14,7 +14,11 @@
 
 
 			<div class="d-flex align-items-center" >
-				<p class="mb-0 me-2">{{user.displayName || user.email}}</p>
+				<div class="text-end me-2">
+					<p class="fw-normal d-block mb-0">{{user.displayName}}</p>
+					<p class="extraSmall mb-0">{{user.email}}</p>
+				</div>
+				
 				<!-- <button class="photoUser" [matMenuTriggerFor]="menu">
 						<img class="" src="https://media-exp1.licdn.com/dms/image/C5603AQETYOc7RHHB9Q/profile-displayphoto-shrink_200_200/0/1517498194143?e=1661990400&v=beta&t=9oQl4SMZUmgpperLo9voBNSEFV8YxJcXup-6XRV0khM" alt="">
 				</button> -->

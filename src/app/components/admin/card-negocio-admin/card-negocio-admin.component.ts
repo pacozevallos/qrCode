@@ -13,6 +13,7 @@ import { EditarNegocioComponent } from '../editar-negocio/editar-negocio.compone
 import { EliminarNegocioComponent } from '../eliminar-negocio/eliminar-negocio.component';
 import { LogoNegocioComponent } from '../logo-negocio/logo-negocio.component';
 import { VistaQrComponent } from '../vista-qr/vista-qr.component';
+import firebase from 'firebase/app';
 
 @Component({
   selector: 'app-card-negocio-admin',
@@ -84,17 +85,43 @@ export class CardNegocioAdminComponent implements OnInit {
     private auth: AngularFireAuth
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
  
     this.afs.collection('users').valueChanges().subscribe( res => {
       this.user = res.find( (find: User) => find.uid === this.negocio.autorId);
     });
     
     
-    this.afs.collection('negocios').doc(this.negocio.id).collection('items').valueChanges().subscribe( res => {
-      this.items = res;
-    });
+    // this.afs.collection('negocios').doc(this.negocio.id).collection('items').valueChanges().subscribe( res => {
+    //   this.items = res;
+    // });
+
+
+    // if (this.afs.collection('negocios').doc(this.negocio.id).collection('items')) {
+    //   console.log('existe');
+    // } else {
+    //   console.log('No existe');
+    // }
+
+
+    // this.afs.collection('negocios').doc(this.negocio.id)?.collection('items').ref.get()
+    // .then( query => {
+    //   const size = query.size;
+    //   console.log(size);
+    // })
+
+  
+    // return await firebase.firestore().collection('negocios').doc(this.negocio.id).collection('items').get()
+    // .then( query => {
+    //   const size = query.size;
+    //   console.log(size);
+    // })
     
+    
+  }
+
+  verificarItemsCollection() {
+
   }
 
   verItems(negocio) {

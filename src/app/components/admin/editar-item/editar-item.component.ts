@@ -37,7 +37,7 @@ export class EditarItemComponent implements OnInit {
 
   tipoPrecio = [
     'Individual',
-    'Múltiple'
+    'Variable'
   ];
   individual = true;
   multiple: boolean;
@@ -87,7 +87,7 @@ export class EditarItemComponent implements OnInit {
     }
 
 
-    if (this.data.item.tipoPrecio === 'Múltiple') {
+    if (this.data.item.tipoPrecio === 'Variable') {
       this.individual = false;
       this.multiple = true;
       this.formItem.removeControl('precio');
@@ -114,7 +114,7 @@ export class EditarItemComponent implements OnInit {
         this.formItem.addControl('precioDescuento', this.fb.control(''));
       }
 
-      if (res === 'Múltiple') {
+      if (res === 'Variable') {
         this.individual = false;
         this.multiple = true;
         this.formItem.removeControl('precio');

@@ -36,7 +36,7 @@ export class HeaderNegocioComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       this.id = params.id;
-      console.log(this.id);
+      // console.log(this.id);
       
       this.afs.collection('negocios').doc(this.id).valueChanges().subscribe( (res: Negocio) => {
         this.negocio = res;

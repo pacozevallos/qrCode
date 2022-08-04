@@ -20,6 +20,7 @@ export class DetalleItemComponent implements OnInit {
   idItem: string;
   item: any;
   negocio: Negocio;
+  messageWhatsApp: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -36,13 +37,15 @@ export class DetalleItemComponent implements OnInit {
 
     this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(this.idItem).valueChanges().subscribe( data => {
       this.item = data;
-      console.log(data);
+
+      this.afs.collection('negocios').doc(this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
+        this.negocio = res;
+        this.messageWhatsApp = `https://api.whatsapp.com/send?phone=51${this.negocio.numeroWhatsApp}&text=Hola, me interesa el siguiente producto`
+      });  
+
     });
 
-    this.afs.collection('negocios').doc(this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
-      this.negocio = res;
-    });
-
+    
 
   }
 

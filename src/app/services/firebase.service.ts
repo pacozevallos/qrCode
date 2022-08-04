@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Item } from '../classes/item';
 import { Negocio } from 'src/app/classes/negocio';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { User } from '../classes/user';
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +96,23 @@ export class FirebaseService {
     this.afAuth.authState.subscribe( user => {
       return user;
     });
+  }
+
+  addSuscripcion() {
+    this.afs.collection('suscripciones').add({
+
+    })
+  }
+
+  getUsers() {
+    return this.afs.collection('users', ref => ref
+    ).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as User;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
   }
 
 

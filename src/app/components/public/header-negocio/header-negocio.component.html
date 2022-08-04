@@ -49,12 +49,15 @@
               <i-tabler name="share"></i-tabler>
               <span class="ms-2">Compartir tienda</span>
             </button>
-            <div *ngIf="negocio.redes.length >= 1">
-              <a mat-menu-item *ngFor="let red of negocio.redes" [href]="red.url" target="_blank">
-                <i-tabler [name]="red.icon"></i-tabler>
-                <span class="ms-2">{{red.nombre}}</span>
-              </a>
+            <div *ngIf="negocio.redes">
+              <div *ngIf="negocio.redes.length >= 1">
+                <a mat-menu-item *ngFor="let red of negocio.redes" [href]="red.url" target="_blank">
+                  <i-tabler [name]="red.icon"></i-tabler>
+                  <span class="ms-2">{{red.nombre}}</span>
+                </a>
+              </div>
             </div>
+           
           </mat-menu>
         </div>
 

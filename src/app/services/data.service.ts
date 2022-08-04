@@ -89,9 +89,25 @@ export class DataService {
 
   planes = [
     {
-      nombre: 'Power',
-      precio: '1 mes gratis, luego pagas S/. 9.90 al mes',
+      nombre: 'Plan Power',
+      subtitulo: '',
       descuento: '-90%',
+      opciones: [
+        {
+          nombre: 'Mensual',
+          precio: 9.90,
+          selected: true,
+          description: 'al mes',
+          url: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c93808482584b4d01825cbd109e02ee'
+        },
+        {
+          nombre: 'Anual',
+          precio: 99,
+          selected: false,
+          description: 'al año',
+          url: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c93808482584b4d01825cc05d9f02ef'
+        },
+      ],
       caracteristicas : [
         'Productos ilimitados',
         'Vende por WhatsApp',
@@ -100,14 +116,14 @@ export class DataService {
         'Comparte con código QR',
         'Asistencia técnica para crear tu catálogo'
       ],
-      nameButton: 'Empezar prueba gratuita',
+      nameButton: 'Plan Power',
       urlButton: 'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-8K665214Y89547137MLSBCUQ'
       // urlButton: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c93808481e5f3990181e9845f3b00fb'
       // urlButton: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c938084822156eb0182380e3363071f'
     },
     {
-      nombre: 'Free',
-      precio: 'Gratis siempre',
+      nombre: 'Plan Free',
+      subtitulo: 'Gratis siempre',
       descuento: '',
       caracteristicas : [
         'Hasta 20 productos',

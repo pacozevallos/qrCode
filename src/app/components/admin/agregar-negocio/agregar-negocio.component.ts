@@ -32,6 +32,8 @@ export class AgregarNegocioComponent implements OnInit {
   color = '#1456D8';
   filteredOptions: Observable<string[]>;
 
+  negocioId: string;
+
   // downloadURL: Observable<string>;
 
   public qrCodeData = '';
@@ -55,14 +57,10 @@ export class AgregarNegocioComponent implements OnInit {
     private ds: DataService
   ) {
 
-    // this.idNegocio = this.afs.collection('negocios').ref.doc().id;
-    // console.log(this.idNegocio);
+    // this.negocioRef = this.afs.collection('negocios').doc(this.negocioId);
+    // console.log(this.negocioRef.id);
 
-    this.negocioRef = this.afs.collection('negocios').ref.doc();
-    console.log(this.negocioRef.id);
-
-    this.qrCodeData = `https://taaripay.com/negocio/${this.negocioRef.id}`;
-    console.log(this.qrCodeData);
+    
 
   }
 
@@ -73,33 +71,41 @@ export class AgregarNegocioComponent implements OnInit {
 
     this.formNegocio = this.fb.group({
       nombre: ['', Validators.required],
-      numeroWhatsApp: ['', [Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
-      direccion: [''],
-      tipo: [''],
+      // numeroWhatsApp: ['', [Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
+      // direccion: [''],
+      // tipo: [''],
       color: [ this.color, Validators.required ],
-      categorias: new FormArray([]),
-      redes: this.fb.array([]),
-      id: [this.negocioRef.id, Validators.required],
+      // categorias: new FormArray([]),
+      // redes: this.fb.array([]),
+      id: ['', Validators.required],
       autorId: [user.uid],
       fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
     });
 
-    this.formNegocio.controls.redes.valueChanges.subscribe( redes => {
-      const control = this.formNegocio.controls.redes as FormArray;
-      for (const i in redes) {
-        control.at(+i).get('nombre').valueChanges.subscribe( res => {
-          const red = this.ds.redesSociales.find( find => find.nombre === res);
-          control.at(+i).get('icon').setValue(red.icon);
-        });
-      }
+    this.formNegocio.get('nombre').valueChanges.subscribe( res => {
+      const negocioIdSpace = res.replace(/ /g, '-');
+      this.negocioId = negocioIdSpace.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
+      this.formNegocio.get('id').setValue(this.negocioId);
+      
+      this.qrCodeData = `https://taaripay.com/negocio/${this.negocioId}`;
     });
 
+    // this.formNegocio.controls.redes.valueChanges.subscribe( redes => {
+    //   const control = this.formNegocio.controls.redes as FormArray;
+    //   for (const i in redes) {
+    //     control.at(+i).get('nombre').valueChanges.subscribe( res => {
+    //       const red = this.ds.redesSociales.find( find => find.nombre === res);
+    //       control.at(+i).get('icon').setValue(red.icon);
+    //     });
+    //   }
+    // });
 
-    this.filteredOptions = this.formNegocio.get('tipo').valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this.filter(value))
-      );
+
+    // this.filteredOptions = this.formNegocio.get('tipo').valueChanges
+    //   .pipe(
+    //     startWith(''),
+    //     map(value => this.filter(value))
+    //   );
 
   }
 
@@ -209,7 +215,7 @@ export class AgregarNegocioComponent implements OnInit {
     const b64Data = myBase64[1];
     const myBlob = base64StringToBlob(b64Data, contentType);
 
-    const filePath = `imagesQrCodes/${this.negocioRef.id}.png`;
+    const filePath = `imagesQrCodes/${this.negocioId}.png`;
     const ref = this.storage.ref(filePath);
     const task = ref.put(myBlob);
 
@@ -218,9 +224,10 @@ export class AgregarNegocioComponent implements OnInit {
       finalize(() => {
         ref.getDownloadURL().toPromise().then( (url) => {
           this.downloadURL = url;
-          this.negocioRef.set(this.formNegocio.value);
+          const negocioRef = this.afs.collection('negocios').doc(this.negocioId);
+          negocioRef.set(this.formNegocio.value);
 
-          this.negocioRef.set({
+          negocioRef.set({
             qrCodeImage: this.downloadURL,
             qrCodeImageName: filePath,
           }, {merge: true});

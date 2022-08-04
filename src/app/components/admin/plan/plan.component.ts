@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { CambiarPLanComponent } from '../cambiar-plan/cambiar-plan.component';
 
 @Component({
   selector: 'app-plan',
@@ -19,6 +21,7 @@ export class PlanComponent implements OnInit {
     private fs: FirebaseService,
     private ds: DataService,
     private afAuth: AngularFireAuth,
+    private matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -34,16 +37,21 @@ export class PlanComponent implements OnInit {
       this.planActual = this.users.find( user => user.uid === this.user.uid).plan;
       console.log(this.planActual);
 
-      if (this.planActual === 'Free') {
-        this.caracteristicasPlan = this.ds.planes.find( plan => plan.nombre === 'Free').caracteristicas;
-      } else {
-        
+      if (this.planActual === 'Plan Free') {
+        this.caracteristicasPlan = this.ds.planes.find( plan => plan.nombre === 'Plan Free').caracteristicas;
+      }
+      if (this.planActual === 'Plan Power Mensual') {
+        this.caracteristicasPlan = this.ds.planes.find( plan => plan.nombre === 'Plan Power').caracteristicas;
       }
 
     })
+  
+  }
 
-  
-  
+  cambiarPLan() {
+    this.matDialog.open(CambiarPLanComponent, {
+      
+    })
   }
 
 }

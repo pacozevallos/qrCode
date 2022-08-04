@@ -1,0 +1,30 @@
+<div class="container d-flex justify-content-center align-items-center py-3 py-md-5" *ngIf="userDoc">
+
+  <div class="col-md-4 rounded p-4 p-md-5 shadow">
+
+    <div class="text-center">
+      <i-tabler name="circle-check" class="text-success" style="width: 90px; height: 90px; stroke-width: 0.75;"></i-tabler>
+      <p class="lead">¡Enhorabuena {{userDoc.displayName}}!</p>
+    </div>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="alert">
+      <strong>{{userDoc.displayName}}!</strong> Tu Plan Power Mensual ha sido activado.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="d-grid">
+
+      <button class="btn btn-primary myButton" (click)="updatePlan()" *ngIf="!alert">
+        <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
+          <mat-spinner class="" [diameter]="24"></mat-spinner>
+        </span>
+        <span *ngIf="!loading">Activar Plan Power Mensual</span>
+      </button>
+
+      <a class="btn btn-primary myButton" routerLink="/admin" *ngIf="alert">Ir a mi Panel</a>
+
+    </div>
+
+  </div>
+
+</div>

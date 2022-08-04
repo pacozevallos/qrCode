@@ -26,6 +26,8 @@ import { DetalleItemAdminComponent } from './components/admin/detalle-item-admin
 import { GraciasPlanComponent } from './components/admin/gracias-plan/gracias-plan.component';
 import { ContraseniaPublicComponent } from './components/public/contrasenia-public/contrasenia-public.component';
 import { ContraseniaGraciasComponent } from './components/public/contrasenia-gracias/contrasenia-gracias.component';
+import { PagoExitoPLanMensualComponent } from './components/admin/pago-exito-plan-mensual/pago-exito-plan-mensual.component';
+import { PagoExitoPLanAnualComponent } from './components/admin/pago-exito-plan-anual/pago-exito-plan-anual.component';
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
@@ -62,6 +64,8 @@ const routes: Routes = [
       { path: 'actualizarDatos', component: ActualizarDatosComponent },
       { path: 'elegirPlan', component: SelectPLanComponent },
       { path: 'graciasPlan', component: GraciasPlanComponent },
+      { path: 'pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
+      { path: 'pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
       // { path: 'crearNegocio', component: AgregarNegocioComponent },
       { path: ':id', component: DetalleNegocioComponent },
       { path: ':id/productos', component: ListaItemsComponent},
