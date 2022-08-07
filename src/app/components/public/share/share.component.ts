@@ -50,8 +50,12 @@ export class ShareComponent implements OnInit {
       this.urlShare = `${window.location.origin}/negocio/${this.data.negocio.id}`;
     }
 
-    if(this.router.url === `/admin/${this.data.negocio.id}/productos` || `/admin/${this.data.negocio.id}/productos/${this.data.item?.id}`) {
-      this.urlShare = `${window.location.origin}/negocio/${this.data.negocio.id}/item/${this.data.item.id}`;
+    if(this.router.url === `/admin/${this.data.negocio.id}/productos`) {
+      this.urlShare = `${window.location.origin}/negocio/${this.data.negocio.id}/item/${this.data.item?.id}`;
+    }
+
+    if(this.router.url === `/admin/${this.data.negocio.id}/productos/${this.data.item?.id}`) {
+      this.urlShare = `${window.location.origin}/negocio/${this.data.negocio.id}/item/${this.data.item?.id}`;
     }
     
 

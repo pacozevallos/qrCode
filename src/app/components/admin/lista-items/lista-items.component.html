@@ -18,10 +18,21 @@
         <i-tabler name="plus"></i-tabler>
       </button>
 
-      <button class="btn btn-outline-primary btn-sm d-none d-md-block" (click)="agregarItem()">
-        <i-tabler name="plus"></i-tabler>
-        <span class="ms-1 d-none d-md-inline-block">Agregar producto</span>
-      </button>
+      <div class="d-none d-md-inline-flex gap-2">
+
+        <!-- <button class="btn btn-outline-primary btn-sm" (click)="duplicarItems()">
+          <i-tabler name="copy"></i-tabler>
+          <span class="ms-1 d-none d-md-inline-block">Copiar items</span>
+        </button> -->
+  
+        <button class="btn btn-outline-primary btn-sm" (click)="agregarItem()">
+          <i-tabler name="plus"></i-tabler>
+          <span class="ms-1 d-none d-md-inline-block">Agregar producto</span>
+        </button>
+
+      </div>
+
+    
 
     </div>
 </div>

@@ -73,7 +73,7 @@ export class ListaItemsComponent implements OnInit {
    
     this.fs.getAllItemsDocument(this.idNegocio).subscribe( res => {
       this.items = res;
-      // console.log(this.items);
+      console.log(this.items);
       
       this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
         const id = prev.findIndex((item) => item.categoria === categoria);
@@ -84,6 +84,17 @@ export class ListaItemsComponent implements OnInit {
         return prev;
       }, []);
       console.log(this.itemsGroup);
+    });
+
+  }
+
+  duplicarItems() {
+
+    this.items.forEach( item => {
+      return this.afs.collection('negocios').doc('yahis-fofuras').collection('items').doc().set(item)
+      .then( () => {
+        console.log('item copiado');
+      });
     });
 
   }

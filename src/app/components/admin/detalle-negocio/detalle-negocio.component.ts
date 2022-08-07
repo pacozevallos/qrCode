@@ -16,6 +16,8 @@ import { ShareComponent } from '../../public/share/share.component';
 import { AgregarRedesComponent } from '../agregar-redes/agregar-redes.component';
 import { EliminarNegocioComponent } from '../eliminar-negocio/eliminar-negocio.component';
 import { AgregarCelularComponent } from '../agregar-celular/agregar-celular.component';
+import { DuplicarNegocioComponent } from '../duplicar-negocio/duplicar-negocio.component';
+import { QrCodeComponent } from '../qr-code/qr-code.component';
 
 @Component({
   selector: 'app-detalle-negocio',
@@ -76,6 +78,11 @@ export class DetalleNegocioComponent implements OnInit {
       function: (negocio) => this.verCodigoQr(negocio)
     },
     {
+      nombre: 'Código QR',
+      icon: 'qrcode',
+      function: (negocio) => this.crearCodigoQr(negocio)
+    },
+    {
       nombre: 'Compartir link',
       icon: 'share',
       function: (negocio) => this.compartirNegocio(negocio)
@@ -85,17 +92,22 @@ export class DetalleNegocioComponent implements OnInit {
       icon: 'brand-facebook',
       function: (negocio) => this.agregarRedes(negocio)
     },
-    
+
     // {
     //   nombre: 'Agregar condiciones',
     //   icon: 'settings',
     //   function: (negocio) => this.otrasConfiguraciones(negocio)
     // },
-  
+
     {
       nombre: 'Eliminar negocio',
       icon: 'trash',
       function: (negocio) => this.eliminarNegocio(negocio)
+    },
+    {
+      nombre: 'Duplicar negocio',
+      icon: 'copy',
+      function: (negocio) => this.duplicarNegocio(negocio)
     }
   ];
 
@@ -111,12 +123,12 @@ export class DetalleNegocioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe( params => {
+    this.activatedRoute.params.subscribe(params => {
       this.idNegocio = params.id;
 
 
       // traer los datos del negocio
-      this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe( res => {
+      this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe(res => {
         this.negocio = res;
       });
 
@@ -156,7 +168,7 @@ export class DetalleNegocioComponent implements OnInit {
 
 
 
-  
+
   verItems(negocio) {
     this.router.navigate([`admin/${negocio.id}/productos`]);
   }
@@ -191,9 +203,14 @@ export class DetalleNegocioComponent implements OnInit {
 
   verCodigoQr(negocio) {
     this.bottomSheet.open(VistaQrComponent, {
-      // panelClass: 'myBottomSheetFull',
       data: negocio
     });
+  }
+
+  crearCodigoQr(negocio) {
+    this.bottomSheet.open(QrCodeComponent, {
+      data: negocio
+    })
   }
 
   agregarRedes(negocio) {
@@ -207,7 +224,7 @@ export class DetalleNegocioComponent implements OnInit {
       data: negocio
     });
   }
- 
+
   agregarWhatsApp(negocio) {
     this.bottomSheet.open(AgregarCelularComponent, {
       data: negocio
@@ -220,6 +237,29 @@ export class DetalleNegocioComponent implements OnInit {
       data: negocio
     });
   }
+
+  duplicarNegocio(negocio) {
+    this.matDialog.open(DuplicarNegocioComponent, {
+      panelClass: 'dialogSmall',
+      data: negocio
+    });
+  }
+
+  // duplicarNegocio(negocio) {
+  //   return this.afs.collection('negocios').doc('yahis-fofuras').set(negocio)
+  //     .then(() => {
+  //       console.log('negocio copiado');
+  //       this.afs.collection('negocios').doc(this.idNegocio).collection('items').valueChanges().subscribe(data => {
+  //         const items = data;
+  //         items.forEach(item => {
+  //           return this.afs.collection('negocios').doc('yahis-fofuras').collection('items').doc().set(item)
+  //             .then(() => {
+  //               console.log('items copiados');
+  //             });
+  //         });
+  //       });
+  //     });
+  // }
 
 
 }

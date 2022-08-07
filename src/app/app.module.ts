@@ -123,6 +123,8 @@ import { ContraseniaGraciasComponent } from './components/public/contrasenia-gra
 import { PagoExitoPLanMensualComponent } from './components/admin/pago-exito-plan-mensual/pago-exito-plan-mensual.component';
 import { PagoExitoPLanAnualComponent } from './components/admin/pago-exito-plan-anual/pago-exito-plan-anual.component';
 import { CambiarPLanComponent } from './components/admin/cambiar-plan/cambiar-plan.component';
+import { DuplicarNegocioComponent } from './components/admin/duplicar-negocio/duplicar-negocio.component';
+import { QrCodeComponent } from './components/admin/qr-code/qr-code.component';
 
 @NgModule({
   declarations: [
@@ -179,7 +181,9 @@ import { CambiarPLanComponent } from './components/admin/cambiar-plan/cambiar-pl
     ContraseniaGraciasComponent,
     PagoExitoPLanMensualComponent,
     PagoExitoPLanAnualComponent,
-    CambiarPLanComponent
+    CambiarPLanComponent,
+    DuplicarNegocioComponent,
+    QrCodeComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

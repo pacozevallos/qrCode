@@ -1,0 +1,82 @@
+<div class="d-none" *ngIf="qrCodeData">
+  <qrcode [qrdata]="qrCodeData" [width]="400" [errorCorrectionLevel]="'M'"></qrcode>
+</div>
+
+
+
+<div class="buttonClose">
+  <button mat-icon-button (click)="cancelar()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+
+<div *ngIf="!qrCodeImage">
+
+  <p class="h4">Generar código QR</p>
+
+  <div class="d-flex gap-2 my-3">
+    <span>
+      <i-tabler name="qrCode" style="width: 42px; stroke-width: 1.2;"></i-tabler>
+    </span>
+    <p>Genera un código QR para tu negocio y compártelo con quien quieras.</p>
+  </div>
+  
+  <div class="d-grid mt-2">
+    <button class="btn btn-primary" (click)="createQrCode()">
+      <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
+        <mat-spinner class="" [diameter]="24"></mat-spinner>
+      </span>
+      <span *ngIf="!loading">Crear código QR</span>
+    </button>
+  </div>
+
+</div>
+
+
+
+
+
+<div *ngIf="qrCodeImage">
+  <p class="h4">Código QR</p>
+    <div class="">
+      <img class="rounded" [src]="data.qrCodeImage" width="100%" height="auto">
+    </div>
+</div>
+
+
+
+<!-- <div *ngIf="qrCodeImage">
+
+  <p class="h4">Código QR</p>
+
+  <div class="contenedorImage" >
+    <div class="loader imageItemAdmin rounded w-100" *ngIf="loadingQr">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <span class="mySpinnerDark" >
+          <mat-spinner diameter="36"></mat-spinner>
+        </span>
+      </div>
+    </div>
+    <div class="image">
+      <img class="rounded" [ngClass]=" {'border': !loadingQr} " [src]="data.qrCodeImage" (load)="loadingQr" width="100%" height="auto">
+    </div>
+  </div>
+
+</div> -->
+
+
+
+
+
+
+<!-- <div class="d-flex justify-content-center align-items-center">
+  <span class="mySpinnerDark my-4" *ngIf="loadingQr">
+    <mat-spinner diameter="36"></mat-spinner>
+  </span>
+  <div class="">
+    <img class="border" [src]="data.qrCodeImage" (load)="detectarCargado()" width="100%" height="auto">
+  </div>
+</div> -->
+
+

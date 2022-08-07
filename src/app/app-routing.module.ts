@@ -28,7 +28,7 @@ import { ContraseniaPublicComponent } from './components/public/contrasenia-publ
 import { ContraseniaGraciasComponent } from './components/public/contrasenia-gracias/contrasenia-gracias.component';
 import { PagoExitoPLanMensualComponent } from './components/admin/pago-exito-plan-mensual/pago-exito-plan-mensual.component';
 import { PagoExitoPLanAnualComponent } from './components/admin/pago-exito-plan-anual/pago-exito-plan-anual.component';
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
 
 const routes: Routes = [
   {
@@ -66,13 +66,12 @@ const routes: Routes = [
       { path: 'graciasPlan', component: GraciasPlanComponent },
       { path: 'pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
       { path: 'pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
-      // { path: 'crearNegocio', component: AgregarNegocioComponent },
       { path: ':id', component: DetalleNegocioComponent },
       { path: ':id/productos', component: ListaItemsComponent},
       { path: ':id/productos/:id', component: DetalleItemAdminComponent},
     ]
   },
-  // { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({

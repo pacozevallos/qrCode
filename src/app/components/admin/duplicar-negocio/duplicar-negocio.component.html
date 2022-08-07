@@ -1,0 +1,53 @@
+<div class="">
+  <div class="buttonClose">
+    <button mat-icon-button (click)="cancelar()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <p class="h4 mt-2 mt-md-0 mb-3">Duplicar negocio</p>
+
+  <p class="small text-muted">Esto creará una copia del negocio y los productos que hay en el.</p>
+
+  <form [formGroup]="formNegocio" (submit)="onSubmit()" novalidate class="row gx-3 gx-md-4">
+
+    <mat-form-field appearance="standard" class="col-12">
+      <mat-label>Nombre del negocio</mat-label>
+      <input matInput type="text" formControlName="nombre">
+      <!-- <mat-hint>url: https://taaripay.com/{{negocioId}}</mat-hint> -->
+      <mat-error *ngIf="errorNombreNegocio()">{{errorNombreNegocio()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard" class="col-12">
+      <mat-label>https://taaripay.com/negocio/</mat-label>
+      <!-- <span matPrefix></span> -->
+      <input matInput type="text" formControlName="id">
+      <mat-error *ngIf="errorId()">{{errorId()}}</mat-error>
+      <!-- <textarea matInput formControlName="id"></textarea> -->
+    </mat-form-field>
+
+
+    <div class="d-grid mt-2">
+      <button class="btn btn-primary">
+        <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
+          <mat-spinner class="" [diameter]="24"></mat-spinner>
+        </span>
+        <span *ngIf="!loading">Duplicar Negocio</span>
+      </button>
+    </div>
+
+  </form>
+
+  <!-- <div class="d-grid">
+    <button type="submit" class="btn btn-primary py-2 px-3" (click)="duplicarNegocio()">
+      <span class="myColorSpinnerWhite d-flex justify-content-center" *ngIf="loading">
+        <mat-spinner class="text-center" [diameter]="24"></mat-spinner>
+      </span>
+      <div *ngIf="!loading">
+        <span>Duplicar negocio</span>
+      </div>
+    </button>
+  </div> -->
+
+  <!-- <pre>{{formNegocio.value | json}}</pre> -->
+
+</div>

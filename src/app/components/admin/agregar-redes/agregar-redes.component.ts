@@ -53,6 +53,7 @@ export class AgregarRedesComponent implements OnInit {
       });
     }
 
+    
     this.formRedes.controls.redes.valueChanges.subscribe( redes => {
       const control = this.formRedes.controls.redes as FormArray;
       for (const i in redes) {

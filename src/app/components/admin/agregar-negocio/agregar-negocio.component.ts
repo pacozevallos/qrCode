@@ -15,6 +15,7 @@ import { ColorComponent } from '../../public/color/color.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { map, startWith } from 'rxjs/operators';
+import { IdValidatorService } from 'src/app/services/id-validator.service';
 
 @Component({
   selector: 'app-agregar-negocio',
@@ -33,6 +34,7 @@ export class AgregarNegocioComponent implements OnInit {
   filteredOptions: Observable<string[]>;
 
   negocioId: string;
+  hrefCurrent = window.location.origin;
 
   // downloadURL: Observable<string>;
 
@@ -47,6 +49,7 @@ export class AgregarNegocioComponent implements OnInit {
   readonly maxSize = 1048576 * 5;
   actualSize: any;
 
+  
   constructor(
     private bottomSheetRef: MatBottomSheetRef<AgregarNegocioComponent>,
     private fb: FormBuilder,
@@ -54,7 +57,8 @@ export class AgregarNegocioComponent implements OnInit {
     private storage: AngularFireStorage,
     private router: Router,
     private dialog: MatDialog,
-    private ds: DataService
+    private ds: DataService,
+    private idValidator: IdValidatorService
   ) {
 
     // this.negocioRef = this.afs.collection('negocios').doc(this.negocioId);
@@ -74,20 +78,26 @@ export class AgregarNegocioComponent implements OnInit {
       // numeroWhatsApp: ['', [Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
       // direccion: [''],
       // tipo: [''],
-      color: [ this.color, Validators.required ],
+      // color: [ this.color, Validators.required ],
       // categorias: new FormArray([]),
       // redes: this.fb.array([]),
-      id: ['', Validators.required],
+      id: ['', [Validators.required], [this.idValidator]],
       autorId: [user.uid],
       fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
     });
 
     this.formNegocio.get('nombre').valueChanges.subscribe( res => {
       const negocioIdSpace = res.replace(/ /g, '-');
-      this.negocioId = negocioIdSpace.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
+      this.negocioId = negocioIdSpace.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
       this.formNegocio.get('id').setValue(this.negocioId);
       
       this.qrCodeData = `https://taaripay.com/negocio/${this.negocioId}`;
+    });
+
+    this.formNegocio.get('id').valueChanges.subscribe( res => {
+      const negocioIdSpace = res.replace(/ /g, '-');
+      this.negocioId = negocioIdSpace.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+      this.formNegocio.get('id').patchValue(this.negocioId, {emitEvent: false});
     });
 
     // this.formNegocio.controls.redes.valueChanges.subscribe( redes => {
@@ -265,5 +275,11 @@ export class AgregarNegocioComponent implements OnInit {
     return this.formNegocio.controls.image.hasError('required') ? 'La imagen es necesaria' :
     this.formNegocio.controls.image.hasError('maxContentSize') ? 'El peso no debe exceder los 5 MB' : '';
   }
+
+  errorId() {
+    return this.formNegocio.controls.id.hasError('required') ? 'Ingresa una url' :
+    this.formNegocio.controls.id.invalid ? 'Esta url ya está tomada ' : '';
+  }
+
 
 }

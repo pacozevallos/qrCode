@@ -13,13 +13,22 @@
 
 
     <p class="h3">Crear Negocio</p>
+    
     <form [formGroup]="formNegocio" (submit)="onSubmit()" novalidate class="row gx-3 gx-md-4">
 
       <mat-form-field appearance="standard" class="col-12">
         <mat-label>Nombre del negocio</mat-label>
         <input matInput type="text" formControlName="nombre">
-        <mat-hint>url: https://taaripay.com/{{negocioId}}</mat-hint>
+        <!-- <mat-hint>url: https://taaripay.com/{{negocioId}}</mat-hint> -->
         <mat-error *ngIf="errorNombreNegocio()">{{errorNombreNegocio()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" class="col-12">
+        <mat-label>{{hrefCurrent}}/</mat-label>
+        <!-- <span matPrefix></span> -->
+        <input matInput type="text" formControlName="id">
+        <mat-error *ngIf="errorId()">{{errorId()}}</mat-error>
+        <!-- <textarea matInput formControlName="id"></textarea> -->
       </mat-form-field>
 
       <!-- <mat-form-field appearance="standard" class="col-12">
@@ -48,14 +57,14 @@
       </mat-form-field> -->
 
 
-      <div class="d-flex justify-content-between align-items-center my-3">
+      <!-- <div class="d-flex justify-content-between align-items-center my-3">
         <p class="mb-0">Elige un color (opcional)</p>
         <span class="rounded-circle border border-4 border-white shadow">
           <button  [style.background-color]="color" type="button" mat-icon-button (click)="openModalCrearColor()">
             <i-tabler name="palette" class="text-white"></i-tabler>
           </button>
         </span>
-      </div>
+      </div> -->
     
 
       <div class="d-grid mt-2">

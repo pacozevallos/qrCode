@@ -51,7 +51,7 @@
           </div>
 
           <div class="col-md-6">
-            <div *ngFor="let option of opciones | slice:4:20; last as last">
+            <div *ngFor="let option of opciones | slice:4:50; last as last">
               <button class="encima" mat-menu-item (click)="option.function(negocio)">
                 <i-tabler class="me-2" [name]="option.icon"></i-tabler>
                 <span class="ms-2">{{option.nombre}}</span>

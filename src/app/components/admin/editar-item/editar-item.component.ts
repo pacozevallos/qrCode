@@ -247,6 +247,7 @@ export class EditarItemComponent implements OnInit {
     .subscribe();
   }
 
+  
 
   errorImagen() {
     return this.formItem.controls.image.hasError('required') ? 'La imagen es necesaria' :
