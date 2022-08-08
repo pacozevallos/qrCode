@@ -125,6 +125,7 @@ import { PagoExitoPLanAnualComponent } from './components/admin/pago-exito-plan-
 import { CambiarPLanComponent } from './components/admin/cambiar-plan/cambiar-plan.component';
 import { DuplicarNegocioComponent } from './components/admin/duplicar-negocio/duplicar-negocio.component';
 import { QrCodeComponent } from './components/admin/qr-code/qr-code.component';
+import { ConfiguracionComponent } from './components/admin/configuracion/configuracion.component';
 
 @NgModule({
   declarations: [
@@ -183,7 +184,8 @@ import { QrCodeComponent } from './components/admin/qr-code/qr-code.component';
     PagoExitoPLanAnualComponent,
     CambiarPLanComponent,
     DuplicarNegocioComponent,
-    QrCodeComponent
+    QrCodeComponent,
+    ConfiguracionComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,
@@ -240,7 +242,6 @@ import { QrCodeComponent } from './components/admin/qr-code/qr-code.component';
     ClipboardModule,
     ColorSketchModule,
     ColorChromeModule,
-    
   ],
   exports: [
     TablerIconsModule

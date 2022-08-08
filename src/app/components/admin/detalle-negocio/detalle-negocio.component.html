@@ -1,10 +1,4 @@
-  <div class="" *ngIf="negocio">
-    
-    <!-- <div class="myPositionBottom">
-      <button class="btn btn-primary btn-circle-lg shadow-sm" (click)="agregarItem()">
-        <i-tabler name="plus"></i-tabler>
-      </button>
-    </div> -->
+  <!-- <div class="" *ngIf="negocio">
 
     <div class="">
 
@@ -20,9 +14,9 @@
           </div>
           
           <div>
-             <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
+             <button mat-icon-button [matMenuTriggerFor]="menu">
               <i-tabler name="dots-vertical" class="iconTablerLg"></i-tabler>
-            </button> -->
+            </button>
             <mat-menu #menu="matMenu">
               <button mat-menu-item *ngFor="let option of opciones" (click)="option.function(negocio)">
                 <i-tabler [name]="option.icon"></i-tabler>
@@ -32,7 +26,6 @@
           </div>
 
         </div>
-
 
 
         <div class="row gx-md-6 gy-4">
@@ -60,31 +53,56 @@
             </div>
           </div>
 
-        </div>
-
-      
-
-        
-
-
-
-        
-        <!-- <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>Ver más opciones</mat-expansion-panel-header>
-            <button class="btn btn-link" (click)="eliminarNegocio(negocio)" >Eliminar negocio</button>
-          </mat-expansion-panel>
-        </mat-accordion> -->
-        
+        </div>        
 
       </div>
     </div>
 
-           
-    
-    <!-- <div class="container">
-      <app-lista-items [idNegocio]="negocio.id"></app-lista-items>
-    </div> -->
+  </div> -->
 
-  </div>
+
+
+
+
+  <!-- <div class="sticky-top shadow-sm" *ngIf="negocio">
+    <div class="container d-flex justify-content-between align-items-center py-3 py-md-4 bg-white">
+
+      <div class="d-flex align-items-center">
+        <button class="me-2" mat-icon-button [routerLink]=" '/admin/' ">
+          <i-tabler name="arrow-left"></i-tabler>
+        </button>
+        <p class="h3 mb-0">{{negocio.nombre}}</p>
+      </div>
+
+      <button mat-mini-fab color="primary" (click)="agregarItem()" class="d-block d-md-none">
+        <i-tabler name="plus"></i-tabler>
+      </button>
+
+      <div class="d-none d-md-inline-flex gap-2">
+  
+        <button class="btn btn-outline-primary btn-sm" (click)="agregarItem()">
+          <i-tabler name="plus"></i-tabler>
+          <span class="ms-1 d-none d-md-inline-block">Agregar producto</span>
+        </button>
+
+      </div>
+    </div>
+</div> -->
+
+
+
+
+
+<div class="container">
+
+  <mat-tab-group>
+    <mat-tab label="Productos">
+    <app-lista-items></app-lista-items>
+    </mat-tab>
+    <mat-tab label="Configuración">
+      <app-configuracion></app-configuracion>
+      </mat-tab>
+  </mat-tab-group>
+
+</div>
 

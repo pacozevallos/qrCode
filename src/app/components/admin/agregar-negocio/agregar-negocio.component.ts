@@ -49,7 +49,6 @@ export class AgregarNegocioComponent implements OnInit {
   readonly maxSize = 1048576 * 5;
   actualSize: any;
 
-  
   constructor(
     private bottomSheetRef: MatBottomSheetRef<AgregarNegocioComponent>,
     private fb: FormBuilder,
@@ -64,7 +63,6 @@ export class AgregarNegocioComponent implements OnInit {
     // this.negocioRef = this.afs.collection('negocios').doc(this.negocioId);
     // console.log(this.negocioRef.id);
 
-    
 
   }
 
@@ -90,7 +88,6 @@ export class AgregarNegocioComponent implements OnInit {
       const negocioIdSpace = res.replace(/ /g, '-');
       this.negocioId = negocioIdSpace.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
       this.formNegocio.get('id').setValue(this.negocioId);
-      
       this.qrCodeData = `https://taaripay.com/negocio/${this.negocioId}`;
     });
 

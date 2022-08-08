@@ -55,7 +55,7 @@ export class DestacadosNegocioComponent implements OnInit {
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe( params => {
-      this.id = params.id
+      this.id = params.id;
 
       this.fs.getItemsDestacados(this.id).subscribe( res => {
         this.itemsDestacados = res;

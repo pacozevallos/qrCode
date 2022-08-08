@@ -1,66 +1,34 @@
-<!-- <div class="myPositionBottom">
-  <button class="btn btn-primary btn-circle-lg shadow" (click)="agregarItem()">
-    <i-tabler name="plus"></i-tabler>
-  </button>
-</div> -->
 
 <div class="sticky-top shadow-sm">
     <div class="container d-flex justify-content-between align-items-center py-3 py-md-4 bg-white">
-
       <div class="d-flex align-items-center">
-        <button class="me-2" mat-icon-button [routerLink]=" '/admin/' + idNegocio">
-          <i-tabler name="arrow-left"></i-tabler>
-        </button>
         <p class="h3 mb-0">Productos</p>
       </div>
-
-      <button mat-mini-fab color="primary" (click)="agregarItem()" class="d-block d-md-none">
+      <button class="btn btn-primary btn-sm" (click)="agregarItem()">
         <i-tabler name="plus"></i-tabler>
+        <span class="ms-1 d-none d-md-inline-block">Agregar producto</span>
       </button>
-
-      <div class="d-none d-md-inline-flex gap-2">
-
-        <!-- <button class="btn btn-outline-primary btn-sm" (click)="duplicarItems()">
-          <i-tabler name="copy"></i-tabler>
-          <span class="ms-1 d-none d-md-inline-block">Copiar items</span>
-        </button> -->
-  
-        <button class="btn btn-outline-primary btn-sm" (click)="agregarItem()">
-          <i-tabler name="plus"></i-tabler>
-          <span class="ms-1 d-none d-md-inline-block">Agregar producto</span>
-        </button>
-
-      </div>
-
-    
-
     </div>
 </div>
 
 
 
-<div class="container">
-
-  <!-- <div class="grillaItemsAdmin">
-    <app-card-item-admin *ngFor="let item of items; let i = index; trackBy: trackByPublicado" [idNegocio]="idNegocio" [item]="item"></app-card-item-admin>
-  </div> -->
-
-  <mat-accordion [multi]="false">
-    <mat-expansion-panel *ngFor="let group of itemsGroup; let i = index">
-      <mat-expansion-panel-header>
-        <p class="lead mb-0">{{group.categoria}}</p>
-      </mat-expansion-panel-header>
-      <div class="grillaItemsAdmin">
-        <app-card-item-admin *ngFor="let item of group.items; let i = index; trackBy: trackByPublicado" [idNegocio]="idNegocio" [item]="item"></app-card-item-admin>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-</div>
+<!-- <mat-accordion [multi]="false">
+  <mat-expansion-panel *ngFor="let group of itemsGroup; let i = index">
+    <mat-expansion-panel-header>
+      <p class="mb-0">{{group.categoria}}</p>
+    </mat-expansion-panel-header>
+    <div class="grillaItemsAdmin">
+      <app-card-item-admin *ngFor="let item of group.items; let i = index; trackBy: trackByPublicado" [idNegocio]="idNegocio" [item]="item"></app-card-item-admin>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion> -->
 
 
 
-<!-- <div class="table-responsive">
+
+
+<div class="table-responsive">
 
   <table mat-table [dataSource]="itemsData" matSort class="example-table" [trackBy]="trackByPublicado">
 
@@ -149,4 +117,4 @@
 </div>
 
 <mat-paginator [pageSize]="50" [pageSizeOptions]="[20, 50, 100]" [showFirstLastButtons]="true">
-</mat-paginator> -->
+</mat-paginator>

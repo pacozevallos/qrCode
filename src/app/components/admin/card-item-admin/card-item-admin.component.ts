@@ -57,7 +57,7 @@ export class CardItemAdminComponent implements OnInit {
     this.afs.collection('negocios').doc(this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
       this.negocio = res;
     });
-    
+
     if (this.item.precios) {
       const precios = this.item.precios.map( res => res.precio);
       this.precioMin = Math.min(...precios);

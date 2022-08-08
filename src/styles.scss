@@ -435,7 +435,8 @@ table {
 
 
 .mat-tab-label {
-  padding: 0 0.95rem !important;
+  min-width: 25px !important;
+  padding: 0 1rem !important;
 }
 
 

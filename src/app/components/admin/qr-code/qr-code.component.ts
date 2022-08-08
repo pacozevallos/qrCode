@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { base64StringToBlob } from 'blob-util';
@@ -19,30 +19,36 @@ export class QrCodeComponent implements OnInit {
   loading = false;
   loadingQr = true;
   qrCodeImage: boolean;
+  negocio: Negocio;
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<QrCodeComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
-  ) { }
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
+      this.changeDetectorRef.markForCheck();
+    }
 
   ngOnInit(): void {
     console.log(this.data);
-    
+
     this.qrCodeData = `${window.location.origin}/negocio/${this.data.id}`;
+    console.log(this.qrCodeData);
 
-    if (this.data.qrCodeImage) {
-      this.qrCodeImage = true;
-    } else {
-      this.qrCodeImage = false;
-    }
+    this.qrCodeImage = false;
 
-  }
+    this.afs.doc('negocios/' + this.data.id).valueChanges().subscribe( (data: Negocio) => {
+      this.negocio = data;
+      if (this.negocio.qrCodeImage) {
+        this.qrCodeImage = true;
+      } else {
+        this.qrCodeImage = false;
+      }
+      this.changeDetectorRef.detectChanges();
+    });
 
-  ngOnChanges(changes: SimpleChange) {
-    // console.log(this.data);
-    console.log(changes);
   }
 
   createQrCode() {
@@ -81,9 +87,9 @@ export class QrCodeComponent implements OnInit {
     .subscribe();
   }
 
-  // detectarCargado() {
-  //   return this.loadingQr = false;
-  // }
+  detectarCargado() {
+    return this.loadingQr = false;
+  }
 
   cancelar() {
     this.bottomSheetRef.dismiss();

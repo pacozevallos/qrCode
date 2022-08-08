@@ -70,11 +70,9 @@ export class ListaItemsComponent implements OnInit {
     // this.itemsData.sort = this.sort;
 
 
-   
     this.fs.getAllItemsDocument(this.idNegocio).subscribe( res => {
       this.items = res;
       console.log(this.items);
-      
       this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
         const id = prev.findIndex((item) => item.categoria === categoria);
         const cat = 'xxx';
