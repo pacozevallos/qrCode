@@ -139,17 +139,24 @@ export class DataService {
 
   paises = [
     {
-      bandera: '🇦🇫',
       nombre: 'Argentina',
-      prefijo: '591'
+      prefijo: '54',
+      moneda: 'ARS'
+    },
+    {
+      nombre: 'Bolivia',
+      prefijo: '591',
+      moneda: 'BOB'
     },
     {
       nombre: 'Brasil',
-      prefijo: '55'
+      prefijo: '55',
+      moneda: 'BRL'
     },
     {
       nombre: 'Chile',
-      prefijo: '56'
+      prefijo: '56',
+      moneda: 'CLP'
     },
     {
       nombre: 'Colombia',
@@ -171,6 +178,6 @@ export class DataService {
       nombre: 'Ecuador',
       prefijo: '593'
     },
-  ]
+  ];
 
 }

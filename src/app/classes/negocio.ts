@@ -16,5 +16,9 @@ export class Negocio {
   redes = [];
   color: string;
   reglas = [];
+  pais: string;
+  prefijo: string;
   numeroWhatsApp: number;
+  moneda: string;
+  iso: string;
 }

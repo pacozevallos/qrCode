@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
 import { DataService } from 'src/app/services/data.service';
 import { IdValidatorService } from 'src/app/services/id-validator.service';
+import { Negocio } from '../../../classes/negocio';
 
 @Component({
   selector: 'app-configurar-negocio',
@@ -11,6 +12,8 @@ import { IdValidatorService } from 'src/app/services/id-validator.service';
   styleUrls: ['./configurar-negocio.component.scss']
 })
 export class ConfigurarNegocioComponent implements OnInit {
+
+  @Input() negocio: Negocio;
 
   formNegocio: FormGroup;
   loading: boolean;
@@ -30,47 +33,38 @@ export class ConfigurarNegocioComponent implements OnInit {
     this.paises = this.ds.paises;
 
     this.formNegocio = this.fb.group({
-      nombre: ['', Validators.required],
-      id: ['', [Validators.required], [this.idValidator]],
-      pais: ['', Validators.required],
-      prefijo: ['', Validators.required],
-      numeroWhatsApp: ['', Validators.required],
+      nombre: [this.negocio.nombre, Validators.required],
+      id: [{value: this.negocio.id, disabled: true}],
+      pais: [this.negocio.pais, Validators.required],
+      moneda: [this.negocio.moneda, Validators.required],
+      prefijo: [this.negocio.prefijo, Validators.required],
+      numeroWhatsApp: [this.negocio.numeroWhatsApp, Validators.required],
       autorId: [user.uid],
-      fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
-    });
-
-    this.formNegocio.get('nombre').valueChanges.subscribe( res => {
-      const negocioIdSpace = res.replace(/ /g, '-');
-      this.negocioId = negocioIdSpace.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
-      this.formNegocio.get('id').setValue(this.negocioId);
-    });
-
-    this.formNegocio.get('id').valueChanges.subscribe( res => {
-      const negocioIdSpace = res.replace(/ /g, '-');
-      this.negocioId = negocioIdSpace.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
-      this.formNegocio.get('id').patchValue(this.negocioId, {emitEvent: false});
+      fechaModificacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
     });
 
     this.formNegocio.get('pais').valueChanges.subscribe( res => {
       const paisSelect = this.paises.find( find => find.nombre === res);
       this.formNegocio.get('prefijo').setValue(paisSelect.prefijo);
-    })
+      this.formNegocio.get('moneda').setValue(paisSelect.moneda);
+    });
 
   }
 
   onSubmit() {
     if (this.formNegocio.valid) {
       this.loading = true;
-      this.crearItem();
+      this.guardarCambios();
     } else {
       this.validateAllFormFields(this.formNegocio);
     }
   }
 
-  crearItem() {
-    this.afs.doc('negocios/' + this.negocioId).set(this.formNegocio.value)
+  guardarCambios() {
+    this.afs.doc('negocios/' + this.negocio.id).update(this.formNegocio.value)
     .then(() => {
-      console.log('Negocio creado');
+      console.log('Negocio actualizado');
+      this.loading = false;
     });
   }
 

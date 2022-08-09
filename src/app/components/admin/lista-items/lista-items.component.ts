@@ -91,7 +91,7 @@ export class ListaItemsComponent implements OnInit {
     });
 
      // Para filtrar objetos anidados, incluye minusculas
-     this.itemsData.filterPredicate = (data: any, filter: string) => {
+    this.itemsData.filterPredicate = (data: any, filter: string) => {
       const dataStr = JSON.stringify(data).toLowerCase();
       return dataStr.indexOf(filter) !== -1;
     };
@@ -143,7 +143,7 @@ export class ListaItemsComponent implements OnInit {
       panelClass: 'dialogSmall',
       data: {
         idNegocio: this.idNegocio,
-        item: item
+        item
       }
     });
     dialogRef.afterClosed().subscribe();

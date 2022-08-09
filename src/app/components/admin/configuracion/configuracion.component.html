@@ -1,17 +1,17 @@
-<div class="overflow-hidden" *ngIf="negocio">
+<div class="overflow-hidden py-4 py-md-5" *ngIf="negocio">
 
-  <div class="d-flex justify-content-between align-items-center py-3 py-md-4">
+  <!-- <div class="d-flex justify-content-between align-items-center py-3 py-md-4">
     <div class="d-flex align-items-center">
       <p class="h3 mb-0">Configuración</p>
     </div>
-  </div>
+  </div> -->
 
 
-  <div class="row gx-md-6 gy-4">
+  <div class="row justify-content-between">
 
-    <div class="col-md-6">
+    <div class="col-md-7">
 
-      <app-configurar-negocio></app-configurar-negocio>
+      <app-configurar-negocio [negocio]="negocio"></app-configurar-negocio>
 
       <!-- <div class="grillaOpciones">
 
@@ -36,7 +36,7 @@
 
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div *ngFor="let option of opciones; last as last">
         <button class="encima" mat-menu-item (click)="option.function(negocio)">
           <i-tabler class="me-2" [name]="option.icon"></i-tabler>

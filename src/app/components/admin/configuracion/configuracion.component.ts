@@ -27,16 +27,16 @@ export class ConfiguracionComponent implements OnInit {
   negocio;
 
   opciones = [
-    {
-      nombre: 'Editar',
-      icon: 'pencil',
-      function: (negocio) => this.editarNegocio(negocio)
-    },
-    {
-      nombre: 'WhatsApp',
-      icon: 'brand-whatsApp',
-      function: (negocio) => this.agregarWhatsApp(negocio)
-    },
+    // {
+    //   nombre: 'Editar',
+    //   icon: 'pencil',
+    //   function: (negocio) => this.editarNegocio(negocio)
+    // },
+    // {
+    //   nombre: 'WhatsApp',
+    //   icon: 'brand-whatsApp',
+    //   function: (negocio) => this.agregarWhatsApp(negocio)
+    // },
     {
       nombre: 'Logotipo',
       icon: 'user-circle',

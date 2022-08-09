@@ -131,7 +131,6 @@ export class EditarNegocioComponent implements OnInit {
     (this.formNegocio.controls.redes as FormArray).removeAt(index);
   }
 
-  
   openModalCrearColor() {
     const dialogRef = this.dialog.open(ColorComponent, {
       panelClass: 'dialogColor',

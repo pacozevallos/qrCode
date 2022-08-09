@@ -37,6 +37,7 @@ export class AgregarNegocioComponent implements OnInit {
   hrefCurrent = window.location.origin;
 
   public qrCodeData = '';
+  paises = [];
 
   @ViewChild('parent') parent: ElementRef;
 
@@ -66,18 +67,15 @@ export class AgregarNegocioComponent implements OnInit {
 
   ngOnInit(): void {
     const user = firebase.default.auth().currentUser;
-    this.redesSociales = this.ds.redesSociales;
-    this.tiposNegocio = this.ds.tiposNegocio;
+    this.paises = this.ds.paises;
 
     this.formNegocio = this.fb.group({
       nombre: ['', Validators.required],
-      // numeroWhatsApp: ['', [Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
-      // direccion: [''],
-      // tipo: [''],
-      // color: [ this.color, Validators.required ],
-      // categorias: new FormArray([]),
-      // redes: this.fb.array([]),
       id: ['', [Validators.required], [this.idValidator]],
+      pais: ['', Validators.required],
+      moneda: ['', Validators.required],
+      prefijo: ['', Validators.required],
+      numeroWhatsApp: ['', Validators.required],
       autorId: [user.uid],
       fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
     });
@@ -93,6 +91,12 @@ export class AgregarNegocioComponent implements OnInit {
       const negocioIdSpace = res.replace(/ /g, '-');
       this.negocioId = negocioIdSpace.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
       this.formNegocio.get('id').patchValue(this.negocioId, {emitEvent: false});
+    });
+
+    this.formNegocio.get('pais').valueChanges.subscribe( res => {
+      const paisSelect = this.paises.find( find => find.nombre === res);
+      this.formNegocio.get('prefijo').setValue(paisSelect.prefijo);
+      this.formNegocio.get('moneda').setValue(paisSelect.moneda);
     });
 
     // this.formNegocio.controls.redes.valueChanges.subscribe( redes => {
@@ -257,6 +261,10 @@ export class AgregarNegocioComponent implements OnInit {
 
   errorNombreNegocio() {
     return this.formNegocio.controls.nombre.hasError('required') ? 'Ingresa un nombre' : '';
+  }
+
+  errorPais() {
+    return this.formNegocio.controls.pais.hasError('required') ? 'Seleccione un país' : '';
   }
 
   errorWhatsApp() {

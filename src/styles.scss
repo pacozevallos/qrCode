@@ -448,7 +448,7 @@ table {
 
 .mat-tab-label {
   min-width: 25px !important;
-  padding: 0 1rem !important;
+  padding: 0 1.5rem !important;
 }
 
 
@@ -870,4 +870,9 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   @include media-breakpoint-only(xs) {
     width: 100%;
   }
+}
+
+.mat-bottom-sheet-container {
+  // font: 400 16px/20px "Lexend" !important;
+  font-size: 16px !important;
 }

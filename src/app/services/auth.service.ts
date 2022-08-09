@@ -23,7 +23,7 @@ export class AuthService {
   ) { }
 
   emailSignUp(nombre: string, email: string, password: string) {
-    return this.auth.createUserWithEmailAndPassword(email, password,)
+    return this.auth.createUserWithEmailAndPassword(email, password)
       .then( credential => {
         this.router.navigate(['/admin/elegirPlan']);
         credential.user.updateProfile({
@@ -32,7 +32,7 @@ export class AuthService {
         this.saveUserEmail(nombre, credential.user);
       })
       .catch( error => {
-        this.handleError(error)
+        this.handleError(error);
       });
   }
 
