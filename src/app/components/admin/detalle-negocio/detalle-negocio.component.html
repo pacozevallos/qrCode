@@ -91,6 +91,31 @@
 
 
 
+<div class="container" *ngIf="negocio">
+  <div class="d-flex justify-content-between align-items-center py-2 py-md-3">
+
+    <div class="d-flex align-items-center">
+      <button class="me-1" mat-icon-button [routerLink]=" '/admin/' ">
+        <i-tabler name="arrow-left"></i-tabler>
+      </button>
+      <p class="h3 mb-0">{{negocio.nombre}}</p>
+    </div>
+    
+    <!-- <div>
+       <button mat-icon-button [matMenuTriggerFor]="menu">
+        <i-tabler name="dots-vertical" class="iconTablerLg"></i-tabler>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let option of opciones" (click)="option.function(negocio)">
+          <i-tabler [name]="option.icon"></i-tabler>
+          <span class="ms-2">{{option.nombre}}</span>
+        </button>
+      </mat-menu>
+    </div> -->
+  
+  </div>
+</div>
+
 
 
 <div class="container">
