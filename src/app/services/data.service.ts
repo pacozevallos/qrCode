@@ -135,6 +135,42 @@ export class DataService {
       nameButton: 'Lo quiero',
       urlButton: '/admin'
     },
+  ];
+
+  paises = [
+    {
+      bandera: '🇦🇫',
+      nombre: 'Argentina',
+      prefijo: '591'
+    },
+    {
+      nombre: 'Brasil',
+      prefijo: '55'
+    },
+    {
+      nombre: 'Chile',
+      prefijo: '56'
+    },
+    {
+      nombre: 'Colombia',
+      prefijo: '57'
+    },
+    {
+      nombre: 'Costa Rica',
+      prefijo: '506'
+    },
+    {
+      nombre: 'Cuba',
+      prefijo: '53'
+    },
+    {
+      nombre: 'República Dominicana',
+      prefijo: '1809'
+    },
+    {
+      nombre: 'Ecuador',
+      prefijo: '593'
+    },
   ]
 
 }

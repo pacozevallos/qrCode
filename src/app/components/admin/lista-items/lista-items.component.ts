@@ -26,16 +26,22 @@ export class ListaItemsComponent implements OnInit {
   negocio: Negocio;
   items: Item[] = [];
   itemsGroup = [];
+  value;
 
-  displayedColumns = [ 'imagen', 'nombre', 'categoria', 'destacado', 'publicado', 'mas'];
+  displayedColumns = [ 'imagen', 'nombre', 'categoria', 'destacado', 'publicado', 'opciones'];
   itemsData = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.itemsData.filter = filterValue;
+  // applyFilter(filterValue: string) {
+  //   filterValue = filterValue.trim(); // Remove whitespace
+  //   filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+  //   this.itemsData.filter = filterValue;
+  // }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.itemsData.filter = filterValue.trim().toLowerCase();
   }
 
 
@@ -84,7 +90,19 @@ export class ListaItemsComponent implements OnInit {
       console.log(this.itemsGroup);
     });
 
+     // Para filtrar objetos anidados, incluye minusculas
+     this.itemsData.filterPredicate = (data: any, filter: string) => {
+      const dataStr = JSON.stringify(data).toLowerCase();
+      return dataStr.indexOf(filter) !== -1;
+    };
+
   }
+
+  clearFilters() {
+    this.itemsData.filter = '';
+    this.value = '';
+  }
+
 
   duplicarItems() {
 
@@ -123,7 +141,10 @@ export class ListaItemsComponent implements OnInit {
   openModalDelete(item) {
     const dialogRef = this.dialog.open(EliminarItemComponent, {
       panelClass: 'dialogSmall',
-      data: {idNegocio_: this.idNegocio, item_: item}
+      data: {
+        idNegocio: this.idNegocio,
+        item: item
+      }
     });
     dialogRef.afterClosed().subscribe();
   }

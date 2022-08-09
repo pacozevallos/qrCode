@@ -44,11 +44,6 @@ export class RegistroComponent implements OnInit {
       this.validateAllFormFields(this.formRegistro);
     }
   }
-
-  googleLogin() {
-    this.auth.googleLogin();
-  }
-
   
   emailSignUp() {
     this.auth.emailSignUp(this.formRegistro.value.nombre, this.formRegistro.value.email, this.formRegistro.value.password)

@@ -126,6 +126,7 @@ import { CambiarPLanComponent } from './components/admin/cambiar-plan/cambiar-pl
 import { DuplicarNegocioComponent } from './components/admin/duplicar-negocio/duplicar-negocio.component';
 import { QrCodeComponent } from './components/admin/qr-code/qr-code.component';
 import { ConfiguracionComponent } from './components/admin/configuracion/configuracion.component';
+import { ConfigurarNegocioComponent } from './components/admin/configurar-negocio/configurar-negocio.component';
 
 @NgModule({
   declarations: [
@@ -185,7 +186,8 @@ import { ConfiguracionComponent } from './components/admin/configuracion/configu
     CambiarPLanComponent,
     DuplicarNegocioComponent,
     QrCodeComponent,
-    ConfiguracionComponent
+    ConfiguracionComponent,
+    ConfigurarNegocioComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

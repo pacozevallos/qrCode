@@ -1,6 +1,6 @@
-$border-radius-sm: 0.65rem;
-$border-radius: 0.85rem;
-$border-radius-lg: 1.3rem;
+$border-radius-sm: 0.5rem;
+$border-radius: 0.75rem;
+$border-radius-lg: 1rem;
 
 //colores
 $primary: #1456D8;
@@ -17,16 +17,23 @@ $white: #fff;
 
 //buttons
 $btn-border-width: 2px;
-$btn-font-weight: 500;
+$btn-font-weight: 400;
 $btn-padding-y: 0.8rem;
-$btn-padding-x: 1.3rem;
-$btn-padding-y-sm: 0.5rem;
-$btn-padding-x-sm: 0.75rem;
-$btn-padding-y-lg: 1rem;
-$btn-padding-x-lg: 1.5rem;
+$btn-padding-x: 1rem;
+// $btn-padding-y-sm: 0.5rem;
+// $btn-padding-x-sm: 0.75rem;
+// $btn-padding-y-lg: 1rem;
+// $btn-padding-x-lg: 1.5rem;
 $btn-border-radius: 0.4rem;
 $btn-border-radius-sm: 0.3rem;
 $btn-border-radius-lg: 0.5rem;
+
+
+//form controls
+$input-border-width: 2px;
+$input-padding-y: 0.8rem;
+$input-padding-x: 1.3rem;
+
 // Espacios
 $spacer: 1rem;
 $spacers: (
@@ -252,6 +259,11 @@ table {
   object-fit: cover;
 }
 
+.imageItemAdminTable {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+}
 // .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
 //   bottom: 0px !important;
 //   border: 1px solid red;
@@ -843,6 +855,18 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 
 .buttonActivePlanMensual {
   width: 270px;
+  @include media-breakpoint-only(xs) {
+    width: 100%;
+  }
+}
+
+.form-control {
+  border-radius: 0.25rem;
+
+}
+
+.flexWidth {
+  width: initial;
   @include media-breakpoint-only(xs) {
     width: 100%;
   }

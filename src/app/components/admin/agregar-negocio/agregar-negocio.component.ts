@@ -36,8 +36,6 @@ export class AgregarNegocioComponent implements OnInit {
   negocioId: string;
   hrefCurrent = window.location.origin;
 
-  // downloadURL: Observable<string>;
-
   public qrCodeData = '';
 
   @ViewChild('parent') parent: ElementRef;
