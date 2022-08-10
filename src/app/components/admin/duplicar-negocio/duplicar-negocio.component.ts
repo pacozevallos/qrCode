@@ -31,6 +31,7 @@ export class DuplicarNegocioComponent implements OnInit {
   downloadURL: Observable<string>;
 
   negocioIdPrev: string;
+  hostname = window.location.origin;
 
   constructor(
     private dialogRef: MatDialogRef<DuplicarNegocioComponent>,
@@ -45,7 +46,7 @@ export class DuplicarNegocioComponent implements OnInit {
   ) {
     this.afs.collection('negocios').valueChanges().subscribe( res => {
       this.idsArray = res.map((fil: Negocio) => fil.id);
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -56,6 +57,13 @@ export class DuplicarNegocioComponent implements OnInit {
       nombre: [`${this.data.nombre}2`, [Validators.required]],
       id: [`${this.data.id}2`, [Validators.required], [this.idValidator]],
       fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
+    });
+
+    this.formNegocio.get('nombre').valueChanges.subscribe( res => {
+      const negocioIdSpace = res.replace(/ /g, '-');
+      this.negocioId = negocioIdSpace.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+      this.formNegocio.get('id').setValue(this.negocioId);
+      this.qrCodeData = `${this.hostname}/negocio/${this.negocioId}`;
     });
 
     this.formNegocio.get('id').valueChanges.subscribe( res => {
@@ -80,11 +88,11 @@ export class DuplicarNegocioComponent implements OnInit {
   duplicarNegocio() {
 
     const negocioPrev = this.data;
-    ['nombre', 'id', 'fechaCreacion', 'qrCodeImage', 'qrCodeImageName'].forEach(e => delete negocioPrev[e]);
+    ['nombre', 'id', 'fechaCreacion', 'qrCodeImage', 'qrCodeImageName', 'imageLogo', 'imageLogoName'].forEach(e => delete negocioPrev[e]);
     const dataForm = this.formNegocio.value;
-    const newDoc = { ...negocioPrev, ...dataForm}
+    const newDoc = { ...negocioPrev, ...dataForm};
     console.log(newDoc);
-    
+
     return this.afs.collection('negocios').doc(this.negocioId).set(newDoc)
       .then(() => {
         console.log('negocio copiado');
@@ -92,7 +100,7 @@ export class DuplicarNegocioComponent implements OnInit {
           const items = data;
           console.log(items);
           items.forEach(item => {
-            return this.afs.collection('negocios').doc(this.negocioId).collection('items').doc().set(item)
+            return this.afs.collection('negocios').doc(this.negocioId).collection('items').doc(item.id).set(item)
               .then(() => {
                 console.log('items copiados');
                 this.dialogRef.close();
@@ -104,7 +112,7 @@ export class DuplicarNegocioComponent implements OnInit {
           });
         });
     });
-    
+
   }
 
 

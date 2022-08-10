@@ -2,7 +2,7 @@
 
   <div class="d-flex justify-content-between align-items-center">
     <p class="h3 mb-0">Negocios</p>
-    <button class="btn btn-outline-primary btn-sm" (click)="addNegocio()">
+    <button class="btn btn-primary" (click)="addNegocio()">
       <i-tabler name="plus"></i-tabler>
       <span class="ms-1 d-none d-md-inline-block">Agregar negocio</span>
     </button>
@@ -15,7 +15,7 @@
     </div> -->
 
     <div class="row g-2 g-md-3">
-      <div class="col-md-3" *ngFor="let negocio of negocios">
+      <div class="col-md-4" *ngFor="let negocio of negocios">
         <app-card-negocio-admin  [negocio]="negocio"></app-card-negocio-admin>
       </div>
     </div>

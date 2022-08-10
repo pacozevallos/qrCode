@@ -47,6 +47,7 @@ export class AgregarNegocioComponent implements OnInit {
   downloadURL: Observable<string>;
   readonly maxSize = 1048576 * 5;
   actualSize: any;
+  hostname = window.location.origin;
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<AgregarNegocioComponent>,
@@ -68,14 +69,16 @@ export class AgregarNegocioComponent implements OnInit {
   ngOnInit(): void {
     const user = firebase.default.auth().currentUser;
     this.paises = this.ds.paises;
+    console.log(this.hostname);
 
     this.formNegocio = this.fb.group({
       nombre: ['', Validators.required],
       id: ['', [Validators.required], [this.idValidator]],
-      pais: ['', Validators.required],
-      moneda: ['', Validators.required],
-      prefijo: ['', Validators.required],
-      numeroWhatsApp: ['', Validators.required],
+      pais: ['Perú', Validators.required],
+      moneda: ['PEN', Validators.required],
+      prefijo: ['51', Validators.required],
+      numeroWhatsApp: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
+      color: ['#1456D8', Validators.required],
       autorId: [user.uid],
       fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
     });
@@ -84,7 +87,7 @@ export class AgregarNegocioComponent implements OnInit {
       const negocioIdSpace = res.replace(/ /g, '-');
       this.negocioId = negocioIdSpace.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
       this.formNegocio.get('id').setValue(this.negocioId);
-      this.qrCodeData = `https://taaripay.com/negocio/${this.negocioId}`;
+      this.qrCodeData = `${this.hostname}/negocio/${this.negocioId}`;
     });
 
     this.formNegocio.get('id').valueChanges.subscribe( res => {
@@ -150,15 +153,15 @@ export class AgregarNegocioComponent implements OnInit {
   onSubmit() {
     if (this.formNegocio.valid) {
       this.loading = true;
-      // this.crearItem();
-      this.uploadQrCodeAndCrearNegocio();
+      this.crearItem();
+      // this.uploadQrCodeAndCrearNegocio();
     } else {
       this.validateAllFormFields(this.formNegocio);
     }
   }
 
   crearItem() {
-    this.afs.doc('negocios/' + this.idNegocio).set(this.formNegocio.value)
+    this.afs.doc('negocios/' + this.negocioId).set(this.formNegocio.value)
     .then(() => {
       this.bottomSheetRef.dismiss();
     });

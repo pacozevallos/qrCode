@@ -48,10 +48,10 @@ export class EliminarNegocioComponent implements OnInit {
     }
 
     // Eliminar image QR Code de Storage
-    this.storage.ref(this.data?.qrCodeImageName).delete();
+    this.storage.ref(`imagesQrCodes/${this.data?.qrCodeImageName}`).delete();
 
-     // Eliminar logo de Storage
-     this.storage.ref(`imagesLogosNegocios/${this.data?.imageLogoName}`).delete();
+    // Eliminar logo de Storage
+    this.storage.ref(`imagesLogosNegocios/${this.data?.imageLogoName}`).delete();
 
     // Eliminar todos los items de la base de datos Firestore
     this.items.forEach( element => {
@@ -66,7 +66,7 @@ export class EliminarNegocioComponent implements OnInit {
         duration: 3000
       });
       console.log('negocio eliminado');
-      this.router.navigate(['/admin'])
+      this.router.navigate(['/admin']);
     });
 
   }

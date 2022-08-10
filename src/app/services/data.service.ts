@@ -139,45 +139,55 @@ export class DataService {
 
   paises = [
     {
-      nombre: 'Argentina',
-      prefijo: '54',
-      moneda: 'ARS'
+      nombre: 'Perú',
+      prefijo: '51',
+      moneda: 'PEN'
     },
-    {
-      nombre: 'Bolivia',
-      prefijo: '591',
-      moneda: 'BOB'
-    },
-    {
-      nombre: 'Brasil',
-      prefijo: '55',
-      moneda: 'BRL'
-    },
-    {
-      nombre: 'Chile',
-      prefijo: '56',
-      moneda: 'CLP'
-    },
-    {
-      nombre: 'Colombia',
-      prefijo: '57'
-    },
-    {
-      nombre: 'Costa Rica',
-      prefijo: '506'
-    },
-    {
-      nombre: 'Cuba',
-      prefijo: '53'
-    },
-    {
-      nombre: 'República Dominicana',
-      prefijo: '1809'
-    },
-    {
-      nombre: 'Ecuador',
-      prefijo: '593'
-    },
+    // {
+    //   nombre: 'Argentina',
+    //   prefijo: '54',
+    //   moneda: 'ARS'
+    // },
+    // {
+    //   nombre: 'Bolivia',
+    //   prefijo: '591',
+    //   moneda: 'BOB'
+    // },
+    // {
+    //   nombre: 'Brasil',
+    //   prefijo: '55',
+    //   moneda: 'BRL'
+    // },
+    // {
+    //   nombre: 'Chile',
+    //   prefijo: '56',
+    //   moneda: 'CLP'
+    // },
+    // {
+    //   nombre: 'Colombia',
+    //   prefijo: '57',
+    //   moneda: 'COP'
+    // },
+    // {
+    //   nombre: 'Costa Rica',
+    //   prefijo: '506',
+    //   moneda: 'CRC'
+    // },
+    // {
+    //   nombre: 'Cuba',
+    //   prefijo: '53',
+    //   moneda: 'CUP'
+    // },
+    // {
+    //   nombre: 'República Dominicana',
+    //   prefijo: '1809',
+    //   moneda: 'DOP'
+    // },
+    // {
+    //   nombre: 'Ecuador',
+    //   prefijo: '593',
+    //   moneda: 'USD'
+    // },
   ];
 
 }

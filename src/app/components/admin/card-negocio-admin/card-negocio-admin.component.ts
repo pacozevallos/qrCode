@@ -22,7 +22,7 @@ import firebase from 'firebase/app';
 })
 export class CardNegocioAdminComponent implements OnInit {
 
-  @Input() negocio
+  @Input() negocio;
 
   opciones = [
     {
@@ -65,7 +65,7 @@ export class CardNegocioAdminComponent implements OnInit {
     //   icon: 'settings',
     //   function: (negocio) => this.otrasConfiguraciones(negocio)
     // },
-  
+
     {
       nombre: 'Eliminar negocio',
       icon: 'trash',
@@ -86,12 +86,12 @@ export class CardNegocioAdminComponent implements OnInit {
   ) { }
 
   ngOnInit() {
- 
+
     this.afs.collection('users').valueChanges().subscribe( res => {
       this.user = res.find( (find: User) => find.uid === this.negocio.autorId);
     });
-    
-    
+
+
     // this.afs.collection('negocios').doc(this.negocio.id).collection('items').valueChanges().subscribe( res => {
     //   this.items = res;
     // });
@@ -110,14 +110,13 @@ export class CardNegocioAdminComponent implements OnInit {
     //   console.log(size);
     // })
 
-  
+
     // return await firebase.firestore().collection('negocios').doc(this.negocio.id).collection('items').get()
     // .then( query => {
     //   const size = query.size;
     //   console.log(size);
     // })
-    
-    
+
   }
 
   verificarItemsCollection() {
