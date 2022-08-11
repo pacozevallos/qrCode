@@ -13,6 +13,8 @@ import { Item } from 'src/app/classes/item';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Negocio } from 'src/app/classes/negocio';
 import { CrearItemComponent } from '../crear-item/crear-item.component';
+import { AngularFireStorage } from '@angular/fire/storage';
+import firebase from 'firebase/app';
 
 @Component({
   selector: 'app-lista-items',
@@ -50,7 +52,8 @@ export class ListaItemsComponent implements OnInit {
     private afs: AngularFirestore,
     private dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private storage: AngularFireStorage
   ) { }
 
   ngOnInit(): void {
@@ -59,6 +62,22 @@ export class ListaItemsComponent implements OnInit {
       this.idNegocio = params.id;
       this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
         this.negocio = res;
+
+        // firebase.storage().ref(`imagesItems/${this.negocio.id}`).listAll()
+        // .then( (res) => {
+        //   console.log(res.items);
+        //   res.items.forEach((itemRef) => {
+        //     console.log(itemRef.fullPath);
+        //   });
+        // })
+
+        this.storage.ref(`imagesItems/${this.negocio.id}`).listAll().subscribe( res => {
+          console.log(res.items);
+          res.items.forEach( itemRef => {
+            console.log(itemRef.fullPath);
+          });
+        })
+
       });
     });
 
@@ -78,7 +97,7 @@ export class ListaItemsComponent implements OnInit {
 
     this.fs.getAllItemsDocument(this.idNegocio).subscribe( res => {
       this.items = res;
-      console.log(this.items);
+      // console.log(this.items);
       this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
         const id = prev.findIndex((item) => item.categoria === categoria);
         const cat = 'xxx';
@@ -87,7 +106,7 @@ export class ListaItemsComponent implements OnInit {
           : prev.push({categoria, items: [{...items, categoria}]});
         return prev;
       }, []);
-      console.log(this.itemsGroup);
+      // console.log(this.itemsGroup);
     });
 
      // Para filtrar objetos anidados, incluye minusculas

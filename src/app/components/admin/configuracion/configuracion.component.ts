@@ -58,15 +58,15 @@ export class ConfiguracionComponent implements OnInit {
       function: (negocio) => this.agregarRedes(negocio)
     },
     {
-      nombre: 'Eliminar negocio',
-      icon: 'trash',
-      function: (negocio) => this.eliminarNegocio(negocio)
-    },
-    {
       nombre: 'Duplicar negocio',
       icon: 'copy',
       function: (negocio) => this.duplicarNegocio(negocio)
-    }
+    },
+    // {
+    //   nombre: 'Eliminar negocio',
+    //   icon: 'trash',
+    //   function: (negocio) => this.eliminarNegocio(negocio)
+    // },
   ];
 
   constructor(

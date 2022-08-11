@@ -29,6 +29,8 @@ export class LogoNegocioComponent implements OnInit {
   readonly maxSize = 1048576 * 5;
   actualSize: any;
 
+  loadingLogo = true;
+
   // imageLogo = new FormControl('', [FileValidator.maxContentSize(this.maxSize)])
 
   constructor(
@@ -97,6 +99,10 @@ export class LogoNegocioComponent implements OnInit {
       })
     )
     .subscribe();
+  }
+
+  detectarCargado() {
+    this.loadingLogo = false;
   }
 
   cancelar() {

@@ -34,6 +34,7 @@ export class EliminarNegocioComponent implements OnInit {
     });
   }
 
+  
 
   eliminarNegocio() {
 

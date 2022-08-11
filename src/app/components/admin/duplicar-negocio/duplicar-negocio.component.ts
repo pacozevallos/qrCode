@@ -100,14 +100,19 @@ export class DuplicarNegocioComponent implements OnInit {
           const items = data;
           console.log(items);
           items.forEach(item => {
-            return this.afs.collection('negocios').doc(this.negocioId).collection('items').doc(item.id).set(item)
+
+            
+
+            this.afs.collection('negocios').doc(this.negocioId).collection('items').doc(item.id).set(item)
               .then(() => {
-                console.log('items copiados');
+                console.log('item copiado');
+
                 this.dialogRef.close();
-                this.snackBar.open(`Negocio duplicado`, 'CERRAR', {
-                  duration: 3000,
-                });
+                // this.snackBar.open(`Negocio duplicado`, 'CERRAR', {
+                //   duration: 3000,
+                // });
                 this.router.navigate(['/admin']);
+
               });
           });
         });
