@@ -99,26 +99,38 @@ export class DuplicarNegocioComponent implements OnInit {
         this.afs.collection('negocios').doc(this.negocioIdPrev).collection('items').valueChanges().subscribe(data => {
           const items = data;
           console.log(items);
+
+
+          // this.storage.ref(`imagesItems/${this.negocio.id}`).listAll().subscribe( response => {
+          //   console.log(response.items);
+          //   response.items.forEach( itemRef => {
+          //     itemRef.getDownloadURL().then( url => {
+          //       const imgUrl = url.replace(this.negocio.id, 'novotel-cusco');
+          //       console.log(imgUrl);
+          //     });
+          //   });
+          // });
+
+
           items.forEach(item => {
 
-            
+            const image = item.image.replace(this.negocioIdPrev, this.negocioId);
+            console.log(image);
+            const newItem = { ...item, image};
 
-            this.afs.collection('negocios').doc(this.negocioId).collection('items').doc(item.id).set(item)
+            this.afs.collection('negocios').doc(this.negocioId).collection('items').doc(item.id).set(newItem)
               .then(() => {
                 console.log('item copiado');
-
                 this.dialogRef.close();
-                // this.snackBar.open(`Negocio duplicado`, 'CERRAR', {
-                //   duration: 3000,
-                // });
                 this.router.navigate(['/admin']);
-
               });
+
           });
         });
     });
 
   }
+
 
 
   validateAllFormFields(formGroup: FormGroup) {

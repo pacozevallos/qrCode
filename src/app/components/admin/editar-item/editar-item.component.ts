@@ -247,8 +247,6 @@ export class EditarItemComponent implements OnInit {
     .subscribe();
   }
 
-  
-
   errorImagen() {
     return this.formItem.controls.image.hasError('required') ? 'La imagen es necesaria' :
     this.formItem.controls.image.hasError('maxContentSize') ? 'El peso no debe exceder los 5 MB' : '';

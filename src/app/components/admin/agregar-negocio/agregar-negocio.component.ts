@@ -63,7 +63,6 @@ export class AgregarNegocioComponent implements OnInit {
     // this.negocioRef = this.afs.collection('negocios').doc(this.negocioId);
     // console.log(this.negocioRef.id);
 
-
   }
 
   ngOnInit(): void {

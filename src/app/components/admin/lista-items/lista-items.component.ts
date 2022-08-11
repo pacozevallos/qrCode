@@ -47,6 +47,7 @@ export class ListaItemsComponent implements OnInit {
   }
 
 
+
   constructor(
     private fs: FirebaseService,
     private afs: AngularFirestore,
@@ -63,20 +64,17 @@ export class ListaItemsComponent implements OnInit {
       this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
         this.negocio = res;
 
-        // firebase.storage().ref(`imagesItems/${this.negocio.id}`).listAll()
-        // .then( (res) => {
-        //   console.log(res.items);
-        //   res.items.forEach((itemRef) => {
-        //     console.log(itemRef.fullPath);
-        //   });
-        // })
 
-        this.storage.ref(`imagesItems/${this.negocio.id}`).listAll().subscribe( res => {
-          console.log(res.items);
-          res.items.forEach( itemRef => {
-            console.log(itemRef.fullPath);
-          });
-        })
+        // this.storage.ref(`imagesItems/${this.negocio.id}`).listAll().subscribe( response => {
+        //   console.log(response.items);
+        //   response.items.forEach( itemRef => {
+        //     itemRef.getDownloadURL().then( url => {
+        //       const imgUrl = url.replace(this.negocio.id, 'novotel-cusco');
+        //       console.log(imgUrl);
+        //     });
+        //   });
+        // });
+
 
       });
     });
@@ -183,3 +181,7 @@ export class ListaItemsComponent implements OnInit {
   }
 
 }
+
+// https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/imagesItems%2FInqd05TPL5eKWV2t0Xga%2FJ2CgzGSeAsEOZElFX6W8.jpg?alt=media&token=504e56b3-a74d-4cb3-bcb5-d8442c4a5940
+
+// https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/imagesItems%2Fnovotel-cusco%2FJ2CgzGSeAsEOZElFX6W8.jpg?alt=media&token=00891eb3-c4cd-4803-9d69-5aff9907eada

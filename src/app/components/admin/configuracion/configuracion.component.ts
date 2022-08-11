@@ -62,11 +62,11 @@ export class ConfiguracionComponent implements OnInit {
       icon: 'copy',
       function: (negocio) => this.duplicarNegocio(negocio)
     },
-    // {
-    //   nombre: 'Eliminar negocio',
-    //   icon: 'trash',
-    //   function: (negocio) => this.eliminarNegocio(negocio)
-    // },
+    {
+      nombre: 'Eliminar negocio',
+      icon: 'trash',
+      function: (negocio) => this.eliminarNegocio(negocio)
+    },
   ];
 
   constructor(
