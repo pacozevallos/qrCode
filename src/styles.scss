@@ -883,3 +883,17 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   height: 81px;
   object-fit: contain;
 }
+
+.mat-tab-nav-bar, .mat-tab-header {
+  // border-bottom: 1px solid rgba(0,0,0,.12);
+  border-bottom: none !important;
+}
+.cardConfig {
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0px 3px 6px rgba($dark, 0.1);
+  @include media-breakpoint-only(xs) {
+    padding: 1.3rem;
+  }
+}

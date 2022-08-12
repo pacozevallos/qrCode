@@ -1,45 +1,13 @@
-<div class="overflow-hidden py-4 py-md-5" *ngIf="negocio">
-
-  <!-- <div class="d-flex justify-content-between align-items-center py-3 py-md-4">
-    <div class="d-flex align-items-center">
-      <p class="h3 mb-0">Configuración</p>
+<div class="">
+  <div class="row" *ngIf="negocio">
+    <div class="col-md-8">
+      <div class="row gy-3 gy-md-5">
+        <app-configurar-negocio [negocio]="negocio"></app-configurar-negocio>
+        <app-logo-negocio [negocio]="negocio"></app-logo-negocio>
+        <app-qr-code [negocio]="negocio"></app-qr-code>
+      </div>
+      
     </div>
-  </div> -->
-
-
-  <div class="bg-light">
-
-
-  
-  <div class="row justify-content-between">
-
-    <div class="col-md-7">
-
-      <app-configurar-negocio [negocio]="negocio"></app-configurar-negocio>
-
-      <!-- <div class="grillaOpciones">
-
-        <div *ngFor="let option of opciones; last as last">
-          <button class="encima" mat-menu-item (click)="option.function(negocio)">
-            <i-tabler class="me-2" [name]="option.icon"></i-tabler>
-            <span class="ms-2">{{option.nombre}}</span>
-          </button>
-          <mat-divider *ngIf="!last"></mat-divider>
-        </div>
-
-        <button class="btn btn-outline-primary" *ngFor="let option of opciones | slice:0:4" (click)="option.function(negocio)">
-          <div class="d-flex flex-column justify-content-center py-1 py-md-2">
-            <span class="mb-3 mb-md-4">
-              <i-tabler [name]="option.icon" class="iconOptionDetalleNegocio"></i-tabler>
-            </span>
-            <span class="lh-sm small">{{option.nombre}}</span>
-          </div>
-        </button>
-
-      </div> -->
-
-    </div>
-
     <div class="col-md-4">
       <div *ngFor="let option of opciones; last as last">
         <button class="encima" mat-menu-item (click)="option.function(negocio)">
@@ -49,9 +17,13 @@
         <mat-divider *ngIf="!last"></mat-divider>
       </div>
     </div>
-
   </div>
-
 </div>
 
-</div>
+
+
+
+
+
+
+

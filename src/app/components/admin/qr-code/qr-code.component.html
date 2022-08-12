@@ -2,18 +2,20 @@
   <qrcode [qrdata]="qrCodeData" [width]="400" [errorCorrectionLevel]="'M'"></qrcode>
 </div>
 
-
-
-<div class="buttonClose">
+<!-- <div class="buttonClose">
   <button mat-icon-button (click)="cancelar()">
     <mat-icon>close</mat-icon>
   </button>
-</div>
+</div> -->
+
+<div class="cardConfig">
+
+
 
 
 
   <div *ngIf="!qrCodeImage">
-    <p class="h4">Generar código QR</p>
+    <p class="h5">Código QR</p>
 
     <div class="d-flex gap-2 my-3">
       <span>
@@ -81,3 +83,5 @@
     <img class="border" [src]="data.qrCodeImage" (load)="detectarCargado()" width="100%" height="auto">
   </div>
 </div> -->
+
+</div>

@@ -1,10 +1,12 @@
-<p class="h3">Agregar logo</p>
+<div class="cardConfig">
 
-<div class="buttonClose">
+<p class="h5 mb-3">Logo</p>
+
+<!-- <div class="buttonClose">
   <button mat-icon-button (click)="cancelar()">
     <mat-icon>close</mat-icon>
   </button>
-</div>
+</div> -->
 
 <form [formGroup]="formLogoNegocio" (submit)="onSubmit()" novalidate class="row gx-3 gx-md-4">
 
@@ -32,7 +34,7 @@
         </div>
       </div>
       <div class="image">
-        <img class="imageLogoEditAdmin p-1 rounded-circle border" [src]="data.imageLogo || 'assets/images/imageFakerCamara.png' " (load)="detectarCargado()">
+        <img class="imageLogoEditAdmin p-2 rounded-circle border" [src]="negocio.imageLogo || 'assets/images/imageFakerCamara.png' " (load)="detectarCargado()">
       </div>
     </div>
 
@@ -61,4 +63,5 @@
   </div>
 
 </form>
+</div>
 

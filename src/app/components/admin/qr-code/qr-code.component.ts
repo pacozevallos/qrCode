@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { base64StringToBlob } from 'blob-util';
@@ -14,12 +14,14 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class QrCodeComponent implements OnInit {
 
+  @Input() negocio: Negocio;
+
   qrCodeData = '';
   downloadURL: Observable<string>;
   loading = false;
   loadingQr = true;
   qrCodeImage: boolean;
-  negocio: Negocio;
+  // negocio: Negocio;
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<QrCodeComponent>,
@@ -28,25 +30,25 @@ export class QrCodeComponent implements OnInit {
     private storage: AngularFireStorage,
     private changeDetectorRef: ChangeDetectorRef
   ) {
-      this.changeDetectorRef.markForCheck();
+      // this.changeDetectorRef.markForCheck();
     }
 
   ngOnInit(): void {
-    console.log(this.data);
+    // console.log(this.data);
 
-    this.qrCodeData = `${window.location.origin}/negocio/${this.data.id}`;
+    this.qrCodeData = `${window.location.origin}/negocio/${this.negocio.id}`;
     console.log(this.qrCodeData);
 
     this.qrCodeImage = false;
 
-    this.afs.doc('negocios/' + this.data.id).valueChanges().subscribe( (data: Negocio) => {
+    this.afs.doc('negocios/' + this.negocio.id).valueChanges().subscribe( (data: Negocio) => {
       this.negocio = data;
       if (this.negocio.qrCodeImage) {
         this.qrCodeImage = true;
       } else {
         this.qrCodeImage = false;
       }
-      this.changeDetectorRef.detectChanges();
+      // this.changeDetectorRef.detectChanges();
     });
 
   }
@@ -63,7 +65,7 @@ export class QrCodeComponent implements OnInit {
     const b64Data = myBase64[1];
     const myBlob = base64StringToBlob(b64Data, contentType);
 
-    const filePath = `imagesQrCodes/${this.data.id}.png`;
+    const filePath = `imagesQrCodes/${this.negocio.id}.png`;
     const ref = this.storage.ref(filePath);
     const task = ref.put(myBlob);
 
@@ -73,7 +75,7 @@ export class QrCodeComponent implements OnInit {
         ref.getDownloadURL().toPromise().then( (url) => {
           this.downloadURL = url;
 
-          this.afs.collection('negocios').doc(this.data.id).update({
+          this.afs.collection('negocios').doc(this.negocio.id).update({
             qrCodeImage: this.downloadURL,
             qrCodeImageName: filePath,
           });

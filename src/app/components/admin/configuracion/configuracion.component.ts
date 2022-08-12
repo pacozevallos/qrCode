@@ -85,7 +85,7 @@ export class ConfiguracionComponent implements OnInit {
     //   const url = res[0].path;
     //   console.log(url);
     // });
-    
+
     this.activatedRoute.parent.url.subscribe(params => {
       this.idNegocio = params[0].path;
 

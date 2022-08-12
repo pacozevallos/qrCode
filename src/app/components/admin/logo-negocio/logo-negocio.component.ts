@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -16,7 +16,7 @@ import { Negocio } from 'src/app/classes/negocio';
 })
 export class LogoNegocioComponent implements OnInit {
 
-  // imageLogo = new FormControl('', [Validators.required, Validators.email]);
+  @Input() negocio: Negocio;
 
   formLogoNegocio: FormGroup;
   loader = false;
@@ -43,7 +43,7 @@ export class LogoNegocioComponent implements OnInit {
 
   ngOnInit(): void {
     this.formLogoNegocio = this.fb.group({
-      imageLogo: ['', [FileValidator.maxContentSize(this.maxSize)]]
+      imageLogo: ['', [ Validators.required, FileValidator.maxContentSize(this.maxSize)]]
     });
   }
 
@@ -52,7 +52,7 @@ export class LogoNegocioComponent implements OnInit {
       this.loader = true;
       this.uploadLogoNegocio();
     } else {
-      this.validateAllFormFields(this.formLogoNegocio)
+      this.validateAllFormFields(this.formLogoNegocio);
     }
   }
 
@@ -78,7 +78,7 @@ export class LogoNegocioComponent implements OnInit {
     const nombreImage = this.nameItem.split('.');
 
     const file = this.selectedFile;
-    const filePath = `imagesLogosNegocios/${this.data.id}.${nombreImage[1]}`;
+    const filePath = `imagesLogosNegocios/${this.negocio.id}.${nombreImage[1]}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
@@ -87,10 +87,10 @@ export class LogoNegocioComponent implements OnInit {
       finalize(() => {
         fileRef.getDownloadURL().toPromise().then( (url) => {
 
-          this.afs.collection('negocios').doc(this.data.id).update({
+          this.afs.collection('negocios').doc(this.negocio.id).update({
             imageLogo: url,
-            imageLogoName: `${this.data.id}.${nombreImage[1]}`
-          })
+            imageLogoName: `${this.negocio.id}.${nombreImage[1]}`
+          });
 
           this.bottomSheetRef.dismiss();
           console.log(url);
@@ -112,7 +112,5 @@ export class LogoNegocioComponent implements OnInit {
   errorImagen() {
     return this.formLogoNegocio.controls.imageLogo.hasError('maxContentSize') ? 'El peso no debe exceder los 5 MB' : '';
   }
-
-  
 
 }

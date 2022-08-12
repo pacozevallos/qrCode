@@ -49,7 +49,7 @@ const routes: Routes = [
       { path: 'elegirPlan', component: SelectPLanComponent },
     ]
   },
-  { path: 'tienda/:id', component: NegocioComponent, children: [
+  { path: 'negocio/:id', component: NegocioComponent, children: [
       { path: '', component: ContentNegocioComponent },
       { path: 'item/:id', component: DetalleItemComponent },
     ]
@@ -71,7 +71,7 @@ const routes: Routes = [
         { path: 'productos', component: ListaItemsComponent},
         { path: 'configuracion', component: ConfiguracionComponent },
       ] },
-    
+
       { path: ':id/productos/:id', component: DetalleItemAdminComponent},
     ]
   },

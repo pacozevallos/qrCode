@@ -111,7 +111,7 @@ export class DetalleNegocioComponent implements OnInit {
     }
   ];
 
-  links = [ 
+  links = [
     {
       nombre: 'Productos',
       url: 'productos'
