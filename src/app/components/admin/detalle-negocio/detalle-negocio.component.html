@@ -118,16 +118,28 @@
 
 
 
-<div class="container">
+<div class="">
 
-  <mat-tab-group [@.disabled]="true">
+  <!-- <mat-tab-group [@.disabled]="true">
     <mat-tab label="Productos">
     <app-lista-items></app-lista-items>
     </mat-tab>
     <mat-tab label="Configuración">
-      <app-configuracion></app-configuracion>
-      </mat-tab>
-  </mat-tab-group>
+      <div class="bg-light">
+        <div class="container">
+          <app-configuracion></app-configuracion>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group> -->
+
+  <nav mat-tab-nav-bar>
+    <!-- <a mat-tab-link *ngFor="let link of links" [routerLink]="link.url" (click)="activeLink = link" [active]="activeLink == link">{{link.nombre}}</a> -->
+    <a mat-tab-link #rla="routerLinkActive" *ngFor="let link of links; let i=index" [routerLink]="link.url" routerLinkActive="active" [active]="rla.isActive" >{{link.nombre}}
+    </a>
+  </nav>
+
+  <router-outlet></router-outlet>
 
 </div>
 

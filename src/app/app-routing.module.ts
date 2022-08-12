@@ -28,6 +28,7 @@ import { ContraseniaPublicComponent } from './components/public/contrasenia-publ
 import { ContraseniaGraciasComponent } from './components/public/contrasenia-gracias/contrasenia-gracias.component';
 import { PagoExitoPLanMensualComponent } from './components/admin/pago-exito-plan-mensual/pago-exito-plan-mensual.component';
 import { PagoExitoPLanAnualComponent } from './components/admin/pago-exito-plan-anual/pago-exito-plan-anual.component';
+import { ConfiguracionComponent } from './components/admin/configuracion/configuracion.component';
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
 
 const routes: Routes = [
@@ -48,7 +49,7 @@ const routes: Routes = [
       { path: 'elegirPlan', component: SelectPLanComponent },
     ]
   },
-  { path: 'negocio/:id', component: NegocioComponent, children: [
+  { path: 'tienda/:id', component: NegocioComponent, children: [
       { path: '', component: ContentNegocioComponent },
       { path: 'item/:id', component: DetalleItemComponent },
     ]
@@ -66,8 +67,11 @@ const routes: Routes = [
       { path: 'graciasPlan', component: GraciasPlanComponent },
       { path: 'pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
       { path: 'pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
-      { path: ':id', component: DetalleNegocioComponent },
-      { path: ':id/productos', component: ListaItemsComponent},
+      { path: ':id', component: DetalleNegocioComponent, children: [
+        { path: 'productos', component: ListaItemsComponent},
+        { path: 'configuracion', component: ConfiguracionComponent },
+      ] },
+    
       { path: ':id/productos/:id', component: DetalleItemAdminComponent},
     ]
   },

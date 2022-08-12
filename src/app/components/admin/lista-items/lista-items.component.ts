@@ -59,8 +59,8 @@ export class ListaItemsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedRoute.params.subscribe( params => {
-      this.idNegocio = params.id;
+    this.activatedRoute.parent.url.subscribe( params => {
+      this.idNegocio = params[0].path;
       this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
         this.negocio = res;
 

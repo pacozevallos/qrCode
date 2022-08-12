@@ -1,58 +1,63 @@
-<form [formGroup]="formNegocio" (submit)="onSubmit()" novalidate class="row gx-2">
+<div class="bg-white rounded p-3 p-md-5 shadow-sm">
 
-  <mat-form-field appearance="fill" class="col-12">
-    <mat-label>Nombre del negocio</mat-label>
-    <input matInput type="text" formControlName="nombre">
-    <mat-error *ngIf="errorNombreNegocio()">{{errorNombreNegocio()}}</mat-error>
-  </mat-form-field>
+  <p class="h5 mb-3">Datos de la tienda</p>
 
-  <mat-form-field appearance="fill" class="col-12">
-    <mat-label>{{hrefCurrent}}/</mat-label>
-    <input matInput type="text" formControlName="id">
-    <mat-error *ngIf="errorId()">{{errorId()}}</mat-error>
-  </mat-form-field>
+  <form [formGroup]="formNegocio" (submit)="onSubmit()" novalidate class="row gx-2">
 
-  <mat-form-field appearance="fill" class="col-8">
-    <mat-label>País</mat-label>
-    <mat-select formControlName="pais">
-      <mat-option *ngFor="let pais of paises" [value]="pais.nombre">{{pais.nombre}}</mat-option>
-    </mat-select>
-    <mat-error *ngIf="errorPais()">{{errorPais()}}</mat-error>
-  </mat-form-field>
+    <mat-form-field appearance="fill" class="col-12">
+      <mat-label>Nombre del negocio</mat-label>
+      <input matInput type="text" formControlName="nombre">
+      <mat-error *ngIf="errorNombreNegocio()">{{errorNombreNegocio()}}</mat-error>
+    </mat-form-field>
 
-  <mat-form-field appearance="fill" class="col-4">
-    <mat-label>Moneda</mat-label>
-    <mat-select formControlName="moneda">
-      <mat-option *ngFor="let pais of paises" [value]="pais.moneda">{{pais.moneda}}</mat-option>
-    </mat-select>
-    <mat-error *ngIf="errorPais()">{{errorPais()}}</mat-error>
-  </mat-form-field>
+    <mat-form-field appearance="fill" class="col-12">
+      <mat-label>{{hrefCurrent}}/</mat-label>
+      <input matInput type="text" formControlName="id">
+      <mat-error *ngIf="errorId()">{{errorId()}}</mat-error>
+    </mat-form-field>
 
-  <mat-form-field appearance="fill" class="col-4">
-    <mat-label>Prefijo</mat-label>
-    <mat-select formControlName="prefijo">
-      <mat-option *ngFor="let pais of paises" [value]="pais.prefijo">+{{pais.prefijo}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  
-  <mat-form-field appearance="fill" class="col-8">
-    <mat-label>Número whatsApp</mat-label>
-    <input matInput type="number" formControlName="numeroWhatsApp" placeholder="999999999">
-    <mat-error *ngIf="errorWhatsApp()">{{errorWhatsApp()}}</mat-error>
-  </mat-form-field>
+    <mat-form-field appearance="fill" class="col-8">
+      <mat-label>País</mat-label>
+      <mat-select formControlName="pais">
+        <mat-option *ngFor="let pais of paises" [value]="pais.nombre">{{pais.nombre}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="errorPais()">{{errorPais()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="col-4">
+      <mat-label>Moneda</mat-label>
+      <mat-select formControlName="moneda">
+        <mat-option *ngFor="let pais of paises" [value]="pais.moneda">{{pais.moneda}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="errorPais()">{{errorPais()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="col-4">
+      <mat-label>Prefijo</mat-label>
+      <mat-select formControlName="prefijo">
+        <mat-option *ngFor="let pais of paises" [value]="pais.prefijo">+{{pais.prefijo}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="col-8">
+      <mat-label>Número whatsApp</mat-label>
+      <input matInput type="number" formControlName="numeroWhatsApp" placeholder="999999999">
+      <mat-error *ngIf="errorWhatsApp()">{{errorWhatsApp()}}</mat-error>
+    </mat-form-field>
 
 
-  <div class="mt-2" style="width: 220px;">
-    <div class="d-grid">
-      <button class="btn btn-primary">
-        <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
-          <mat-spinner class="" [diameter]="24"></mat-spinner>
-        </span>
-        <span *ngIf="!loading">Guardar cambios</span>
-      </button>
+    <div class="mt-2" style="width: 220px;">
+      <div class="d-grid">
+        <button class="btn btn-primary">
+          <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
+            <mat-spinner class="" [diameter]="24"></mat-spinner>
+          </span>
+          <span *ngIf="!loading">Guardar cambios</span>
+        </button>
+      </div>
     </div>
-  </div>
 
-</form>
+  </form>
 
-<!-- <pre>{{formNegocio.value | json}}</pre> -->
+  <!-- <pre>{{formNegocio.value | json}}</pre> -->
+</div>

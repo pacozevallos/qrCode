@@ -111,14 +111,18 @@ export class DetalleNegocioComponent implements OnInit {
     }
   ];
 
-  secciones = [
+  links = [ 
     {
       nombre: 'Productos',
+      url: 'productos'
     },
     {
-      nombre: 'Configuración'
+      nombre: 'Configuración',
+      url: 'configuracion'
     }
   ];
+
+  activeLink = this.links[0];
 
   constructor(
     private activatedRoute: ActivatedRoute,
