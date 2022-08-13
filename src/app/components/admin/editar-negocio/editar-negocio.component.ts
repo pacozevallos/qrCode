@@ -40,7 +40,7 @@ export class EditarNegocioComponent implements OnInit {
     this.color = this.data.color;
 
     this.formNegocio = this.fb.group({
-      nombre: [this.data.nombre, Validators.required],
+      nombre: [this.data.nombreNegocio, Validators.required],
 
       // numeroWhatsApp: [this.data.numeroWhatsApp, [Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
       // tipo: [this.data.tipo],

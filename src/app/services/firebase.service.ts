@@ -101,7 +101,7 @@ export class FirebaseService {
   addSuscripcion() {
     this.afs.collection('suscripciones').add({
 
-    })
+    });
   }
 
   getUsers() {

@@ -27,7 +27,7 @@ export class QrCodeComponent implements OnInit {
     'Permite a tu público acceder a tu tienda desde cualquier lugar',
     'Puedes imprimirlo y mostrarlo en un lugar visible de tu local',
     'Fácil rápido y siempre actualizado'
-  ]
+  ];
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<QrCodeComponent>,

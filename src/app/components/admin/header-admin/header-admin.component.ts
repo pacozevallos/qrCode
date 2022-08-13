@@ -56,7 +56,7 @@ export class HeaderAdminComponent implements OnInit {
   }
 
   goToCuenta() {
-    this.router.navigate(['/admin/cuenta']);
+    this.router.navigate([`/admin/${this.negocio.id}/cuenta`]);
   }
 
   goToPlan() {

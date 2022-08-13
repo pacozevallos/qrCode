@@ -33,7 +33,7 @@ export class PlanComponent implements OnInit {
     this.fs.getUsersFirestore().subscribe( res => {
       this.users = res;
       console.log(this.users);
-      
+
       this.planActual = this.users.find( user => user.uid === this.user.uid).plan;
       console.log(this.planActual);
 
@@ -44,14 +44,13 @@ export class PlanComponent implements OnInit {
         this.caracteristicasPlan = this.ds.planes.find( plan => plan.nombre === 'Plan Power').caracteristicas;
       }
 
-    })
-  
+    });
+
   }
 
   cambiarPLan() {
     this.matDialog.open(CambiarPLanComponent, {
-      
-    })
+    });
   }
 
 }

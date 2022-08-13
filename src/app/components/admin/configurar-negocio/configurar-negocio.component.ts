@@ -33,7 +33,7 @@ export class ConfigurarNegocioComponent implements OnInit {
     this.paises = this.ds.paises;
 
     this.formNegocio = this.fb.group({
-      nombre: [this.negocio.nombre, Validators.required],
+      nombre: [this.negocio.nombreNegocio, Validators.required],
       id: [{value: this.negocio.id, disabled: true}],
       pais: [this.negocio.pais, Validators.required],
       moneda: [this.negocio.moneda, Validators.required],

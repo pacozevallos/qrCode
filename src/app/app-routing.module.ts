@@ -59,7 +59,6 @@ const routes: Routes = [
     // path: 'admin', component: AdminComponent,
     children: [
       { path: '', component: DetalleNegocioComponent },
-      { path: 'cuenta', component: CuentaComponent },
       { path: 'contrasenia', component: ContraseniaComponent },
       { path: 'plan', component: PlanComponent },
       { path: 'actualizarDatos', component: ActualizarDatosComponent },
@@ -72,6 +71,7 @@ const routes: Routes = [
       { path: ':id', component: DetalleNegocioComponent, children: [
         { path: 'productos', component: ListaItemsComponent},
         { path: 'configuracion', component: ConfiguracionComponent },
+        { path: 'cuenta', component: CuentaComponent },
       ] },
       // { path: ':id/productos/:id', component: DetalleItemAdminComponent},
     ]

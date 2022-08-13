@@ -1,5 +1,5 @@
 export class Negocio {
-  nombre: string;
+  nombreNegocio: string;
   fechaCreacion: string;
   id: string;
   tipo: string;
@@ -21,4 +21,5 @@ export class Negocio {
   numeroWhatsApp: number;
   moneda: string;
   iso: string;
+  autorId: string;
 }

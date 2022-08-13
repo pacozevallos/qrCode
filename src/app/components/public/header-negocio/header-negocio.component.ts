@@ -12,7 +12,7 @@ import { ShareComponent } from '../share/share.component';
   styleUrls: ['./header-negocio.component.scss']
 })
 export class HeaderNegocioComponent implements OnInit, OnChanges {
-  
+
   id;
   negocio: Negocio;
   loader = true;
@@ -28,26 +28,25 @@ export class HeaderNegocioComponent implements OnInit, OnChanges {
 
     this.router.events.subscribe( (event: Event) => {
       if (event instanceof NavigationStart) {
-        this.back = event.url == `/negocio/${this.id}`? false : true
+        this.back = event.url === `/negocio/${this.id}` ? false : true;
       }
-    })
+    });
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       this.id = params.id;
       // console.log(this.id);
-      
+
       this.afs.collection('negocios').doc(this.id).valueChanges().subscribe( (res: Negocio) => {
         this.negocio = res;
         this.loader = false;
       });
 
-      this.back = this.router.url == `/negocio/${this.id}`? false : true
-      
+      this.back = this.router.url === `/negocio/${this.id}` ? false : true;
+
     });
 
-    
   }
 
   ngOnChanges(changes: SimpleChanges) {

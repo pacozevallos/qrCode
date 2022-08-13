@@ -37,7 +37,7 @@ export class RegistroComponent implements OnInit {
     this.paises = this.ds.paises;
 
     this.formRegistro = this.fb.group ({
-      // nombre: ['', Validators.required],
+      nombre: ['', Validators.required],
       email: [ '', [Validators.required, Validators.email] ],
       password: [ '', [Validators.required, Validators.minLength(6)]],
 
@@ -81,7 +81,7 @@ export class RegistroComponent implements OnInit {
       this.validateAllFormFields(this.formRegistro);
     }
   }
-  
+
   emailSignUp() {
     this.auth.emailSignUp(this.formRegistro.value)
     .then( data  => {

@@ -18,6 +18,7 @@ import { EliminarNegocioComponent } from '../eliminar-negocio/eliminar-negocio.c
 import { AgregarCelularComponent } from '../agregar-celular/agregar-celular.component';
 import { DuplicarNegocioComponent } from '../duplicar-negocio/duplicar-negocio.component';
 import { QrCodeComponent } from '../qr-code/qr-code.component';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-detalle-negocio',
@@ -119,10 +120,15 @@ export class DetalleNegocioComponent implements OnInit {
     {
       nombre: 'Configuración',
       url: 'configuracion'
-    }
+    },
+    {
+      nombre: 'Mi Cuenta',
+      url: 'cuenta'
+    },
   ];
 
   activeLink = this.links[0];
+  user;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -132,24 +138,56 @@ export class DetalleNegocioComponent implements OnInit {
     private bottomSheetRef: MatBottomSheetRef,
     private router: Router,
     private matDialog: MatDialog,
+    private afa: AngularFireAuth
 
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      this.idNegocio = params.id;
 
-
-      // traer los datos del negocio
-      this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe(res => {
-        this.negocio = res;
-        console.log(this.negocio);
-        
-      });
-
-      // this.bottomSheetRef.containerInstance._animationStateChanged = this.negocio;
-
+    this.afa.authState.subscribe( user => {
+      this.user = user;
+      console.log(this.user.uid);
     });
+
+    this.afs.collection('negocios').valueChanges().subscribe( res => {
+      const arrayNegocios = res;
+      console.log(res);
+      const negocioRef = arrayNegocios.find( (find: Negocio) => find.autorId === this.user.uid );
+      console.log(negocioRef);
+      this.negocio = negocioRef;
+    });
+
+
+
+
+
+
+    // this.activatedRoute.parent.url.subscribe( res => {
+    //   const currentUrl = res[0].path;
+    //   console.log(currentUrl);
+    // });
+
+    // this.activatedRoute.params.subscribe(params => {
+    //   this.idNegocio = params.id;
+    //   console.log(this.idNegocio);
+
+    //   this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
+
+    //     if (res.autorId === this.user.uid) {
+    //       this.negocio = res;
+    //       console.log(this.negocio);
+    //       console.log('Si tiene permiso');
+    //     } else {
+    //       console.log('No tiene permiso');
+    //       this.negocio = '';
+    //     }
+
+    //   });
+
+
+    //   // this.bottomSheetRef.containerInstance._animationStateChanged = this.negocio;
+
+    // });
   }
 
   // verCodigoQr() {

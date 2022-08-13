@@ -31,7 +31,6 @@ export class ListaNegociosComponent implements OnInit {
   items = [];
   user = firebase.default.auth().currentUser;
 
-  
 
   public myAngularxQrCode = 'golxlkPQPcyGhnoLD6xO';
 
@@ -119,6 +118,5 @@ export class ListaNegociosComponent implements OnInit {
     return new Blob([uInt8Array], { type: imageType });
   }
 
-  
 
 }

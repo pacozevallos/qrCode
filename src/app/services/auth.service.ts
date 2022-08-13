@@ -25,21 +25,21 @@ export class AuthService {
   emailSignUp(dataFormRegistro) {
     return this.auth.createUserWithEmailAndPassword(dataFormRegistro.email, dataFormRegistro.password)
       .then( credential => {
-        this.router.navigate(['/admin/elegirPlan']);
-        // credential.user.updateProfile({
-        //   displayName: dataFormRegistro.nombre
-        // });
-        this.saveUserEmail(credential.user);
+        credential.user.updateProfile({
+          displayName: dataFormRegistro.nombre
+        });
+        this.saveUser(dataFormRegistro.nombre, credential.user);
         this.saveNegocio(dataFormRegistro);
+        this.router.navigate([`/admin/${dataFormRegistro.id}/productos`]);
       })
       .catch( error => {
         this.handleError(error);
       });
   }
 
-  saveUserEmail(user) {
+  saveUser(nombre, user) {
     return this.afs.collection('users').add({
-      // displayName: nombre,
+      displayName: nombre,
       uid: user.uid,
       email: user.email,
       plan: 'Plan Free',
@@ -51,7 +51,6 @@ export class AuthService {
     this.afs.doc('negocios/' + dataFormRegistro.id).set(dataFormRegistro)
     .then(() => {
       console.log('Megocio creado');
-      ;
     });
   }
 

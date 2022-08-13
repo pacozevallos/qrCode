@@ -1,28 +1,34 @@
-<!-- <div class="bg-light">
-  <div class="container py-3 py-md-4">
-    <a class="text-dark lead" routerLink="/admin/listaNegocios">Admin qrCode</a>
-  </div>
-</div> -->
 
-<div class="bg-light" *ngIf="user && negocio">
+<div class="bg-white" *ngIf="user && negocio">
 	<div class="container">
 		<div class="py-3 d-flex justify-content-between align-items-center">
 
-			<a class="lead mb-0" [routerLink]=" '/admin/' + negocio.id + '/productos' ">
-				<!-- <img class="logoTaaripayAdmin" src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/home%2FlogoTaaripay.svg?alt=media&token=de2c5381-9d52-4aac-a6c3-7fd77ce026c0" alt=""> -->
-				{{negocio.nombre}}
+			<a class="h4 mb-0 text-dark" [routerLink]=" '/admin/' + negocio.id + '/productos' ">
+				{{negocio.nombreNegocio}}
       </a>
 
 
-			<div class="d-flex align-items-center" >
-				<div class="text-end me-2">
+			<div class="d-flex align-items-center">
+
+        <button class="btn btn-outline-primary btn-sm me-2">
+          <i-tabler name="building-store"></i-tabler>
+          <span class="ms-2 d-none d-md-inline-block">Ver tienda</span>
+        </button>
+
+        <button class="btn btn-primary btn-sm me-2">
+          <i-tabler name="rocket"></i-tabler>
+          <span class="ms-2 d-none d-md-inline-block">Mejorar plan</span>
+        </button>
+
+				<div class="text-end mx-2 d-none d-md-block">
 					<p class="fw-normal d-block mb-0">{{user.displayName}}</p>
-					<p class="extraSmall mb-0">{{user.email}}</p>
+					<!-- <p class="extraSmall mb-0">{{user.email}}</p> -->
 				</div>
 				
 				<!-- <button class="photoUser" [matMenuTriggerFor]="menu">
 						<img class="" src="https://media-exp1.licdn.com/dms/image/C5603AQETYOc7RHHB9Q/profile-displayphoto-shrink_200_200/0/1517498194143?e=1661990400&v=beta&t=9oQl4SMZUmgpperLo9voBNSEFV8YxJcXup-6XRV0khM" alt="">
 				</button> -->
+
 				<button mat-icon-button [matMenuTriggerFor]="menu">
 					<i-tabler name="dots-vertical"></i-tabler>
 				</button>
@@ -36,6 +42,7 @@
 						<span>{{item.nombre}}</span>
 					</button>
 				</mat-menu>
+
 			</div>
 
       

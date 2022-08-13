@@ -15,6 +15,7 @@ import { Negocio } from 'src/app/classes/negocio';
 import { CrearItemComponent } from '../crear-item/crear-item.component';
 import { AngularFireStorage } from '@angular/fire/storage';
 import firebase from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-lista-items',
@@ -25,10 +26,12 @@ export class ListaItemsComponent implements OnInit {
 
   // @Input() idNegocio: string;
   idNegocio: string;
-  negocio: Negocio;
+  negocio;
   items: Item[] = [];
   itemsGroup = [];
   value;
+
+  user;
 
   displayedColumns = [ 'imagen', 'nombre', 'categoria', 'destacado', 'publicado', 'opciones'];
   itemsData = new MatTableDataSource();
@@ -54,35 +57,53 @@ export class ListaItemsComponent implements OnInit {
     private dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
     private activatedRoute: ActivatedRoute,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private afa: AngularFireAuth
   ) { }
 
   ngOnInit(): void {
 
-    this.activatedRoute.parent.url.subscribe( params => {
-      this.idNegocio = params[0].path;
-      this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
-        this.negocio = res;
+    this.afa.authState.subscribe( user => {
+      this.user = user;
+      console.log(this.user.uid);
+    });
 
-
-        // this.storage.ref(`imagesItems/${this.negocio.id}`).listAll().subscribe( response => {
-        //   console.log(response.items);
-        //   response.items.forEach( itemRef => {
-        //     itemRef.getDownloadURL().then( url => {
-        //       const imgUrl = url.replace(this.negocio.id, 'novotel-cusco');
-        //       console.log(imgUrl);
-        //     });
-        //   });
-        // });
-
-
+    this.afs.collection('negocios').valueChanges().subscribe( res => {
+      const arrayNegocios = res;
+      console.log(res);
+      const negocioRef = arrayNegocios.find( (find: Negocio) => find.autorId === this.user.uid );
+      console.log(negocioRef);
+      this.negocio = negocioRef;
+      this.idNegocio = this.negocio.id;
+      console.log(this.idNegocio);
+      this.fs.getAllItemsDocument(this.idNegocio).subscribe( response => {
+        this.itemsData.data = response;
+        console.log(response);
       });
     });
 
+    // this.activatedRoute.parent.url.subscribe( params => {
+    //   this.idNegocio = params[0].path;
+    //   this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
+    //     this.negocio = res;
 
-    this.fs.getAllItemsDocument(this.idNegocio).subscribe( res => {
-      this.itemsData.data = res;
-    });
+
+    //     // this.storage.ref(`imagesItems/${this.negocio.id}`).listAll().subscribe( response => {
+    //     //   console.log(response.items);
+    //     //   response.items.forEach( itemRef => {
+    //     //     itemRef.getDownloadURL().then( url => {
+    //     //       const imgUrl = url.replace(this.negocio.id, 'novotel-cusco');
+    //     //       console.log(imgUrl);
+    //     //     });
+    //     //   });
+    //     // });
+
+
+    //   });
+    // });
+
+
+
 
     this.itemsData.paginator = this.paginator;
 

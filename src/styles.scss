@@ -20,8 +20,8 @@ $btn-border-width: 2px;
 $btn-font-weight: 400;
 $btn-padding-y: 0.8rem;
 $btn-padding-x: 1rem;
-// $btn-padding-y-sm: 0.5rem;
-// $btn-padding-x-sm: 0.75rem;
+$btn-padding-y-sm: 0.4rem;
+$btn-padding-x-sm: 0.7rem;
 // $btn-padding-y-lg: 1rem;
 // $btn-padding-x-lg: 1.5rem;
 $btn-border-radius: 0.4rem;
@@ -466,6 +466,14 @@ table {
 
 .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
   display: none !important;
+}
+
+.mat-tab-link {
+  min-width: 25px !important;
+  padding: 0 1.5rem !important;
+  @include media-breakpoint-only(xs) {
+    padding: 0 1rem !important;
+  }
 }
 
 .dialogColor {
