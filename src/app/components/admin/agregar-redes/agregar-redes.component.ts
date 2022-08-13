@@ -1,7 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { Negocio } from 'src/app/classes/negocio';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -11,13 +12,15 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class AgregarRedesComponent implements OnInit {
 
+  @Input() negocio: Negocio;
+
   formRedes: FormGroup;
   loading: boolean;
   redesSociales = [];
 
   constructor(
-    private bottomSheetRef: MatBottomSheetRef<AgregarRedesComponent>,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
+    // private bottomSheetRef: MatBottomSheetRef<AgregarRedesComponent>,
+    // @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private fb: FormBuilder,
     private afs: AngularFirestore,
     private ds: DataService
@@ -32,17 +35,17 @@ export class AgregarRedesComponent implements OnInit {
     });
 
     const arrayRedes = this.formRedes.controls.redes as FormArray;
-    // if (this.data.redes === undefined ) {
-    //   arrayRedes.push(
-    //     this.fb.group({
-    //       nombre: ['', Validators.required],
-    //       url: ['', Validators.required],
-    //       icon: ['']
-    //     })
-    //   );
-    // }
-    if (this.data.redes?.length >= 1 ) {
-      this.data.redes.forEach( element => {
+    if (this.negocio.redes?.length === 0) {
+      arrayRedes.push(
+        this.fb.group({
+          nombre: ['', Validators.required],
+          url: ['', Validators.required],
+          icon: ['']
+        })
+      );
+    }
+    if (this.negocio.redes?.length >= 1 ) {
+      this.negocio.redes.forEach( element => {
         arrayRedes.push(
           this.fb.group({
             nombre: [element.nombre, Validators.required],
@@ -78,10 +81,11 @@ export class AgregarRedesComponent implements OnInit {
   }
 
   updateNegocio() {
-    this.afs.doc('negocios/' + this.data.id).update(this.formRedes.value)
+    this.afs.doc('negocios/' + this.negocio.id).update(this.formRedes.value)
     .then(() => {
-      this.bottomSheetRef.dismiss();
-      console.log('Configuraciones agregadas');
+      // this.bottomSheetRef.dismiss();
+      this.loading = false;
+      console.log('Redes sociales actualizada');
     });
   }
 
@@ -110,8 +114,8 @@ export class AgregarRedesComponent implements OnInit {
     (this.formRedes.controls.redes as FormArray).removeAt(index);
   }
 
-  cancelar() {
-    this.bottomSheetRef.dismiss();
-  }
+  // cancelar() {
+  //   this.bottomSheetRef.dismiss();
+  // }
 
 }

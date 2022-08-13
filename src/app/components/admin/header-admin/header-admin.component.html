@@ -4,12 +4,13 @@
   </div>
 </div> -->
 
-<div class="bg-light" *ngIf="user">
+<div class="bg-light" *ngIf="user && negocio">
 	<div class="container">
 		<div class="py-3 d-flex justify-content-between align-items-center">
 
-			<a class="lead mb-0" routerLink="/admin">
-				<img class="logoTaaripayAdmin" src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/home%2FlogoTaaripay.svg?alt=media&token=de2c5381-9d52-4aac-a6c3-7fd77ce026c0" alt="">
+			<a class="lead mb-0" [routerLink]=" '/admin/' + negocio.id + '/productos' ">
+				<!-- <img class="logoTaaripayAdmin" src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/home%2FlogoTaaripay.svg?alt=media&token=de2c5381-9d52-4aac-a6c3-7fd77ce026c0" alt=""> -->
+				{{negocio.nombre}}
       </a>
 
 

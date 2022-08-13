@@ -127,6 +127,7 @@ import { DuplicarNegocioComponent } from './components/admin/duplicar-negocio/du
 import { QrCodeComponent } from './components/admin/qr-code/qr-code.component';
 import { ConfiguracionComponent } from './components/admin/configuracion/configuracion.component';
 import { ConfigurarNegocioComponent } from './components/admin/configurar-negocio/configurar-negocio.component';
+import { ShareAdminComponent } from './components/admin/share-admin/share-admin.component';
 
 @NgModule({
   declarations: [
@@ -187,7 +188,8 @@ import { ConfigurarNegocioComponent } from './components/admin/configurar-negoci
     DuplicarNegocioComponent,
     QrCodeComponent,
     ConfiguracionComponent,
-    ConfigurarNegocioComponent
+    ConfigurarNegocioComponent,
+    ShareAdminComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,

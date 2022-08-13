@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Negocio } from 'src/app/classes/negocio';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -14,6 +15,8 @@ export class HeaderAdminComponent implements OnInit {
   // displayName: string;
   // email: string;
   // photoURL: string;
+
+  @Input() negocio: Negocio;
 
   user;
 

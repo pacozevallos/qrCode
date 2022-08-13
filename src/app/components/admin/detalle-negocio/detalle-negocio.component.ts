@@ -143,6 +143,8 @@ export class DetalleNegocioComponent implements OnInit {
       // traer los datos del negocio
       this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe(res => {
         this.negocio = res;
+        console.log(this.negocio);
+        
       });
 
       // this.bottomSheetRef.containerInstance._animationStateChanged = this.negocio;

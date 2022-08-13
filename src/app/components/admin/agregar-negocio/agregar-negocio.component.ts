@@ -32,7 +32,6 @@ export class AgregarNegocioComponent implements OnInit {
   tiposNegocio = [];
   color = '#1456D8';
   filteredOptions: Observable<string[]>;
-
   negocioId: string;
   hrefCurrent = window.location.origin;
 

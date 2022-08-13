@@ -22,27 +22,36 @@ export class AuthService {
     public readonly ngZone: NgZone,
   ) { }
 
-  emailSignUp(nombre: string, email: string, password: string) {
-    return this.auth.createUserWithEmailAndPassword(email, password)
+  emailSignUp(dataFormRegistro) {
+    return this.auth.createUserWithEmailAndPassword(dataFormRegistro.email, dataFormRegistro.password)
       .then( credential => {
         this.router.navigate(['/admin/elegirPlan']);
-        credential.user.updateProfile({
-          displayName: nombre
-        });
-        this.saveUserEmail(nombre, credential.user);
+        // credential.user.updateProfile({
+        //   displayName: dataFormRegistro.nombre
+        // });
+        this.saveUserEmail(credential.user);
+        this.saveNegocio(dataFormRegistro);
       })
       .catch( error => {
         this.handleError(error);
       });
   }
 
-  saveUserEmail(nombre, user) {
+  saveUserEmail(user) {
     return this.afs.collection('users').add({
-      displayName: nombre,
+      // displayName: nombre,
       uid: user.uid,
       email: user.email,
       plan: 'Plan Free',
       fechaCreacion: firebase.default.firestore.FieldValue.serverTimestamp(),
+    });
+  }
+
+  saveNegocio(dataFormRegistro) {
+    this.afs.doc('negocios/' + dataFormRegistro.id).set(dataFormRegistro)
+    .then(() => {
+      console.log('Megocio creado');
+      ;
     });
   }
 

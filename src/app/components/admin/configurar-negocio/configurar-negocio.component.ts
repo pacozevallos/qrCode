@@ -38,7 +38,7 @@ export class ConfigurarNegocioComponent implements OnInit {
       pais: [this.negocio.pais, Validators.required],
       moneda: [this.negocio.moneda, Validators.required],
       prefijo: [this.negocio.prefijo, Validators.required],
-      numeroWhatsApp: [this.negocio.numeroWhatsApp, Validators.required],
+      numeroWhatsApp: [this.negocio.numeroWhatsApp, [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
       autorId: [user.uid],
       fechaModificacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
     });

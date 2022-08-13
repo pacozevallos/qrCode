@@ -23,6 +23,12 @@ export class QrCodeComponent implements OnInit {
   qrCodeImage: boolean;
   // negocio: Negocio;
 
+  opciones = [
+    'Permite a tu público acceder a tu tienda desde cualquier lugar',
+    'Puedes imprimirlo y mostrarlo en un lugar visible de tu local',
+    'Fácil rápido y siempre actualizado'
+  ]
+
   constructor(
     private bottomSheetRef: MatBottomSheetRef<QrCodeComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,

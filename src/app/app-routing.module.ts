@@ -58,7 +58,7 @@ const routes: Routes = [
     path: 'admin', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin},
     // path: 'admin', component: AdminComponent,
     children: [
-      { path: '', component: ListaNegociosComponent },
+      { path: '', component: DetalleNegocioComponent },
       { path: 'cuenta', component: CuentaComponent },
       { path: 'contrasenia', component: ContraseniaComponent },
       { path: 'plan', component: PlanComponent },
@@ -67,12 +67,13 @@ const routes: Routes = [
       { path: 'graciasPlan', component: GraciasPlanComponent },
       { path: 'pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
       { path: 'pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
+      { path: 'productos', component: ListaItemsComponent},
+      { path: 'configuracion', component: ConfiguracionComponent },
       { path: ':id', component: DetalleNegocioComponent, children: [
         { path: 'productos', component: ListaItemsComponent},
         { path: 'configuracion', component: ConfiguracionComponent },
       ] },
-
-      { path: ':id/productos/:id', component: DetalleItemAdminComponent},
+      // { path: ':id/productos/:id', component: DetalleItemAdminComponent},
     ]
   },
   { path: '', redirectTo: '', pathMatch: 'full' },

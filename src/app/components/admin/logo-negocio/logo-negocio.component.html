@@ -53,14 +53,19 @@
   </div>
 
 
-  <div class="d-grid mt-4">
-    <button class="btn btn-primary">
-      <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loader">
-        <mat-spinner class="" [diameter]="24"></mat-spinner>
-      </span>
-      <span *ngIf="!loader">Agregar logo</span>
-    </button>
+  <div class="mt-4" style="width: 180px;">
+    <div class="d-grid">
+      <button class="btn btn-primary">
+        <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loader">
+          <mat-spinner class="" [diameter]="24"></mat-spinner>
+        </span>
+        <span *ngIf="!loader">Agregar logo</span>
+      </button>
+    </div>
   </div>
+
+
+ 
 
 </form>
 </div>
