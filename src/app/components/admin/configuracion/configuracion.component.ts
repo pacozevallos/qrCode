@@ -15,6 +15,8 @@ import { EliminarNegocioComponent } from '../eliminar-negocio/eliminar-negocio.c
 import { LogoNegocioComponent } from '../logo-negocio/logo-negocio.component';
 import { QrCodeComponent } from '../qr-code/qr-code.component';
 import { VistaQrComponent } from '../vista-qr/vista-qr.component';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Negocio } from 'src/app/classes/negocio';
 
 @Component({
   selector: 'app-configuracion',
@@ -25,6 +27,7 @@ export class ConfiguracionComponent implements OnInit {
 
   idNegocio: string;
   negocio;
+  user;
 
   opciones = [
     // {
@@ -77,6 +80,7 @@ export class ConfiguracionComponent implements OnInit {
     private bottomSheetRef: MatBottomSheetRef,
     private router: Router,
     private matDialog: MatDialog,
+    private afAuth: AngularFireAuth
   ) { }
 
   ngOnInit(): void {
@@ -86,14 +90,22 @@ export class ConfiguracionComponent implements OnInit {
     //   console.log(url);
     // });
 
-    this.activatedRoute.parent.url.subscribe(params => {
-      this.idNegocio = params[0].path;
+    // this.activatedRoute.parent.url.subscribe(params => {
+    //   this.idNegocio = params[0].path;
+    //   this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe(res => {
+    //     this.negocio = res;
+    //   });
+    // });
 
-      this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe(res => {
-        this.negocio = res;
+     // traer solo el negocio del usuario
+    this.afAuth.authState.subscribe( user => {
+      this.user = user;
+      this.afs.collection('negocios').valueChanges().subscribe( res => {
+        const negocioRef = res.find( (find: Negocio) => find.autorId === this.user.uid );
+        this.negocio = negocioRef;
       });
-
     });
+
   }
 
   verItems(negocio) {

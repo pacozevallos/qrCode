@@ -54,26 +54,33 @@ const routes: Routes = [
       { path: 'item/:id', component: DetalleItemComponent },
     ]
   },
+  // {
+  //   path: 'admin', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin},
+  //   children: [
+  //     { path: '', component: DetalleNegocioComponent },
+  //     { path: 'contrasenia', component: ContraseniaComponent },
+  //     { path: 'plan', component: PlanComponent },
+  //     { path: 'actualizarDatos', component: ActualizarDatosComponent },
+  //     { path: 'elegirPlan', component: SelectPLanComponent },
+  //     { path: 'graciasPlan', component: GraciasPlanComponent },
+  //     { path: 'pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
+  //     { path: 'pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
+  //     { path: 'productos', component: ListaItemsComponent},
+  //     { path: 'configuracion', component: ConfiguracionComponent },
+  //     { path: ':id', component: DetalleNegocioComponent, children: [
+  //       { path: 'productos', component: ListaItemsComponent},
+  //       { path: 'configuracion', component: ConfiguracionComponent },
+  //       { path: 'cuenta', component: CuentaComponent },
+  //     ] },
+  //   ]
+  // },
   {
-    path: 'admin', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin},
-    // path: 'admin', component: AdminComponent,
+    path: 'admin', component: DetalleNegocioComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin},
     children: [
-      { path: '', component: DetalleNegocioComponent },
-      { path: 'contrasenia', component: ContraseniaComponent },
-      { path: 'plan', component: PlanComponent },
-      { path: 'actualizarDatos', component: ActualizarDatosComponent },
-      { path: 'elegirPlan', component: SelectPLanComponent },
-      { path: 'graciasPlan', component: GraciasPlanComponent },
-      { path: 'pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
-      { path: 'pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
+      { path: '', component: ListaItemsComponent},
       { path: 'productos', component: ListaItemsComponent},
       { path: 'configuracion', component: ConfiguracionComponent },
-      { path: ':id', component: DetalleNegocioComponent, children: [
-        { path: 'productos', component: ListaItemsComponent},
-        { path: 'configuracion', component: ConfiguracionComponent },
-        { path: 'cuenta', component: CuentaComponent },
-      ] },
-      // { path: ':id/productos/:id', component: DetalleItemAdminComponent},
+      { path: 'cuenta', component: CuentaComponent },
     ]
   },
   { path: '', redirectTo: '', pathMatch: 'full' },

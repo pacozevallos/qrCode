@@ -33,7 +33,7 @@ export class ConfigurarNegocioComponent implements OnInit {
     this.paises = this.ds.paises;
 
     this.formNegocio = this.fb.group({
-      nombre: [this.negocio.nombreNegocio, Validators.required],
+      nombreNegocio: [this.negocio.nombreNegocio, Validators.required],
       id: [{value: this.negocio.id, disabled: true}],
       pais: [this.negocio.pais, Validators.required],
       moneda: [this.negocio.moneda, Validators.required],
@@ -80,7 +80,7 @@ export class ConfigurarNegocioComponent implements OnInit {
   }
 
   errorNombreNegocio() {
-    return this.formNegocio.controls.nombre.hasError('required') ? 'Ingresa un nombre' : '';
+    return this.formNegocio.controls.nombreNegocio.hasError('required') ? 'Ingresa un nombre para tu tienda' : '';
   }
 
   errorId() {

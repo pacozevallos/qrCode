@@ -12,6 +12,9 @@ import { User } from '../classes/user';
 })
 export class FirebaseService {
 
+  user;
+  negocio;
+
   constructor(
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth
@@ -113,6 +116,19 @@ export class FirebaseService {
         return { id, ...data };
       }))
     );
+  }
+
+  getNegocioUser() {
+
+    this.afAuth.authState.subscribe( user => {
+      return this.user = user;
+    });
+
+    this.afs.collection('negocios').valueChanges().subscribe( res => {
+      const negocioRef = res.find( (find: Negocio) => find.autorId === this.user.uid );
+      return this.negocio = negocioRef;
+    });
+
   }
 
 

@@ -59,7 +59,7 @@ export class DetalleItemAdminComponent implements OnInit {
 
     this.activatedRoute.params.subscribe( params => {
       this.idItem = params.id;
-      
+
       this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(this.idItem).valueChanges().subscribe( data => {
         this.item = data;
 
@@ -76,13 +76,13 @@ export class DetalleItemAdminComponent implements OnInit {
             checked: this.item.destacado,
             function: (idItem, change: MatSlideToggleChange) => this.actualizarDestacado(idItem, change)
           },
-        ]
+        ];
 
       });
 
     });
 
-    this.urlBack = `/admin/${this.idNegocio}/productos`
+    this.urlBack = `/admin/${this.idNegocio}/productos`;
 
   }
 

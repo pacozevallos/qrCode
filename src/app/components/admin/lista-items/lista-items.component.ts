@@ -58,29 +58,38 @@ export class ListaItemsComponent implements OnInit {
     private bottomSheet: MatBottomSheet,
     private activatedRoute: ActivatedRoute,
     private storage: AngularFireStorage,
-    private afa: AngularFireAuth
+    private afAuth: AngularFireAuth
   ) { }
 
   ngOnInit(): void {
 
-    this.afa.authState.subscribe( user => {
+    this.afAuth.authState.subscribe( user => {
       this.user = user;
-      console.log(this.user.uid);
     });
 
     this.afs.collection('negocios').valueChanges().subscribe( res => {
-      const arrayNegocios = res;
-      console.log(res);
-      const negocioRef = arrayNegocios.find( (find: Negocio) => find.autorId === this.user.uid );
-      console.log(negocioRef);
+      const negocioRef = res.find( (find: Negocio) => find.autorId === this.user.uid );
       this.negocio = negocioRef;
-      this.idNegocio = this.negocio.id;
-      console.log(this.idNegocio);
-      this.fs.getAllItemsDocument(this.idNegocio).subscribe( response => {
-        this.itemsData.data = response;
-        console.log(response);
+
+      this.fs.getAllItemsDocument(this.negocio.id).subscribe( data => {
+        this.itemsData.data = data;
       });
+
     });
+
+    // this.afs.collection('negocios').valueChanges().subscribe( res => {
+    //   const arrayNegocios = res;
+    //   console.log(res);
+    //   const negocioRef = arrayNegocios.find( (find: Negocio) => find.autorId === this.user.uid );
+    //   console.log(negocioRef);
+    //   this.negocio = negocioRef;
+    //   this.idNegocio = this.negocio.id;
+    //   console.log(this.idNegocio);
+    //   this.fs.getAllItemsDocument(this.idNegocio).subscribe( response => {
+    //     this.itemsData.data = response;
+    //     console.log(response);
+    //   });
+    // });
 
     // this.activatedRoute.parent.url.subscribe( params => {
     //   this.idNegocio = params[0].path;
