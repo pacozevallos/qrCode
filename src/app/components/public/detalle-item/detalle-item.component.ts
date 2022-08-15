@@ -40,7 +40,7 @@ export class DetalleItemComponent implements OnInit {
 
       this.afs.collection('negocios').doc(this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
         this.negocio = res;
-        this.messageWhatsApp = `https://api.whatsapp.com/send?phone=51${this.negocio.numeroWhatsApp}&text=Hola, me interesa el siguiente producto`
+        this.messageWhatsApp = `https://api.whatsapp.com/send?phone=51${this.negocio.numeroWhatsApp}&text=Hola te escribo desde tu catálogo de _${this.negocio.nombreNegocio}_. Me interesa el siguiente producto: *${this.item.nombre} | ${this.negocio.moneda} ${this.item.precio}*. Referencia: ${window.location.origin}/tienda/${this.idNegocio}/item/${this.item.id} `
       });  
 
     });

@@ -43,6 +43,8 @@ export class HeaderAdminComponent implements OnInit {
     }
   ];
 
+  urlTienda:string;
+
   constructor(
     public auth: AuthService,
     public afAuth: AngularFireAuth,
@@ -53,10 +55,11 @@ export class HeaderAdminComponent implements OnInit {
     this.afAuth.authState.subscribe( user => {
       this.user = user;
     });
+    this.urlTienda = `${window.location.origin}/tienda/${this.negocio.id}`
   }
 
   goToCuenta() {
-    this.router.navigate([`/admin/${this.negocio.id}/cuenta`]);
+    this.router.navigate([`/admin/cuenta`]);
   }
 
   goToPlan() {

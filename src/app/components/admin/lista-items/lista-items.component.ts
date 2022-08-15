@@ -164,13 +164,11 @@ export class ListaItemsComponent implements OnInit {
 
   agregarItem() {
     this.bottomSheet.open(CrearItemComponent, {
-      // panelClass: 'myBottomSheetFull',
       data: this.negocio
     });
   }
 
   actualizarPublicado(idItem, change: MatSlideToggleChange) {
-    // this.fs.updatePublicado(key, e);
     this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(idItem).update({
       publicado: change.checked
     });
@@ -179,7 +177,7 @@ export class ListaItemsComponent implements OnInit {
   openModalEdit(item) {
     this.bottomSheet.open(EditarItemComponent, {
       data: {
-        idNegocio: this.idNegocio,
+        idNegocio: this.negocio.id,
         item
       }
     });

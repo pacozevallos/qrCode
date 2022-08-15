@@ -29,8 +29,8 @@ export class AuthService {
           displayName: dataFormRegistro.nombre
         });
         this.saveUser(dataFormRegistro.nombre, credential.user);
-        this.saveNegocio(dataFormRegistro);
-        this.router.navigate([`/admin/${dataFormRegistro.id}/productos`]);
+        this.saveNegocio(dataFormRegistro, credential.user);
+        this.router.navigate([`/admin/productos`]);
       })
       .catch( error => {
         this.handleError(error);
@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   saveUser(nombre, user) {
-    return this.afs.collection('users').add({
+    return this.afs.collection('users').doc(user.uid).set({
       displayName: nombre,
       uid: user.uid,
       email: user.email,
@@ -47,8 +47,8 @@ export class AuthService {
     });
   }
 
-  saveNegocio(dataFormRegistro) {
-    this.afs.doc('negocios/' + dataFormRegistro.id).set(dataFormRegistro)
+  saveNegocio(dataFormRegistro, user) {
+    this.afs.doc('negocios/' + dataFormRegistro.id).set({...dataFormRegistro, autorId: user.uid})
     .then(() => {
       console.log('Megocio creado');
     });

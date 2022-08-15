@@ -18,7 +18,7 @@ export class ShareAdminComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.urlShare = `${window.location.origin}/negocio/${this.negocio.id}`
+    this.urlShare = `${window.location.origin}/tienda/${this.negocio.id}`
   }
 
   hecho() {

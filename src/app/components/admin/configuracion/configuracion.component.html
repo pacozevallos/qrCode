@@ -7,7 +7,18 @@
         <app-logo-negocio [negocio]="negocio"></app-logo-negocio>
         <app-share-admin [negocio]="negocio"></app-share-admin>
         <app-qr-code [negocio]="negocio"></app-qr-code>
-        <app-agregar-redes [negocio]="negocio"></app-agregar-redes> 
+        <app-agregar-redes [negocio]="negocio"></app-agregar-redes>
+        <div>
+          <button class="btn btn-link px-1 btn-sm" (click)="eliminarNegocio(negocio)">
+            <div class="d-flex align-items-center">
+              <span class="me-2">
+                <i-tabler name="trash" style="width: 21px;"></i-tabler>
+              </span>
+              <span>Eliminar tienda</span>
+            </div>
+            
+          </button>
+        </div>
       </div>
     </div>
 

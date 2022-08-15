@@ -2,9 +2,9 @@
 
   <div class="d-flex justify-content-between">
 
-    <div class="">
+    <div class="pt-2">
       <p class="nombreItem mb-1 lh-sm">{{item.nombre}}</p>
-      <p class="descripcionItem mb-1" *ngIf="item.descripcion">{{item.descripcion | slice:0:28}}...</p>
+      <!-- <p class="descripcionItem mb-1" *ngIf="item.descripcion">{{item.descripcion | slice:0:28}}...</p> -->
       
       <!-- <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
       <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " >S/. {{item.precio}}</span> -->

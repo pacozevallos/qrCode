@@ -28,7 +28,7 @@ export class HeaderNegocioComponent implements OnInit, OnChanges {
 
     this.router.events.subscribe( (event: Event) => {
       if (event instanceof NavigationStart) {
-        this.back = event.url === `/negocio/${this.id}` ? false : true;
+        this.back = event.url === `/tienda/${this.id}` ? false : true;
       }
     });
   }
@@ -43,7 +43,7 @@ export class HeaderNegocioComponent implements OnInit, OnChanges {
         this.loader = false;
       });
 
-      this.back = this.router.url === `/negocio/${this.id}` ? false : true;
+      this.back = this.router.url === `/tienda/${this.id}` ? false : true;
 
     });
 

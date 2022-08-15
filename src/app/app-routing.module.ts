@@ -49,7 +49,7 @@ const routes: Routes = [
       { path: 'elegirPlan', component: SelectPLanComponent },
     ]
   },
-  { path: 'negocio/:id', component: NegocioComponent, children: [
+  { path: 'tienda/:id', component: NegocioComponent, children: [
       { path: '', component: ContentNegocioComponent },
       { path: 'item/:id', component: DetalleItemComponent },
     ]
@@ -81,6 +81,13 @@ const routes: Routes = [
       { path: 'productos', component: ListaItemsComponent},
       { path: 'configuracion', component: ConfiguracionComponent },
       { path: 'cuenta', component: CuentaComponent },
+      { path: 'contrasenia', component: ContraseniaComponent },
+      { path: 'plan', component: PlanComponent },
+      { path: 'actualizarDatos', component: ActualizarDatosComponent },
+      { path: 'elegirPlan', component: SelectPLanComponent },
+      { path: 'graciasPlan', component: GraciasPlanComponent },
+      { path: 'pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
+      { path: 'pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
     ]
   },
   { path: '', redirectTo: '', pathMatch: 'full' },

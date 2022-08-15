@@ -49,6 +49,7 @@ export class RegistroComponent implements OnInit {
       numeroWhatsApp: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
       color: ['#1456D8', Validators.required],
       // autorId: [user.uid],
+      // redes: this.fb.array([]),
       fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
     });
 

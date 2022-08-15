@@ -92,7 +92,7 @@ export class LogoNegocioComponent implements OnInit {
             imageLogoName: `${this.negocio.id}.${nombreImage[1]}`
           });
 
-          this.bottomSheetRef.dismiss();
+          this.loader = true;
           console.log(url);
 
         }).catch(err => { console.log(err); } );

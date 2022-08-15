@@ -4,18 +4,12 @@
 
 
     <div class="col-md-6">
-      <div class="imageDetalleItem rounded" [style.background-image]=" 'url(' + item.image + ')' ">
-        <!-- <div class="p-2 p-md-3 h-100">
-          <div class="d-flex justify-content-between">
-            <a mat-mini-fab [routerLink]=" '/negocio/' + idNegocio ">
-              <i-tabler name="arrow-left"></i-tabler>
-            </a>
-            <button mat-mini-fab (click)="compartirItem()">
-              <i-tabler name="share"></i-tabler>
-            </button>
-          </div>
-        </div> -->
-      </div>
+      <!-- <div class="imageDetalleItem rounded" [style.background-image]=" 'url(' + item.image + ')' ">
+      </div> -->
+ 
+      <img class="imageDetalleItem rounded bg-light"  [src]="item.image" alt="" width="100%">
+
+      
     </div>
 
 

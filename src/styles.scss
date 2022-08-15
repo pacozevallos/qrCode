@@ -9,7 +9,7 @@ $success: #23E47C;
 $info: #009DF5;
 $warning: #FFCD38;
 $danger: #FA391F;
-$light: #eff3f7;
+$light: #F6F6F6;
 $dark: #16181D;
 $text-muted: rgba($dark, 0.6);
 $superLight: rgba($dark, 0.1);
@@ -274,9 +274,10 @@ table {
 }
 
 .imageDetalleItem {
-  height: 240px;
-  background-size: cover;
-  background-position: center center;
+  height: 380px;
+  object-fit: contain;
+  // background-size: contain;
+  // background-position: center center;
   @include media-breakpoint-only(xs) {
     height: 240px;
   }
@@ -909,4 +910,8 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   .h5 {
     margin-bottom: 2rem;
   }
+}
+
+.mat-paginator, [mat-header-row], [mat-row] {
+  background: $light;
 }
