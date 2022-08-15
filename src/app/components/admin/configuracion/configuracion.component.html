@@ -3,10 +3,12 @@
 
     <div class="col-md-8">
       <div class="row gy-3 gy-md-4">
+        <!-- <app-categorias [negocio]="negocio"></app-categorias> -->
         <app-configurar-negocio [negocio]="negocio"></app-configurar-negocio>
         <app-logo-negocio [negocio]="negocio"></app-logo-negocio>
         <app-share-admin [negocio]="negocio"></app-share-admin>
         <app-qr-code [negocio]="negocio"></app-qr-code>
+        
         <app-agregar-redes [negocio]="negocio"></app-agregar-redes>
         <div>
           <button class="btn btn-link px-1 btn-sm" (click)="eliminarNegocio(negocio)">

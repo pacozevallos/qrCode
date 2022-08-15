@@ -22,7 +22,6 @@ export class ShareComponent implements OnInit {
 
   }
 
-  
   // const dataURL = canvas[0].toDataURL();
   // const myBase64 = dataURL.split(',');
 
@@ -31,33 +30,33 @@ export class ShareComponent implements OnInit {
     const currentUrl = window.location.href;
     console.log(currentUrl);
     console.log(this.router.url);
-    
 
-    if(this.router.url === `/negocio/${this.data.negocio.id}`) {
+
+    if (this.router.url === `/negocio/${this.data.negocio.id}`) {
       this.urlShare = currentUrl;
     }
 
-    if(this.router.url === `/negocio/${this.data.negocio.id}/item/${this.data.item?.id}`) {
+    if (this.router.url === `/negocio/${this.data.negocio.id}/item/${this.data.item?.id}`) {
       this.urlShare = currentUrl;
     }
 
-    if(this.router.url === '/admin') {
+    if (this.router.url === '/admin') {
       const urlNegocio = currentUrl.replace(`admin`, `negocio/${this.data.negocio.id}`);
-      this.urlShare = urlNegocio
+      this.urlShare = urlNegocio;
     }
 
-    if(this.router.url === `/admin/${this.data.negocio.id}`) {
+    if (this.router.url === `/admin/${this.data.negocio.id}`) {
       this.urlShare = `${window.location.origin}/negocio/${this.data.negocio.id}`;
     }
 
-    if(this.router.url === `/admin/${this.data.negocio.id}/productos`) {
+    if (this.router.url === `/admin/${this.data.negocio.id}/productos`) {
       this.urlShare = `${window.location.origin}/negocio/${this.data.negocio.id}/item/${this.data.item?.id}`;
     }
 
-    if(this.router.url === `/admin/${this.data.negocio.id}/productos/${this.data.item?.id}`) {
+    if (this.router.url === `/admin/${this.data.negocio.id}/productos/${this.data.item?.id}`) {
       this.urlShare = `${window.location.origin}/negocio/${this.data.negocio.id}/item/${this.data.item?.id}`;
     }
-    
+
 
     // if(this.router.url === `/admin/${this.data.negocio.id}`) {
     //   const urlNegocio = currentUrl.replace(`admin`, `negocio`);
@@ -66,7 +65,6 @@ export class ShareComponent implements OnInit {
     //   console.log(this.urlShare);
     // }
 
-    
 
   }
 

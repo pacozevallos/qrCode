@@ -21,7 +21,7 @@ $btn-font-weight: 400;
 $btn-padding-y: 0.8rem;
 $btn-padding-x: 1rem;
 $btn-padding-y-sm: 0.4rem;
-$btn-padding-x-sm: 0.7rem;
+$btn-padding-x-sm: 0.6rem;
 // $btn-padding-y-lg: 1rem;
 // $btn-padding-x-lg: 1.5rem;
 $btn-border-radius: 0.4rem;
@@ -215,7 +215,7 @@ table {
 .imageItemDestacado {
   width: 100%;
   height: 140px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .nombreItemDestacado {

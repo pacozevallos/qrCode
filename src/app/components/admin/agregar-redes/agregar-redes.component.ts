@@ -68,7 +68,6 @@ export class AgregarRedesComponent implements OnInit {
     });
 
 
-
   }
 
   onSubmit() {

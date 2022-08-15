@@ -42,7 +42,7 @@ export class QrCodeComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.data);
 
-    this.qrCodeData = `${window.location.origin}/negocio/${this.negocio.id}`;
+    this.qrCodeData = `${window.location.origin}/tienda/${this.negocio.id}`;
     console.log(this.qrCodeData);
 
     this.qrCodeImage = false;

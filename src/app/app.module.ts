@@ -128,6 +128,7 @@ import { QrCodeComponent } from './components/admin/qr-code/qr-code.component';
 import { ConfiguracionComponent } from './components/admin/configuracion/configuracion.component';
 import { ConfigurarNegocioComponent } from './components/admin/configurar-negocio/configurar-negocio.component';
 import { ShareAdminComponent } from './components/admin/share-admin/share-admin.component';
+import { CategoriasComponent } from './components/admin/categorias/categorias.component';
 
 @NgModule({
   declarations: [
@@ -189,7 +190,8 @@ import { ShareAdminComponent } from './components/admin/share-admin/share-admin.
     QrCodeComponent,
     ConfiguracionComponent,
     ConfigurarNegocioComponent,
-    ShareAdminComponent
+    ShareAdminComponent,
+    CategoriasComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,
