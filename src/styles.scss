@@ -908,10 +908,16 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   }
 
   .h5 {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: normal;
   }
 }
 
 .mat-paginator, [mat-header-row], [mat-row] {
   background: $light;
+}
+
+.iconSmall {
+  width: 21px !important;
+  stroke-width: 1.75 !important;
 }

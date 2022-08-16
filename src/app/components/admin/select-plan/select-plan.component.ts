@@ -43,16 +43,16 @@ export class SelectPLanComponent implements OnInit {
 
   goToUrlOpcion(opcion) {
     if (this.estado === opcion) {
-      this.planPower = this.planes.find(find => find.nombre === 'Plan Power');
+      this.planPower = this.planes.find(find0 => find0.nombre === 'Plan Power');
       this.opcionesPlanPower = this.planPower.opciones;
-      this.opcionSelect = this.opcionesPlanPower.find(find => find.nombre === opcion);
+      this.opcionSelect = this.opcionesPlanPower.find(find2 => find2.nombre === opcion);
       return this.opcionSelect.url;
     }
   }
 
 
   goToPlanFree() {
-    this.planFree = this.planes.find(find => find.nombre === 'Plan Free');
+    this.planFree = this.planes.find(find3 => find3.nombre === 'Plan Free');
     return this.planFree.urlButton;
   }
 

@@ -15,7 +15,7 @@ export class ContraseniaComponent implements OnInit {
 
   constructor(
     private afAuth: AngularFireAuth,
-    private auth : AuthService
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {

@@ -28,12 +28,11 @@ export class ActualizarDatosComponent implements OnInit {
 
       this.formDatos = this.fb.group({
         nombre: [this.user.displayName, Validators.required],
-        email: [ {value:this.user.email, disabled: true}, [Validators.required, Validators.email] ],
+        email: [ {value: this.user.email, disabled: true}, [Validators.required, Validators.email] ],
       });
 
     });
 
-    
   }
 
   onSubmit() {
@@ -58,7 +57,7 @@ export class ActualizarDatosComponent implements OnInit {
     })
     .then( () => {
       console.log('Perfil actualizado');
-      this.router.navigate(['/admin/cuenta'])
+      this.router.navigate(['/admin/cuenta']);
     })
     .catch( (error) => {
       console.log(error);
