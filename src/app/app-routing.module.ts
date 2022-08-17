@@ -81,13 +81,10 @@ const routes: Routes = [
       { path: 'productos', component: ListaItemsComponent},
       { path: 'configuracion', component: ConfiguracionComponent },
       { path: 'cuenta', component: CuentaComponent },
-      { path: 'contrasenia', component: ContraseniaComponent },
-      { path: 'plan', component: PlanComponent },
-      { path: 'actualizarDatos', component: ActualizarDatosComponent },
-      { path: 'elegirPlan', component: SelectPLanComponent },
-      { path: 'graciasPlan', component: GraciasPlanComponent },
-      { path: 'pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
-      { path: 'pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
+      { path: 'cuenta/elegirPlan', component: SelectPLanComponent },
+
+      { path: 'cuenta/pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
+      { path: 'cuenta/pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
     ]
   },
   { path: '', redirectTo: '', pathMatch: 'full' },

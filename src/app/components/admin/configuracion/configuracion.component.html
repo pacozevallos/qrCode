@@ -1,40 +1,26 @@
-<div class="">
-  <div class="row" *ngIf="negocio">
+<div *ngIf="negocio">
 
-    <div class="col-md-8">
-      <div class="row gy-3 gy-md-4">
-        <!-- <app-categorias [negocio]="negocio"></app-categorias> -->
-        <app-configurar-negocio [negocio]="negocio"></app-configurar-negocio>
-        <app-logo-negocio [negocio]="negocio"></app-logo-negocio>
-        <app-share-admin [negocio]="negocio"></app-share-admin>
-        <app-qr-code [negocio]="negocio"></app-qr-code>
-        
-        <app-agregar-redes [negocio]="negocio"></app-agregar-redes>
-        <div>
-          <button class="btn btn-link px-1 btn-sm" (click)="eliminarNegocio(negocio)">
-            <div class="d-flex align-items-center">
-              <span class="me-2">
-                <i-tabler name="trash" style="width: 21px;"></i-tabler>
-              </span>
-              <span>Eliminar tienda</span>
-            </div>
-            
-          </button>
-        </div>
-      </div>
+    <div class="row gy-3 gy-md-4">
+      <!-- <app-categorias [negocio]="negocio"></app-categorias> -->
+      <app-configurar-negocio [negocio]="negocio"></app-configurar-negocio>
+      <app-logo-negocio [negocio]="negocio"></app-logo-negocio>
+      <app-share-admin [negocio]="negocio"></app-share-admin>
+      <app-qr-code [negocio]="negocio"></app-qr-code>
+      <app-agregar-redes [negocio]="negocio"></app-agregar-redes>
+
+      <!-- <div>
+        <button class="btn btn-link px-1 btn-sm" (click)="eliminarNegocio(negocio)">
+          <div class="d-flex align-items-center">
+            <span class="me-2">
+              <i-tabler name="trash" style="width: 21px;"></i-tabler>
+            </span>
+            <span>Eliminar tienda</span>
+          </div>
+        </button>
+      </div> -->
+
     </div>
 
-    <!-- <div class="col-md-4">
-      <div *ngFor="let option of opciones; last as last">
-        <button class="encima" mat-menu-item (click)="option.function(negocio)">
-          <i-tabler class="me-2" [name]="option.icon"></i-tabler>
-          <span class="ms-2">{{option.nombre}}</span>
-        </button>
-        <mat-divider *ngIf="!last"></mat-divider>
-      </div>
-    </div> -->
-    
-  </div>
 </div>
 
 

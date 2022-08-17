@@ -91,7 +91,7 @@ export class DataService {
     {
       nombre: 'Plan Power',
       subtitulo: '',
-      descuento: '-90%',
+      descuento: '-50%',
       opciones: [
         {
           nombre: 'Mensual',

@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <mat-form-field appearance="fill" class="w-100">
+    <mat-form-field appearance="standard" class="w-100">
       <mat-label>Imagen logo</mat-label>
       <ngx-mat-file-input #removableInput formControlName="imageLogo" placeholder="Seleccionar imagen" accept=".jpg, .jpeg, .png" (change)="detectFiles($event)"></ngx-mat-file-input>
       <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">

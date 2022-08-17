@@ -48,7 +48,7 @@ export class PlanComponent implements OnInit {
 
   }
 
-  cambiarPLan() {
+  openModalCambiarPlan() {
     this.matDialog.open(CambiarPLanComponent, {
     });
   }
