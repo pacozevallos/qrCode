@@ -30,13 +30,13 @@ export class PagoExitoPLanMensualComponent implements OnInit, AfterContentInit {
       console.log(this.user);
 
       this.getDoc();
-      
+
     });
-    
+
   }
 
   ngAfterContentInit() {
-   
+
   }
 
   getDoc() {
@@ -44,13 +44,13 @@ export class PagoExitoPLanMensualComponent implements OnInit, AfterContentInit {
       this.userDoc = res.find( find => find.uid === this.user.uid );
       console.log(this.userDoc);
 
-      if(this.userDoc.plan === 'Plan Power Mensual') {
+      if (this.userDoc.plan === 'Plan Power Mensual') {
         this.alert = true;
       } else {
         this.alert = false;
       }
-      
-    })
+
+    });
   }
 
   updatePlan() {
@@ -60,7 +60,7 @@ export class PagoExitoPLanMensualComponent implements OnInit, AfterContentInit {
     }).then ( () => {
       this.loading = false;
       this.alert = true;
-    })
+    });
   }
 
 }
