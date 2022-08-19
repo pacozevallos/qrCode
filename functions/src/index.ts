@@ -1,19 +1,23 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
-const axios = require('axios').default;
 admin.initializeApp();
 
-const CLIENT = 'AV3AQkjnuIRsS1L8H1WqByz0Pqgz9V81wMaLMxv0G9faOepwPC-gYMVMsPERmYfPMptqlv5YpZZfZ9Iv';
-const SECRET = 'EE6RAwswnEpt9c8eRp5Qpe_i3oWd2FlU6hALLXdg8AwDny0-FAXGKMZP_rBHXcToWcVWxpnW4a_cLZ9t';
-const TOKEN = 'A21AAKS7PMxkd9yYjYQ1dTVwDPeopKkcU_f0Yo7aCbodmuG2zGynxavB1lvLAtE5tCIOyNvc4oYnvtygJ-RQSWieYlYEj012w';
+const axios = require('axios');
+
+// const client_id = 'AV3AQkjnuIRsS1L8H1WqByz0Pqgz9V81wMaLMxv0G9faOepwPC-gYMVMsPERmYfPMptqlv5YpZZfZ9Iv';
+// const secret = 'EE6RAwswnEpt9c8eRp5Qpe_i3oWd2FlU6hALLXdg8AwDny0-FAXGKMZP_rBHXcToWcVWxpnW4a_cLZ9t';
+const basic = 'QVYzQVFram51SVJzUzFMOEgxV3FCeXowUHFnejlWODF3TWFMTXh2MEc5ZmFPZXB3UEMtZ1lNVk1zUEVSbVlmUE1wdHFsdjVZcFpaZlo5SXY6RUU2UkF3c3duRXB0OWM4ZVJwNVFwZV9pM29XZDJGbFU2aEFMTFhkZzhBd0RueTAtRkFYR0tNWlBfckJIWGNUb1djVld4cG5XNGFfY0xaOXQ='
+// const access_token = 'A21AAJ_LgEntBfmHzLaw1gX1qtdF323gWGb_tov665eWJx691pGB6atMAOe-UbZUV6Nd-fYjB0iZDCtkaIsDR_ISjEb2dcFyA';
 const PAYPAL_API = 'https://api-m.sandbox.paypal.com'; // Live https://api-m.paypal.com
-const auth = { user: CLIENT, pass: SECRET };
+// const auth = { user: client_id, pass: secret };
+
+
+
 
 export const createProduct = functions.https.onRequest( (req, res) => {
-  // tslint:disable-next-line:no-shadowed-variable
-  const axios = require('axios');
-  const data = JSON.stringify({
+
+  const product = JSON.stringify({
     name: 'Subscripcion Youtube',
     description: 'Subscripcion a un canal de Youtube se cobra mensualmente',
     type: 'SERVICE',
@@ -23,31 +27,34 @@ export const createProduct = functions.https.onRequest( (req, res) => {
 
   const config = {
     method: 'post',
-    url: 'https://api-m.sandbox.paypal.com/v1/catalogs/products',
+    url: `${PAYPAL_API}/v1/catalogs/products`,
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Basic ${basic}`,
       'Content-Type': 'application/json'
     },
-    data
+    data: product
   };
 
   axios(config)
-  .then((response: { data: any; }) => {
-    console.log(JSON.stringify(response.data));
-    return res.status(200).json({
-      info: response.data});
+  .then((response: any) => {
+    res.json(response.data);
+    console.log(response.data);
   })
   .catch((error: any) => {
+    res.json(error);
     console.log(error);
   });
+
+
 });
 
 
 export const createPlan = functions.https.onRequest((req, res) => {
+
   const { body } = req;
   // product_id
 
-  const plan = {
+  const plan = JSON.stringify({
     name: 'PLAN mensual',
     product_id: body.product_id,
     status: 'ACTIVE',
@@ -81,17 +88,69 @@ export const createPlan = functions.https.onRequest((req, res) => {
       percentage: '10', // 10USD + 10% = 11 USD
       inclusive: false,
     },
+  });
+
+  const config = {
+    method: 'post',
+    url: `${PAYPAL_API}/v1/billing/plans`,
+    headers: {
+      Authorization: `Basic ${basic}`,
+      'Content-Type': 'application/json'
+    },
+    data: plan
   };
 
-  axios.post(
-    `${PAYPAL_API}/v1/billing/plans`,
-    {
-      auth,
-      body: plan,
-      json: true,
+  axios(config)
+  .then((response: any) => {
+    res.json(response.data);
+    console.log(response.data);
+  })
+  .catch((error: any) => {
+    res.json(error);
+    console.log(error);
+  });
+
+});
+
+
+
+export const generateSubscription = functions.https.onRequest((req, res) => {
+
+  const { body } = req;
+
+  const subscription = JSON.stringify({
+    plan_id: body.plan_id, //P-3HK92642FR4448515MBQHCYQ
+    start_time: "2022-11-01T00:00:00Z",
+    quantity: 1,
+    subscriber: {
+        name: {
+            given_name: "Leifer",
+            surname: "Mendez"
+        },
+        email_address: "customer@example.com",
     },
-    (err: any, response: { body: any }) => {
-      res.json({ data: response.body });
-    }
-  );
+    return_url: 'http://localhost/gracias',
+    cancel_url: 'http://localhost/fallo'
+  });
+
+  const config = {
+    method: 'post',
+    url: `${PAYPAL_API}/v1/billing/subscriptions`,
+    headers: {
+      Authorization: `Basic ${basic}`,
+      'Content-Type': 'application/json'
+    },
+    data: subscription
+  };
+
+  axios(config)
+  .then((response: any) => {
+    res.json(response.data);
+    console.log(response.data);
+  })
+  .catch((error: any) => {
+    res.json(error);
+    console.log(error);
+  });
+
 });

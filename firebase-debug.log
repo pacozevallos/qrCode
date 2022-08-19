@@ -1,0 +1,28 @@
+[debug] [2022-08-17T17:19:32.714Z] ----------------------------------------------------------------------
+[debug] [2022-08-17T17:19:32.715Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js serve --only functions
+[debug] [2022-08-17T17:19:32.715Z] CLI Version:   11.1.0
+[debug] [2022-08-17T17:19:32.715Z] Platform:      win32
+[debug] [2022-08-17T17:19:32.715Z] Node Version:  v14.18.0
+[debug] [2022-08-17T17:19:32.716Z] Time:          Wed Aug 17 2022 12:19:32 GMT-0500 (hora estándar de Perú)
+[debug] [2022-08-17T17:19:32.716Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-08-17T17:19:32.764Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-08-17T17:19:32.764Z] > authorizing via signed-in user (previsoraperu@gmail.com)
+[debug] [2022-08-17T17:19:32.765Z] [iam] checking project qrcode-3b121 for permissions ["firebase.projects.get"]
+[debug] [2022-08-17T17:19:32.766Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/qrcode-3b121:testIamPermissions [none]
+[debug] [2022-08-17T17:19:32.766Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/qrcode-3b121:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-08-17T17:19:33.685Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/qrcode-3b121:testIamPermissions 200
+[debug] [2022-08-17T17:19:33.686Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/qrcode-3b121:testIamPermissions {}
+[debug] [2022-08-17T17:19:33.686Z] [iam] error while checking permissions, command may fail: FirebaseError: Authorization failed. This account is missing the following required permissions on project qrcode-3b121:
+
+  firebase.projects.get
+[debug] [2022-08-17T17:19:33.687Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/qrcode-3b121 [none]
+[debug] [2022-08-17T17:19:34.114Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/qrcode-3b121 403
+[debug] [2022-08-17T17:19:34.115Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/qrcode-3b121 {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2022-08-17T17:19:34.115Z] HTTP Error: 403, The caller does not have permission
+[debug] [2022-08-17T17:19:34.355Z] FirebaseError: HTTP Error: 403, The caller does not have permission
+    at responseToError (C:\Users\Usuario\AppData\Roaming\nvm\v14.18.0\node_modules\firebase-tools\lib\responseToError.js:49:12)
+    at RetryOperation._fn (C:\Users\Usuario\AppData\Roaming\nvm\v14.18.0\node_modules\firebase-tools\lib\apiv2.js:287:77)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+[error] 
+[error] Error: Failed to get Firebase project qrcode-3b121. Please make sure the project exists and your account has permission to access it.
