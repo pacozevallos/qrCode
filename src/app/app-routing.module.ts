@@ -82,10 +82,15 @@ const routes: Routes = [
       { path: 'configuracion', component: ConfiguracionComponent },
       { path: 'cuenta', component: CuentaComponent },
       { path: 'cuenta/elegirPlan', component: SelectPLanComponent },
-
       { path: 'cuenta/pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
       { path: 'cuenta/pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
     ]
+  },
+  {
+    path: 'owner', component: ListaNegociosComponent, data: {
+      roles: 'owner',
+      authGuardPipe: redirectUnauthorizedToLogin
+    }, canActivate: [AngularFireAuthGuard]
   },
   { path: '', redirectTo: '', pathMatch: 'full' },
 ];

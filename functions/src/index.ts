@@ -7,7 +7,7 @@ const axios = require('axios');
 
 // const client_id = 'AV3AQkjnuIRsS1L8H1WqByz0Pqgz9V81wMaLMxv0G9faOepwPC-gYMVMsPERmYfPMptqlv5YpZZfZ9Iv';
 // const secret = 'EE6RAwswnEpt9c8eRp5Qpe_i3oWd2FlU6hALLXdg8AwDny0-FAXGKMZP_rBHXcToWcVWxpnW4a_cLZ9t';
-const basic = 'QVYzQVFram51SVJzUzFMOEgxV3FCeXowUHFnejlWODF3TWFMTXh2MEc5ZmFPZXB3UEMtZ1lNVk1zUEVSbVlmUE1wdHFsdjVZcFpaZlo5SXY6RUU2UkF3c3duRXB0OWM4ZVJwNVFwZV9pM29XZDJGbFU2aEFMTFhkZzhBd0RueTAtRkFYR0tNWlBfckJIWGNUb1djVld4cG5XNGFfY0xaOXQ='
+const basic = 'QVYzQVFram51SVJzUzFMOEgxV3FCeXowUHFnejlWODF3TWFMTXh2MEc5ZmFPZXB3UEMtZ1lNVk1zUEVSbVlmUE1wdHFsdjVZcFpaZlo5SXY6RUU2UkF3c3duRXB0OWM4ZVJwNVFwZV9pM29XZDJGbFU2aEFMTFhkZzhBd0RueTAtRkFYR0tNWlBfckJIWGNUb1djVld4cG5XNGFfY0xaOXQ=';
 // const access_token = 'A21AAJ_LgEntBfmHzLaw1gX1qtdF323gWGb_tov665eWJx691pGB6atMAOe-UbZUV6Nd-fYjB0iZDCtkaIsDR_ISjEb2dcFyA';
 const PAYPAL_API = 'https://api-m.sandbox.paypal.com'; // Live https://api-m.paypal.com
 // const auth = { user: client_id, pass: secret };
@@ -119,15 +119,15 @@ export const generateSubscription = functions.https.onRequest((req, res) => {
   const { body } = req;
 
   const subscription = JSON.stringify({
-    plan_id: body.plan_id, //P-3HK92642FR4448515MBQHCYQ
-    start_time: "2022-11-01T00:00:00Z",
+    plan_id: body.plan_id,
+    start_time: '2022-11-01T00:00:00Z',
     quantity: 1,
     subscriber: {
         name: {
-            given_name: "Leifer",
-            surname: "Mendez"
+            given_name: 'Leifer',
+            surname: 'Mendez'
         },
-        email_address: "customer@example.com",
+        email_address: 'customer@example.com',
     },
     return_url: 'http://localhost/gracias',
     cancel_url: 'http://localhost/fallo'

@@ -62,7 +62,7 @@ export class AuthService {
         // return this.updateUserData(credential.user)
         // this.pushUserDataEmail(credential.user)
         console.log('Usuario logueado');
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/admin/productos']);
         // window.open('/admin', '_blank');
       })
       .catch(error => {

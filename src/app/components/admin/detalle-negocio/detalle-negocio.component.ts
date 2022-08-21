@@ -44,9 +44,14 @@ export class DetalleNegocioComponent implements OnInit {
     // traer solo el negocio del usuario
     this.afAuth.authState.subscribe( user => {
       this.user = user;
-      this.afs.collection('negocios').valueChanges().subscribe( res => {
-        const negocioRef = res.find( (find: Negocio) => find.autorId === this.user.uid );
-        this.negocio = negocioRef;
+      // this.afs.collection('negocios').valueChanges().subscribe( res => {
+      //   console.log(res);
+      //   const negocioRef = res.find( (find: Negocio) => find.autorId === this.user.uid );
+      //   this.negocio = negocioRef;
+      // });
+      this.afs.collection('negocios').doc('alsa').valueChanges().subscribe( res => {
+        // console.log(res);
+        this.negocio = res;
       });
     });
 

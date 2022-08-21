@@ -17,16 +17,16 @@ export class PublicComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.router.url);
-    
+
     if (this.router.url === '/') {
       this.float = true;
     } else {
-      this.float = false; 
+      this.float = false;
     }
 
 
     // this.router.events.subscribe( routerData => {
-    //   if(routerData instanceof ResolveEnd){ 
+    //   if(routerData instanceof ResolveEnd){
     //      if(routerData.url === '/'){
     //       this.float = true;
     //      } else {

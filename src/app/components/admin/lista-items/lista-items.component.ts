@@ -65,17 +65,35 @@ export class ListaItemsComponent implements OnInit {
 
     this.afAuth.authState.subscribe( user => {
       this.user = user;
-    });
 
-    this.afs.collection('negocios').valueChanges().subscribe( res => {
-      const negocioRef = res.find( (find: Negocio) => find.autorId === this.user.uid );
-      this.negocio = negocioRef;
+      this.afs.collection('negocios').doc('alsa').valueChanges().subscribe( res => {
+        this.negocio = res;
 
-      this.fs.getAllItemsDocument(this.negocio.id).subscribe( data => {
-        this.itemsData.data = data;
+        // this.fs.getAllItemsDocument(this.negocio.id).subscribe( data => {
+        // this.itemsData.data = data;
+        // });
+
+        // this.afs.doc('negocios/alsa').collection('items', ref =>   ref
+        // .orderBy('categoria', 'asc')).valueChanges().subscribe( data => {
+        //    this.itemsData.data = data;
+        //    console.log(data);
+        // });
+
       });
 
     });
+
+    // this.afs.collection('negocios').valueChanges().subscribe( res => {
+    //   const negocioRef = res.find( (find: Negocio) => find.autorId === this.user.uid );
+    //   this.negocio = negocioRef;
+
+    //   this.fs.getAllItemsDocument(this.negocio.id).subscribe( data => {
+    //     this.itemsData.data = data;
+    //   });
+
+    // });
+
+
 
     // this.afs.collection('negocios').valueChanges().subscribe( res => {
     //   const arrayNegocios = res;
