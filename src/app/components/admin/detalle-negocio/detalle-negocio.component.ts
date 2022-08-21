@@ -55,6 +55,14 @@ export class DetalleNegocioComponent implements OnInit {
       });
     });
 
+
+    // setTimeout( () => {
+    //   this.afs.collection('negocios').doc('alsa').valueChanges().subscribe( res => {
+    //     console.log(res);
+    //     this.negocio = res;
+    //   });
+    // }, 3000)
+
   }
 
 }

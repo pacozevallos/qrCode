@@ -73,11 +73,11 @@ export class ListaItemsComponent implements OnInit {
         // this.itemsData.data = data;
         // });
 
-        // this.afs.doc('negocios/alsa').collection('items', ref =>   ref
-        // .orderBy('categoria', 'asc')).valueChanges().subscribe( data => {
-        //    this.itemsData.data = data;
-        //    console.log(data);
-        // });
+        this.afs.doc('negocios/alsa').collection('items', ref =>   ref
+        .orderBy('categoria', 'asc')).valueChanges().subscribe( data => {
+           this.itemsData.data = data;
+           console.log(data);
+        });
 
       });
 
