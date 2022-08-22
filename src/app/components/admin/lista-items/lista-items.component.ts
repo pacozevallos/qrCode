@@ -26,7 +26,7 @@ export class ListaItemsComponent implements OnInit {
 
   // @Input() idNegocio: string;
   idNegocio: string;
-  negocio;
+  negocio: Negocio;
   items: Item[] = [];
   itemsGroup = [];
   value;
@@ -66,12 +66,14 @@ export class ListaItemsComponent implements OnInit {
     this.afAuth.authState.subscribe( user => {
       this.user = user;
 
-      this.afs.collection('negocios').valueChanges().subscribe( res => {
-        this.negocio = res.find( (find: Negocio) => find.autorId === this.user.uid );
+      this.afs.collection('negocios').valueChanges().subscribe( (res: Negocio[]) => {
+        const negocioRef = res.find( (find: Negocio) => find.autorId === this.user.uid );
+        this.negocio = negocioRef;
         this.idNegocio = this.negocio.id;
         this.fs.getAllItemsDocument(this.idNegocio).subscribe( data => {
           this.itemsData.data = data;
         });
+        
       });
 
     });
@@ -86,19 +88,17 @@ export class ListaItemsComponent implements OnInit {
     // this.itemsData.sort = this.sort;
 
 
-    this.fs.getAllItemsDocument(this.idNegocio).subscribe( res => {
-      this.items = res;
-      // console.log(this.items);
-      this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
-        const id = prev.findIndex((item) => item.categoria === categoria);
-        const cat = 'xxx';
-        id >= 0
-          ? prev[id].items.push({...items, categoria})
-          : prev.push({categoria, items: [{...items, categoria}]});
-        return prev;
-      }, []);
-      // console.log(this.itemsGroup);
-    });
+    // this.fs.getAllItemsDocument(this.idNegocio).subscribe( res => {
+    //   this.items = res;
+    //   this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
+    //     const id = prev.findIndex((item) => item.categoria === categoria);
+    //     const cat = 'xxx';
+    //     id >= 0
+    //       ? prev[id].items.push({...items, categoria})
+    //       : prev.push({categoria, items: [{...items, categoria}]});
+    //     return prev;
+    //   }, []);
+    // });
 
      // Para filtrar objetos anidados, incluye minusculas
     this.itemsData.filterPredicate = (data: any, filter: string) => {

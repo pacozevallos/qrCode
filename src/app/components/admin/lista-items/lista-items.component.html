@@ -39,7 +39,7 @@
 
 
 
-<div class="table-responsive">
+<div class="table-responsive" *ngIf="negocio">
 
   <table mat-table [dataSource]="itemsData" matSort class="example-table" [trackBy]="trackByPublicado">
 
@@ -96,8 +96,7 @@
     <ng-container matColumnDef="destacado">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Destacado</th>
       <td mat-cell *matCellDef="let item">
-
-        <mat-checkbox #toggle2 [ngModel]="item.destacado" (ngModelChange)="actualizarDestacado(item.id, $event)">
+        <mat-checkbox #toggle2 color="primary" [ngModel]="item.destacado" (ngModelChange)="actualizarDestacado(item.id, $event)">
         </mat-checkbox>
       </td>
     </ng-container>
