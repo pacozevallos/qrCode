@@ -24,7 +24,7 @@ export class FooterComponent implements OnInit {
     //   nombre: 'Derechos ARCO',
     //   url: '/derechosArco'
     // },
-  ]
+  ];
 
   constructor() { }
 

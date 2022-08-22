@@ -28,7 +28,7 @@ export class AuthService {
         credential.user.updateProfile({
           displayName: dataFormRegistro.nombre
         });
-        this.saveUser(dataFormRegistro.nombre, credential.user);
+        this.saveUser(dataFormRegistro, credential.user);
         this.saveNegocio(dataFormRegistro, credential.user);
         this.router.navigate([`/admin/productos`]);
       })
@@ -37,18 +37,21 @@ export class AuthService {
       });
   }
 
-  saveUser(nombre, user) {
+  saveUser(dataFormRegistro, user) {
     return this.afs.collection('users').doc(user.uid).set({
-      displayName: nombre,
+      displayName: dataFormRegistro.nombre,
       uid: user.uid,
       email: user.email,
       plan: 'Plan Free',
+      negocioId: dataFormRegistro.id,
       fechaCreacion: firebase.default.firestore.FieldValue.serverTimestamp(),
     });
   }
 
   saveNegocio(dataFormRegistro, user) {
-    this.afs.doc('negocios/' + dataFormRegistro.id).set({...dataFormRegistro, autorId: user.uid})
+    const dataNoPassword  = dataFormRegistro;
+    ['password', 'email'].forEach(e => delete dataNoPassword[e]);
+    this.afs.doc('negocios/' + dataFormRegistro.id).set({...dataNoPassword, autorId: user.uid})
     .then(() => {
       console.log('Megocio creado');
     });

@@ -44,17 +44,20 @@ export class ListaNegociosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.user.uid === '3oa8paObQSeXA5X1H97PD78AhAj2' || this.user.uid === 'J0oBKmPwKXQNHbjKrcuqHImvdV52' || this.user.uid === 'ooEFajXGEyahVruhnWDgxS6aEbO2') {
-      this.fs.getAllNegocios().subscribe( res => {
-        this.negocios = res;
-      });
-    } else {
-      this.fs.getNegociosPropios().subscribe( res => {
-        this.negocios = res;
-    });
-    }
 
-    // this.items = this.afs.collection('negocios').doc()
+    // if (this.user.uid === 'oNPWy3A4O8SZendJzegSQcldJAy2' || this.user.uid === 'GH8rckeuR3NNYdyk1iF4wRH8hlv2' || this.user.uid === '0ZcEAJP4pAWtDgelYcigPFYviyG2') {
+    //   this.fs.getAllNegocios().subscribe( res => {
+    //     this.negocios = res;
+    //   });
+    // } else {
+    //   this.fs.getNegociosPropios().subscribe( res => {
+    //     this.negocios = res;
+    // });
+    // }
+
+    this.fs.getAllNegocios().subscribe( res => {
+      this.negocios = res;
+    });
 
   }
 

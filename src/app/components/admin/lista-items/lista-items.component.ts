@@ -66,70 +66,15 @@ export class ListaItemsComponent implements OnInit {
     this.afAuth.authState.subscribe( user => {
       this.user = user;
 
-      this.afs.collection('negocios').doc('alsa').valueChanges().subscribe( res => {
-        this.negocio = res;
-
-        // this.fs.getAllItemsDocument(this.negocio.id).subscribe( data => {
-        // this.itemsData.data = data;
-        // });
-
-        this.afs.doc('negocios/alsa').collection('items', ref =>   ref
-        .orderBy('categoria', 'asc')).valueChanges().subscribe( data => {
-           this.itemsData.data = data;
-           console.log(data);
+      this.afs.collection('negocios').valueChanges().subscribe( res => {
+        this.negocio = res.find( (find: Negocio) => find.autorId === this.user.uid );
+        this.idNegocio = this.negocio.id;
+        this.fs.getAllItemsDocument(this.idNegocio).subscribe( data => {
+          this.itemsData.data = data;
         });
-
       });
 
     });
-
-    // this.afs.collection('negocios').valueChanges().subscribe( res => {
-    //   const negocioRef = res.find( (find: Negocio) => find.autorId === this.user.uid );
-    //   this.negocio = negocioRef;
-
-    //   this.fs.getAllItemsDocument(this.negocio.id).subscribe( data => {
-    //     this.itemsData.data = data;
-    //   });
-
-    // });
-
-
-
-    // this.afs.collection('negocios').valueChanges().subscribe( res => {
-    //   const arrayNegocios = res;
-    //   console.log(res);
-    //   const negocioRef = arrayNegocios.find( (find: Negocio) => find.autorId === this.user.uid );
-    //   console.log(negocioRef);
-    //   this.negocio = negocioRef;
-    //   this.idNegocio = this.negocio.id;
-    //   console.log(this.idNegocio);
-    //   this.fs.getAllItemsDocument(this.idNegocio).subscribe( response => {
-    //     this.itemsData.data = response;
-    //     console.log(response);
-    //   });
-    // });
-
-    // this.activatedRoute.parent.url.subscribe( params => {
-    //   this.idNegocio = params[0].path;
-    //   this.afs.doc('negocios/' + this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
-    //     this.negocio = res;
-
-
-    //     // this.storage.ref(`imagesItems/${this.negocio.id}`).listAll().subscribe( response => {
-    //     //   console.log(response.items);
-    //     //   response.items.forEach( itemRef => {
-    //     //     itemRef.getDownloadURL().then( url => {
-    //     //       const imgUrl = url.replace(this.negocio.id, 'novotel-cusco');
-    //     //       console.log(imgUrl);
-    //     //     });
-    //     //   });
-    //     // });
-
-
-    //   });
-    // });
-
-
 
 
     this.itemsData.paginator = this.paginator;

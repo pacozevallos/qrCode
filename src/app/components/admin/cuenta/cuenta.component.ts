@@ -18,7 +18,6 @@ export class CuentaComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.afAuth.authState.subscribe( res => {
       this.user = res;
-      console.log(this.user);
     });
   }
 
