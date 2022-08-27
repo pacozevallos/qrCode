@@ -11,31 +11,26 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderAdminComponent implements OnInit {
 
-  // userId: string;
-  // displayName: string;
-  // email: string;
-  // photoURL: string;
-
   @Input() negocio: Negocio;
 
   user;
 
   linksAdmin = [
-    {
-      nombre: 'Cuenta',
-      icon: 'user',
-      function: () => this.goToCuenta()
-    },
-    {
-      nombre: 'Mi plan',
-      icon: 'star',
-      function: () => this.goToPlan()
-    },
-    {
-      nombre: 'Cambiar contraseña',
-      icon: 'key',
-      function: () => this.goToContrasenia()
-    },
+    // {
+    //   nombre: 'Cuenta',
+    //   icon: 'user',
+    //   function: () => this.goToCuenta()
+    // },
+    // {
+    //   nombre: 'Mi plan',
+    //   icon: 'star',
+    //   function: () => this.goToPlan()
+    // },
+    // {
+    //   nombre: 'Cambiar contraseña',
+    //   icon: 'key',
+    //   function: () => this.goToContrasenia()
+    // },
     {
       nombre: 'Cerrar sesión',
       icon: 'power',
@@ -63,7 +58,7 @@ export class HeaderAdminComponent implements OnInit {
   }
 
   goToPlan() {
-    this.router.navigate(['/admin/plan']);
+    this.router.navigate(['/admin/cuenta']);
   }
 
   goToContrasenia() {

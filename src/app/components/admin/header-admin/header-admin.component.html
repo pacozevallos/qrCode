@@ -12,13 +12,13 @@
 
         <a class="btn btn-light btn-sm me-2" [href]="urlTienda" target="_blank">
           <i-tabler name="building-store"></i-tabler>
-          <span class="ms-2 d-none d-md-inline-block">Ver tienda</span>
+          <span class="ms-1 d-none d-md-inline-block">Ver tienda</span>
         </a>
 
-        <button class="btn btn-outline-primary btn-sm me-2">
+        <a class="btn btn-outline-primary btn-sm me-2" routerLink="/admin/cuenta">
           <i-tabler name="rocket"></i-tabler>
-          <span class="ms-2 d-none d-md-inline-block">Mejora tu plan</span>
-        </button>
+          <span class="ms-1 d-none d-md-inline-block">Mejorar plan</span>
+        </a>
 
 				<div class="text-end mx-2 d-none d-md-block">
 					<p class="fw-normal d-block mb-0">{{user.displayName}}</p>

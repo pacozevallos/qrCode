@@ -129,6 +129,7 @@ import { ConfiguracionComponent } from './components/admin/configuracion/configu
 import { ConfigurarNegocioComponent } from './components/admin/configurar-negocio/configurar-negocio.component';
 import { ShareAdminComponent } from './components/admin/share-admin/share-admin.component';
 import { CategoriasComponent } from './components/admin/categorias/categorias.component';
+import { FooterAdminComponent } from './components/admin/footer-admin/footer-admin.component';
 
 @NgModule({
   declarations: [
@@ -191,7 +192,8 @@ import { CategoriasComponent } from './components/admin/categorias/categorias.co
     ConfiguracionComponent,
     ConfigurarNegocioComponent,
     ShareAdminComponent,
-    CategoriasComponent
+    CategoriasComponent,
+    FooterAdminComponent
   ],
   entryComponents: [
     CrearCategoriaItemComponent,
