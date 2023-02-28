@@ -20,7 +20,7 @@ export class CompartirNegocioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.urlShare = `${window.location.origin}/negocio/${this.data.id}`
+    this.urlShare = `${window.location.origin}/tienda/${this.data.id}`
   }
 
   cancelar() {

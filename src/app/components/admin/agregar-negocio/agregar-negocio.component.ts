@@ -64,6 +64,7 @@ export class AgregarNegocioComponent implements OnInit {
 
   }
 
+  
   ngOnInit(): void {
     const user = firebase.default.auth().currentUser;
     this.paises = this.ds.paises;

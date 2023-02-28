@@ -11,6 +11,7 @@ import { FirebaseService } from '../../../services/firebase.service';
 })
 export class DetalleNegocioComponent implements OnInit {
 
+  
   idNegocio: string;
   negocio;
 

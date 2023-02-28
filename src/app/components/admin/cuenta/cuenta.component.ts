@@ -11,6 +11,7 @@ export class CuentaComponent implements OnInit {
 
   user;
 
+  
   constructor(
     private afAuth: AngularFireAuth
   ) { }

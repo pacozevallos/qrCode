@@ -36,12 +36,14 @@ export class ActualizarDatosComponent implements OnInit {
   }
 
   onSubmit() {
+
     if (this.formDatos.valid) {
       this.loading = true;
       this.actualizarDatos();
     } else {
       this.validateAllFormFields(this.formDatos);
-    }
+    };
+
   }
 
 

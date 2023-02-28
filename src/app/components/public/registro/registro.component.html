@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-md-6">
-      <div class="bg-light p-4 p-md-6 boxForm">
+      <div class="bg-warning p-4 p-md-6 boxForm">
         <p class="h1 mb-0 mb-md-3">¡Comienza gratis!</p>
 
         <!-- <div class="d-grid my-3">
@@ -37,8 +37,7 @@
 
           <mat-form-field appearance="standard" class="w-100">
             <mat-label>Contraseña</mat-label>
-            <input type="password" matInput formControlName="password" placeholder="Password"
-              [type]="hide ? 'password' : 'text'">
+            <input type="password" matInput formControlName="password" placeholder="Password" [type]="hide ? 'password' : 'text'" autocomplete="username">
             <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
               [attr.aria-pressed]="hide">
               <mat-icon class="text-muted">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -49,10 +48,6 @@
           </mat-form-field>
 
           
-
-
-
-
 
           <mat-form-field appearance="standard" class="col-12">
             <mat-label>Nombre de tu tienda</mat-label>

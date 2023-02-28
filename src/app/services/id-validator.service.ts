@@ -5,7 +5,6 @@ import { Observable, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
 import { Negocio } from '../classes/negocio';
 
-
 @Injectable({
   providedIn: 'root'
 })

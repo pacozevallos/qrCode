@@ -4,6 +4,7 @@
       <!-- <img src="https://firebasestorage.googleapis.com/v0/b/turibus-59f94.appspot.com/o/logoTuribus.svg?alt=media&token=4cab1ad7-f431-4cff-b370-029c3ba439ba" width="260px"> -->
       <p class="h2">Ingresar</p>
     </div>
+    
     <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" novalidate class="row">
 
       <mat-form-field appearance="outline" class="col-12">
@@ -14,7 +15,7 @@
 
       <mat-form-field appearance="outline" class="col-12">
         <mat-label>Contraseña</mat-label>
-        <input type="password" matInput formControlName="password" placeholder="Password" [type]="hide ? 'password' : 'text'">
+        <input type="password" matInput formControlName="password" placeholder="Password" [type]="hide ? 'password' : 'text'" autocomplete="off">
         <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon class="text-muted">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
