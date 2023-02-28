@@ -79,6 +79,7 @@ const routes: Routes = [
     children: [
       { path: '', component: ListaItemsComponent},
       { path: 'productos', component: ListaItemsComponent},
+      { path: 'productos/crearItem', component: CrearItemComponent},
       { path: 'configuracion', component: ConfiguracionComponent },
       { path: 'cuenta', component: CuentaComponent },
       { path: 'cuenta/elegirPlan', component: SelectPLanComponent },

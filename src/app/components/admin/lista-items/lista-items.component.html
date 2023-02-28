@@ -15,10 +15,10 @@
         <input type="text" class="form-control w-100" (keyup)="applyFilter($event)" placeholder="Buscar">
       </div>
 
-      <button class="btn btn-primary d-inline-flex" (click)="agregarItem()">
+      <a class="btn btn-primary d-inline-flex" routerLink="/admin/productos/crearItem">
         <i-tabler name="plus"></i-tabler>
         <span class="ms-1 d-none d-md-inline-block">Agregar</span>
-      </button>
+      </a>
       
     </div>
 

@@ -33,6 +33,9 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
 import { ColorSketchModule } from 'ngx-color/sketch';
 import { ColorChromeModule } from 'ngx-color/chrome';
 
+
+import { EditorModule } from "@tinymce/tinymce-angular";
+
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -250,6 +253,7 @@ import { FooterAdminComponent } from './components/admin/footer-admin/footer-adm
     ClipboardModule,
     ColorSketchModule,
     ColorChromeModule,
+    EditorModule
   ],
   exports: [
     TablerIconsModule

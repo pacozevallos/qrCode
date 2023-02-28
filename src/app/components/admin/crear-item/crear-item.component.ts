@@ -60,6 +60,7 @@ export class CrearItemComponent implements OnInit {
     console.log(this.itemRef.id);
   }
 
+  
 
   ngOnInit(): void {
     // console.log(this.data.id);
