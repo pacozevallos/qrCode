@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/classes/user';
 
@@ -13,11 +13,11 @@ export class ActualizarDatosComponent implements OnInit {
 
   user: User;
   loading: boolean;
-  formDatos: FormGroup;
+  formDatos: UntypedFormGroup;
 
   constructor(
     private afAuth: AngularFireAuth,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router
   ) { }
 
@@ -70,12 +70,12 @@ export class ActualizarDatosComponent implements OnInit {
     // });
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validateAllFormFields(control);
       }
     });

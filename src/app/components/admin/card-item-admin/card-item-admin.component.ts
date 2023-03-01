@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
+import { MatSlideToggleChange as MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Item } from 'src/app/classes/item';
 import { ShareComponent } from '../../public/share/share.component';
 import { EditarItemComponent } from '../editar-item/editar-item.component';

@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { MatDialog } from '@angular/material/dialog';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
 import { Negocio } from 'src/app/classes/negocio';
 import { CompartirNegocioComponent } from '../compartir-negocio/compartir-negocio.component';

@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Timestamp } from '@angular/fire/firestore';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -17,7 +18,7 @@ import { ColorComponent } from '../../public/color/color.component';
 })
 export class EditarNegocioComponent implements OnInit {
 
-  formNegocio: FormGroup;
+  formNegocio: UntypedFormGroup;
   loading = false;
   color: string;
   redesSociales = [];
@@ -27,7 +28,7 @@ export class EditarNegocioComponent implements OnInit {
   constructor(
     private bottomSheetRef: MatBottomSheetRef<EditarNegocioComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private dialog: MatDialog,
     private afs: AngularFirestore,
     private ds: DataService
@@ -48,7 +49,7 @@ export class EditarNegocioComponent implements OnInit {
       // categorias: [this.data.categorias],
 
       color: [ this.data.color, Validators.required],
-      fechaEdicion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
+      fechaEdicion: [Timestamp.now()]
     });
 
     // this.formNegocio.addControl('redes', this.fb.array([]));
@@ -106,19 +107,19 @@ export class EditarNegocioComponent implements OnInit {
     });
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validateAllFormFields(control);
       }
     });
   }
 
   agregarRed() {
-    (this.formNegocio.controls.redes as FormArray).push(
+    (this.formNegocio.controls.redes as UntypedFormArray).push(
       this.fb.group({
         nombre: [''],
         url: [''],
@@ -128,7 +129,7 @@ export class EditarNegocioComponent implements OnInit {
   }
 
   eliminarRed(index: number): void {
-    (this.formNegocio.controls.redes as FormArray).removeAt(index);
+    (this.formNegocio.controls.redes as UntypedFormArray).removeAt(index);
   }
 
   openModalCrearColor() {

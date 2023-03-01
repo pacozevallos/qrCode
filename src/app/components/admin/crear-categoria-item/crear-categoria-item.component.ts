@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatDialogRef as MatDialogRef, MAT_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Negocio } from 'src/app/classes/negocio';
 // import { arrayUnion } from "firebase/firestore";
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 
 export interface DialogData {
   idNegocio: string;
@@ -18,13 +18,13 @@ export interface DialogData {
 })
 export class CrearCategoriaItemComponent implements OnInit {
 
-  formCategoria: FormGroup;
+  formCategoria: UntypedFormGroup;
   loading = false;
 
   constructor(
     public dialogRef: MatDialogRef<CrearCategoriaItemComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private afs: AngularFirestore,
   ) { }
 
@@ -40,13 +40,13 @@ export class CrearCategoriaItemComponent implements OnInit {
   }
 
   agregarCategoria() {
-    (this.formCategoria.controls.categorias as FormArray).push(
-      new FormControl('', [Validators.required])
+    (this.formCategoria.controls.categorias as UntypedFormArray).push(
+      new UntypedFormControl('', [Validators.required])
     );
   }
 
   eliminarCategoria(index: number): void {
-    (this.formCategoria.controls.categorias as FormArray).removeAt(index);
+    (this.formCategoria.controls.categorias as UntypedFormArray).removeAt(index);
   }
 
   onSubmit() {
@@ -71,12 +71,12 @@ export class CrearCategoriaItemComponent implements OnInit {
     });
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validateAllFormFields(control);
       }
     });

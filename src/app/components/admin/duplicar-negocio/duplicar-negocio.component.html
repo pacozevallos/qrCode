@@ -10,14 +10,14 @@
 
   <form [formGroup]="formNegocio" (submit)="onSubmit()" novalidate class="row gx-3 gx-md-4">
 
-    <mat-form-field appearance="standard" class="col-12">
+    <mat-form-field appearance="fill" class="col-12">
       <mat-label>Nombre del negocio</mat-label>
       <input matInput type="text" formControlName="nombre">
       <!-- <mat-hint>url: https://taaripay.com/{{negocioId}}</mat-hint> -->
       <mat-error *ngIf="errorNombreNegocio()">{{errorNombreNegocio()}}</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="standard" class="col-12">
+    <mat-form-field appearance="fill" class="col-12">
       <mat-label>https://taaripay.com/negocio/</mat-label>
       <!-- <span matPrefix></span> -->
       <input matInput type="text" formControlName="id">

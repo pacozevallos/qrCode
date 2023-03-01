@@ -20,7 +20,7 @@
         <div class="d-flex align-items-center">
 
           <div class="row w-100">
-            <mat-form-field appearance="standard">
+            <mat-form-field appearance="fill">
               <mat-label>Regla {{i+1}}</mat-label>
               <input matInput type="text" [formControlName]="i" placeholder="Servicio a la habitación + S/. 5">
             </mat-form-field>
@@ -38,11 +38,11 @@
 
         <!-- <div [formGroupName]="i" class="d-flex">
           <div class="row gx-3">
-            <mat-form-field appearance="standard" class="col-6">
+            <mat-form-field appearance="fill" class="col-6">
               <mat-label>Variante</mat-label>
               <input matInput type="text" formControlName="variante">
             </mat-form-field>
-            <mat-form-field appearance="standard" class="col-6">
+            <mat-form-field appearance="fill" class="col-6">
               <mat-label>Precio</mat-label>
               <span matPrefix>S/. &nbsp;</span>
               <input matInput type="number" formControlName="precio">

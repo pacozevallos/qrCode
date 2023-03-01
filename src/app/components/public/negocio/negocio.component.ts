@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Negocio } from 'src/app/classes/negocio';
 import { ActivatedRoute } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { Item } from '../../../classes/item';
 // import Swiper core and required modules
 import SwiperCore, { SwiperOptions, Pagination } from 'swiper';
 
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { ShareComponent } from '../share/share.component';
 import { ColorEvent } from 'ngx-color';
 // install Swiper modules

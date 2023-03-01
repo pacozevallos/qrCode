@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Item } from 'src/app/classes/item';
 import { DetalleItemComponent } from '../detalle-item/detalle-item.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Negocio } from 'src/app/classes/negocio';
 
 @Component({

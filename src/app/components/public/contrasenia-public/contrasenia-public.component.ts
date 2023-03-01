@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { FormControl, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -13,14 +13,14 @@ export class ContraseniaPublicComponent implements OnInit {
   user;
   loading: boolean;
   aviso = false;
-  email: FormControl;
+  email: UntypedFormControl;
 
   constructor(
     public auth : AuthService
   ) { }
 
   ngOnInit(): void {
-    this.email = new FormControl ('', Validators.required)
+    this.email = new UntypedFormControl ('', Validators.required)
   }
 
   cambiarContrasenia() {

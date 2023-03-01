@@ -1,10 +1,10 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { IconLoader } from 'angular-tabler-icons/icons';
-import { FileValidator } from 'ngx-material-file-input';
+// import { FileValidator } from 'ngx-material-file-input';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Negocio } from 'src/app/classes/negocio';
@@ -18,7 +18,7 @@ export class LogoNegocioComponent implements OnInit {
 
   @Input() negocio: Negocio;
 
-  formLogoNegocio: FormGroup;
+  formLogoNegocio: UntypedFormGroup;
   loader = false;
 
 
@@ -34,7 +34,7 @@ export class LogoNegocioComponent implements OnInit {
   // imageLogo = new FormControl('', [FileValidator.maxContentSize(this.maxSize)])
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private storage: AngularFireStorage,
     private bottomSheetRef: MatBottomSheetRef<LogoNegocioComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
@@ -43,7 +43,7 @@ export class LogoNegocioComponent implements OnInit {
 
   ngOnInit(): void {
     this.formLogoNegocio = this.fb.group({
-      imageLogo: ['', [ Validators.required, FileValidator.maxContentSize(this.maxSize)]]
+      imageLogo: ['', [ Validators.required]]
     });
   }
 
@@ -56,12 +56,12 @@ export class LogoNegocioComponent implements OnInit {
     }
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validateAllFormFields(control);
       }
     });

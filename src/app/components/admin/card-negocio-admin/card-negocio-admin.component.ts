@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { User } from 'src/app/classes/user';
 import { ShareComponent } from '../../public/share/share.component';
@@ -13,7 +13,7 @@ import { EditarNegocioComponent } from '../editar-negocio/editar-negocio.compone
 import { EliminarNegocioComponent } from '../eliminar-negocio/eliminar-negocio.component';
 import { LogoNegocioComponent } from '../logo-negocio/logo-negocio.component';
 import { VistaQrComponent } from '../vista-qr/vista-qr.component';
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
 
 @Component({
   selector: 'app-card-negocio-admin',

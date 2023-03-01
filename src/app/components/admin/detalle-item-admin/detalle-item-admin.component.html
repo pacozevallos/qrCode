@@ -92,7 +92,7 @@
           <p class="h6 mb-1">Visible</p>
           <p class="extraSmall text-muted lh-sm">Muestra u oculta este producto</p>
         </div>
-        <mat-slide-toggle class="ms-2" color="primary" #toggle [checked]="item.publicado" (change)="actualizarPublicado(item.id, $event)"></mat-slide-toggle>
+        <mat-slide-toggle class="ms-2" color="primary" #toggle [checked]="item.publicado" (change)="actualizarPublicado(item.id, $any($event))"></mat-slide-toggle>
       </div>
 
       <div class="d-flex justify-content-between mb-3" *ngIf="item.publicado">
@@ -100,7 +100,7 @@
           <p class="h6 mb-1">Destacado</p>
           <p class="extraSmall text-muted lh-sm">Muestra este producto en la zona de Destacados</p>
         </div>
-        <mat-slide-toggle class="ms-2" color="primary" #toggle [checked]="item.destacado" (change)="actualizarDestacado(item.id, $event)"></mat-slide-toggle>
+        <mat-slide-toggle class="ms-2" color="primary" #toggle [checked]="item.destacado" (change)="actualizarDestacado(item.id, $any($event))"></mat-slide-toggle>
       </div>
 
     </div>

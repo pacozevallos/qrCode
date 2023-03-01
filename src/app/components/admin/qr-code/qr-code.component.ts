@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component, Inject, Input, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { base64StringToBlob } from 'blob-util';
 import { Negocio } from 'src/app/classes/negocio';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-qr-code',

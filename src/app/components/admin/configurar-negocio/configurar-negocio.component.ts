@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import * as firebase from 'firebase/app';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Timestamp } from '@angular/fire/firestore';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import * as firebase from 'firebase/compat/app';
 import { DataService } from 'src/app/services/data.service';
 import { IdValidatorService } from 'src/app/services/id-validator.service';
 import { Negocio } from '../../../classes/negocio';
@@ -15,14 +16,14 @@ export class ConfigurarNegocioComponent implements OnInit {
 
   @Input() negocio: Negocio;
 
-  formNegocio: FormGroup;
+  formNegocio: UntypedFormGroup;
   loading: boolean;
   negocioId: string;
   hrefCurrent = window.location.origin;
   paises = [];
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private idValidator: IdValidatorService,
     private afs: AngularFirestore,
     private ds: DataService
@@ -40,7 +41,7 @@ export class ConfigurarNegocioComponent implements OnInit {
       prefijo: [this.negocio.prefijo, Validators.required],
       numeroWhatsApp: [this.negocio.numeroWhatsApp, [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
       autorId: [user.uid],
-      fechaModificacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
+      fechaModificacion: [Timestamp.now()]
     });
 
     this.formNegocio.get('pais').valueChanges.subscribe( res => {
@@ -68,12 +69,12 @@ export class ConfigurarNegocioComponent implements OnInit {
     });
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validateAllFormFields(control);
       }
     });

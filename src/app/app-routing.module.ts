@@ -6,7 +6,7 @@ import { InicioComponent } from './components/public/inicio/inicio.component';
 import { PublicComponent } from './components/public/public/public.component';
 import { LoginComponent } from './components/public/login/login.component';
 
-import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard';
 import { CrearItemComponent } from './components/admin/crear-item/crear-item.component';
 import { ListaNegociosComponent } from './components/admin/lista-negocios/lista-negocios.component';
 import { DetalleNegocioComponent } from './components/admin/detalle-negocio/detalle-negocio.component';
@@ -77,9 +77,9 @@ const routes: Routes = [
   {
     path: 'admin', component: DetalleNegocioComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin},
     children: [
-      { path: '', component: ListaItemsComponent},
-      { path: 'productos', component: ListaItemsComponent},
-      { path: 'productos/crearItem', component: CrearItemComponent},
+      { path: '', component: ListaItemsComponent },
+      { path: 'productos', component: ListaItemsComponent },
+      { path: 'productos/crearItem', component: CrearItemComponent },
       { path: 'configuracion', component: ConfiguracionComponent },
       { path: 'cuenta', component: CuentaComponent },
       { path: 'cuenta/elegirPlan', component: SelectPLanComponent },

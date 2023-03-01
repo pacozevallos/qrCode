@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatRadioChange } from '@angular/material/radio';
+import { MatRadioChange as MatRadioChange } from '@angular/material/radio';
 import { find } from 'rxjs/operators';
 import { DataService } from 'src/app/services/data.service';
 

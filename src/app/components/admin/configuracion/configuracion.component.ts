@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
-import { MatDialog } from '@angular/material/dialog';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatBottomSheet} from '@angular/material/bottom-sheet';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { ShareComponent } from '../../public/share/share.component';
@@ -15,7 +15,7 @@ import { EliminarNegocioComponent } from '../eliminar-negocio/eliminar-negocio.c
 import { LogoNegocioComponent } from '../logo-negocio/logo-negocio.component';
 import { QrCodeComponent } from '../qr-code/qr-code.component';
 import { VistaQrComponent } from '../vista-qr/vista-qr.component';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Negocio } from 'src/app/classes/negocio';
 
 @Component({
@@ -77,7 +77,6 @@ export class ConfiguracionComponent implements OnInit {
     private afs: AngularFirestore,
     private fs: FirebaseService,
     private bottomSheet: MatBottomSheet,
-    private bottomSheetRef: MatBottomSheetRef,
     private router: Router,
     private matDialog: MatDialog,
     private afAuth: AngularFireAuth

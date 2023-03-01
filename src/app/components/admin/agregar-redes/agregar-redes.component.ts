@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { Negocio } from 'src/app/classes/negocio';
 import { DataService } from 'src/app/services/data.service';
@@ -14,14 +14,14 @@ export class AgregarRedesComponent implements OnInit {
 
   @Input() negocio: Negocio;
 
-  formRedes: FormGroup;
+  formRedes: UntypedFormGroup;
   loading: boolean;
   redesSociales = [];
 
   constructor(
     // private bottomSheetRef: MatBottomSheetRef<AgregarRedesComponent>,
     // @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private afs: AngularFirestore,
     private ds: DataService
   ) { }
@@ -34,7 +34,7 @@ export class AgregarRedesComponent implements OnInit {
       redes: this.fb.array([]),
     });
 
-    const arrayRedes = this.formRedes.controls.redes as FormArray;
+    const arrayRedes = this.formRedes.controls.redes as UntypedFormArray;
     if (this.negocio.redes?.length === 0) {
       arrayRedes.push(
         this.fb.group({
@@ -58,7 +58,7 @@ export class AgregarRedesComponent implements OnInit {
 
 
     this.formRedes.controls.redes.valueChanges.subscribe( redes => {
-      const control = this.formRedes.controls.redes as FormArray;
+      const control = this.formRedes.controls.redes as UntypedFormArray;
       for (const i in redes) {
         control.at(+i).get('nombre').valueChanges.subscribe( res => {
           const red = this.ds.redesSociales.find( find => find.nombre === res);
@@ -88,19 +88,19 @@ export class AgregarRedesComponent implements OnInit {
     });
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validateAllFormFields(control);
       }
     });
   }
 
   agregarRed() {
-    (this.formRedes.controls.redes as FormArray).push(
+    (this.formRedes.controls.redes as UntypedFormArray).push(
       this.fb.group({
         nombre: ['', Validators.required],
         url: ['', Validators.required],
@@ -110,7 +110,7 @@ export class AgregarRedesComponent implements OnInit {
   }
 
   eliminarRed(index: number): void {
-    (this.formRedes.controls.redes as FormArray).removeAt(index);
+    (this.formRedes.controls.redes as UntypedFormArray).removeAt(index);
   }
 
   // cancelar() {

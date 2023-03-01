@@ -1,16 +1,17 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { MatDialog } from '@angular/material/dialog';
-import firebase from 'firebase/app';
-import { FileValidator } from 'ngx-material-file-input';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
+// import firebase from 'firebase/compat/app';
+// import { FileValidator } from 'ngx-material-file-input';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Negocio } from 'src/app/classes/negocio';
 import { CrearCategoriaItemComponent } from '../crear-categoria-item/crear-categoria-item.component';
 import { ActivatedRoute } from '@angular/router';
+import { Timestamp } from 'firebase/firestore';
 
 @Component({
   selector: 'app-crear-item',
@@ -19,7 +20,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CrearItemComponent implements OnInit {
 
-  formItem: FormGroup;
+  formItem: UntypedFormGroup;
   idItem: string;
   loading = false;
   negocio;
@@ -47,7 +48,7 @@ export class CrearItemComponent implements OnInit {
   constructor(
     private bottomSheetRef: MatBottomSheetRef<CrearItemComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
     private dialog: MatDialog,
@@ -79,11 +80,11 @@ export class CrearItemComponent implements OnInit {
       //     precio: [''],
       //   })
       // ]),
-      image: ['', FileValidator.maxContentSize(this.maxSize)],
+      image: [''],
       imageName: [''],
       publicado: [true],
       destacado: [false],
-      fechaCreacion: [firebase.firestore.Timestamp.fromDate(new Date())]
+      fechaCreacion: Timestamp.now()
     });
 
     this.formItem.get('tipoPrecio').valueChanges.subscribe( res => {
@@ -108,7 +109,7 @@ export class CrearItemComponent implements OnInit {
           })
         ]) );
 
-        const arrayPrecios = this.formItem.controls.precios as FormArray;
+        const arrayPrecios = this.formItem.controls.precios as UntypedFormArray;
         this.formItem.controls.precios.valueChanges.subscribe( multiple => {
           for (const i in multiple) {
             arrayPrecios.at(+i).get('variante').setValidators(Validators.required);
@@ -151,7 +152,7 @@ export class CrearItemComponent implements OnInit {
   }
 
   agregarPrecio() {
-    (this.formItem.controls.precios as FormArray).push(
+    (this.formItem.controls.precios as UntypedFormArray).push(
       this.fb.group({
         variante: [''],
         precio: [''],
@@ -160,15 +161,15 @@ export class CrearItemComponent implements OnInit {
   }
 
   eliminarPrecio(index: number): void {
-    (this.formItem.controls.precios as FormArray).removeAt(index);
+    (this.formItem.controls.precios as UntypedFormArray).removeAt(index);
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validateAllFormFields(control);
       }
     });

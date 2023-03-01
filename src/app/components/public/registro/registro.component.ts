@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Timestamp } from '@angular/fire/firestore';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatSnackBar as MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,7 +15,7 @@ import { IdValidatorService } from 'src/app/services/id-validator.service';
 })
 export class RegistroComponent implements OnInit {
 
-  formRegistro: FormGroup;
+  formRegistro: UntypedFormGroup;
   hide = true;
   caracteristicas = [];
   loading: boolean;
@@ -24,7 +25,7 @@ export class RegistroComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router,
     private snackBar: MatSnackBar,
     private ds: DataService,
@@ -50,7 +51,7 @@ export class RegistroComponent implements OnInit {
       color: ['#1456D8', Validators.required],
       // autorId: [user.uid],
       // redes: this.fb.array([]),
-      fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
+      fechaCreacion: [Timestamp.now()]
     });
 
     this.formRegistro.get('nombreNegocio').valueChanges.subscribe( res => {
@@ -93,12 +94,12 @@ export class RegistroComponent implements OnInit {
     });
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validateAllFormFields(control);
       }
     });

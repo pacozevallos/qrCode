@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import * as firebase from 'firebase/app';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import * as firebase from 'firebase/compat/app';
 import { map } from 'rxjs/operators';
 import { Item } from '../classes/item';
 import { Negocio } from 'src/app/classes/negocio';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from '../classes/user';
 
 @Injectable({

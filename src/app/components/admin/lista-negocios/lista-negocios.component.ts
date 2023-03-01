@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { AgregarNegocioComponent } from '../agregar-negocio/agregar-negocio.component';
 // import { getStorage, ref, uploadBytes } from 'firebase/storage';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 import { base64StringToBlob } from 'blob-util';
 import { Router } from '@angular/router';
 import { EditarNegocioComponent } from '../editar-negocio/editar-negocio.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { ShareComponent } from '../../public/share/share.component';
 import { EliminarNegocioComponent } from '../eliminar-negocio/eliminar-negocio.component';
 import { VistaQrComponent } from '../vista-qr/vista-qr.component';
 import { AdicionalesComponent } from '../adicionales/adicionales.component';
 import { AgregarRedesComponent } from '../agregar-redes/agregar-redes.component';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase/compat/app';
 import { UpgradeComponent } from '../upgrade/upgrade.component';
 import { LogoNegocioComponent } from '../logo-negocio/logo-negocio.component';
 

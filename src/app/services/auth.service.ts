@@ -1,9 +1,10 @@
 import { Injectable, NgZone } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { MatSnackBar as MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase/compat/app';
+import { Timestamp } from 'firebase/firestore';
 import { User } from '../classes/user';
 
 @Injectable({
@@ -44,7 +45,7 @@ export class AuthService {
       email: user.email,
       plan: 'Plan Free',
       negocioId: dataFormRegistro.id,
-      fechaCreacion: firebase.default.firestore.FieldValue.serverTimestamp(),
+      fechaCreacion: Timestamp.now(),
     });
   }
 

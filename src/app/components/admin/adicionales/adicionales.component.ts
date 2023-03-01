@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { Negocio } from 'src/app/classes/negocio';
 
@@ -11,7 +11,7 @@ import { Negocio } from 'src/app/classes/negocio';
 })
 export class AdicionalesComponent implements OnInit {
 
-  formConfiguraciones: FormGroup;
+  formConfiguraciones: UntypedFormGroup;
   loading: boolean;
   lista = [
     '"Delivery + S/. 5"',
@@ -23,7 +23,7 @@ export class AdicionalesComponent implements OnInit {
   constructor(
     private bottomSheetRef: MatBottomSheetRef<AdicionalesComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private afs: AngularFirestore
   ) { }
 
@@ -34,7 +34,7 @@ export class AdicionalesComponent implements OnInit {
       ]),
     });
 
-    const arrayReglas = this.formConfiguraciones.controls.reglas as FormArray;
+    const arrayReglas = this.formConfiguraciones.controls.reglas as UntypedFormArray;
     if (typeof this.data.reglas === 'undefined' ) {
       arrayReglas.push(
         this.fb.control('')
@@ -66,19 +66,19 @@ export class AdicionalesComponent implements OnInit {
     });
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validateAllFormFields(control);
       }
     });
   }
 
   agregarRegla() {
-    (this.formConfiguraciones.controls.reglas as FormArray).push(
+    (this.formConfiguraciones.controls.reglas as UntypedFormArray).push(
       this.fb.control('')
       // this.fb.group({
       //   variante: [''],
@@ -88,7 +88,7 @@ export class AdicionalesComponent implements OnInit {
   }
 
   eliminarRegla(index: number): void {
-    (this.formConfiguraciones.controls.reglas as FormArray).removeAt(index);
+    (this.formConfiguraciones.controls.reglas as UntypedFormArray).removeAt(index);
   }
 
   cancelar() {

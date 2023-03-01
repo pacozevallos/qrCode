@@ -1,21 +1,21 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
+import { MatPaginator as MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortable } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource as MatTableDataSource } from '@angular/material/table';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { EliminarItemComponent } from '../eliminar-item/eliminar-item.component';
 import { EditarItemComponent } from '../editar-item/editar-item.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ActivatedRoute } from '@angular/router';
 import { Item } from 'src/app/classes/item';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSlideToggleChange as MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Negocio } from 'src/app/classes/negocio';
 import { CrearItemComponent } from '../crear-item/crear-item.component';
-import { AngularFireStorage } from '@angular/fire/storage';
-import firebase from 'firebase/app';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+// import firebase from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-lista-items',

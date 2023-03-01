@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatDialogRef as MatDialogRef, MAT_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar as MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs';
@@ -13,6 +13,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { IdValidatorService } from 'src/app/services/id-validator.service';
 import { finalize } from 'rxjs/operators';
 import { base64StringToBlob } from 'blob-util';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-duplicar-negocio',
@@ -21,7 +22,7 @@ import { base64StringToBlob } from 'blob-util';
 })
 export class DuplicarNegocioComponent implements OnInit {
 
-  formNegocio: FormGroup;
+  formNegocio: UntypedFormGroup;
   loading: boolean;
   negocioId: string;
 
@@ -41,7 +42,7 @@ export class DuplicarNegocioComponent implements OnInit {
     private storage: AngularFireStorage,
     private fs: FirebaseService,
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private idValidator: IdValidatorService
   ) {
     this.afs.collection('negocios').valueChanges().subscribe( res => {
@@ -56,7 +57,7 @@ export class DuplicarNegocioComponent implements OnInit {
     this.formNegocio = this.fb.group({
       nombre: [`${this.data.nombre}2`, [Validators.required]],
       id: [`${this.data.id}2`, [Validators.required], [this.idValidator]],
-      fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
+      fechaCreacion: [Timestamp.now()]
     });
 
     this.formNegocio.get('nombre').valueChanges.subscribe( res => {
@@ -133,12 +134,12 @@ export class DuplicarNegocioComponent implements OnInit {
 
 
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validateAllFormFields(control);
       }
     });

@@ -1,14 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatBottomSheet, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ShareComponent } from '../../public/share/share.component';
 import { Item } from 'src/app/classes/item';
 import { Negocio } from 'src/app/classes/negocio';
 import { EditarItemComponent } from '../editar-item/editar-item.component';
 import { EliminarItemComponent } from '../eliminar-item/eliminar-item.component';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSlideToggleChange as MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-detalle-item-admin',

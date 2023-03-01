@@ -1,12 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import firebase from 'firebase/app';
-import { FileValidator } from 'ngx-material-file-input';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
+import { MatSlideToggleChange as MatSlideToggleChange } from '@angular/material/slide-toggle';
+import firebase from 'firebase/compat/app';
+// import { FileValidator } from 'ngx-material-file-input';
 import { Observable, merge } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Item } from 'src/app/classes/item';
@@ -20,7 +20,7 @@ import { CrearCategoriaItemComponent } from '../crear-categoria-item/crear-categ
 })
 export class EditarItemComponent implements OnInit {
 
-  formItem: FormGroup;
+  formItem: UntypedFormGroup;
   idItem: string;
   loading = false;
   negocio;
@@ -47,7 +47,7 @@ export class EditarItemComponent implements OnInit {
   constructor(
     private bottomSheetRef: MatBottomSheetRef<EditarItemComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
     public dialog: MatDialog
@@ -76,7 +76,7 @@ export class EditarItemComponent implements OnInit {
       precio: [this.data.item.precio, Validators.required],
       // precioDescuento: [this.data.item.precioDescuento],
       tipoPrecio: [this.data.item.tipoPrecio, Validators.required],
-      image: ['', FileValidator.maxContentSize(this.maxSize)],
+      image: [''],
       imageName: [''],
       fechaEdicion: [firebase.firestore.Timestamp.fromDate(new Date())]
     });
@@ -94,7 +94,7 @@ export class EditarItemComponent implements OnInit {
       this.formItem.removeControl('precioDescuento');
       this.formItem.addControl('precios', this.fb.array([]));
       this.data.item.precios.forEach(element => {
-        const arrayPrecios = this.formItem.controls.precios as FormArray;
+        const arrayPrecios = this.formItem.controls.precios as UntypedFormArray;
         arrayPrecios.push(
           this.fb.group({
             variante: [element.variante, Validators.required],
@@ -125,7 +125,7 @@ export class EditarItemComponent implements OnInit {
             precio: ['', Validators.required]
           })
         ]));
-        const arrayPrecios = this.formItem.controls.precios as FormArray;
+        const arrayPrecios = this.formItem.controls.precios as UntypedFormArray;
         this.formItem.controls.precios.valueChanges.subscribe( multiple => {
           for (const i in multiple) {
             arrayPrecios.at(+i).get('variante').setValidators(Validators.required);
@@ -161,7 +161,7 @@ export class EditarItemComponent implements OnInit {
   }
 
   agregarPrecio() {
-    (this.formItem.controls.precios as FormArray).push(
+    (this.formItem.controls.precios as UntypedFormArray).push(
       this.fb.group({
         variante: [''],
         precio: [''],
@@ -170,7 +170,7 @@ export class EditarItemComponent implements OnInit {
   }
 
   eliminarPrecio(index: number): void {
-    (this.formItem.controls.precios as FormArray).removeAt(index);
+    (this.formItem.controls.precios as UntypedFormArray).removeAt(index);
   }
 
   actualizarPublicado(idItem, change: MatSlideToggleChange) {
@@ -180,12 +180,12 @@ export class EditarItemComponent implements OnInit {
     });
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validateAllFormFields(control);
       }
     });

@@ -1,21 +1,22 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 // import firebase from 'firebase/app';
-import * as firebase from 'firebase/app';
-import { FileValidator } from 'ngx-material-file-input';
-import { AngularFireStorage } from '@angular/fire/storage';
+import * as firebase from 'firebase/compat/app';
+// import { FileValidator } from 'ngx-material-file-input';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { base64StringToBlob } from 'blob-util';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ColorEvent } from 'ngx-color';
 import { ColorComponent } from '../../public/color/color.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { map, startWith } from 'rxjs/operators';
 import { IdValidatorService } from 'src/app/services/id-validator.service';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-agregar-negocio',
@@ -24,7 +25,7 @@ import { IdValidatorService } from 'src/app/services/id-validator.service';
 })
 export class AgregarNegocioComponent implements OnInit {
 
-  formNegocio: FormGroup;
+  formNegocio: UntypedFormGroup;
   idNegocio: string;
   loading = false;
   negocioRef: any;
@@ -50,7 +51,7 @@ export class AgregarNegocioComponent implements OnInit {
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<AgregarNegocioComponent>,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
     private router: Router,
@@ -79,7 +80,7 @@ export class AgregarNegocioComponent implements OnInit {
       numeroWhatsApp: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
       color: ['#1456D8', Validators.required],
       autorId: [user.uid],
-      fechaCreacion: [firebase.default.firestore.Timestamp.fromDate(new Date())]
+      fechaCreacion: [Timestamp.now()]
     });
 
     this.formNegocio.get('nombre').valueChanges.subscribe( res => {
@@ -167,7 +168,7 @@ export class AgregarNegocioComponent implements OnInit {
   }
 
   agregarRed() {
-    (this.formNegocio.controls.redes as FormArray).push(
+    (this.formNegocio.controls.redes as UntypedFormArray).push(
       this.fb.group({
         nombre: [''],
         url: [''],
@@ -177,7 +178,7 @@ export class AgregarNegocioComponent implements OnInit {
   }
 
   eliminarRed(index: number): void {
-    (this.formNegocio.controls.redes as FormArray).removeAt(index);
+    (this.formNegocio.controls.redes as UntypedFormArray).removeAt(index);
   }
 
   saveImageQrCode() {
@@ -204,12 +205,12 @@ export class AgregarNegocioComponent implements OnInit {
   //   }, 'image/png');
   // }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validateAllFormFields(control);
       }
     });

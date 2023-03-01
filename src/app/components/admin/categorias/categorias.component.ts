@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Negocio } from '../../../classes/negocio';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, UntypedFormArray, UntypedFormControl } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-categorias',
@@ -11,13 +11,13 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class CategoriasComponent implements OnInit {
 
   @Input() negocio: Negocio;
-  formCategorias: FormGroup;
+  formCategorias: UntypedFormGroup;
   loading: boolean;
   categorias = [];
 
   constructor(
     private afs: AngularFirestore,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -30,7 +30,7 @@ export class CategoriasComponent implements OnInit {
       // categorias: this.negocio.categorias
     });
 
-    const arrayCategorias = this.formCategorias.controls.categorias as FormArray;
+    const arrayCategorias = this.formCategorias.controls.categorias as UntypedFormArray;
 
     if (this.negocio.categorias?.length === 0) {
       arrayCategorias.push(
@@ -76,25 +76,25 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validateAllFormFields(control);
       }
     });
   }
 
   agregarCategoria() {
-    (this.formCategorias.controls.categorias as FormArray).push(
+    (this.formCategorias.controls.categorias as UntypedFormArray).push(
       this.fb.control('', Validators.required)
     );
   }
 
   eliminarCategoria(index: number): void {
-    (this.formCategorias.controls.categorias as FormArray).removeAt(index);
+    (this.formCategorias.controls.categorias as UntypedFormArray).removeAt(index);
   }
 
 }

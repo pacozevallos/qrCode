@@ -4,19 +4,27 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+
+// Material
+import { MaterialModule } from './material.module';
+
+
+// Tabler icons
+import { TablerIconsAngularModule } from './tabler-icons-angular.module';
+
 // Angularfire2
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+import { provideAnalytics, getAnalytics, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideFunctions, getFunctions } from '@angular/fire/functions';
+import { provideMessaging, getMessaging } from '@angular/fire/messaging';
+import { providePerformance, getPerformance } from '@angular/fire/performance';
+import { provideRemoteConfig, getRemoteConfig } from '@angular/fire/remote-config';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { AngularFireModule, FIREBASE_OPTIONS } from '@angular/fire/compat';
 
-// Material File input
-import { MaterialFileInputModule } from 'ngx-material-file-input';
-
-// Swiper
-import { SwiperModule } from 'swiper/angular';
 
 // Español Angular
 import { registerLocaleData } from '@angular/common';
@@ -25,10 +33,7 @@ registerLocaleData(localeEs, 'es-ES');
 
 import { QRCodeModule } from 'angularx-qrcode';
 
-import { TablerIconsModule } from 'angular-tabler-icons';
-import * as TablerIcons from 'angular-tabler-icons/icons';
-
-import {ClipboardModule} from '@angular/cdk/clipboard';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { ColorSketchModule } from 'ngx-color/sketch';
 import { ColorChromeModule } from 'ngx-color/chrome';
@@ -36,40 +41,8 @@ import { ColorChromeModule } from 'ngx-color/chrome';
 
 import { EditorModule } from "@tinymce/tinymce-angular";
 
-// Angular Material
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatSortModule } from '@angular/material/sort';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatTableModule } from '@angular/material/table';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatBottomSheetModule, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -134,136 +107,103 @@ import { ShareAdminComponent } from './components/admin/share-admin/share-admin.
 import { CategoriasComponent } from './components/admin/categorias/categorias.component';
 import { FooterAdminComponent } from './components/admin/footer-admin/footer-admin.component';
 
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    PublicComponent,
-    HeaderComponent,
-    FooterComponent,
-    InicioComponent,
-    AdminComponent,
-    HeaderAdminComponent,
-    InicioAdminComponent,
-    LoginComponent,
-    CrearItemComponent,
-    ListaNegociosComponent,
-    AgregarNegocioComponent,
-    DetalleNegocioComponent,
-    ListaItemsComponent,
-    CrearCategoriaItemComponent,
-    EliminarItemComponent,
-    NegocioComponent,
-    CardItemComponent,
-    CardItemDestacadoComponent,
-    DetalleItemComponent,
-    EditarItemComponent,
-    ShareComponent,
-    CardItemAdminComponent,
-    RegistroComponent,
-    ColorComponent,
-    EditarNegocioComponent,
-    VistaQrComponent,
-    DetalleItemAdminComponent,
-    EliminarNegocioComponent,
-    AdicionalesComponent,
-    AgregarRedesComponent,
-    UpgradeComponent,
-    LogoNegocioComponent,
-    CardNegocioAdminComponent,
-    CuentaComponent,
-    PlanComponent,
-    ContraseniaComponent,
-    ActualizarDatosComponent,
-    SelectPLanComponent,
-    AgregarCelularComponent,
-    HeaderNegocioComponent,
-    ContentNegocioComponent,
-    DestacadosNegocioComponent,
-    ItemsNegocioComponent,
-    FooterNegocioComponent,
-    CompartirNegocioComponent,
-    CompartirItemComponent,
-    GraciasPlanPowerComponent,
-    GraciasPlanComponent,
-    ContraseniaPublicComponent,
-    ContraseniaGraciasComponent,
-    PagoExitoPLanMensualComponent,
-    PagoExitoPLanAnualComponent,
-    CambiarPLanComponent,
-    DuplicarNegocioComponent,
-    QrCodeComponent,
-    ConfiguracionComponent,
-    ConfigurarNegocioComponent,
-    ShareAdminComponent,
-    CategoriasComponent,
-    FooterAdminComponent
-  ],
-  entryComponents: [
-    CrearCategoriaItemComponent,
-    DetalleItemComponent,
-    ShareComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    AngularFireAnalyticsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatSliderModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatSlideToggleModule,
-    MatIconModule,
-    MatGridListModule,
-    MatAutocompleteModule,
-    MatCardModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatRadioModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatChipsModule,
-    MatSidenavModule,
-    MatListModule,
-    MatMenuModule,
-    MatProgressSpinnerModule,
-    MatStepperModule,
-    MatExpansionModule,
-    MatTooltipModule,
-    MatBadgeModule,
-    MatBottomSheetModule,
-    MaterialFileInputModule,
-    SwiperModule,
-    QRCodeModule,
-    TablerIconsModule.pick(TablerIcons),
-    DragDropModule,
-    ClipboardModule,
-    ColorSketchModule,
-    ColorChromeModule,
-    EditorModule
-  ],
-  exports: [
-    TablerIconsModule
-  ],
-  providers: [
-    { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
-    { provide: MatBottomSheetRef, useValue: {} },
-    { provide: LOCALE_ID, useValue: 'es-Es' }
-  ],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+	declarations: [
+		AppComponent,
+		PublicComponent,
+		HeaderComponent,
+		FooterComponent,
+		InicioComponent,
+		AdminComponent,
+		HeaderAdminComponent,
+		InicioAdminComponent,
+		LoginComponent,
+		CrearItemComponent,
+		ListaNegociosComponent,
+		AgregarNegocioComponent,
+		DetalleNegocioComponent,
+		ListaItemsComponent,
+		CrearCategoriaItemComponent,
+		EliminarItemComponent,
+		NegocioComponent,
+		CardItemComponent,
+		CardItemDestacadoComponent,
+		DetalleItemComponent,
+		EditarItemComponent,
+		ShareComponent,
+		CardItemAdminComponent,
+		RegistroComponent,
+		ColorComponent,
+		EditarNegocioComponent,
+		VistaQrComponent,
+		DetalleItemAdminComponent,
+		EliminarNegocioComponent,
+		AdicionalesComponent,
+		AgregarRedesComponent,
+		UpgradeComponent,
+		LogoNegocioComponent,
+		CardNegocioAdminComponent,
+		CuentaComponent,
+		PlanComponent,
+		ContraseniaComponent,
+		ActualizarDatosComponent,
+		SelectPLanComponent,
+		AgregarCelularComponent,
+		HeaderNegocioComponent,
+		ContentNegocioComponent,
+		DestacadosNegocioComponent,
+		ItemsNegocioComponent,
+		FooterNegocioComponent,
+		CompartirNegocioComponent,
+		CompartirItemComponent,
+		GraciasPlanPowerComponent,
+		GraciasPlanComponent,
+		ContraseniaPublicComponent,
+		ContraseniaGraciasComponent,
+		PagoExitoPLanMensualComponent,
+		PagoExitoPLanAnualComponent,
+		CambiarPLanComponent,
+		DuplicarNegocioComponent,
+		QrCodeComponent,
+		ConfiguracionComponent,
+		ConfigurarNegocioComponent,
+		ShareAdminComponent,
+		CategoriasComponent,
+		FooterAdminComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		FormsModule,
+		ReactiveFormsModule,
+		provideFirebaseApp(() => initializeApp(environment.firebase)),
+		provideAnalytics(() => getAnalytics()),
+		provideAuth(() => getAuth()),
+		provideFirestore(() => getFirestore()),
+		provideFunctions(() => getFunctions()),
+		provideMessaging(() => getMessaging()),
+		providePerformance(() => getPerformance()),
+		provideRemoteConfig(() => getRemoteConfig()),
+		provideStorage(() => getStorage()),
+		MaterialModule,
+		QRCodeModule,
+		DragDropModule,
+		ClipboardModule,
+		ColorChromeModule,
+		TablerIconsAngularModule
+		// TablerIconsModule.pick(TablerIcons),
+		// EditorModule,
+		// SwiperModule,
+		// ColorSketchModule,
+	],
+	providers: [
+		ScreenTrackingService, UserTrackingService,
+		{ provide: LOCALE_ID, useValue: 'es-Es' },
+		{ provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+	],
+	bootstrap: [AppComponent],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

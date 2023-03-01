@@ -1,3 +1,20 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+$my-typography: mat.define-typography-config(
+  $font-family: 'Lexend',
+);
+
+$my-theme: mat.define-dark-theme((
+  typography: $my-typography,
+));
+
+@include mat.all-component-themes($my-theme);
+
+
+
+
+
 $border-radius-sm: 0.5rem;
 $border-radius: 0.75rem;
 $border-radius-lg: 1rem;
@@ -38,46 +55,27 @@ $input-padding-x: 1.3rem;
 $spacer: 1rem;
 $spacers: (
   0: 0,
-  1: (
-    $spacer * 0.25,
-  ),
-  2: (
-    $spacer * 0.75,
-  ),
-  3: (
-    $spacer * 1.3,
-  ),
-  4: (
-    $spacer * 2,
-  ),
-  5: (
-    $spacer * 3,
-  ),
-  6: (
-    $spacer * 5,
-  ),
-  7: (
-    $spacer * 7,
-  ),
-  8: (
-    $spacer * 10,
-  ),
-  9: (
-    $spacer * 14,
-  ),
-  10: (
-    $spacer * 20,
-  ),
+  1: ($spacer * 0.25),
+  2: ($spacer * 0.75),
+  3: ($spacer * 1.3),
+  4: ($spacer * 2),
+  5: ($spacer * 3),
+  6: ($spacer * 5),
+  7: ($spacer * 7),
+  8: ($spacer * 10),
+  9: ($spacer * 14),
+  10: ($spacer * 20),
 );
+
 
 $enable-cssgrid: true;
 
 // Bootstrap 5
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/bootstrap/scss/bootstrap";
 
 // Swiper Angular
-@import "swiper/swiper.scss";
-@import "~swiper/swiper-bundle";
+// @import "swiper/swiper.scss";
+// @import "~swiper/swiper-bundle";
 
 // Fonts Google
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
@@ -89,12 +87,6 @@ $enable-cssgrid: true;
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@200;300;400;500;600;700;800&display=swap');
 
-// Custom theme Angular Material
-@import "~@angular/material/theming";
-$custom-typography: mat-typography-config(
-  $font-family: "Lexend" !important,
-);
-@include mat-core($custom-typography);
 
 body {
   margin: 0;
@@ -447,35 +439,44 @@ table {
 }
 
 
-.mat-tab-label {
-  min-width: 25px !important;
-  padding: 0 1.5rem !important;
-}
+
+// .mat-tab-label {
+//   min-width: 25px !important;
+//   padding: 0 1.5rem !important;
+// }
 
 
-.mat-tab-header {
-  overflow-x: scroll !important;
-}
+// .mat-mdc-tab-header {
+//   overflow-x: scroll !important;
+//   // border: 1px red solid !important;
+//   // width: 100% !important;
+// }
 
-.mat-tab-label-container {
-  overflow: visible !important;
-}
+// .mat-mdc-tab-label-container {
+//   overflow: visible !important;
+// }
 
-.mat-tab-header::-webkit-scrollbar {
-  display: none !important;
-}
+// .mat-mdc-tab-header::-webkit-scrollbar {
+//   display: none !important;
+// }
 
-.mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
-  display: none !important;
-}
+// .mat-mdc-tab-header-pagination-controls-enabled .mat-mdc-tab-header-pagination {
+//   display: none !important;
+// }
 
-.mat-tab-link {
+.mat-mdc-tab-link {
+  letter-spacing: 0rem !important;
   min-width: 25px !important;
   padding: 0 1.5rem !important;
   @include media-breakpoint-only(xs) {
     padding: 0 1rem !important;
   }
 }
+
+// .mdc-tab {
+//   letter-spacing: 0rem !important;
+// }
+
 
 .dialogColor {
   .mat-dialog-container {
@@ -890,7 +891,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .imageLogoEditAdmin {
   width: 81px;
   height: 81px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .mat-tab-nav-bar, .mat-tab-header {

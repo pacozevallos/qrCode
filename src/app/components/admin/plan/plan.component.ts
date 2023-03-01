@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { MatDialog } from '@angular/material/dialog';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { CambiarPLanComponent } from '../cambiar-plan/cambiar-plan.component';
