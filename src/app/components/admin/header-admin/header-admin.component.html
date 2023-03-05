@@ -8,19 +8,19 @@
       </a>
 
 
-			<div class="d-flex align-items-center">
+			<div class="d-flex align-items-center gap-2 gap-md-3">
 
-        <a class="btn btn-light btn-sm me-2" [href]="urlTienda" target="_blank">
-          <i-tabler name="building-store"></i-tabler>
-          <span class="ms-1 d-none d-md-inline-block">Ver tienda</span>
+        <a class="btn btn-light btn-sm text-primary" [href]="urlTienda" target="_blank">
+          <span class="me-1 d-none d-md-inline-block">Ver tienda</span>
+					<i-tabler name="building-store"></i-tabler>
         </a>
 
-        <a class="btn btn-outline-primary btn-sm me-2" routerLink="/admin/cuenta">
+        <a class="btn btn-outline-primary btn-sm" routerLink="/admin/cuenta">
+					<span class="me-1 d-none d-md-inline-block">Mejorar plan</span>
           <i-tabler name="rocket"></i-tabler>
-          <span class="ms-1 d-none d-md-inline-block">Mejorar plan</span>
         </a>
 
-				<div class="text-end mx-2 d-none d-md-block">
+				<div class="text-end d-none d-md-block">
 					<p class="fw-normal d-block mb-0">{{user.displayName}}</p>
 					<!-- <p class="extraSmall mb-0">{{user.email}}</p> -->
 				</div>
@@ -49,12 +49,3 @@
 		</div>
 	</div>
 </div>
-
-
-<!-- <div class="">
-	<div class="container">
-		<div class="d-flex justify-content-center small">
-			<span class="text-muted me-1">Vende por WhatsApp</span> <a routerLink="/admin/plan">Cambiar a Plan Power</a>
-		</div>
-	</div>
-</div> -->

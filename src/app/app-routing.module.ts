@@ -74,19 +74,29 @@ const routes: Routes = [
   //     ] },
   //   ]
   // },
-  {
-    path: 'admin', component: DetalleNegocioComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin},
-    children: [
-      { path: '', component: ListaItemsComponent },
-      { path: 'productos', component: ListaItemsComponent },
-      { path: 'productos/crearItem', component: CrearItemComponent },
-      { path: 'configuracion', component: ConfiguracionComponent },
-      { path: 'cuenta', component: CuentaComponent },
-      { path: 'cuenta/elegirPlan', component: SelectPLanComponent },
-      { path: 'cuenta/pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
-      { path: 'cuenta/pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
-    ]
-  },
+
+
+
+
+  // {
+  //   path: 'admin', component: DetalleNegocioComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin},
+  //   children: [
+  //     { path: '', component: ListaItemsComponent },
+  //     { path: 'productos', component: ListaItemsComponent },
+  //     { path: 'productos/crearItem', component: CrearItemComponent },
+  //     { path: 'configuracion', component: ConfiguracionComponent },
+  //     { path: 'cuenta', component: CuentaComponent },
+  //     { path: 'cuenta/elegirPlan', component: SelectPLanComponent },
+  //     { path: 'cuenta/pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
+  //     { path: 'cuenta/pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
+  //   ]
+  // },
+
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then( m => m.AdminModule), canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
+
+
+  
+
   {
     path: 'owner', component: ListaNegociosComponent, data: {
       roles: 'owner',

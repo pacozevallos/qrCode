@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialog as MatDialog } from '@angular/material/dialog';
 // import firebase from 'firebase/compat/app';
@@ -20,7 +20,7 @@ import { Timestamp } from 'firebase/firestore';
 })
 export class CrearItemComponent implements OnInit {
 
-  formItem: UntypedFormGroup;
+  formItem: FormGroup;
   idItem: string;
   loading = false;
   negocio;
@@ -48,7 +48,7 @@ export class CrearItemComponent implements OnInit {
   constructor(
     private bottomSheetRef: MatBottomSheetRef<CrearItemComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
     private dialog: MatDialog,
@@ -62,7 +62,6 @@ export class CrearItemComponent implements OnInit {
   }
 
   
-
   ngOnInit(): void {
     // console.log(this.data.id);
 
@@ -109,7 +108,7 @@ export class CrearItemComponent implements OnInit {
           })
         ]) );
 
-        const arrayPrecios = this.formItem.controls.precios as UntypedFormArray;
+        const arrayPrecios = this.formItem.controls.precios as FormArray;
         this.formItem.controls.precios.valueChanges.subscribe( multiple => {
           for (const i in multiple) {
             arrayPrecios.at(+i).get('variante').setValidators(Validators.required);
@@ -152,7 +151,7 @@ export class CrearItemComponent implements OnInit {
   }
 
   agregarPrecio() {
-    (this.formItem.controls.precios as UntypedFormArray).push(
+    (this.formItem.controls.precios as FormArray).push(
       this.fb.group({
         variante: [''],
         precio: [''],
@@ -161,15 +160,15 @@ export class CrearItemComponent implements OnInit {
   }
 
   eliminarPrecio(index: number): void {
-    (this.formItem.controls.precios as UntypedFormArray).removeAt(index);
+    (this.formItem.controls.precios as FormArray).removeAt(index);
   }
 
-  validateAllFormFields(formGroup: UntypedFormGroup) {
+  validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof UntypedFormControl) {
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof UntypedFormGroup) {
+      } else if (control instanceof FormGroup) {
         this.validateAllFormFields(control);
       }
     });

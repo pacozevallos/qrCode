@@ -5,6 +5,7 @@ import { MatSnackBar as MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/compat/app';
 import { Timestamp } from 'firebase/firestore';
+import { Negocio } from '../classes/negocio';
 import { User } from '../classes/user';
 
 @Injectable({
@@ -22,6 +23,7 @@ export class AuthService {
     public snackBar: MatSnackBar,
     public readonly ngZone: NgZone,
   ) { }
+
 
   emailSignUp(dataFormRegistro) {
     return this.auth.createUserWithEmailAndPassword(dataFormRegistro.email, dataFormRegistro.password)
@@ -59,14 +61,28 @@ export class AuthService {
   }
 
   emailLogin(email: string, password: string ) {
-    return this.auth
-      .signInWithEmailAndPassword(email, password)
+    return this.auth.signInWithEmailAndPassword(email, password)
       .then(credential => {
+
         // this.notify.update('Welcome to Firestarter!!!', 'success');
         // return this.updateUserData(credential.user)
         // this.pushUserDataEmail(credential.user)
+
+
+        // this.auth.authState.subscribe( user => {
+        //   this.user = user;
+        //   this.afs.collection('negocios').valueChanges().subscribe( (res: any) => {
+        //     const negocio = res.find( (find: Negocio) => find.autorId === this.user.uid );
+        //     const idNegocio = negocio.id;
+        //     console.log('Usuario logueado');
+        //     this.router.navigate([`/admin/${idNegocio}/productos`]);
+        //   });
+        // });
+
         console.log('Usuario logueado');
-        this.router.navigate(['/admin/productos']);
+        this.router.navigate([`/admin/productos`]);
+
+       
         // window.open('/admin', '_blank');
       })
       .catch(error => {

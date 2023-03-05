@@ -1,2 +1,19 @@
-<app-header-admin></app-header-admin>
-<router-outlet></router-outlet>
+
+<div *ngIf="negocio">
+  <app-header-admin  [negocio]="negocio"></app-header-admin>
+</div>
+
+
+<nav mat-tab-nav-bar class="container" [tabPanel]="tabPanel" mat-stretch-tabs="false">
+  <a mat-tab-link #rla="routerLinkActive" *ngFor="let link of links; let i=index" [routerLink]="link.url" routerLinkActive="active" [active]="rla.isActive" >{{link.nombre}}
+  </a>
+</nav>
+
+
+<div #tabPanel class="bg-white">
+  <div class="container py-4 py-md-5 pb-6 pb-md-9">
+    <router-outlet></router-outlet> 
+  </div>
+</div>
+
+<app-footer-admin></app-footer-admin>

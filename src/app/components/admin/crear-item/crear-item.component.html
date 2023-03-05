@@ -18,12 +18,15 @@
         <p class="h4 mb-0">Crear item</p>
       </div>
 
+
+      <app-upload-images [itemId]="itemRef.id"></app-upload-images>
+
     
 
       <form [formGroup]="formItem" (submit)="onSubmit()" novalidate class="row gx-3">
 
         <mat-form-field appearance="fill" class="col-12">
-          <mat-label>Categoría *</mat-label>
+          <mat-label>Categoría</mat-label>
           <!-- <input matInput type="text" formControlName="categoria"> -->
           <mat-select formControlName="categoria">
             <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</mat-option>
@@ -38,7 +41,7 @@
         </div> -->
 
         <mat-form-field appearance="fill" class="col-12">
-          <mat-label>Nombre *</mat-label>
+          <mat-label>Nombre</mat-label>
           <input matInput type="text" formControlName="nombre">
         </mat-form-field>
 

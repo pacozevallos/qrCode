@@ -87,7 +87,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Publicado</th>
       <td mat-cell *matCellDef="let item">
         <mat-slide-toggle color="primary" #toggle [ngModel]="item.publicado"
-          (ngModelChange)="actualizarPublicado(item.id, $event)">
+          (ngModelChange)="actualizarPublicado(item.id, $any($event) )">
         </mat-slide-toggle>
       </td>
     </ng-container>

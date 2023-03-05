@@ -1,0 +1,47 @@
+<input class="form-control" type="file" id="formFileMultiple" multiple (change)="getFileDetails($event)">
+
+<button class="btn btn-outline-primary" (click)="uploadFilesItem()">
+  <span *ngIf="!loading">Subir imágenes</span>
+  <span class="d-flex justify-content-center spinnerDark" *ngIf="loading">
+    <mat-spinner [diameter]="24"></mat-spinner>
+  </span>
+</button>
+
+
+<div class="grillaImagesItemsPreview">
+
+  <div class="position-relative" *ngFor="let item of imagesPreview; let i = index">
+    <img class="imageItemPreview rounded border" [src]="sanitizer.bypassSecurityTrustResourceUrl(item)" alt="" >
+    <div class="buttonDeleteImageItem">
+      <button class="btn btn-primary btn-circle-xs" (click)="removeItem($event, i)">
+        <i-tabler name="x"></i-tabler>
+      </button>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center buttonDotted rounded">
+    <i-tabler name="plus" class="text-primary" style="width: 48px; height: 48px; stroke-width: 1.5; stroke-linecap: square;" ></i-tabler>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- <table class="table table-dark mb-0 mt-3 mt-md-4" *ngIf="fotos.length >= 1 && !avisoSuccess">
+  <tbody>
+    <tr class="align-middle" *ngFor="let file of fotos; let i = index">
+      <td>{{file.name}}</td>
+      <td>{{file.type}}</td>
+      <td>{{file.size / 1024 | number:'2.1-2'}} KB</td>
+      <td>
+        <button class="btn btn-dark btn-circle" (click)="removeItem($event, i)">
+          <span>
+            <i-tabler name="trash"></i-tabler>
+          </span>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table> -->

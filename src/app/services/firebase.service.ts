@@ -120,13 +120,15 @@ export class FirebaseService {
 
   getNegocioUser() {
 
-    this.afAuth.authState.subscribe( user => {
-      return this.user = user;
-    });
+    // this.afAuth.authState.subscribe( user => {
+    //   return this.user = user;
+    // });
 
-    this.afs.collection('negocios').valueChanges().subscribe( res => {
-      const negocioRef = res.find( (find: Negocio) => find.autorId === this.user.uid );
-      return this.negocio = negocioRef;
+    const user = firebase.default.auth().currentUser;
+
+    return this.afs.collection('negocios').valueChanges().subscribe( res => {
+      const negocioRef = res.find( (find: Negocio) => find.autorId === user.uid );
+      return negocioRef;
     });
 
   }

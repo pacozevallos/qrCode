@@ -15,9 +15,9 @@ $my-theme: mat.define-dark-theme((
 
 
 
-$border-radius-sm: 0.5rem;
-$border-radius: 0.75rem;
-$border-radius-lg: 1rem;
+$border-radius-sm: 0.35rem;
+$border-radius: 0.5rem;
+$border-radius-lg: 0.75rem;
 
 //colores
 $primary: #673ab7;
@@ -26,7 +26,7 @@ $success: #23E47C;
 $info: #009DF5;
 $warning: #FFCD38;
 $danger: #FA391F;
-$light: #f8f8f8;
+$light: #f5f5f5;
 $dark: #351F4D;
 $text-muted: rgba($dark, 0.6);
 $superLight: rgba($dark, 0.1);
@@ -321,6 +321,12 @@ table {
   right: 0.5rem;
 }
 
+.buttonDeleteImageItem {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
 .imageItemEdit {
   object-fit: cover;
   width: 100%;
@@ -501,6 +507,22 @@ table {
   position: absolute;
   top: 0.4rem;
   right: 0.4rem;
+}
+
+.btn-circle-xs {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  i-tabler {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.7;
+  }
 }
 
 
@@ -921,4 +943,35 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .iconSmall {
   width: 21px !important;
   stroke-width: 1.75 !important;
+}
+
+.btn-sm {
+  i-tabler {
+    width: 21px !important;
+    height: 21px !important;
+  }
+}
+
+
+.grillaImagesItemsPreview {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  @include media-breakpoint-only(xs) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.25rem;
+  }
+}
+
+.imageItemPreview {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.buttonDotted {
+  // border-style: dashed !important;
+  border: dashed 2px rgba($primary, 0.5);;
+  background-color: rgba($primary, 0.1);
+  aspect-ratio: 1 / 1;
 }

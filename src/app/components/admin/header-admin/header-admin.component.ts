@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderAdminComponent implements OnInit {
 
+  
   @Input() negocio: Negocio;
 
   user;

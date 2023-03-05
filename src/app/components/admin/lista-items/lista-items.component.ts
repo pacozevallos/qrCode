@@ -30,7 +30,6 @@ export class ListaItemsComponent implements OnInit {
   items: Item[] = [];
   itemsGroup = [];
   value;
-
   user;
 
   displayedColumns = [ 'imagen', 'nombre', 'categoria', 'destacado', 'publicado', 'opciones'];
