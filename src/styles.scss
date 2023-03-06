@@ -327,6 +327,15 @@ table {
   right: 0.5rem;
 }
 
+.loadingImageItem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
 .imageItemEdit {
   object-fit: cover;
   width: 100%;
@@ -970,8 +979,11 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 }
 
 .buttonDotted {
-  // border-style: dashed !important;
-  border: dashed 2px rgba($primary, 0.5);;
-  background-color: rgba($primary, 0.1);
+  border: dashed 2px rgba($primary, 0.5);
+  background-color: rgba($primary, 0);
   aspect-ratio: 1 / 1;
+}
+
+.buttonDotted:hover {
+  background-color: rgba($primary, 0.2);
 }

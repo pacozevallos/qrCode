@@ -30,7 +30,6 @@
     "bootstrap": "^5.2.3",
     "firebase": "^9.17.1",
     "ngx-color": "^6.2.0",
-    "ngx-material-file-input": "^4.0.0",
     "rxjs": "~6.6.0",
     "swiper": "^9.1.0",
     "tslib": "^2.0.0",

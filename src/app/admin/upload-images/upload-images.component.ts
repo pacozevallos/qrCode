@@ -1,9 +1,9 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { Timestamp } from '@angular/fire/firestore';
+import { Index, Timestamp } from '@angular/fire/firestore';
 
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { Item } from 'src/app/classes/item';
@@ -32,7 +32,13 @@ export class UploadImagesComponent {
   avisoSuccess = false;
   negocioId: string;
   imagesPreview = [];
-  // imgURL: any;
+  maxFotos = false;
+  maxButton = false;
+
+  lista = [
+    'Tamaño recomendado 600 x 600',
+    'Puedes subir hasta 8 fotos'
+  ]
 
   constructor(
     private storage: AngularFireStorage,
@@ -61,20 +67,29 @@ export class UploadImagesComponent {
 
   getFileDetails (event: any) {
 
+    document.getElementById('formFileMultiple').click();
+
     const files = event.target.files;
 
-    for (let i = 0; i < files.length; i++) {
+    for (let i = 0; i < files?.length; i++) {
 
       this.fotos.push(files[i]);
 
       const imgUrl = URL.createObjectURL(files[i])
       this.imagesPreview.push(imgUrl)
 
-   
     }
 
     console.log(this.fotos);
-    console.log(this.imagesPreview);
+    // console.log(this.imagesPreview);
+
+    // this.getLengthFotos();
+
+    if (this.fotos.length <= 8) {
+      this.uploadFilesItem();
+    } else {
+      this.maxFotos = true;
+    }
 
   }
 
@@ -85,16 +100,33 @@ export class UploadImagesComponent {
     console.log(this.fotos);
 
     this.imagesPreview.splice(i, 1);
-    console.log(this.imagesPreview);
+    // console.log(this.imagesPreview);
+
+    this.getLengthFotos()
   }
 
+  getLengthFotos() {
+    if (this.fotos.length > 8) {
+      this.maxFotos = true;
+    } else {
+      this.maxFotos = false;
+    }
+
+    if (this.fotos.length > 7) {
+      this.maxButton = true;
+    } else {
+      this.maxButton = false;
+    }
+  }
 
 
   uploadFilesItem() {
 
     this.loading = true;
 
+    // Guardar en Storage
     const promises = this.fotos.map( (image, index) => {
+
       const imageToServer: any = this.storage.ref(`imagesItems/${this.negocioId}/${this.itemId}/${image.name}`).put(image, {
         customMetadata: {
           name: image.name,
@@ -102,9 +134,13 @@ export class UploadImagesComponent {
           size: image.size.toString(),
         }
       });
+
+      this.uploadPercent = imageToServer.snapshotChanges();
+
       return imageToServer.then( (uploadTaskSnapshot: any) => {
         // return uploadTaskSnapshot.ref.getDownloadURL();
         const nameImage = image.name;
+        
         return uploadTaskSnapshot.ref.getDownloadURL()
         .then( (url: any) => {
           console.log(url);
@@ -113,6 +149,8 @@ export class UploadImagesComponent {
       });
     })
 
+
+    // Guardar en Firestore
     Promise.all(promises)
     .then( (response: any) => {
 

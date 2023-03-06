@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Material File input
-import { MaterialFileInputModule } from 'ngx-material-file-input';
+// import { MaterialFileInputModule } from 'ngx-material-file-input'
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -44,7 +44,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatMenuModule,
     MatBottomSheetModule,
     MatSnackBarModule,
-    MaterialFileInputModule,
+    // MaterialFileInputModule,
     MatTabsModule
   ],
   exports: [
@@ -64,7 +64,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatMenuModule,
     MatBottomSheetModule,
     MatSnackBarModule,
-    MaterialFileInputModule,
+    // MaterialFileInputModule,
     MatTabsModule
   ],
   providers: [

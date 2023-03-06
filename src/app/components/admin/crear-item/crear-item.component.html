@@ -21,6 +21,18 @@
 
       <app-upload-images [itemId]="itemRef.id"></app-upload-images>
 
+
+      <!-- <button class="btn btn-outline-primary" (click)="recibirFuncion()">
+        <span *ngIf="!loading">Subir imágenes</span>
+        <span class="d-flex justify-content-center spinnerDark" *ngIf="loading">
+          <mat-spinner [diameter]="24"></mat-spinner>
+        </span>
+      </button> -->
+
+
+
+
+
     
 
       <form [formGroup]="formItem" (submit)="onSubmit()" novalidate class="row gx-3">
