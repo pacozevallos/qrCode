@@ -17,14 +17,14 @@
         </button>
       </div> -->
 
-      <!-- <div class="loadingImageItem d-flex justify-content-center align-items-center bg-light bg-opacity-50 rounded">
-        <mat-progress-spinner color="primary" mode="determinate" [value]="uploadPercent | async " diameter="48">
+      <div class="loadingImageItem d-flex justify-content-center align-items-center bg-light bg-opacity-50 rounded">
+        <mat-progress-spinner color="primary" mode="determinate" [value]="item.progreso" diameter="48">
         </mat-progress-spinner>
-      </div> -->
-
-      <div class="progress my-1" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-        <div class="progress-bar" [ngStyle]=" { 'width': item.progreso + '%'} "></div>
       </div>
+
+      <!-- <div class="progress my-1" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" [ngStyle]=" { 'width': item.progreso + '%'} "></div>
+      </div> -->
 
 
     </div>
@@ -44,16 +44,6 @@
     <i-tabler name="alert-triangle"></i-tabler>
     <p class="small mb-0">Máximo 8 fotos</p>
   </div> -->
-
-
-  <div class="" *ngFor="let item of fotos; let i = index">
-
-    <div class="progress my-1" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-      <div class="progress-bar" [ngStyle]=" { 'width': item.progreso + '%'} "></div>
-    </div>
-
-  </div>
-
 
   
 

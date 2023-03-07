@@ -80,11 +80,11 @@ export class UploadImagesComponent {
 
     console.log(this.fotos);
 
-    // if (this.fotos.length <= 8) {
-    //   this.uploadFilesItem();
-    // } else {
-    //   this.maxFotos = true;
-    // }
+    if (this.fotos.length <= 8) {
+      this.uploadFilesItem();
+    } else {
+      this.maxFotos = true;
+    }
 
   }
 
@@ -120,13 +120,9 @@ export class UploadImagesComponent {
     this.loading = true;
 
     // Guardar en Storage
-    const promises = this.fotos.map( (image: FileItem, i: number) => {
+    const promises = this.fotos.map( (image, i: number) => {
 
-      // console.log(image.nameArchivo);
-      // console.log(image.typeArchivo);
-      // console.log(image.sizeArchivo);
-
-      const imageToServer = this.storage.ref(`imagesItems/${this.negocioId}/${this.itemId}/${image.nameArchivo}`).put(image, {
+      const imageToServer = this.storage.ref(`imagesItems/${this.negocioId}/${this.itemId}/${image.nameArchivo}`).put(image.archivo, {
         customMetadata: {
           name: image.nameArchivo,
           type: image.typeArchivo,
@@ -170,7 +166,7 @@ export class UploadImagesComponent {
 
         const imageComplete = {
           urlImage: element.url,
-          nameImage: element.nameArchivo,
+          nameImage: element.nameImage,
           fechaCreacion: Timestamp.now(),
           destacado: false,
           order: index + 1,

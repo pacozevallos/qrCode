@@ -976,6 +976,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+  backdrop-filter: blur(10px);
 }
 
 .buttonDotted {
