@@ -11,6 +11,7 @@ import { Negocio } from 'src/app/classes/negocio';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 import { DomSanitizer } from '@angular/platform-browser';
+import { FileItem } from 'src/app/classes/file-item';
 
 @Component({
   selector: 'app-upload-images',
@@ -21,9 +22,9 @@ export class UploadImagesComponent {
 
   @Input() itemId!: string;
 
-  fotos: File[] = [];
+  fotos: FileItem [] = [];
   disabled = true;
-  uploadPercent!: Observable<number | undefined>;
+  uploadPercent: Observable<number>;
   downloadURL!: Observable<string>;
   urlsImages: any[] = [];
   resultados: any[] = [];
@@ -81,9 +82,7 @@ export class UploadImagesComponent {
     }
 
     console.log(this.fotos);
-    // console.log(this.imagesPreview);
-
-    // this.getLengthFotos();
+    console.log(this.imagesPreview);
 
     if (this.fotos.length <= 8) {
       this.uploadFilesItem();
@@ -125,29 +124,41 @@ export class UploadImagesComponent {
     this.loading = true;
 
     // Guardar en Storage
-    const promises = this.fotos.map( (image, index) => {
+    const promises = this.fotos.map( (image: FileItem, i: number) => {
 
-      const imageToServer: any = this.storage.ref(`imagesItems/${this.negocioId}/${this.itemId}/${image.name}`).put(image, {
+      console.log(image.nameArchivo);
+
+      const imageToServer: any = this.storage.ref(`imagesItems/${this.negocioId}/${this.itemId}/${image.nameArchivo}`).put(image, {
         customMetadata: {
-          name: image.name,
-          type: image.type,
-          size: image.size.toString(),
+          name: image.nameArchivo,
+          type: image.typeArchivo,
+          size: image.sizeArchivo.toString(),
         }
       });
 
-      this.uploadPercent = imageToServer.snapshotChanges();
+      // this.uploadPercent = imageToServer.percentageChanges();
+      // this.uploadPercent.subscribe( res => console.log(res + `[${i}]`))
+
+      imageToServer.percentageChanges().subscribe( res => {
+        image.progreso = res;
+        console.log(res);
+        
+      });
+
+      // console.log(this.uploadPercent);
 
       return imageToServer.then( (uploadTaskSnapshot: any) => {
-        // return uploadTaskSnapshot.ref.getDownloadURL();
-        const nameImage = image.name;
+        const nameImage = image.nameArchivo;
         
         return uploadTaskSnapshot.ref.getDownloadURL()
         .then( (url: any) => {
-          console.log(url);
+          console.log(url, nameImage);
           return { url, nameImage }
         });
       });
     })
+
+    
 
 
     // Guardar en Firestore
@@ -162,7 +173,7 @@ export class UploadImagesComponent {
 
         const imageComplete = {
           urlImage: element.url,
-          nameImage: element.nameImage,
+          nameImage: element.nombreArchivo,
           fechaCreacion: Timestamp.now(),
           destacado: false,
           order: index + 1,
