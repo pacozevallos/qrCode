@@ -6,7 +6,8 @@ export class FileItem {
   sizeArchivo: number;
   url: string;
   estaSubiendo: boolean;
-  progreso: number;
+  progreso: any;
+  imgUrl: any;
 
   constructor( archivo: File ) {
     this.archivo = archivo;

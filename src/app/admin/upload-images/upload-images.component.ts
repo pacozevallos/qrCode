@@ -70,25 +70,21 @@ export class UploadImagesComponent {
 
     document.getElementById('formFileMultiple').click();
 
-    const files: FileItem[] = event.target.files;
+    const files = event.target.files;
 
     for (let i = 0; i < files?.length; i++) {
-
-      this.fotos.push(files[i]);
-
-      // const imgUrl = URL.createObjectURL(files[i])
-      // this.imagesPreview.push(imgUrl)
-
+      const nuevoArchivo = new FileItem(files[i]);
+      this.fotos.push(nuevoArchivo);
+      nuevoArchivo.imgUrl = URL.createObjectURL(files[i]);
     }
 
     console.log(this.fotos);
-    console.log(this.imagesPreview);
 
-    if (this.fotos.length <= 8) {
-      this.uploadFilesItem();
-    } else {
-      this.maxFotos = true;
-    }
+    // if (this.fotos.length <= 8) {
+    //   this.uploadFilesItem();
+    // } else {
+    //   this.maxFotos = true;
+    // }
 
   }
 
@@ -126,11 +122,11 @@ export class UploadImagesComponent {
     // Guardar en Storage
     const promises = this.fotos.map( (image: FileItem, i: number) => {
 
-      console.log(image.nameArchivo);
-      console.log(image.typeArchivo);
-      console.log(image.sizeArchivo);
+      // console.log(image.nameArchivo);
+      // console.log(image.typeArchivo);
+      // console.log(image.sizeArchivo);
 
-      const imageToServer: any = this.storage.ref(`imagesItems/${this.negocioId}/${this.itemId}/${image.nameArchivo}`).put(image, {
+      const imageToServer = this.storage.ref(`imagesItems/${this.negocioId}/${this.itemId}/${image.nameArchivo}`).put(image, {
         customMetadata: {
           name: image.nameArchivo,
           type: image.typeArchivo,
@@ -138,13 +134,12 @@ export class UploadImagesComponent {
         }
       });
 
-      // this.uploadPercent = imageToServer.percentageChanges();
+      // image.progreso = imageToServer.percentageChanges();
       // this.uploadPercent.subscribe( res => console.log(res + `[${i}]`))
 
       imageToServer.percentageChanges().subscribe( res => {
         image.progreso = res;
         console.log(res);
-        
       });
 
       // console.log(this.uploadPercent);
@@ -175,7 +170,7 @@ export class UploadImagesComponent {
 
         const imageComplete = {
           urlImage: element.url,
-          nameImage: element.nombreArchivo,
+          nameImage: element.nameArchivo,
           fechaCreacion: Timestamp.now(),
           destacado: false,
           order: index + 1,
