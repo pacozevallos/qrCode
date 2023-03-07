@@ -22,7 +22,7 @@ export class UploadImagesComponent {
 
   @Input() itemId!: string;
 
-  fotos: FileItem [] = [];
+  fotos: FileItem[] = [];
   disabled = true;
   uploadPercent: Observable<number>;
   downloadURL!: Observable<string>;
@@ -70,14 +70,14 @@ export class UploadImagesComponent {
 
     document.getElementById('formFileMultiple').click();
 
-    const files = event.target.files;
+    const files: FileItem[] = event.target.files;
 
     for (let i = 0; i < files?.length; i++) {
 
       this.fotos.push(files[i]);
 
-      const imgUrl = URL.createObjectURL(files[i])
-      this.imagesPreview.push(imgUrl)
+      // const imgUrl = URL.createObjectURL(files[i])
+      // this.imagesPreview.push(imgUrl)
 
     }
 
@@ -127,6 +127,8 @@ export class UploadImagesComponent {
     const promises = this.fotos.map( (image: FileItem, i: number) => {
 
       console.log(image.nameArchivo);
+      console.log(image.typeArchivo);
+      console.log(image.sizeArchivo);
 
       const imageToServer: any = this.storage.ref(`imagesItems/${this.negocioId}/${this.itemId}/${image.nameArchivo}`).put(image, {
         customMetadata: {
