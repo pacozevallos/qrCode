@@ -17,7 +17,7 @@
         </button>
       </div> -->
 
-      <div class="loadingImageItem d-flex justify-content-center align-items-center bg-light bg-opacity-50 rounded">
+      <div class="loadingImageItem d-flex justify-content-center align-items-center bg-white bg-opacity-50 rounded">
         <mat-progress-spinner color="primary" mode="determinate" [value]="item.progreso" diameter="48">
         </mat-progress-spinner>
       </div>
@@ -26,8 +26,18 @@
         <div class="progress-bar" [ngStyle]=" { 'width': item.progreso + '%'} "></div>
       </div> -->
 
-
     </div>
+
+
+    <div *ngIf="fotosServer.length ">
+      <div  *ngFor="let item of fotosServer">
+        <img class="imageItemPreview rounded border" [src]="item.imgUrl">
+      </div>
+    </div>
+
+    
+
+
 
     <button class="p-0 border-0 bg-white" (click)="getFileDetails($event)" type="button">
       <div class="d-flex justify-content-center align-items-center buttonDotted rounded">

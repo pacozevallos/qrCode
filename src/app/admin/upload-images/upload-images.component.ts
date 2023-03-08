@@ -35,6 +35,7 @@ export class UploadImagesComponent {
   imagesPreview = [];
   maxFotos = false;
   maxButton = false;
+  fotosServer = [];
 
   lista = [
     'Tamaño recomendado 600 x 600',
@@ -80,11 +81,11 @@ export class UploadImagesComponent {
 
     console.log(this.fotos);
 
-    if (this.fotos.length <= 8) {
-      this.uploadFilesItem();
-    } else {
-      this.maxFotos = true;
-    }
+    // if (this.fotos.length <= 8) {
+    //   this.uploadFilesItem();
+    // } else {
+    //   this.maxFotos = true;
+    // }
 
   }
 
@@ -190,6 +191,13 @@ export class UploadImagesComponent {
       console.log(error);
     });
 
+  }
+
+
+  getImagesFirestore() {
+    this.afs.collection('negocios').doc(this.negocioId).collection('items').doc(this.itemId).collection('images').valueChanges().subscribe( res => {
+      this.fotosServer = res;
+    });
   }
 
 
