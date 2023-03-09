@@ -21,6 +21,7 @@ import { FileItem } from 'src/app/classes/file-item';
 export class UploadImagesComponent {
 
   @Input() itemId!: string;
+  @Output() archivos = new EventEmitter<FileItem[]>();
 
   fotos: FileItem[] = [];
   disabled = true;
@@ -34,7 +35,7 @@ export class UploadImagesComponent {
   negocioId: string;
   imagesPreview = [];
   maxFotos = false;
-  maxButton = false;
+  maxButton = true;
   fotosServer = [];
 
   lista = [
@@ -81,11 +82,12 @@ export class UploadImagesComponent {
 
     console.log(this.fotos);
 
-    // if (this.fotos.length <= 8) {
-    //   this.uploadFilesItem();
-    // } else {
-    //   this.maxFotos = true;
-    // }
+    if (this.fotos.length <= 8) {
+      // this.uploadFilesItem();
+      this.emitirImages(this.fotos);
+    } else {
+      this.getLengthFotos();
+    }
 
   }
 
@@ -95,10 +97,7 @@ export class UploadImagesComponent {
     this.fotos.splice(i, 1);
     console.log(this.fotos);
 
-    this.imagesPreview.splice(i, 1);
-    // console.log(this.imagesPreview);
-
-    this.getLengthFotos()
+    this.getLengthFotos();
   }
 
   getLengthFotos() {
@@ -109,10 +108,14 @@ export class UploadImagesComponent {
     }
 
     if (this.fotos.length > 7) {
-      this.maxButton = true;
-    } else {
       this.maxButton = false;
+    } else {
+      this.maxButton = true;
     }
+  }
+
+  emitirImages(images: FileItem[]) {
+    this.archivos.emit(images);
   }
 
 
@@ -194,11 +197,11 @@ export class UploadImagesComponent {
   }
 
 
-  getImagesFirestore() {
-    this.afs.collection('negocios').doc(this.negocioId).collection('items').doc(this.itemId).collection('images').valueChanges().subscribe( res => {
-      this.fotosServer = res;
-    });
-  }
+  // getImagesFirestore() {
+  //   this.afs.collection('negocios').doc(this.negocioId).collection('items').doc(this.itemId).collection('images').valueChanges().subscribe( res => {
+  //     this.fotosServer = res;
+  //   });
+  // }
 
 
 }

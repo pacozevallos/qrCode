@@ -321,12 +321,6 @@ table {
   right: 0.5rem;
 }
 
-.buttonDeleteImageItem {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-}
-
 .imageItemEdit {
   object-fit: cover;
   width: 100%;
@@ -955,10 +949,10 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 
 .grillaImagesItemsPreview {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
   @include media-breakpoint-only(xs) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.25rem;
   }
 }
@@ -967,6 +961,12 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+}
+
+.buttonDeleteImageItem {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
 .buttonDotted {

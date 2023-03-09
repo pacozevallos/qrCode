@@ -12,6 +12,9 @@ import { Negocio } from 'src/app/classes/negocio';
 import { CrearCategoriaItemComponent } from '../crear-categoria-item/crear-categoria-item.component';
 import { ActivatedRoute } from '@angular/router';
 import { Timestamp } from 'firebase/firestore';
+import { UploadImagesService } from 'src/app/services/upload-images.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FileItem } from 'src/app/classes/file-item';
 
 @Component({
   selector: 'app-crear-item',
@@ -45,6 +48,11 @@ export class CrearItemComponent implements OnInit {
   categoria: string;
 
 
+  archivos: FileItem[] = [];
+  negocioId: string;
+  itemId: string;
+  
+
   constructor(
     private bottomSheetRef: MatBottomSheetRef<CrearItemComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
@@ -52,13 +60,22 @@ export class CrearItemComponent implements OnInit {
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
     private dialog: MatDialog,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private afAuth: AngularFireAuth,
+    private uploadImages: UploadImagesService,
   ) {
-    // const myUrl = this.activatedRoute.snapshot.url;
-    // this.idNegocio = myUrl[1].path;
 
-    this.itemRef = this.afs.collection('negocios/').doc(this.data.id).collection('items').ref.doc();
-    console.log(this.itemRef.id);
+    // traer solo el negocio del usuario
+    this.afAuth.authState.subscribe( res => {
+      const user = res;
+      this.afs.collection('negocios').valueChanges().subscribe( (res: any) => {
+        const negocio = res.find( (find: Negocio) => find.autorId === user.uid );
+        this.negocioId = negocio.id;
+      });
+    });
+
+    // Generar ID item
+    this.itemId = this.afs.collection('negocios/').doc(this.data.id).collection('items').ref.doc().id;
   }
 
   
@@ -66,7 +83,7 @@ export class CrearItemComponent implements OnInit {
     // console.log(this.data.id);
 
     this.formItem = this.fb.group({
-      id: [ this.itemRef.id ],
+      id: [ this.itemId ],
       categoria: ['', Validators.required],
       nombre: ['', Validators.required],
       descripcion: [''],
@@ -124,6 +141,15 @@ export class CrearItemComponent implements OnInit {
     });
   }
 
+  getArchivos(archivos: FileItem[]) {
+    this.archivos = archivos;
+    console.log(this.archivos);
+  }
+
+  uploadArchivos() {
+    this.uploadImages.uploadFilesItem(this.archivos, this.negocioId, this.itemId)
+  }
+
 
   onSubmit() {
     if (this.formItem.valid) {
@@ -142,7 +168,7 @@ export class CrearItemComponent implements OnInit {
 
   crearItem() {
     // this.afs.doc('items/' + this.idItem).set(this.formItem.value)
-    this.afs.doc('negocios/' + this.data.id).collection('items').doc(this.itemRef.id).set(this.formItem.value)
+    this.afs.doc('negocios/' + this.data.id).collection('items').doc(this.itemId).set(this.formItem.value)
     // this.itemRef.set(this.formItem.value)
     .then(() => {
       this.bottomSheetRef.dismiss();
@@ -201,7 +227,7 @@ export class CrearItemComponent implements OnInit {
     const nombreImage = this.nameItem.split('.');
 
     const file = this.selectedFile;
-    const filePath = `imagesItems/${this.data.id}/${this.itemRef.id}.${nombreImage[1]}`;
+    const filePath = `imagesItems/${this.data.id}/${this.itemId}.${nombreImage[1]}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
@@ -217,7 +243,7 @@ export class CrearItemComponent implements OnInit {
           this.itemRef.set(objectItem);
           this.itemRef.set({
             image: this.downloadURL,
-            imageName: `${this.itemRef.id}.${nombreImage[1]}`,
+            imageName: `${this.itemId}.${nombreImage[1]}`,
           }, {merge: true});
           this.bottomSheetRef.dismiss();
           console.log( this.downloadURL );

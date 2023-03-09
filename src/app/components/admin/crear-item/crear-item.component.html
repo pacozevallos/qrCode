@@ -19,7 +19,9 @@
       </div>
 
 
-      <app-upload-images [itemId]="itemRef.id"></app-upload-images>
+      <app-upload-images [itemId]="itemId" (archivos)="getArchivos($event)"></app-upload-images>
+
+      <button class="btn btn-outline-primary" (click)="uploadArchivos()">Subir imágenes</button>
 
 
       <!-- <button class="btn btn-outline-primary" (click)="recibirFuncion()">
