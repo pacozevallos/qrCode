@@ -6,30 +6,28 @@
   <input class="d-none" type="file" id="formFileMultiple" multiple (change)="getFileDetails($event)" accept="image/png, image/jpeg, image/jpg">
 
 
-  <div class="grillaImagesItemsPreview mb-3">
+  <div class="grillaImagesItemsPreview mb-3" cdkDropList (cdkDropListDropped)="drop($event)">
 
-    <div class="position-relative" *ngFor="let item of fotosFirestore; let i = index">
+    <div class="position-relative" *ngFor="let item of fotosFirestore; let i = index" cdkDrag>
       <img class="imageItemPreview rounded border" [src]="item.urlImage" alt="">
       <div class="buttonDeleteImageItem">
         <button class="btn btn-primary btn-circle-xs" (click)="deleteImageFromFirebase(item)">
           <i-tabler name="trash"></i-tabler>
         </button>
       </div>
+      <p class="extraSmall mb-0">{{item.id}}</p>
+      <p>{{item.order}}</p>
     </div>
 
-    <div class="">
-      <div *ngFor="let item of fotos; let i = index">
-        <div class="h-100 rounded" style="background-size: cover;" [ngStyle]=" { 'background-image': 'url(' + item.imgUrl + ')' }">
-          <div class="d-flex justify-content-center align-items-center bg-dark bg-opacity-50 rounded h-100">
-            <mat-progress-spinner color="primary" mode="determinate" [value]="item.progreso" diameter="48">
-            </mat-progress-spinner>
-          </div>
+    <div *ngFor="let item of fotos; let i = index">
+      <div class="h-100 rounded" style="background-size: cover;" [ngStyle]=" { 'background-image': 'url(' + item.imgUrl + ')' }">
+        <div class="d-flex justify-content-center align-items-center bg-white bg-opacity-50 rounded h-100">
+          <mat-progress-spinner color="primary" mode="determinate" [value]="item.progreso" diameter="48">
+          </mat-progress-spinner>
         </div>
       </div>
     </div>
-
-    
-
+ 
     <button class="p-0 border-0 bg-white" (click)="getFileDetails($event)" type="button" *ngIf="maxButton">
       <div class="d-flex justify-content-center align-items-center buttonDotted rounded">
         <i-tabler name="plus" class="text-primary"

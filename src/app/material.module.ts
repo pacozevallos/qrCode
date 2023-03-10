@@ -22,6 +22,8 @@ import {MatBottomSheetModule,  MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA} from '@
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 
 
 @NgModule({
@@ -65,7 +67,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatBottomSheetModule,
     MatSnackBarModule,
     // MaterialFileInputModule,
-    MatTabsModule
+    MatTabsModule,
+    DragDropModule
   ],
   providers: [
     { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },

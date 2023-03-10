@@ -137,7 +137,7 @@ export class FirebaseService {
   getAllImagesItem(negocioId: string, itemId: string) {
 
     return this.afs.collection('negocios').doc(negocioId).collection('items').doc(itemId).collection('images', ref => ref
-    // .orderBy('order', 'asc')
+    .orderBy('order', 'asc')
     ).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as FileItem;

@@ -14,6 +14,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FileItem } from 'src/app/classes/file-item';
 import { UploadImagesService } from 'src/app/services/upload-images.service';
 
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 @Component({
   selector: 'app-upload-images',
   templateUrl: './upload-images.component.html',
@@ -41,6 +43,7 @@ export class UploadImagesComponent {
   maxNumFotos = 8;
   fotosFirestore = [];
   visiblePreviewImages = true;
+  sizeCollection: number;
   
 
   lista = [
@@ -74,13 +77,11 @@ export class UploadImagesComponent {
         //   console.log(this.itemId);
         // });
 
-        // traer imágenes del item si las hubiera
+        // traer imágenes del item
         this.fs.getAllImagesItem(this.negocioId, this.itemId).subscribe( res => {
           this.fotosFirestore = res;
-          console.log(res.length);
-          
-          // this.visiblePreviewImages = false;
-          console.log(this.fotosFirestore);
+          this.fotos = [];
+          this.sizeCollection = res.length;
         });
 
 
@@ -109,7 +110,7 @@ export class UploadImagesComponent {
     console.log(this.fotos);
 
     if (this.fotos.length <= this.maxNumFotos) {
-      this.uploadImages.uploadFilesItem(this.fotos, this.negocioId, this.itemId)
+      this.uploadImages.uploadFilesItem(this.fotos, this.negocioId, this.itemId, this.sizeCollection)
     } else {
       this.getLengthFotos();
     }
@@ -151,6 +152,15 @@ export class UploadImagesComponent {
     // console.log(this.fotos);
     this.getLengthFotos();
     this.emitirImages(this.fotos);
+  }
+
+  drop(event: CdkDragDrop<any[]>) {
+    moveItemInArray(this.fotos, event.previousIndex, event.currentIndex);
+    this.fotos.map( (element: any, index: number )=> {
+      this.afs.collection(`negocios/${this.negocioId}/items/${this.itemId}/images`).doc(element.id).update({
+        order: index + 1
+      });
+    });
   }
 
 

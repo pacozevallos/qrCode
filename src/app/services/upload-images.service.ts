@@ -11,22 +11,28 @@ export class UploadImagesService {
 
   loading: boolean;
   resultados = [];
+  imageId: string;
 
   constructor(
     private storage: AngularFireStorage,
     private afs: AngularFirestore
   ) { }
 
-  uploadFilesItem( fotos: FileItem[], negocioId: string, itemId: string ) {
+  uploadFilesItem( fotos: FileItem[], negocioId: string, itemId: string, sizeCollection: number ) {
 
     this.loading = true;
-
     
+
 
     // Guardar en Storage
     const promises = fotos.map( (image, i: number) => {
 
-      const imageToServer = this.storage.ref(`imagesItems/${negocioId}/${itemId}/${image.nameArchivo}`).put(image.archivo, {
+      this.imageId = this.afs.collection(`negocios/${negocioId}/items/${itemId}/images`).doc().ref.id;
+
+      const formatImage = image.nameArchivo.split('.').pop()
+      const newNameArchivo = `${this.imageId}.${formatImage}`;
+
+      const imageToServer = this.storage.ref(`imagesItems/${negocioId}/${itemId}/${newNameArchivo}`).put(image.archivo, {
         customMetadata: {
           name: image.nameArchivo,
           type: image.typeArchivo,
@@ -42,7 +48,9 @@ export class UploadImagesService {
       // console.log(this.uploadPercent);
 
       return imageToServer.then( (uploadTaskSnapshot: any) => {
-        const nameImage = image.nameArchivo;
+
+        // const nameImage = image.nameArchivo;
+        const nameImage = newNameArchivo;
         
         return uploadTaskSnapshot.ref.getDownloadURL()
         .then( (url: any) => {
@@ -60,18 +68,18 @@ export class UploadImagesService {
 
       console.log(response);
 
-      response.map( (element: any, index: number) => {
+      response.map( (element: any, i: number) => {
 
-        const refImage = this.afs.collection('negocios').doc(negocioId).collection('items').doc(itemId).collection('images').doc().ref.id;
+        // const refImage = this.afs.collection('negocios').doc(negocioId).collection('items').doc(itemId).collection('images').doc().ref.id;
 
         const imageComplete = {
           urlImage: element.url,
           nameImage: element.nameImage,
           fechaCreacion: Timestamp.now(),
           destacado: false,
-          order: index + 1,
+          order: sizeCollection + i + 1,
           publicado: true,
-          id: refImage
+          id: element.nameImage.split('.').shift()
         }
         this.resultados.push(imageComplete);
       });
