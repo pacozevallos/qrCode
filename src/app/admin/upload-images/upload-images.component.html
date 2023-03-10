@@ -17,14 +17,18 @@
       </div>
     </div>
 
-    <div *ngFor="let item of fotos; let i = index">
-      <div class="h-100 rounded" style="background-size: cover;" [ngStyle]=" { 'background-image': 'url(' + item.imgUrl + ')' }">
-        <div class="d-flex justify-content-center align-items-center bg-dark bg-opacity-50 rounded h-100">
-          <mat-progress-spinner color="primary" mode="determinate" [value]="item.progreso" diameter="48">
-          </mat-progress-spinner>
+    <div class="">
+      <div *ngFor="let item of fotos; let i = index">
+        <div class="h-100 rounded" style="background-size: cover;" [ngStyle]=" { 'background-image': 'url(' + item.imgUrl + ')' }">
+          <div class="d-flex justify-content-center align-items-center bg-dark bg-opacity-50 rounded h-100">
+            <mat-progress-spinner color="primary" mode="determinate" [value]="item.progreso" diameter="48">
+            </mat-progress-spinner>
+          </div>
         </div>
       </div>
     </div>
+
+    
 
     <button class="p-0 border-0 bg-white" (click)="getFileDetails($event)" type="button" *ngIf="maxButton">
       <div class="d-flex justify-content-center align-items-center buttonDotted rounded">
