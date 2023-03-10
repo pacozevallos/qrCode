@@ -47,10 +47,11 @@ export class CrearItemComponent implements OnInit {
   idNegocio: string;
   categoria: string;
 
-
   archivos: FileItem[] = [];
   negocioId: string;
   itemId: string;
+
+  maxNumFotos: number;
   
 
   constructor(
@@ -75,12 +76,17 @@ export class CrearItemComponent implements OnInit {
     });
 
     // Generar ID item
-    this.itemId = this.afs.collection('negocios/').doc(this.data.id).collection('items').ref.doc().id;
+    // this.itemId = this.afs.collection('negocios/').doc(this.data.id).collection('items').ref.doc().id;
   }
 
   
   ngOnInit(): void {
     // console.log(this.data.id);
+
+    this.activatedRoute.params.subscribe( res => {
+      this.itemId = res.id
+      console.log(this.itemId);
+    });
 
     this.formItem = this.fb.group({
       id: [ this.itemId ],
@@ -141,18 +147,27 @@ export class CrearItemComponent implements OnInit {
     });
   }
 
-  getArchivos(archivos: FileItem[]) {
-    this.archivos = archivos;
-    console.log(this.archivos);
+  getMaxNumFotos(maxNumFotos: number) {
+    this.maxNumFotos = maxNumFotos;
+    console.log(this.maxNumFotos);
+    
   }
 
-  uploadArchivos() {
-    this.uploadImages.uploadFilesItem(this.archivos, this.negocioId, this.itemId)
+  getArchivos(archivos: FileItem[]) {
+    this.archivos = archivos;
+    console.log(this.archivos.length);
   }
+
+
+  // uploadArchivos() {
+  //   if (this.archivos.length ) {
+  //   }
+  //   this.uploadImages.uploadFilesItem(this.archivos, this.negocioId, this.itemId)
+  // }
 
 
   onSubmit() {
-    if (this.formItem.valid) {
+    if (this.formItem.valid && this.archivos.length <= this.maxNumFotos ) {
       this.loading = true;
       // this.crearItem();
       // this.uploadFileCrearItem();

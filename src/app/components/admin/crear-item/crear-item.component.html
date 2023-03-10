@@ -1,43 +1,27 @@
 <div class="">
 
-  <div class="row">
+
+  <div class="d-flex align-items-center gap-2 mb-3 mb-md-4">
+    <a routerLink="/admin/productos">
+      <i-tabler name="arrow-left"></i-tabler>
+    </a>
+    <p class="h4 mb-0">Crear item</p>
+  </div>
+
+
+
+  <div class="row gx-md-8">
+
+    <div class="col-md-6">
+      <app-upload-images [itemId]="itemId" (archivos)="getArchivos($event)" (maxNumFiles)="getMaxNumFotos($event)"></app-upload-images>
+    </div>
+
 
     <div class="col-md-6">
 
-      <!-- <div class="buttonClose">
-        <button mat-icon-button (click)="cancelar()">
-          <mat-icon>close</mat-icon>
-        </button>
-      </div> -->
-
-
-      <div class="d-flex align-items-center gap-2 mb-3 mb-md-4">
-        <a routerLink="/admin/productos">
-          <i-tabler name="arrow-left"></i-tabler>
-        </a>
-        <p class="h4 mb-0">Crear item</p>
-      </div>
-
-
-      <app-upload-images [itemId]="itemId" (archivos)="getArchivos($event)"></app-upload-images>
-
-      <button class="btn btn-outline-primary" (click)="uploadArchivos()">Subir imágenes</button>
-
-
-      <!-- <button class="btn btn-outline-primary" (click)="recibirFuncion()">
-        <span *ngIf="!loading">Subir imágenes</span>
-        <span class="d-flex justify-content-center spinnerDark" *ngIf="loading">
-          <mat-spinner [diameter]="24"></mat-spinner>
-        </span>
-      </button> -->
-
-
-
-
-
-    
-
       <form [formGroup]="formItem" (submit)="onSubmit()" novalidate class="row gx-3">
+
+        <p class="lead">Información</p>
 
         <mat-form-field appearance="fill" class="col-12">
           <mat-label>Categoría</mat-label>
@@ -48,11 +32,6 @@
           </mat-select>
         </mat-form-field>
 
-        <!-- <div class="col-3">
-          <div class="d-grid">
-            <button type="button" class="btn btn-outline-primary myButton" (click)="openModalCrearCategoriaItem()">Crear</button>
-          </div>
-        </div> -->
 
         <mat-form-field appearance="fill" class="col-12">
           <mat-label>Nombre</mat-label>
@@ -64,16 +43,6 @@
           <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="8" formControlName="descripcion"></textarea>
         </mat-form-field>
 
-        <!-- <mat-form-field appearance="fill" class="col-12">
-          <mat-label>Imagen</mat-label>
-          <ngx-mat-file-input #removableInput formControlName="image" placeholder="Seleccionar imagen" accept=".jpg, .jpeg, .png" (change)="detectFiles($event)"></ngx-mat-file-input>
-          <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
-            <mat-icon>clear</mat-icon>
-          </button>
-          <mat-icon matSuffix *ngIf="removableInput.empty">image_search</mat-icon>
-          <mat-error *ngIf="errorImagen()">{{errorImagen()}}</mat-error>
-          <mat-hint>Peso máximo: 5 MB</mat-hint>
-        </mat-form-field> -->
 
         <p class="lead mt-3">Precio</p>
 
@@ -151,8 +120,6 @@
         </div>
 
       </form>
-
-      <!-- <pre>{{formItem.value | json}}</pre> -->
 
     </div>
 

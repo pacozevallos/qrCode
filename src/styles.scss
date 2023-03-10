@@ -952,7 +952,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
   @include media-breakpoint-only(xs) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 0.25rem;
   }
 }

@@ -2,33 +2,30 @@
 
   <p class="lead">Imágenes</p>
 
+
   <input class="d-none" type="file" id="formFileMultiple" multiple (change)="getFileDetails($event)" accept="image/png, image/jpeg, image/jpg">
 
 
   <div class="grillaImagesItemsPreview mb-3">
 
-    <div class="position-relative" *ngFor="let item of fotos; let i = index">
-
-      <img class="imageItemPreview rounded border" [src]="sanitizer.bypassSecurityTrustResourceUrl(item.imgUrl)" alt="">
-
+    <div class="position-relative" *ngFor="let item of fotosFirestore; let i = index">
+      <img class="imageItemPreview rounded border" [src]="item.urlImage" alt="">
       <div class="buttonDeleteImageItem">
-        <button class="btn btn-primary btn-circle-xs" (click)="removeItem($event, i)">
-          <i-tabler name="x"></i-tabler>
+        <button class="btn btn-primary btn-circle-xs" (click)="deleteImageFromFirebase(item)">
+          <i-tabler name="trash"></i-tabler>
         </button>
       </div>
-
-      <!-- <div class="loadingImageItem d-flex justify-content-center align-items-center bg-white bg-opacity-50 rounded">
-        <mat-progress-spinner color="primary" mode="determinate" [value]="item.progreso" diameter="48">
-        </mat-progress-spinner>
-      </div> -->
-
-      <!-- <div class="progress my-1" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-        <div class="progress-bar" [ngStyle]=" { 'width': item.progreso + '%'} "></div>
-      </div> -->
-
     </div>
 
-    
+    <div *ngFor="let item of fotos; let i = index">
+      <div class="h-100 rounded" style="background-size: cover;" [ngStyle]=" { 'background-image': 'url(' + item.imgUrl + ')' }">
+        <div class="d-flex justify-content-center align-items-center bg-dark bg-opacity-50 rounded h-100">
+          <mat-progress-spinner color="primary" mode="determinate" [value]="item.progreso" diameter="48">
+          </mat-progress-spinner>
+        </div>
+      </div>
+    </div>
+
     <button class="p-0 border-0 bg-white" (click)="getFileDetails($event)" type="button" *ngIf="maxButton">
       <div class="d-flex justify-content-center align-items-center buttonDotted rounded">
         <i-tabler name="plus" class="text-primary"
@@ -92,3 +89,10 @@
     </tr>
   </tbody>
 </table> -->
+
+
+    <!-- <div class="buttonDeleteImageItem">
+        <button class="btn btn-primary btn-circle-xs" (click)="removeItem($event, i)">
+          <i-tabler name="x"></i-tabler>
+        </button>
+      </div> -->

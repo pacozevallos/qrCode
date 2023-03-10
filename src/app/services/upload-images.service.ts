@@ -21,6 +21,8 @@ export class UploadImagesService {
 
     this.loading = true;
 
+    
+
     // Guardar en Storage
     const promises = fotos.map( (image, i: number) => {
 
@@ -51,7 +53,6 @@ export class UploadImagesService {
     })
 
     
-
 
     // Guardar en Firestore
     Promise.all(promises)

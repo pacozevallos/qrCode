@@ -31,6 +31,7 @@ export class ListaItemsComponent implements OnInit {
   itemsGroup = [];
   value;
   user;
+  itemId: string;
 
   displayedColumns = [ 'imagen', 'nombre', 'categoria', 'destacado', 'publicado', 'opciones'];
   itemsData = new MatTableDataSource();
@@ -58,7 +59,9 @@ export class ListaItemsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private storage: AngularFireStorage,
     private afAuth: AngularFireAuth
-  ) { }
+  ) {
+   
+  }
 
   ngOnInit(): void {
 
@@ -69,6 +72,8 @@ export class ListaItemsComponent implements OnInit {
         const negocioRef = res.find( (find: Negocio) => find.autorId === this.user.uid );
         this.negocio = negocioRef;
         this.idNegocio = this.negocio.id;
+         // Generar ID item
+        this.itemId = this.afs.collection('negocios/').doc(this.idNegocio).collection('items').ref.doc().id;
         this.fs.getAllItemsDocument(this.idNegocio).subscribe( data => {
           this.itemsData.data = data;
         });

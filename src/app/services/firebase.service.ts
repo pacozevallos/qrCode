@@ -6,6 +6,7 @@ import { Item } from '../classes/item';
 import { Negocio } from 'src/app/classes/negocio';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from '../classes/user';
+import { FileItem } from '../classes/file-item';
 
 @Injectable({
   providedIn: 'root'
@@ -130,6 +131,22 @@ export class FirebaseService {
       const negocioRef = res.find( (find: Negocio) => find.autorId === user.uid );
       return negocioRef;
     });
+
+  }
+
+  getAllImagesItem(negocioId: string, itemId: string) {
+
+    return this.afs.collection('negocios').doc(negocioId).collection('items').doc(itemId).collection('images', ref => ref
+    // .orderBy('order', 'asc')
+    ).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as FileItem;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+
+
 
   }
 
