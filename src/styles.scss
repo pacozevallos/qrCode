@@ -963,6 +963,12 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   object-fit: cover;
 }
 
+.imageItemFile {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
 .buttonDeleteImageItem {
   position: absolute;
   top: 0.5rem;

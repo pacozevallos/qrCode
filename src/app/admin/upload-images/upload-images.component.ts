@@ -24,7 +24,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class UploadImagesComponent {
 
   @Input() itemId!: string;
-  @Output() archivos = new EventEmitter<FileItem[]>();
+  // @Output() archivos = new EventEmitter<FileItem[]>();
   @Output() maxNumFiles = new EventEmitter<number>();
 
   fotos: FileItem[] = [];
@@ -47,6 +47,8 @@ export class UploadImagesComponent {
 
   showButtonAddFile: boolean;
   showAlert: boolean;
+
+  totalFotos: number;
   
 
   lista = [
@@ -70,15 +72,10 @@ export class UploadImagesComponent {
     this.afAuth.authState.subscribe( res => {
       const user = res;
       this.afs.collection('negocios').valueChanges().subscribe( (res: any) => {
+
         const negocio = res.find( (find: Negocio) => find.autorId === user.uid );
 
         this.negocioId = negocio.id;
-
-        // // Traer itemId
-        // this.activatedRoute.params.subscribe( res => {
-        //   this.itemId = res.id
-        //   console.log(this.itemId);
-        // });
 
         // traer imágenes del item
         this.fs.getAllImagesItem(this.negocioId, this.itemId).subscribe( res => {
@@ -88,14 +85,10 @@ export class UploadImagesComponent {
           this.checkNumFotos();
         });
 
-
       });
     });
 
     console.log(this.itemId);
-
-    // this.getImagesFirestore();
-
     this.checkNumFotos();
 
   }
@@ -114,49 +107,28 @@ export class UploadImagesComponent {
     }
 
     console.log(this.fotos);
-
     this.checkNumFotos();
-
-    // if (this.fotos.length <= this.maxNumFotos) {
-    //   this.uploadImages.uploadFilesItem(this.fotos, this.negocioId, this.itemId, this.sizeCollection)
-    // } else {
-    //   this.checkNumFotos();
-    // }
-
-    // this.emitirMaxNumFotos();
-    // this.emitirImages(this.fotos);
+    this.uploadFiles();
 
   }
 
-  emitirMaxNumFotos() {
-    this.maxNumFiles.emit(this.maxNumFotos)
-  }
-
-  emitirImages(images: FileItem[]) {
-    if (this.fotos.length <= this.maxNumFotos) {
-      this.archivos.emit(images);
-    } else {
-      this.checkNumFotos()
+  uploadFiles() {
+    this.totalFotos = this.fotosFirestore.length + this.fotos.length
+    if ( this.totalFotos <= this.maxNumFotos) {
+      this.uploadImages.uploadFilesItem(this.fotos, this.negocioId, this.itemId, this.sizeCollection)
     }
   }
 
   checkNumFotos() {
+    this.totalFotos = this.fotosFirestore.length + this.fotos.length
 
-    const fotosFirestore = this.fotosFirestore.length;
-    const fotos = this.fotos.length;
-    const totalFotos = fotosFirestore + fotos
-
-    if ( totalFotos <= this.maxNumFotos) {
-      this.uploadImages.uploadFilesItem(this.fotos, this.negocioId, this.itemId, this.sizeCollection)
-    }
-
-    if ( totalFotos < this.maxNumFotos) {
+    if ( this.totalFotos < this.maxNumFotos) {
       this.showButtonAddFile = true;
     } else {
       this.showButtonAddFile = false;
     }
 
-    if ( totalFotos > this.maxNumFotos) {
+    if ( this.totalFotos > this.maxNumFotos) {
       this.showAlert = true;
     } else {
       this.showAlert = false;
@@ -164,10 +136,10 @@ export class UploadImagesComponent {
 
   }
 
-
   removeItem(i: any) {
     this.fotos.splice(i, 1);
     this.checkNumFotos();
+    this.uploadFiles();
   }
 
   drop(event: CdkDragDrop<any[]>) {
@@ -179,113 +151,13 @@ export class UploadImagesComponent {
     });
   }
 
-
-
-
-  uploadFilesItem() {
-
-    this.loading = true;
-
-    // Guardar en Storage
-    const promises = this.fotos.map( (image, i: number) => {
-
-      const imageToServer = this.storage.ref(`imagesItems/${this.negocioId}/${this.itemId}/${image.nameArchivo}`).put(image.archivo, {
-        customMetadata: {
-          name: image.nameArchivo,
-          type: image.typeArchivo,
-          size: image.sizeArchivo.toString(),
-        }
-      });
-
-      // image.progreso = imageToServer.percentageChanges();
-      // this.uploadPercent.subscribe( res => console.log(res + `[${i}]`))
-
-      imageToServer.percentageChanges().subscribe( res => {
-        image.progreso = res;
-        console.log(res);
-      });
-
-      // console.log(this.uploadPercent);
-
-      return imageToServer.then( (uploadTaskSnapshot: any) => {
-        const nameImage = image.nameArchivo;
-        
-        return uploadTaskSnapshot.ref.getDownloadURL()
-        .then( (url: any) => {
-          console.log(url, nameImage);
-          return { url, nameImage }
-        });
-      });
-    })
-
-    
-
-
-    // Guardar en Firestore
-    Promise.all(promises)
-    .then( (response: any) => {
-
-      console.log(response);
-
-      response.map( (element: any, index: number) => {
-
-        const refImage = this.afs.collection('negocios').doc(this.negocioId).collection('items').doc(this.itemId).collection('images').doc().ref.id;
-
-        const imageComplete = {
-          urlImage: element.url,
-          nameImage: element.nameImage,
-          fechaCreacion: Timestamp.now(),
-          destacado: false,
-          order: index + 1,
-          publicado: true,
-          id: refImage
-        }
-        this.resultados.push(imageComplete);
-      });
-
-      console.log(this.resultados);
-
-      this.resultados.map( element => {
-        this.afs.collection('negocios').doc(this.negocioId).collection('items').doc(this.itemId).collection('images').doc(element.id).set(element)
-        .then( () => {
-          this.avisoSuccess = true;
-        });
-      })
-     
-    })
-    .catch( error => {
-      console.log(error);
-    });
-
-  }
-
-
-  // getImagesFirestore() {
-  //   this.fs.getAllImagesItem(this.negocioId, this.itemId).subscribe( res => {
-  //     this.fotosFirestore = res;
-  //     console.log(this.fotosFirestore);
-  //   });
-  // }
-
   deleteImageFromFirebase(item) {
-
-    // this.storage.ref(`imagesItems/${this.negocioId}/${this.itemId}/${item.nameImage}`).delete().subscribe( res => {
-    //   console.log('Eliminado de Storage');
-    //   this.afs.collection('negocios').doc(this.negocioId).collection('items').doc(this.itemId).collection('images').doc(item.id).delete().then( () => {
-    //     console.log('Eliminado de firestore');
-    //   });
-    // });
-
-
     this.afs.collection('negocios').doc(this.negocioId).collection('items').doc(this.itemId).collection('images').doc(item.id).delete().then( () => {
       console.log('Eliminado de firestore');
       this.storage.ref(`imagesItems/${this.negocioId}/${this.itemId}/${item.nameImage}`).delete().subscribe( res => {
         console.log('Eliminado de Storage');
       });
     });
-
-
-
   }
 
 

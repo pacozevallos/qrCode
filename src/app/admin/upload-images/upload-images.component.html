@@ -9,31 +9,36 @@
 
  
 
-  <div class="grillaImagesItems mb-3 example-list" cdkDropListOrientation="horizontal" cdkDropList (cdkDropListDropped)="drop($event)">
+  <div class="grillaImagesItems mb-3 list" cdkDropListOrientation="horizontal" cdkDropList (cdkDropListDropped)="drop($event)">
 
-    <div class="position-relative example-box" *ngFor="let item of fotosFirestore; let i = index" cdkDrag>
+    <!-- <div class="position-relative box" *ngFor="let item of fotosFirestore; let i = index" cdkDrag>
       <img class="imageItemPreview rounded border" [src]="item.urlImage" alt="">
       <div class="buttonDeleteImageItem">
         <button class="btn btn-primary btn-circle-xs" (click)="deleteImageFromFirebase(item)">
           <i-tabler name="x"></i-tabler>
         </button>
       </div>
-    </div>
+    </div> -->
 
-    <!-- <div class="h-100" *ngFor="let item of fotosFirestore; let i = index" cdkDrag>
-      <div class="h-100 rounded" style="background-size: cover;" [ngStyle]=" { 'background-image': 'url(' + item.urlImage + ')' }">
-        <div class="d-flex justify-content-center align-items-center rounded h-100">
-          <button class="btn btn-primary btn-circle-xs" (click)="deleteImageFromFirebase(item)">
-            <i-tabler name="trash"></i-tabler>
-          </button>
+    <div class="imageItemFile box" *ngFor="let item of fotosFirestore; let i = index" cdkDrag>
+      <div class="h-100 border rounded" style="background-size: cover;" [ngStyle]=" { 'background-image': 'url(' + item.urlImage + ')' }">
+        <div class="d-flex justify-content-between rounded h-100 p-2">
+          <div>
+            <i-tabler class="text-white" name="grip-vertical"></i-tabler>
+          </div>
+          <div>
+            <button class="btn btn-primary btn-circle-xs" (click)="deleteImageFromFirebase(item)">
+              <i-tabler name="trash"></i-tabler>
+            </button>
+          </div>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <div class="position-relative imageItemPreview" *ngFor="let item of fotos; let i = index">
       <div class="h-100 rounded" style="background-size: cover;" [ngStyle]=" { 'background-image': 'url(' + item.imgUrl + ')' }">
         <div class="d-flex justify-content-center align-items-center bg-white bg-opacity-75 rounded h-100">
-          <mat-progress-spinner color="primary" mode="determinate" [value]="item.progreso" diameter="48">
+          <mat-progress-spinner color="primary" mode="determinate" [value]="item.progreso" diameter="36">
           </mat-progress-spinner>
         </div>
         <div class="buttonDeleteImageItem">
