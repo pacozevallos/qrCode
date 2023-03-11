@@ -40,15 +40,18 @@ export class UploadImagesComponent {
   imagesPreview = [];
   maxFotos = false;
   maxButton = true;
-  maxNumFotos = 8;
+  maxNumFotos = 4;
   fotosFirestore = [];
   visiblePreviewImages = true;
   sizeCollection: number;
+
+  showButtonAddFile: boolean;
+  showAlert: boolean;
   
 
   lista = [
     'Tamaño recomendado 600 x 600',
-    'Puedes subir hasta 8 fotos'
+    `Puedes subir hasta ${this.maxNumFotos} fotos`
   ]
 
   constructor(
@@ -82,6 +85,7 @@ export class UploadImagesComponent {
           this.fotosFirestore = res;
           this.fotos = [];
           this.sizeCollection = res.length;
+          this.checkNumFotos();
         });
 
 
@@ -91,6 +95,8 @@ export class UploadImagesComponent {
     console.log(this.itemId);
 
     // this.getImagesFirestore();
+
+    this.checkNumFotos();
 
   }
 
@@ -109,11 +115,13 @@ export class UploadImagesComponent {
 
     console.log(this.fotos);
 
-    if (this.fotos.length <= this.maxNumFotos) {
-      this.uploadImages.uploadFilesItem(this.fotos, this.negocioId, this.itemId, this.sizeCollection)
-    } else {
-      this.getLengthFotos();
-    }
+    this.checkNumFotos();
+
+    // if (this.fotos.length <= this.maxNumFotos) {
+    //   this.uploadImages.uploadFilesItem(this.fotos, this.negocioId, this.itemId, this.sizeCollection)
+    // } else {
+    //   this.checkNumFotos();
+    // }
 
     // this.emitirMaxNumFotos();
     // this.emitirImages(this.fotos);
@@ -128,35 +136,43 @@ export class UploadImagesComponent {
     if (this.fotos.length <= this.maxNumFotos) {
       this.archivos.emit(images);
     } else {
-      this.getLengthFotos()
+      this.checkNumFotos()
     }
   }
 
-  getLengthFotos() {
-    if (this.fotos.length > this.maxNumFotos) {
-      this.maxFotos = true;
-    } else {
-      this.maxFotos = false;
+  checkNumFotos() {
+
+    const fotosFirestore = this.fotosFirestore.length;
+    const fotos = this.fotos.length;
+    const totalFotos = fotosFirestore + fotos
+
+    if ( totalFotos <= this.maxNumFotos) {
+      this.uploadImages.uploadFilesItem(this.fotos, this.negocioId, this.itemId, this.sizeCollection)
     }
 
-    if (this.fotos.length > (this.maxNumFotos - 1) ) {
-      this.maxButton = false;
+    if ( totalFotos < this.maxNumFotos) {
+      this.showButtonAddFile = true;
     } else {
-      this.maxButton = true;
+      this.showButtonAddFile = false;
     }
+
+    if ( totalFotos > this.maxNumFotos) {
+      this.showAlert = true;
+    } else {
+      this.showAlert = false;
+    }
+
   }
 
 
-  removeItem(event: any, i: any) {
+  removeItem(i: any) {
     this.fotos.splice(i, 1);
-    // console.log(this.fotos);
-    this.getLengthFotos();
-    this.emitirImages(this.fotos);
+    this.checkNumFotos();
   }
 
   drop(event: CdkDragDrop<any[]>) {
-    moveItemInArray(this.fotos, event.previousIndex, event.currentIndex);
-    this.fotos.map( (element: any, index: number )=> {
+    moveItemInArray(this.fotosFirestore, event.previousIndex, event.currentIndex);
+    this.fotosFirestore.map( (element: any, index: number )=> {
       this.afs.collection(`negocios/${this.negocioId}/items/${this.itemId}/images`).doc(element.id).update({
         order: index + 1
       });
