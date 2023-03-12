@@ -89,6 +89,12 @@ export class UploadImagesService {
       this.resultados.map( element => {
         this.afs.collection('negocios').doc(negocioId).collection('items').doc(itemId).collection('images').doc(element.id).set(element)
       });
+
+      // upadte date images
+      this.afs.collection('negocios').doc(negocioId).collection('items').doc(itemId).set({
+        dateImages: Timestamp.now(),
+        id: itemId
+      });
      
     })
     .catch( error => {

@@ -32,6 +32,7 @@ export class ListaItemsComponent implements OnInit {
   value;
   user;
   itemId: string;
+  // imageUrl: string;
 
   displayedColumns = [ 'imagen', 'nombre', 'categoria', 'destacado', 'publicado', 'opciones'];
   itemsData = new MatTableDataSource();
@@ -70,12 +71,16 @@ export class ListaItemsComponent implements OnInit {
 
       this.afs.collection('negocios').valueChanges().subscribe( (res: Negocio[]) => {
         const negocioRef = res.find( (find: Negocio) => find.autorId === this.user.uid );
+
         this.negocio = negocioRef;
+
         this.idNegocio = this.negocio.id;
+
          // Generar ID item
         this.itemId = this.afs.collection('negocios/').doc(this.idNegocio).collection('items').ref.doc().id;
         this.fs.getAllItemsDocument(this.idNegocio).subscribe( data => {
           this.itemsData.data = data;
+          console.log(this.itemsData.data);
         });
         
       });
@@ -85,30 +90,23 @@ export class ListaItemsComponent implements OnInit {
 
     this.itemsData.paginator = this.paginator;
 
-    // this.sort.sort(({
-    //   id: 'categoria',
-    //   start: 'asc'
-    // }) as MatSortable);
-    // this.itemsData.sort = this.sort;
-
-
-    // this.fs.getAllItemsDocument(this.idNegocio).subscribe( res => {
-    //   this.items = res;
-    //   this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
-    //     const id = prev.findIndex((item) => item.categoria === categoria);
-    //     const cat = 'xxx';
-    //     id >= 0
-    //       ? prev[id].items.push({...items, categoria})
-    //       : prev.push({categoria, items: [{...items, categoria}]});
-    //     return prev;
-    //   }, []);
-    // });
 
      // Para filtrar objetos anidados, incluye minusculas
     this.itemsData.filterPredicate = (data: any, filter: string) => {
       const dataStr = JSON.stringify(data).toLowerCase();
       return dataStr.indexOf(filter) !== -1;
     };
+
+  }
+
+  getImageItem(itemId: string) {
+   
+    this.afs.collection(`negocios/${this.idNegocio}/items/${itemId}/images`).get().subscribe( (res: any) => {
+      const image = res.find( (find: any) => find.order === 1 );
+      const imageUrl = image?.urlImage;
+    });
+
+    // return imageUrl
 
   }
 
