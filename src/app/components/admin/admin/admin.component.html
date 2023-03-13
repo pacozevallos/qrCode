@@ -1,13 +1,14 @@
 
 <div *ngIf="negocio">
-  <app-header-admin  [negocio]="negocio"></app-header-admin>
+  <app-header-admin [negocio]="negocio"></app-header-admin>
 </div>
 
-
-<nav mat-tab-nav-bar class="container" [tabPanel]="tabPanel" mat-stretch-tabs="false">
-  <a mat-tab-link #rla="routerLinkActive" *ngFor="let link of links; let i=index" [routerLink]="link.url" routerLinkActive="active" [active]="rla.isActive" >{{link.nombre}}
-  </a>
-</nav>
+<div class="bg-light">
+  <nav mat-tab-nav-bar class="container" [tabPanel]="tabPanel" mat-stretch-tabs="false">
+    <a mat-tab-link #rla="routerLinkActive" *ngFor="let link of links; let i=index" [routerLink]="link.url" routerLinkActive="active" [active]="rla.isActive" >{{link.nombre}}
+    </a>
+  </nav>
+</div>
 
 
 <div #tabPanel class="bg-white">

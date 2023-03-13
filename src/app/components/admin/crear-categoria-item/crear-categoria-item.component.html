@@ -1,6 +1,6 @@
 <div>
 
-  <p class="h5">Agregar categoría</p>
+  <p class="h4 mb-3">Agregar categoría</p>
 
   <form [formGroup]="formCategoria" (ngSubmit)="onSubmit()" novalidate class="row gx-0">
 
@@ -34,7 +34,7 @@
         <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
           <mat-spinner class="" [diameter]="24"></mat-spinner>
         </span>
-        <span *ngIf="!loading">Agregar</span>
+        <span *ngIf="!loading">Crear categoría</span>
       </button>
     </div>
     

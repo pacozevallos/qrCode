@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef as MatDialogRef, MAT_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Negocio } from 'src/app/classes/negocio';
 // import { arrayUnion } from "firebase/firestore";
@@ -18,13 +18,13 @@ export interface DialogData {
 })
 export class CrearCategoriaItemComponent implements OnInit {
 
-  formCategoria: UntypedFormGroup;
+  formCategoria: FormGroup;
   loading = false;
 
   constructor(
     public dialogRef: MatDialogRef<CrearCategoriaItemComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private afs: AngularFirestore,
   ) { }
 
@@ -40,13 +40,13 @@ export class CrearCategoriaItemComponent implements OnInit {
   }
 
   agregarCategoria() {
-    (this.formCategoria.controls.categorias as UntypedFormArray).push(
-      new UntypedFormControl('', [Validators.required])
+    (this.formCategoria.controls.categorias as FormArray).push(
+      new FormControl('', [Validators.required])
     );
   }
 
   eliminarCategoria(index: number): void {
-    (this.formCategoria.controls.categorias as UntypedFormArray).removeAt(index);
+    (this.formCategoria.controls.categorias as FormArray).removeAt(index);
   }
 
   onSubmit() {
@@ -59,7 +59,7 @@ export class CrearCategoriaItemComponent implements OnInit {
   }
 
   updateCategorias() {
-    this.afs.collection('negocios').doc(this.data.idNegocio).update({
+    this.afs.doc(`negocios/${this.data.idNegocio}`).update({
       // categorias: arrayUnion(this.formCategoria.value.categorias)
       categorias: firebase.firestore.FieldValue.arrayUnion(this.formCategoria.value.categoria)
     })
@@ -71,12 +71,12 @@ export class CrearCategoriaItemComponent implements OnInit {
     });
   }
 
-  validateAllFormFields(formGroup: UntypedFormGroup) {
+  validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof UntypedFormControl) {
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof UntypedFormGroup) {
+      } else if (control instanceof FormGroup) {
         this.validateAllFormFields(control);
       }
     });

@@ -72,6 +72,9 @@ export class CrearItemComponent implements OnInit {
       this.afs.collection('negocios').valueChanges().subscribe( (res: any) => {
         const negocio = res.find( (find: Negocio) => find.autorId === user.uid );
         this.negocioId = negocio.id;
+        this.categorias = negocio.categorias;
+        console.log(this.negocioId);
+        
       });
     });
 
@@ -141,10 +144,6 @@ export class CrearItemComponent implements OnInit {
       }
     });
 
-    // traer solo categorias en tiempo real
-    this.afs.doc('negocios/' + this.data.id).valueChanges().subscribe( (res: Negocio) => {
-      this.categorias = res?.categorias;
-    });
   }
 
   getMaxNumFotos(maxNumFotos: number) {
@@ -219,7 +218,7 @@ export class CrearItemComponent implements OnInit {
   openModalCrearCategoriaItem() {
     const dialogRef = this.dialog.open(CrearCategoriaItemComponent, {
       data: {
-        idNegocio: this.data.id,
+        idNegocio: this.negocioId,
         categoria: this.categoria
       }
     });

@@ -144,11 +144,18 @@ export class UploadImagesComponent {
 
   drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.fotosFirestore, event.previousIndex, event.currentIndex);
+
     this.fotosFirestore.map( (element: any, index: number )=> {
       this.afs.collection(`negocios/${this.negocioId}/items/${this.itemId}/images`).doc(element.id).update({
         order: index + 1
       });
     });
+
+    this.afs.collection(`negocios/${this.negocioId}/items`).doc(this.itemId).update({
+      image: this.fotosFirestore[0].urlImage
+    });
+
+
   }
 
   deleteImageFromFirebase(item) {

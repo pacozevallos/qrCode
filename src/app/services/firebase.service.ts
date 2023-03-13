@@ -54,13 +54,6 @@ export class FirebaseService {
   // }
 
   getAllItemsDocument(idNegocio: string) {
-
-    
-    // this.afs.collection(`negocios/${this.idNegocio}/items/${itemId}/images`).get().subscribe( (res: any) => {
-    //   const image = res.find( (find: any) => find.order === 1 );
-    //   const imageUrl = image?.urlImage;
-    // });
-
     return this.afs.collection('negocios').doc(idNegocio).collection('items', ref => ref
     // .orderBy('categoria', 'asc')
     ).snapshotChanges().pipe(

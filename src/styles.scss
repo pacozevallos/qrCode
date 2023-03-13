@@ -107,8 +107,8 @@ a, .btn-link {
 }
 
 *:focus {
-  outline: 0px !important;
-  // box-shadow: none !important;
+  // outline: 0px !important;
+  box-shadow: none !important;
 }
 
 .textPrimaryDark {
@@ -252,9 +252,13 @@ table {
 }
 
 .imageItemAdminTable {
-  width: 54px;
-  height: 54px;
+  width: 72px;
+  height: 72px;
   object-fit: contain;
+  @include media-breakpoint-only(xs) {
+    width: 54px;
+    height: 54px;
+  }
 }
 // .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
 //   bottom: 0px !important;
@@ -307,13 +311,13 @@ table {
 // }
 
 
-.mat-dialog-container {
-  position: relative;
-  // border-radius: 1rem !important;
-  @include media-breakpoint-only(xs) {
-    // border-radius: inherit !important;
-  }
-}
+// .mat-dialog-container {
+//   position: relative;
+//   // border-radius: 1rem !important;
+//   @include media-breakpoint-only(xs) {
+//     // border-radius: inherit !important;
+//   }
+// }
 
 .buttonClose {
   position: absolute;
@@ -484,14 +488,14 @@ table {
     border-radius: $border-radius-lg !important;
     @include media-breakpoint-only(xs) {
       border-radius: $border-radius-sm !important;
-      padding: 0rem !important;
+      // padding: 0rem !important;
       width: 80vw !important;
       height: 100% !important;
     }
   }
 }
 
-.mat-dialog-container {
+.mat-mdc-dialog-container .mdc-dialog__surface {
   position: relative !important;
   border-radius: $border-radius-lg !important;
   padding: 2.35rem !important;

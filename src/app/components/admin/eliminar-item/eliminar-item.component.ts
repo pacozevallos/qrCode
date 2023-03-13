@@ -25,23 +25,42 @@ export class EliminarItemComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data.item.id);
+    this.afs.collection(`negocios/${this.data.idNegocio}/items/${this.data.item.id}/images`).valueChanges().subscribe( res => {
+      console.log(res);
+    });
   }
 
   eliminarItem() {
 
     this.loader = true;
 
-    // Eliminar imagen de storage
-    this.storage.ref(`imagesItems/${this.data.idNegocio}/${this.data.item.imageName}`).delete();
-
-    // Eliminar item de base de datos Firestore
-    this.afs.collection('negocios').doc(this.data.idNegocio).collection('items').doc(this.data.item.id).delete()
+    this.afs.collection(`negocios/${this.data.idNegocio}/items`).doc(this.data.item.id).delete()
     .then(() => {
       this.dialogRef.close();
       this.snackBar.open('Item eliminado', 'CERRAR', {
         duration: 3000,
       });
-      console.log('Item eliminado de Firestore');
+    });
+
+    // Delete images from Firestore
+    const refImages = this.afs.collection(`negocios/${this.data.idNegocio}/items/${this.data.item.id}/images`);
+
+    refImages.valueChanges().subscribe( res => {
+
+      // res.map( (element: any) => {
+      //   refImages.doc(element.id).delete();
+      //   // this.storage.ref(`imagesItems/${this.data.idNegocio}/${this.data.item.id}/${element.nameImage}`).delete();
+      // });
+
+      res.forEach( (element: any) => {
+        this.storage.ref(`imagesItems/${this.data.idNegocio}/${this.data.item.id}/${element.nameImage}`)?.delete().subscribe( () => {
+          console.log(res);
+          refImages.doc(element.id)?.delete();
+        });
+      });
+
+
+
     });
 
   }

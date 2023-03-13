@@ -150,7 +150,7 @@ export class ListaItemsComponent implements OnInit {
 
   openModalDelete(item) {
     const dialogRef = this.dialog.open(EliminarItemComponent, {
-      panelClass: 'dialogSmall',
+      // panelClass: 'dialogSmall',
       data: {
         idNegocio: this.idNegocio,
         item

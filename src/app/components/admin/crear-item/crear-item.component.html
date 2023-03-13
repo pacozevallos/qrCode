@@ -21,16 +21,7 @@
 
         <p class="lead">Información</p>
 
-        <mat-form-field appearance="fill" class="col-12">
-          <mat-label>Categoría</mat-label>
-          <!-- <input matInput type="text" formControlName="categoria"> -->
-          <mat-select formControlName="categoria">
-            <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</mat-option>
-            <mat-option class="text-secondary" (click)="openModalCrearCategoriaItem()">+ Agregar categoría</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-
+      
         <mat-form-field appearance="fill" class="col-12">
           <mat-label>Nombre</mat-label>
           <input matInput type="text" formControlName="nombre">
@@ -38,7 +29,18 @@
 
         <mat-form-field appearance="fill" class="col-12">
           <mat-label>Descripción</mat-label>
-          <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="8" formControlName="descripcion"></textarea>
+          <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3" cdkAutosizeMaxRows="8" formControlName="descripcion"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="col-12">
+          <mat-label>Categoría</mat-label>
+          <!-- <input matInput type="text" formControlName="categoria"> -->
+          <mat-select formControlName="categoria">
+            <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</mat-option>
+            <mat-option (click)="openModalCrearCategoriaItem()">
+              <span class="text-primary">+ Agregar categoría</span>
+              </mat-option>
+          </mat-select>
         </mat-form-field>
 
 

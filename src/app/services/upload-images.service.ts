@@ -93,7 +93,8 @@ export class UploadImagesService {
       // upadte date images
       this.afs.collection('negocios').doc(negocioId).collection('items').doc(itemId).set({
         dateImages: Timestamp.now(),
-        id: itemId
+        id: itemId,
+        image: this.resultados[0].urlImage
       });
      
     })
