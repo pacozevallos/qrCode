@@ -68,12 +68,18 @@ export class CrearItemComponent implements OnInit {
 
     // traer solo el negocio del usuario
     this.afAuth.authState.subscribe( res => {
+
       const user = res;
+
       this.afs.collection('negocios').valueChanges().subscribe( (res: any) => {
         const negocio = res.find( (find: Negocio) => find.autorId === user.uid );
         this.negocioId = negocio.id;
-        this.categorias = negocio.categorias;
         console.log(this.negocioId);
+
+        // Traer categorias colección
+        this.afs.collection(`negocios/${this.negocioId}/categorias`).valueChanges().subscribe( res => {
+          this.categorias = res;
+        });
         
       });
     });
@@ -217,6 +223,7 @@ export class CrearItemComponent implements OnInit {
 
   openModalCrearCategoriaItem() {
     const dialogRef = this.dialog.open(CrearCategoriaItemComponent, {
+      // panelClass: 'dia',
       data: {
         idNegocio: this.negocioId,
         categoria: this.categoria

@@ -5,6 +5,7 @@ import { MatDialogRef as MatDialogRef, MAT_DIALOG_DATA as MAT_DIALOG_DATA } from
 import { Negocio } from 'src/app/classes/negocio';
 // import { arrayUnion } from "firebase/firestore";
 import firebase from 'firebase/compat/app';
+import { Timestamp } from 'firebase/firestore';
 
 export interface DialogData {
   idNegocio: string;
@@ -20,13 +21,23 @@ export class CrearCategoriaItemComponent implements OnInit {
 
   formCategoria: FormGroup;
   loading = false;
+  idNewCategoria: string;
+  ziseCategorias: number;
 
   constructor(
     public dialogRef: MatDialogRef<CrearCategoriaItemComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private fb: FormBuilder,
     private afs: AngularFirestore,
-  ) { }
+  ) {
+    const refCategoria = this.afs.collection(`negocios/${this.data.idNegocio}/categorias`);
+    this.idNewCategoria = refCategoria.doc().ref.id;
+    console.log(this.idNewCategoria);
+    
+    refCategoria.get().subscribe( res => {
+      this.ziseCategorias = res.size
+    })
+  }
 
   ngOnInit(): void {
     console.log(this.data);
@@ -51,8 +62,10 @@ export class CrearCategoriaItemComponent implements OnInit {
 
   onSubmit() {
     if (this.formCategoria.valid) {
-      this.updateCategorias();
       this.loading = true;
+      // this.updateCategorias();
+      this.crearCategoria();
+      
     } else {
       this.validateAllFormFields(this.formCategoria);
     }
@@ -60,14 +73,20 @@ export class CrearCategoriaItemComponent implements OnInit {
 
   updateCategorias() {
     this.afs.doc(`negocios/${this.data.idNegocio}`).update({
-      // categorias: arrayUnion(this.formCategoria.value.categorias)
       categorias: firebase.firestore.FieldValue.arrayUnion(this.formCategoria.value.categoria)
-    })
-    .then( () => {
+    }).then( () => {
       this.dialogRef.close(this.formCategoria.value.categoria);
-      // this.dialogRef.afterClosed().subscribe( data => {
-      //   console.log(data);
-      // });
+    });
+  }
+
+  crearCategoria() {
+    this.afs.collection(`negocios/${this.data.idNegocio}/categorias`).doc(this.idNewCategoria).set({
+      nombre: this.formCategoria.value.categoria,
+      order: this.ziseCategorias + 1,
+      id: this.idNewCategoria,
+      fechaCreacion: Timestamp.now()
+    }).then( () => {
+      this.dialogRef.close(this.formCategoria.value.categoria);
     });
   }
 
@@ -80,6 +99,10 @@ export class CrearCategoriaItemComponent implements OnInit {
         this.validateAllFormFields(control);
       }
     });
+  }
+
+  cancelar() {
+    this.dialogRef.close();
   }
 
 

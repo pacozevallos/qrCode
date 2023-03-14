@@ -22,26 +22,44 @@
         <p class="lead">Información</p>
 
       
-        <mat-form-field appearance="fill" class="col-12">
+        <mat-form-field appearance="outline" class="col-12">
           <mat-label>Nombre</mat-label>
           <input matInput type="text" formControlName="nombre">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="col-12">
+        <mat-form-field appearance="outline" class="col-12">
           <mat-label>Descripción</mat-label>
           <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3" cdkAutosizeMaxRows="8" formControlName="descripcion"></textarea>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="col-12">
-          <mat-label>Categoría</mat-label>
-          <!-- <input matInput type="text" formControlName="categoria"> -->
-          <mat-select formControlName="categoria">
-            <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</mat-option>
-            <mat-option (click)="openModalCrearCategoriaItem()">
-              <span class="text-primary">+ Agregar categoría</span>
-              </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <div class="col-12">
+
+          <div class="d-flex gap-2">
+
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Categoría</mat-label>
+              <!-- <input matInput type="text" formControlName="categoria"> -->
+              <mat-select formControlName="categoria">
+                <mat-option *ngFor="let categoria of categorias" [value]="categoria.nombre">{{categoria.nombre}}</mat-option>
+                <mat-option (click)="openModalCrearCategoriaItem()">
+                  <span class="text-primary">+ Agregar categoría</span>
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div>
+              <button type="button" class="btn btn-primary" (click)="openModalCrearCategoriaItem()" style="height: 56px;">
+                <i-tabler name="plus"></i-tabler>
+              </button>
+            </div>
+  
+            
+
+          </div>
+
+        </div>
+
+        
 
 
         <p class="lead mt-3">Precio</p>
@@ -52,12 +70,12 @@
 
         <div class="col-12" *ngIf="individual">
           <div class="row gx-3">
-            <mat-form-field appearance="fill" class="col-12">
+            <mat-form-field appearance="outline" class="col-12">
               <mat-label>Precio</mat-label>
               <span matPrefix>S/. &nbsp;</span>
               <input matInput type="number" formControlName="precio">
             </mat-form-field>
-            <!-- <mat-form-field appearance="fill" class="col-6">
+            <!-- <mat-form-field appearance="outline" class="col-6">
               <mat-label>Precio descuento</mat-label>
               <input matInput type="number" formControlName="precioDescuento">
               <span matPrefix>S/. &nbsp;</span>
@@ -70,16 +88,16 @@
             <div *ngFor="let precio of formItem.controls['precios']['controls']; let i = index;">
               <div [formGroupName]="i" class="d-flex">
                 <div class="row gx-3 w-100">
-                  <mat-form-field appearance="fill" class="col-8">
+                  <mat-form-field appearance="outline" class="col-8">
                     <mat-label>Variante</mat-label>
                     <input matInput type="text" formControlName="variante">
                   </mat-form-field>
-                  <mat-form-field appearance="fill" class="col-4">
+                  <mat-form-field appearance="outline" class="col-4">
                     <mat-label>Precio</mat-label>
                     <span matPrefix>S/. &nbsp;</span>
                     <input matInput type="number" formControlName="precio">
                   </mat-form-field>
-                  <!-- <mat-form-field appearance="fill" class="col-6">
+                  <!-- <mat-form-field appearance="outline" class="col-6">
                       <mat-label>Precio descuento</mat-label>
                       <span matPrefix>S/. &nbsp;</span>
                       <input matInput type="number" formControlName="precioDescuento">
