@@ -319,6 +319,19 @@ table {
 //   }
 // }
 
+.btn-circle-sm {
+  width: 38px;
+  height: 38px;
+  padding: 0px;
+  border-radius: 50%;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  // font-size: 12px;
+  // line-height: 1.42857;
+}
+
 .buttonClose {
   position: absolute;
   top: 0.5rem;

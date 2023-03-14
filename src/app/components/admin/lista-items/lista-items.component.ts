@@ -34,6 +34,7 @@ export class ListaItemsComponent implements OnInit {
   itemId: string;
   // imageUrl: string;
 
+  
   displayedColumns = [ 'imagen', 'nombre', 'categoria', 'destacado', 'publicado', 'opciones'];
   itemsData = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

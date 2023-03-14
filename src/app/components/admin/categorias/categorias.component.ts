@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Negocio } from '../../../classes/negocio';
 import { UntypedFormGroup, UntypedFormBuilder, Validators, UntypedFormArray, UntypedFormControl } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatTableDataSource } from '@angular/material/table';
+
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-categorias',
@@ -13,7 +16,11 @@ export class CategoriasComponent implements OnInit {
   @Input() negocio: Negocio;
   formCategorias: UntypedFormGroup;
   loading: boolean;
-  categorias = [];
+  // categorias = [];
+
+
+  displayedColumns = [ 'order', 'nombre', 'editar', 'eliminar'];
+  categorias = new MatTableDataSource();
 
   constructor(
     private afs: AngularFirestore,
@@ -22,8 +29,13 @@ export class CategoriasComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.negocio);
+    this.afs.collection(`negocios/${this.negocio.id}/categorias`, ref => ref
+    .orderBy('order', 'asc')
+    ).valueChanges().subscribe( data => {
+      this.categorias.data = data;
+    });
 
+    console.log(this.negocio);
 
     this.formCategorias = this.fb.group({
       categorias: this.fb.array([])
@@ -56,6 +68,17 @@ export class CategoriasComponent implements OnInit {
         );
       });
     }
+
+  }
+
+  drop(event: CdkDragDrop<any[]>) {
+    moveItemInArray(this.categorias.data, event.previousIndex, event.currentIndex);
+
+    this.categorias.data.map( (element: any, index: number )=> {
+      this.afs.collection(`negocios/${this.negocio.id}/categorias`).doc(element.id).update({
+        order: index + 1
+      });
+    });
 
   }
 
