@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Negocio } from '../../../classes/negocio';
-import { UntypedFormGroup, UntypedFormBuilder, Validators, UntypedFormArray, UntypedFormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { CrearCategoriaItemComponent } from '../crear-categoria-item/crear-categoria-item.component';
 
 @Component({
   selector: 'app-categorias',
@@ -14,25 +16,27 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class CategoriasComponent implements OnInit {
 
   @Input() negocio: Negocio;
-  formCategorias: UntypedFormGroup;
+  formCategorias: FormGroup;
   loading: boolean;
-  // categorias = [];
+  categorias2 = [];
 
 
-  displayedColumns = [ 'order', 'nombre', 'editar', 'eliminar'];
+  displayedColumns = [ 'changeOrder', 'order', 'nombre', 'editar', 'eliminar'];
   categorias = new MatTableDataSource();
 
   constructor(
     private afs: AngularFirestore,
-    private fb: UntypedFormBuilder
+    private fb: FormBuilder,
+    private matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
 
     this.afs.collection(`negocios/${this.negocio.id}/categorias`, ref => ref
     .orderBy('order', 'asc')
-    ).valueChanges().subscribe( data => {
+    ).valueChanges().subscribe( (data: any) => {
       this.categorias.data = data;
+      this.categorias2 = data;
     });
 
     console.log(this.negocio);
@@ -42,7 +46,7 @@ export class CategoriasComponent implements OnInit {
       // categorias: this.negocio.categorias
     });
 
-    const arrayCategorias = this.formCategorias.controls.categorias as UntypedFormArray;
+    const arrayCategorias = this.formCategorias.controls.categorias as FormArray;
 
     if (this.negocio.categorias?.length === 0) {
       arrayCategorias.push(
@@ -99,25 +103,33 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
-  validateAllFormFields(formGroup: UntypedFormGroup) {
+  validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof UntypedFormControl) {
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof UntypedFormGroup) {
+      } else if (control instanceof FormGroup) {
         this.validateAllFormFields(control);
       }
     });
   }
 
   agregarCategoria() {
-    (this.formCategorias.controls.categorias as UntypedFormArray).push(
+    (this.formCategorias.controls.categorias as FormArray).push(
       this.fb.control('', Validators.required)
     );
   }
 
   eliminarCategoria(index: number): void {
-    (this.formCategorias.controls.categorias as UntypedFormArray).removeAt(index);
+    (this.formCategorias.controls.categorias as FormArray).removeAt(index);
+  }
+
+  openModalAddCategoria() {
+    this.matDialog.open(CrearCategoriaItemComponent, {
+      data: {
+        idNegocio: this.negocio.id,
+      }
+    })
   }
 
 }

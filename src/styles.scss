@@ -37,7 +37,7 @@ $btn-border-width: 2px;
 $btn-font-weight: 400;
 $btn-padding-y: 0.8rem;
 $btn-padding-x: 1rem;
-$btn-padding-y-sm: 0.4rem;
+$btn-padding-y-sm: 0.5rem;
 $btn-padding-x-sm: 0.6rem;
 // $btn-padding-y-lg: 1rem;
 // $btn-padding-x-lg: 1.5rem;
@@ -569,6 +569,10 @@ table {
   line-height: 100% !important;
   display: flex !important;
   justify-content: center !important;
+}
+
+.mdc-icon-button {
+  font-size: inherit !important;
 }
 
 .iconTablerLg {
