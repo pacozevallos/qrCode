@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
+import { EditorModule } from "@tinymce/tinymce-angular";
 
 // Tabler icons
 import { TablerIconsAngularModule } from '../tabler-icons-angular.module';
@@ -34,7 +35,8 @@ import { AdminComponent } from '../components/admin/admin/admin.component';
     TablerIconsAngularModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EditorModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

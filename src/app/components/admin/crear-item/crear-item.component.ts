@@ -30,10 +30,10 @@ export class CrearItemComponent implements OnInit {
   categorias;
   itemRef: any;
   tipoPrecio = [
-    'Individual',
-    'Variable'
+    'Precio único',
+    'Precio variable'
   ];
-  individual = true;
+  unico = true;
   multiple: boolean;
 
 
@@ -72,8 +72,8 @@ export class CrearItemComponent implements OnInit {
       const user = res;
 
       this.afs.collection('negocios').valueChanges().subscribe( (res: any) => {
-        const negocio = res.find( (find: Negocio) => find.autorId === user.uid );
-        this.negocioId = negocio.id;
+        this.negocio = res.find( (find: Negocio) => find.autorId === user.uid );
+        this.negocioId = this.negocio.id;
         console.log(this.negocioId);
 
         // Traer categorias colección
@@ -101,10 +101,11 @@ export class CrearItemComponent implements OnInit {
       id: [ this.itemId ],
       categoria: ['', Validators.required],
       nombre: ['', Validators.required],
-      descripcion: [''],
+      // descripcion: [''],
+      body: ['', Validators.required],
       precio: ['', Validators.required],
       // precioDescuento: [''],
-      tipoPrecio: ['Individual', Validators.required],
+      tipoPrecio: ['Precio único', Validators.required],
       // precios: this.fb.array([
       //   this.fb.group({
       //     variante: [''],
@@ -120,23 +121,23 @@ export class CrearItemComponent implements OnInit {
 
     this.formItem.get('tipoPrecio').valueChanges.subscribe( res => {
 
-      if (res === 'Individual') {
-        this.individual = true;
+      if (res === 'Precio único') {
+        this.unico = true;
         this.multiple = false;
         this.formItem.removeControl('precios');
         this.formItem.addControl('precio', this.fb.control('', Validators.required));
         this.formItem.addControl('precioDescuento', this.fb.control(''));
       }
 
-      if (res === 'Variable') {
-        this.individual = false;
+      if (res === 'Precio variable') {
+        this.unico = false;
         this.multiple = true;
         this.formItem.removeControl('precio');
         this.formItem.removeControl('precioDescuento');
         this.formItem.addControl('precios', this.fb.array([
           this.fb.group({
             variante: ['', Validators.required],
-            precio: ['', Validators.required]
+            precio: [0, Validators.required]
           })
         ]) );
 
@@ -200,7 +201,7 @@ export class CrearItemComponent implements OnInit {
     (this.formItem.controls.precios as FormArray).push(
       this.fb.group({
         variante: [''],
-        precio: [''],
+        precio: [0],
       })
     );
   }
@@ -282,6 +283,10 @@ export class CrearItemComponent implements OnInit {
   errorImagen() {
     return this.formItem.controls.image.hasError('required') ? 'La imagen es necesaria' :
     this.formItem.controls.image.hasError('maxContentSize') ? 'El peso no debe exceder los 5 MB' : '';
+  }
+
+  errorBody() {
+    return this.formItem.controls['body'].touched && this.formItem.controls['body'].hasError('required') ? 'Incluye una descripción' : '';
   }
 
 }
