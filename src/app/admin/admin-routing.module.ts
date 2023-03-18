@@ -20,6 +20,7 @@ const routes: Routes = [
       { path: '', component: ListaItemsComponent },
       { path: 'productos', component: ListaItemsComponent },
       { path: 'productos/crearItem/:id', component: CrearItemComponent },
+      { path: 'productos/editarItem/:id', component: CrearItemComponent },
       { path: 'configuracion', component: ConfiguracionComponent },
       { path: 'cuenta', component: CuentaComponent },
       { path: 'cuenta/elegirPlan', component: SelectPLanComponent },

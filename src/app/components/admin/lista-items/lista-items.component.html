@@ -104,14 +104,22 @@
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let item">
         <div class="d-flex gap-3 justify-content-end">
-          <button class="btn btn-outline-primary btn-sm" (click)="openModalEdit(item)">
+
+          <!-- <button class="btn btn-outline-primary btn-sm" (click)="openModalEdit(item)">
             <i-tabler name="pencil"></i-tabler>
             Editar
-          </button>
+          </button> -->
+
+          <a class="btn btn-outline-primary btn-sm" [routerLink]=" 'editarItem/' + item.id">
+            <i-tabler name="pencil"></i-tabler>
+            Editar
+          </a>
+
           <button class="btn btn-outline-danger btn-sm" (click)="openModalDelete(item)">
             <i-tabler name="trash"></i-tabler>
             Eliminar
           </button>
+
           <!-- <button mat-icon-button (click)="openModalDelete(item)">
             <i-tabler class="text-muted" name="trash"></i-tabler>
           </button> -->

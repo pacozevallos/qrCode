@@ -8,7 +8,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { EliminarItemComponent } from '../eliminar-item/eliminar-item.component';
 import { EditarItemComponent } from '../editar-item/editar-item.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from 'src/app/classes/item';
 import { MatSlideToggleChange as MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Negocio } from 'src/app/classes/negocio';
@@ -60,7 +60,8 @@ export class ListaItemsComponent implements OnInit {
     private bottomSheet: MatBottomSheet,
     private activatedRoute: ActivatedRoute,
     private storage: AngularFireStorage,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private router: Router
   ) {
    
   }
@@ -141,12 +142,13 @@ export class ListaItemsComponent implements OnInit {
   }
 
   openModalEdit(item) {
-    this.bottomSheet.open(EditarItemComponent, {
-      data: {
-        idNegocio: this.negocio.id,
-        item
-      }
-    });
+    // this.bottomSheet.open(EditarItemComponent, {
+    //   data: {
+    //     idNegocio: this.negocio.id,
+    //     item
+    //   }
+    // });
+    this.router.navigate([`${item.id}`])
   }
 
   openModalDelete(item) {

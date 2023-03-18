@@ -57,6 +57,9 @@ export class EditarItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+    
     console.log(this.data);
     // this.categorias = this.data.categorias,
 

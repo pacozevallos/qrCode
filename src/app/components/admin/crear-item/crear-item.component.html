@@ -10,14 +10,14 @@
 
 
 
-  <div class="row">
+  <div class="row" *ngIf="negocio">
 
     <div class="col-md-6">
 
       <app-upload-images [itemId]="itemId" (maxNumFiles)="getMaxNumFotos($event)"></app-upload-images>
 
 
-      <form [formGroup]="formItem" (submit)="onSubmit()" novalidate class="row gx-3" *ngIf="negocio">
+      <form [formGroup]="formItem" (submit)="onSubmit()" novalidate class="row gx-3" *ngIf="item">
 
         <p class="lead">Información</p>
 
@@ -39,11 +39,11 @@
           plugins: 'lists link',
           toolbar: 'bold italic underline numlist bullist',
           content_css: '/assets/mycontent.css'
-        }" formControlName="body" class="mb-3">
+        }" formControlName="body">
         </editor>
-        <mat-error class="extraSmall mt-2" *ngIf="errorBody()">{{errorBody()}}</mat-error>
+        <mat-error class="small mt-1" *ngIf="errorBody()">{{errorBody()}}</mat-error>
 
-        <div class="col-12">
+        <div class="col-12 mt-3">
 
           <div class="d-flex gap-2">
 
@@ -151,7 +151,7 @@
     </div>
 
 
-    <div class="col-md-4">
+    <div class="col-md-4" *ngIf="item">
       <pre>{{formItem.value | json}}</pre>
     </div>
 

@@ -6,7 +6,7 @@ import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bott
 import { MatDialog as MatDialog } from '@angular/material/dialog';
 // import firebase from 'firebase/compat/app';
 // import { FileValidator } from 'ngx-material-file-input';
-import { Observable } from 'rxjs';
+import { merge, Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Negocio } from 'src/app/classes/negocio';
 import { CrearCategoriaItemComponent } from '../crear-categoria-item/crear-categoria-item.component';
@@ -15,6 +15,7 @@ import { Timestamp } from 'firebase/firestore';
 import { UploadImagesService } from 'src/app/services/upload-images.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FileItem } from 'src/app/classes/file-item';
+import { Item } from 'src/app/classes/item';
 
 @Component({
   selector: 'app-crear-item',
@@ -52,6 +53,8 @@ export class CrearItemComponent implements OnInit {
   itemId: string;
 
   maxNumFotos: number;
+
+  item: Item | undefined;
   
 
   constructor(
@@ -67,90 +70,112 @@ export class CrearItemComponent implements OnInit {
     private router: Router
   ) {
 
-    // traer solo el negocio del usuario
+   
+
+  }
+
+  
+  ngOnInit(): void {
+
+
     this.afAuth.authState.subscribe( res => {
 
       const user = res;
 
       this.afs.collection('negocios').valueChanges().subscribe( (res: any) => {
+
+        // Traer negocio user
         this.negocio = res.find( (find: Negocio) => find.autorId === user.uid );
         this.negocioId = this.negocio.id;
         console.log(this.negocioId);
 
-        // Traer categorias colección
+
+        // Traer categorías
         this.afs.collection(`negocios/${this.negocioId}/categorias`).valueChanges().subscribe( res => {
           this.categorias = res;
         });
+
+
+        this.activatedRoute.params.subscribe( res => {
+
+          this.itemId = res.id
+          console.log(this.itemId);
+    
+          this.afs.doc(`negocios/${this.negocioId}/items/${this.itemId}`).valueChanges().subscribe( (res: Item | undefined) => {
+    
+            this.item = res;
+            console.log(this.item);
+    
+            this.formItem = this.fb.group({
+              id: [ this.itemId ],
+              categoria: ['', Validators.required],
+              nombre: [this.item.nombre, Validators.required],
+              body: ['', Validators.required],
+              precio: ['', Validators.required],
+              tipoPrecio: ['Precio único', Validators.required],
+              publicado: [true],
+              destacado: [false],
+              fechaCreacion: Timestamp.now()
+            });
+    
+            this.formItem.get('tipoPrecio').valueChanges.subscribe( res => {
+    
+              if (res === 'Precio único') {
+                this.unico = true;
+                this.multiple = false;
+                this.formItem.removeControl('precios');
+                this.formItem.addControl('precio', this.fb.control('', Validators.required));
+                this.formItem.addControl('precioDescuento', this.fb.control(''));
+              }
+        
+              if (res === 'Precio variable') {
+                this.unico = false;
+                this.multiple = true;
+                this.formItem.removeControl('precio');
+                this.formItem.removeControl('precioDescuento');
+                this.formItem.addControl('precios', this.fb.array([
+                  this.fb.group({
+                    variante: ['', Validators.required],
+                    precio: [0, Validators.required]
+                  })
+                ]) );
+        
+                const arrayPrecios = this.formItem.controls.precios as FormArray;
+                this.formItem.controls.precios.valueChanges.subscribe( multiple => {
+                  for (const i in multiple) {
+                    arrayPrecios.at(+i).get('variante').setValidators(Validators.required);
+                    arrayPrecios.at(+i).get('precio').setValidators(Validators.required);
+                  }
+                });
+              }
+            });
+            
+          });
+    
+        
+        });
+
         
       });
+      
     });
+    
 
-    // Generar ID item
-    // this.itemId = this.afs.collection('negocios/').doc(this.data.id).collection('items').ref.doc().id;
-  }
+    
 
-  
-  ngOnInit(): void {
-    // console.log(this.data.id);
+    // this.formItem = this.fb.group({
+    //   id: [ this.itemId ],
+    //   categoria: ['', Validators.required],
+    //   nombre: ['', Validators.required],
+    //   body: ['', Validators.required],
+    //   precio: ['', Validators.required],
+    //   tipoPrecio: ['Precio único', Validators.required],
+    //   publicado: [true],
+    //   destacado: [false],
+    //   fechaCreacion: Timestamp.now()
+    // });
 
-    this.activatedRoute.params.subscribe( res => {
-      this.itemId = res.id
-      console.log(this.itemId);
-    });
-
-    this.formItem = this.fb.group({
-      id: [ this.itemId ],
-      categoria: ['', Validators.required],
-      nombre: ['', Validators.required],
-      // descripcion: [''],
-      body: ['', Validators.required],
-      precio: ['', Validators.required],
-      // precioDescuento: [''],
-      tipoPrecio: ['Precio único', Validators.required],
-      // precios: this.fb.array([
-      //   this.fb.group({
-      //     variante: [''],
-      //     precio: [''],
-      //   })
-      // ]),
-      image: [''],
-      imageName: [''],
-      publicado: [true],
-      destacado: [false],
-      fechaCreacion: Timestamp.now()
-    });
-
-    this.formItem.get('tipoPrecio').valueChanges.subscribe( res => {
-
-      if (res === 'Precio único') {
-        this.unico = true;
-        this.multiple = false;
-        this.formItem.removeControl('precios');
-        this.formItem.addControl('precio', this.fb.control('', Validators.required));
-        this.formItem.addControl('precioDescuento', this.fb.control(''));
-      }
-
-      if (res === 'Precio variable') {
-        this.unico = false;
-        this.multiple = true;
-        this.formItem.removeControl('precio');
-        this.formItem.removeControl('precioDescuento');
-        this.formItem.addControl('precios', this.fb.array([
-          this.fb.group({
-            variante: ['', Validators.required],
-            precio: [0, Validators.required]
-          })
-        ]) );
-
-        const arrayPrecios = this.formItem.controls.precios as FormArray;
-        this.formItem.controls.precios.valueChanges.subscribe( multiple => {
-          for (const i in multiple) {
-            arrayPrecios.at(+i).get('variante').setValidators(Validators.required);
-            arrayPrecios.at(+i).get('precio').setValidators(Validators.required);
-          }
-        });
-      }
-    });
+   
 
   }
 
@@ -184,7 +209,7 @@ export class CrearItemComponent implements OnInit {
   }
 
   crearItem() {
-    this.afs.doc( `negocios/${this.negocioId}/items/${this.itemId}`).set(this.formItem.value)
+    this.afs.doc( `negocios/${this.negocioId}/items/${this.itemId}`).set(this.formItem.value, {merge: true})
     .then(() => {
       console.log('item creado');
       this.router.navigate(['/admin/productos'])
