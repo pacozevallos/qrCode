@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600;700;800&display=swap');
+
+
+
+.mce-content-body {
+  font-family: 'Lexend';
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.tox-tinymce {
+  border: 1px solid rgba(0, 0, 0, 0.38) !important;
+  border-radius: 5px !important;
+}
+
+.tox .tox-toolbar-overlord {
+  background-color: inherit !important;
+}
+
+.tox .tox-toolbar, .tox .tox-toolbar__overflow, .tox .tox-toolbar__primary {
+  background: none !important;
+  background-color: none !important;
+}
+
+.tox .tox-edit-area__iframe {
+  background-color: inherit !important;
+}
+
+.tox .tox-statusbar {
+  display: none !important;
+}

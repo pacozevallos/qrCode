@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Negocio } from 'src/app/classes/negocio';
 import { CrearCategoriaItemComponent } from '../crear-categoria-item/crear-categoria-item.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Timestamp } from 'firebase/firestore';
 import { UploadImagesService } from 'src/app/services/upload-images.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -64,6 +64,7 @@ export class CrearItemComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private afAuth: AngularFireAuth,
     private uploadImages: UploadImagesService,
+    private router: Router
   ) {
 
     // traer solo el negocio del usuario
@@ -171,29 +172,22 @@ export class CrearItemComponent implements OnInit {
   //   this.uploadImages.uploadFilesItem(this.archivos, this.negocioId, this.itemId)
   // }
 
+  // && this.archivos.length <= this.maxNumFotos
 
   onSubmit() {
-    if (this.formItem.valid && this.archivos.length <= this.maxNumFotos ) {
+    if (this.formItem.valid) {
       this.loading = true;
-      // this.crearItem();
-      // this.uploadFileCrearItem();
-      if (this.formItem.get('image').value === '') {
-        this.crearItem();
-      } else {
-        this.uploadFileCrearItem();
-      }
+      this.crearItem();
     } else {
       this.validateAllFormFields(this.formItem);
     }
   }
 
   crearItem() {
-    // this.afs.doc('items/' + this.idItem).set(this.formItem.value)
-    this.afs.doc('negocios/' + this.data.id).collection('items').doc(this.itemId).set(this.formItem.value)
-    // this.itemRef.set(this.formItem.value)
+    this.afs.doc( `negocios/${this.negocioId}/items/${this.itemId}`).set(this.formItem.value)
     .then(() => {
-      this.bottomSheetRef.dismiss();
       console.log('item creado');
+      this.router.navigate(['/admin/productos'])
     });
   }
 

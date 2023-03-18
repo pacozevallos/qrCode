@@ -1015,3 +1015,15 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   margin: auto;
   // backdrop-filter: blur(3px);
 }
+
+.spinnerDark {
+  .mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: #000 !important;
+  }
+}
+
+.spinnerWhite {
+  .mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: #fff !important;
+  }
+}
