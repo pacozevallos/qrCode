@@ -2,41 +2,77 @@
 
   <div class="buttonClose">
     <button mat-icon-button (click)="cancelar()">
-      <!-- <mat-icon>close</mat-icon> -->
       <i-tabler name="x"></i-tabler>
     </button>
   </div>
 
   <p class="h5 mb-3 mb-md-4">Eliminar categoría</p>
 
-  <!-- <p class="small">Esta acción no se puede deshacer. ¿Desea eliminar la categoría?</p> -->
+
+  <div class="d-flex justify-content-center align-items-center w-100 py-4" *ngIf="loading">
+    <mat-spinner color="primary" diameter="36"></mat-spinner>
+  </div>
 
 
-  <!-- <div class="d-flex gap-2 text-danger">
-    <div><i-tabler name="alert-triangle"></i-tabler></div>
-    <p class="small mb-0 lh-sm">Cambia la categoría de los siguientes productos a de Algunos productos están usando esta categoría</p>
-  </div> -->
 
-  <div class="">
+  <div *ngIf="enUso">
 
     <div class="d-flex gap-2 text-danger">
       <div>
-        <i-tabler name="alert-triangle" style="width: 36px; height: 36px; stroke-width: 1.2;"></i-tabler>
+        <i-tabler name="alert-triangle" style="width: 40px; height: 40px; stroke-width: 1.2;"></i-tabler>
       </div>
-      <p class="small lh-sm">Algunos productos están usando esta categoría: <span class="fw-bold">{{data.categoria.nombre}}</span>  </p>
+      <p class="small lh-sm">Algunos productos están usando esta categoría: <span class="fw-bold">{{data.categoria.nombre}}</span></p>
     </div>
 
-    <!-- <p class="small lh-sm">Cambia primero su categoría de los siguientes productos antes de poder eliminar la categoría</p> -->
+    <p class="small lh-sm text-muted">Cambia primero la categoría de dichos productos antes de eliminar.</p>
 
-    <mat-form-field class="w-100">
+    <form [formGroup]="formCategoria" (submit)="onSubmit()" novalidate>
+
+
+    <mat-form-field appearance="outline" class="w-100">
       <mat-label>Cambiar a categoría</mat-label>
-      <mat-select [formControl]="categoria">
-        <mat-option *ngFor="let categoria of categorias" [value]="categoria.nombre" [disabled]="disabled" >{{categoria.nombre}}</mat-option>
+      <mat-select formControlName="categoria">
+        <mat-option *ngFor="let categoria of categoriasFilter" [value]="categoria.nombre" >{{categoria.nombre}}</mat-option>
       </mat-select>
     </mat-form-field>
 
+    <!-- <div class="d-grid">
+      <button class="btn btn-primary" [disabled]="formCategoria.invalid" >Actualizar y eliminar categoría</button>
+    </div> -->
+
     <div class="d-grid">
-      <button class="btn btn-primary">Actualizar y eliminar categoría</button>
+      <button class="btn btn-primary myButton" [disabled]="formCategoria.invalid">
+        <span class="d-flex justify-content-center spinnerWhite" *ngIf="loading">
+          <mat-spinner class="" [diameter]="24"></mat-spinner>
+        </span>
+        <span *ngIf="!loading">Actualizar y eliminar categoría</span>
+      </button>
+    </div>
+
+    </form>
+
+
+  </div>
+
+
+
+
+
+  <div *ngIf="!enUso">
+
+    <p class="small">Esta acción no se puede deshacer. ¿Desea eliminar la categoría <span class="fw-bold">{{data.categoria.nombre}}</span>?</p>
+
+    <!-- <div class="d-grid">
+      <button class="btn btn-primary" (click)="deleteCategoriaFirestore()">Eliminar categoría</button>
+    </div> -->
+
+    <div class="d-grid">
+      <button class="btn btn-primary myButton" (click)="deleteCategoriaFirestore()">
+        <span class="d-flex justify-content-center spinnerWhite" *ngIf="loadingButton">
+          <mat-spinner class="" [diameter]="24"></mat-spinner>
+        </span>
+        <span *ngIf="!loadingButton">Eliminar categoría</span>
+      </button>
     </div>
 
   </div>
@@ -44,11 +80,5 @@
   
 
  
-
-  
-
-  <!-- <div class="d-grid">
-    <button class="btn btn-primary">Eliminar categoría</button>
-  </div> -->
 
 </div>

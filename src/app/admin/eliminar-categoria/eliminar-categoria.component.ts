@@ -1,6 +1,6 @@
 import { Component, Inject, inject } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -10,59 +10,101 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class EliminarCategoriaComponent {
 
-  categoria: FormControl;
-  categorias = [];
+  // categoria: FormControl;
+  formCategoria: FormGroup;
+  categoriasFilter = [];
   itemsEnUso = [];
   enUso: boolean;
   disabled: boolean;
+  loading = true;
+  loadingButton = false;
 
   constructor(
     public dialogRef: MatDialogRef<EliminarCategoriaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
 
-    this.categorias = this.data.categorias;
-    console.log(this.categorias);
-    
+    this.categoriasFilter = this.data.categorias.filter( find => find !== this.data.categoria )
 
-    this.categoria = new FormControl('', [Validators.required]);
+    // this.categoria = new FormControl('', [Validators.required]);
 
-    if ( this.categoria.value === this.data.categoria.nombre ) {
-      this.disabled = false;
-    } else {
-      this.disabled = true;
-    }
+    this.formCategoria = this.fb.group({
+      categoria: ['', Validators.required]
+    });
 
     this.afs.collection(`negocios/${this.data.idNegocio}/items`, ref => ref
     .where('categoria', '==', this.data.categoria.nombre)
     ).valueChanges().subscribe( res => {
 
       this.itemsEnUso = res;
-      console.log(res);
+      console.log(this.itemsEnUso);
 
       if (this.itemsEnUso.length >= 1) {
+        this.loading = false
         this.enUso = true;
       } else {
+        this.loading = false
         this.enUso = false;
       }
       
     });
 
+  }
 
-
+  onSubmit() {
+    if (this.formCategoria.valid) {
+      this.updateAndDeleteCategoriaFirestore();
+    } else {
+      this.validateAllFormFields(this.formCategoria);
+    }
   }
 
   
-  cambiarCategoria() {
-    console.log('listo para cambiar');
+  updateAndDeleteCategoriaFirestore() {
     
+    const promises = this.itemsEnUso.map( element => {
+      return this.afs.doc(`negocios/${this.data.idNegocio}/items/${element.id}`).update({
+        categoria: this.formCategoria.value.categoria
+      }).then( () => {
+        return element.categoria
+      });
+    });
+
+    Promise.all(promises).then( response =>{
+      console.log(response);
+      this.deleteCategoriaFirestore();
+    });
+    
+  }
+
+
+  deleteCategoriaFirestore() {
+    this.loadingButton = true;
+    this.afs.collection(`negocios/${this.data.idNegocio}/categorias`).doc(this.data.categoria.id).delete().then( () => {
+      this.cancelar();
+    });
   }
 
   cancelar() {
     this.dialogRef.close();
   }
+
+
+  validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
+  }
+
+ 
 
 }

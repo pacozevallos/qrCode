@@ -23,7 +23,6 @@ export class UploadImagesService {
     this.loading = true;
     
 
-
     // Guardar en Storage
     const promises = fotos.map( (image, i: number) => {
 

@@ -18,6 +18,7 @@ import { HeaderAdminComponent } from '../components/admin/header-admin/header-ad
 import { AdminComponent } from '../components/admin/admin/admin.component';
 import { EditarItemComponent } from '../components/admin/editar-item/editar-item.component';
 import { EliminarCategoriaComponent } from './eliminar-categoria/eliminar-categoria.component';
+import { EditarCategoriaComponent } from './editar-categoria/editar-categoria.component';
 
 
 
@@ -30,7 +31,8 @@ import { EliminarCategoriaComponent } from './eliminar-categoria/eliminar-catego
     UploadImagesComponent,
     HeaderAdminComponent,
     AdminComponent,
-    EliminarCategoriaComponent
+    EliminarCategoriaComponent,
+    EditarCategoriaComponent
     
   ],
   imports: [

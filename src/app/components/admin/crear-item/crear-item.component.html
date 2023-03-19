@@ -45,9 +45,9 @@
               <mat-label>Categoría</mat-label>
               <mat-select formControlName="categoria">
                 <mat-option *ngFor="let categoria of categorias" [value]="categoria.nombre">{{categoria.nombre}}</mat-option>
-                <mat-option (click)="openModalCrearCategoriaItem()">
+                <!-- <mat-option (click)="openModalCrearCategoriaItem()">
                   <span class="text-primary">+ Agregar categoría</span>
-                  </mat-option>
+                </mat-option> -->
               </mat-select>
             </mat-form-field>
 
