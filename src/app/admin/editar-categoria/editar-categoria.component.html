@@ -1,1 +1,43 @@
-<p>editar-categoria works!</p>
+<div>
+
+  <div class="buttonClose">
+    <button mat-icon-button (click)="cancelar()">
+      <i-tabler name="x"></i-tabler>
+    </button>
+  </div>
+
+  <p class="h5 mb-3 mb-md-4">Editar categoría</p>
+
+
+
+  <div>
+
+    <p class="small mb-3">Este cambio también afectará a los productos que utilicen esta categoría.</p>
+
+    <form [formGroup]="formCategoria" (submit)="onSubmit()" novalidate>
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Editar categoría</mat-label>
+        <input matInput type="text" formControlName="categoria">
+      </mat-form-field>
+
+      <div class="d-grid">
+        <button class="btn btn-primary myButton" [disabled]="formCategoria.invalid">
+          <span class="d-flex justify-content-center spinnerWhite" *ngIf="loading">
+            <mat-spinner class="" [diameter]="24"></mat-spinner>
+          </span>
+          <span *ngIf="!loading">Guardar cambios</span>
+        </button>
+      </div>
+
+    </form>
+
+
+  </div>
+
+
+  
+
+ 
+
+</div>

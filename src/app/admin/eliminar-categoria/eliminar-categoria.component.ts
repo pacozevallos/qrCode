@@ -10,7 +10,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class EliminarCategoriaComponent {
 
-  // categoria: FormControl;
+
   formCategoria: FormGroup;
   categoriasFilter = [];
   itemsEnUso = [];

@@ -8,6 +8,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearCategoriaItemComponent } from '../crear-categoria-item/crear-categoria-item.component';
 import { EliminarCategoriaComponent } from 'src/app/admin/eliminar-categoria/eliminar-categoria.component';
+import { EditarCategoriaComponent } from 'src/app/admin/editar-categoria/editar-categoria.component';
 
 @Component({
   selector: 'app-categorias',
@@ -134,8 +135,19 @@ export class CategoriasComponent implements OnInit {
     })
   }
 
+
+  openModalEditCategoria(categoria) {
+    this.matDialog.open( EditarCategoriaComponent, {
+      panelClass: 'dialogSmall',
+      data: {
+        idNegocio: this.negocio.id,
+        categoria: categoria,
+        categorias: this.categorias
+      }
+    })
+  }
+
   openModalDeleteCategoria(categoria) {
-    
     this.matDialog.open( EliminarCategoriaComponent, {
       panelClass: 'dialogSmall',
       data: {

@@ -59,7 +59,7 @@
           <p class="mb-0">{{categoria.nombre}}</p>
         </div>
         <div class="d-flex gap-1">
-          <button mat-icon-button>
+          <button mat-icon-button (click)="openModalEditCategoria(categoria)">
             <i-tabler class="text-primary" name="pencil"></i-tabler>
           </button>
           <button mat-icon-button (click)="openModalDeleteCategoria(categoria)">
