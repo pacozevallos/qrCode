@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearCategoriaItemComponent } from '../crear-categoria-item/crear-categoria-item.component';
+import { EliminarCategoriaComponent } from 'src/app/admin/eliminar-categoria/eliminar-categoria.component';
 
 @Component({
   selector: 'app-categorias',
@@ -18,11 +19,12 @@ export class CategoriasComponent implements OnInit {
   @Input() negocio: Negocio;
   formCategorias: FormGroup;
   loading: boolean;
-  categorias2 = [];
+  categorias = [];
 
 
   displayedColumns = [ 'changeOrder', 'order', 'nombre', 'editar', 'eliminar'];
-  categorias = new MatTableDataSource();
+  // categorias = new MatTableDataSource();
+
 
   constructor(
     private afs: AngularFirestore,
@@ -35,8 +37,8 @@ export class CategoriasComponent implements OnInit {
     this.afs.collection(`negocios/${this.negocio.id}/categorias`, ref => ref
     .orderBy('order', 'asc')
     ).valueChanges().subscribe( (data: any) => {
-      this.categorias.data = data;
-      this.categorias2 = data;
+      // this.categorias.data = data;
+      this.categorias = data;
     });
 
     console.log(this.negocio);
@@ -76,9 +78,9 @@ export class CategoriasComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<any[]>) {
-    moveItemInArray(this.categorias.data, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.categorias, event.previousIndex, event.currentIndex);
 
-    this.categorias.data.map( (element: any, index: number )=> {
+    this.categorias.map( (element: any, index: number )=> {
       this.afs.collection(`negocios/${this.negocio.id}/categorias`).doc(element.id).update({
         order: index + 1
       });
@@ -128,6 +130,18 @@ export class CategoriasComponent implements OnInit {
     this.matDialog.open(CrearCategoriaItemComponent, {
       data: {
         idNegocio: this.negocio.id,
+      }
+    })
+  }
+
+  openModalDeleteCategoria(categoria) {
+    
+    this.matDialog.open( EliminarCategoriaComponent, {
+      panelClass: 'dialogSmall',
+      data: {
+        idNegocio: this.negocio.id,
+        categoria: categoria,
+        categorias: this.categorias
       }
     })
   }

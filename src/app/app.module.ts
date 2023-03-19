@@ -65,7 +65,7 @@ import { NegocioComponent } from './components/public/negocio/negocio.component'
 import { CardItemComponent } from './components/public/card-item/card-item.component';
 import { CardItemDestacadoComponent } from './components/public/card-item-destacado/card-item-destacado.component';
 import { DetalleItemComponent } from './components/public/detalle-item/detalle-item.component';
-import { EditarItemComponent } from './components/admin/editar-item/editar-item.component';
+// import { EditarItemComponent } from './components/admin/editar-item/editar-item.component';
 import { ShareComponent } from './components/public/share/share.component';
 import { CardItemAdminComponent } from './components/admin/card-item-admin/card-item-admin.component';
 import { RegistroComponent } from './components/public/registro/registro.component';
@@ -130,7 +130,7 @@ import { FooterAdminComponent } from './components/admin/footer-admin/footer-adm
 		CardItemComponent,
 		CardItemDestacadoComponent,
 		DetalleItemComponent,
-		EditarItemComponent,
+		// EditarItemComponent,
 		ShareComponent,
 		CardItemAdminComponent,
 		RegistroComponent,

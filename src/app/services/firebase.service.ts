@@ -55,7 +55,7 @@ export class FirebaseService {
 
   getAllItemsDocument(idNegocio: string) {
     return this.afs.collection('negocios').doc(idNegocio).collection('items', ref => ref
-    // .orderBy('categoria', 'asc')
+    .orderBy('fechaCreacion', 'desc')
     ).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Item;

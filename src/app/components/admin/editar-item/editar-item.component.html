@@ -1,136 +1,109 @@
-<p class="h3">Editar Item</p>
+<div class="">
 
-<div class="buttonClose">
-  <button mat-icon-button (click)="cancelar()">
-    <mat-icon>close</mat-icon>
-  </button>
-</div>
-  
-  <div class="row gx-md-5">
 
-    <!-- <div class="col-md-4">
-      <img class="imageItemEdit rounded" [src]="data.item.image" alt="">
-    </div> -->
+  <div class="d-flex align-items-center gap-2 mb-3 mb-md-4">
+    <a routerLink="/admin/productos">
+      <i-tabler name="arrow-left"></i-tabler>
+    </a>
+    <p class="h4 mb-0">Editar item</p>
+  </div>
 
-    <div class="col-md-12">
-      <form [formGroup]="formItem" (submit)="onSubmit()" novalidate class="row gx-3">
 
-        <!-- <div class="d-flex justify-content-between align-items-center col-12 my-2">
-          <div>
-            <span class="me-2">Destacado</span>
-            <mat-slide-toggle color="primary" #toggle formControlName="destacado"></mat-slide-toggle>
-          </div>
-          <div>
-            <span class="me-2">Visible</span>
-            <mat-slide-toggle color="primary" #toggle formControlName="publicado"></mat-slide-toggle>
-          </div>
-        </div> -->
 
-        <mat-form-field appearance="fill" class="col-12">
-          <mat-label>Categoría *</mat-label>
-          <!-- <input matInput type="text" formControlName="categoria"> -->
-          <mat-select formControlName="categoria">
-            <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</mat-option>
-            <mat-option class="text-secondary" (click)="openModalCrearCategoriaItem()">+ Agregar categoría</mat-option>
-          </mat-select>
-        </mat-form-field>
+  <div class="row" *ngIf="negocio">
 
-        <!-- <div class="col-3">
-          <div class="d-grid">
-            <button type="button" class="btn btn-outline-primary myButton" (click)="openModalCrearCategoriaItem()">Crear</button>
-          </div>
-        </div> -->
+    <div class="col-md-6">
 
-        <mat-form-field appearance="fill" class="col-12">
-          <mat-label>Nombre *</mat-label>
+      <app-upload-images [itemId]="itemId"></app-upload-images>
+
+
+      <form [formGroup]="formItem" (submit)="onSubmit()" novalidate class="row gx-3" *ngIf="item">
+
+        <p class="lead">Información</p>
+
+        <mat-form-field appearance="outline" class="col-12">
+          <mat-label>Nombre</mat-label>
           <input matInput type="text" formControlName="nombre">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="col-12">
-          <mat-label>Descripción</mat-label>
-          <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" formControlName="descripcion"></textarea>
-        </mat-form-field>
+        <editor apiKey="3t4bbn26k36rnfef810v29rx26hel42y3n5kmwf5qzyahnjz" [init]="{ 
+          menubar: false,
+          selector: 'textarea',
+          min_height: 280,
+          plugins: 'lists link',
+          toolbar: 'bold italic underline numlist bullist',
+          content_css: '/assets/mycontent.css'
+        }" formControlName="body">
+        </editor>
+        <mat-error class="small mt-1" *ngIf="errorBody()">{{errorBody()}}</mat-error>
 
-        <mat-form-field appearance="fill" class="col-12">
-          <mat-label>Cambiar imagen</mat-label>
-          <ngx-mat-file-input #removableInput formControlName="image" placeholder="Seleccionar imagen" accept=".jpg, .jpeg, .png" (change)="detectFiles($event)"></ngx-mat-file-input>
-          <!-- <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
-            <mat-icon>clear</mat-icon>
-          </button>
-          <mat-icon matSuffix *ngIf="removableInput.empty">image_search</mat-icon> -->
-          <mat-error *ngIf="errorImagen()">{{errorImagen()}}</mat-error>
-          <mat-hint>Peso máximo: 5 MB</mat-hint>
-        </mat-form-field>
+        <div class="col-12 mt-3">
 
-        <!-- <mat-form-field appearance="fill" class="col-6">
-          <mat-label>Precio (S/.) *</mat-label>
-          <input matInput type="number" formControlName="precio">
-        </mat-form-field>
+          <div class="d-flex gap-2">
 
-        <mat-form-field appearance="fill" class="col-6">
-          <mat-label>Precio descuento (S/.)</mat-label>
-          <input matInput type="number" formControlName="precioDescuento">
-        </mat-form-field> -->
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Categoría</mat-label>
+              <mat-select formControlName="categoria">
+                <mat-option *ngFor="let categoria of categorias" [value]="categoria.nombre">{{categoria.nombre}}</mat-option>
+                <mat-option (click)="openModalCrearCategoriaItem()">
+                  <span class="text-primary">+ Agregar categoría</span>
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div>
+              <button type="button" class="btn btn-primary" (click)="openModalCrearCategoriaItem()" style="height: 56px;">
+                <i-tabler name="plus"></i-tabler>
+              </button>
+            </div>
+  
+          </div>
+
+        </div>
 
 
         <p class="lead mt-3">Precio</p>
 
-        <mat-radio-group formControlName="tipoPrecio">
-          <mat-radio-button *ngFor="let tipo of tipoPrecio" [value]="tipo" class="me-4">{{tipo}}</mat-radio-button>
+        <mat-radio-group formControlName="tipoPrecio" class="mb-3">
+          <mat-radio-button color="primary" *ngFor="let tipo of tipoPrecio" [value]="tipo" class="me-4">{{tipo}}</mat-radio-button>
         </mat-radio-group>
 
-        <div class="col-12" *ngIf="individual">
+        <div class="col-12" *ngIf="unico">
           <div class="row gx-3">
-            <mat-form-field appearance="fill" class="col-12">
+            <mat-form-field appearance="outline" class="col-12">
               <mat-label>Precio</mat-label>
-              <span matPrefix>S/. &nbsp;</span>
+              <span matTextPrefix class="me-2">{{negocio.moneda}}</span>
               <input matInput type="number" formControlName="precio">
             </mat-form-field>
-            <!-- <mat-form-field appearance="fill" class="col-6">
-              <mat-label>Precio descuento</mat-label>
-              <input matInput type="number" formControlName="precioDescuento">
-              <span matPrefix>S/. &nbsp;</span>
-            </mat-form-field> -->
           </div>
         </div>
 
-        <div *ngIf="multiple">
+        <div *ngIf="multiple" class="">
           <div formArrayName="precios" class="col-12">
             <div *ngFor="let precio of formItem.controls['precios']['controls']; let i = index;">
-              <div [formGroupName]="i" class="d-flex">
-                <div class="row gx-3">
-                  <mat-form-field appearance="fill" class="col-8">
+              <div [formGroupName]="i" class="d-flex gap-1">
+                <div class="row gx-2 w-100">
+                  <mat-form-field appearance="outline" class="col-7">
                     <mat-label>Variante</mat-label>
                     <input matInput type="text" formControlName="variante">
                   </mat-form-field>
-                  <mat-form-field appearance="fill" class="col-4">
+                  <mat-form-field appearance="outline" class="col-5">
                     <mat-label>Precio</mat-label>
-                    <span matPrefix>S/. &nbsp;</span>
+                    <span matTextPrefix class="me-2">{{negocio.moneda}}</span>
                     <input matInput type="number" formControlName="precio">
                   </mat-form-field>
-                  <!-- <mat-form-field appearance="fill" class="col-6">
-                      <mat-label>Precio descuento</mat-label>
-                      <span matPrefix>S/. &nbsp;</span>
-                      <input matInput type="number" formControlName="precioDescuento">
-                    </mat-form-field> -->
                 </div>
                 <div class="pt-1">
-                  <button class="ms-2" matSuffix mat-icon-button (click)="eliminarPrecio(i)" [disabled]="i === 0">
-                    <!-- <mat-icon>close</mat-icon> -->
+                  <button class="" matSuffix mat-icon-button (click)="eliminarPrecio(i)" [disabled]="i === 0">
                     <i-tabler name="trash"></i-tabler>
                   </button>
                 </div>
-                <!-- <div class="buttonClose">
-                    <button mat-icon-button (click)="eliminarPrecio(i)" [disabled]="i === 0">
-                      <mat-icon>close</mat-icon>
-                    </button>
-                  </div> -->
               </div>
             </div>
           </div>
 
           <div class="col-12 mb-3 mb-md-5">
-            <button type="button" class="btn btn-light btn-sm px-2" (click)="agregarPrecio()">
+            <button type="button" class="btn btn-link btn-sm" (click)="agregarPrecio()">
               <i-tabler name="plus" class="me-1" style="width: 18px; height: 18px;"></i-tabler>
               Agregar variante
             </button>
@@ -138,28 +111,24 @@
         </div>
 
 
-
-
         <div class="d-grid mt-3">
-          <!-- <button class="btn btn-light" (click)="cancelar()" type="button">Cancelar</button> -->
-          <button class="btn btn-primary">
-            <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
+          <button class="btn btn-primary myButton">
+            <span class="d-flex justify-content-center spinnerWhite" *ngIf="loading">
               <mat-spinner class="" [diameter]="24"></mat-spinner>
             </span>
             <span *ngIf="!loading">Guardar cambios</span>
           </button>
-         
         </div>
 
       </form>
 
-      <!-- <pre>{{formItem.value | json }}</pre> -->
-      
     </div>
 
 
-
-     
+    <!-- <div class="col-md-4" *ngIf="item">
+      <pre>{{formItem.value | json}}</pre>
+    </div> -->
 
 
   </div>
+</div>

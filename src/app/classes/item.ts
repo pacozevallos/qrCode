@@ -11,4 +11,5 @@ export class Item {
   publicado: boolean;
   precios: any[];
   tipoPrecio: string;
+  body: any;
 }

@@ -50,7 +50,7 @@
 
 
   <div class="row gy-1 list mb-3" cdkDropList (cdkDropListDropped)="drop($event)">
-    <div class="col-12" *ngFor="let categoria of categorias2" cdkDrag>
+    <div class="col-12" *ngFor="let categoria of categorias" cdkDrag>
       <div class="d-flex justify-content-between bg-white border rounded py-1 px-2">
         <div class="d-flex gap-2 align-items-center">
           <button class="handle" mat-icon-button cdkDragHandle>
@@ -62,7 +62,7 @@
           <button mat-icon-button>
             <i-tabler class="text-primary" name="pencil"></i-tabler>
           </button>
-          <button mat-icon-button>
+          <button mat-icon-button (click)="openModalDeleteCategoria(categoria)">
             <i-tabler class="text-danger" name="trash"></i-tabler>
           </button>
         </div>

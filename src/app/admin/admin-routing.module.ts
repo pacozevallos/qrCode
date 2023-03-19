@@ -11,6 +11,7 @@ import { SelectPLanComponent } from '../components/admin/select-plan/select-plan
 import { PagoExitoPLanMensualComponent } from '../components/admin/pago-exito-plan-mensual/pago-exito-plan-mensual.component';
 import { PagoExitoPLanAnualComponent } from '../components/admin/pago-exito-plan-anual/pago-exito-plan-anual.component';
 import { AdminComponent } from '../components/admin/admin/admin.component';
+import { EditarItemComponent } from '../components/admin/editar-item/editar-item.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,7 @@ const routes: Routes = [
       { path: '', component: ListaItemsComponent },
       { path: 'productos', component: ListaItemsComponent },
       { path: 'productos/crearItem/:id', component: CrearItemComponent },
-      { path: 'productos/editarItem/:id', component: CrearItemComponent },
+      { path: 'productos/editarItem/:id', component: EditarItemComponent },
       { path: 'configuracion', component: ConfiguracionComponent },
       { path: 'cuenta', component: CuentaComponent },
       { path: 'cuenta/elegirPlan', component: SelectPLanComponent },

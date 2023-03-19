@@ -1,11 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialog as MatDialog } from '@angular/material/dialog';
 import { MatSlideToggleChange as MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
+import { Timestamp } from 'firebase/firestore';
 // import { FileValidator } from 'ngx-material-file-input';
 import { Observable, merge } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -20,7 +24,7 @@ import { CrearCategoriaItemComponent } from '../crear-categoria-item/crear-categ
 })
 export class EditarItemComponent implements OnInit {
 
-  formItem: UntypedFormGroup;
+  formItem: FormGroup;
   idItem: string;
   loading = false;
   negocio;
@@ -36,21 +40,29 @@ export class EditarItemComponent implements OnInit {
   actualSize: any;
 
   tipoPrecio = [
-    'Individual',
-    'Variable'
+    'Precio único',
+    'Precio variable'
   ];
-  individual = true;
+  unico = true;
   multiple: boolean;
 
   categoria: string;
 
+  negocioId: string;
+  itemId: string;
+  item: Item;
+
   constructor(
     private bottomSheetRef: MatBottomSheetRef<EditarItemComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private afAuth: AngularFireAuth,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private snackbar: MatSnackBar
   ) {
     // this.itemRef = this.afs.collection('negocios/').doc(this.data.id).collection('items').ref.doc();
     // console.log(this.itemRef.id);
@@ -60,120 +72,212 @@ export class EditarItemComponent implements OnInit {
 
 
     
-    console.log(this.data);
-    // this.categorias = this.data.categorias,
+    // console.log(this.data);
+    // // this.categorias = this.data.categorias,
 
-    // traer solo categorias en tiempo real
-    this.afs.doc('negocios/' + this.data.idNegocio).valueChanges().subscribe( (res: Negocio) => {
-      this.categorias = res.categorias;
-      console.log(res);
-    });
+    // // traer solo categorias en tiempo real
+    // this.afs.doc('negocios/' + this.data.idNegocio).valueChanges().subscribe( (res: Negocio) => {
+    //   this.categorias = res.categorias;
+    //   console.log(res);
+    // });
 
-    this.formItem = this.fb.group({
-      id: [ this.data.item.id ],
-      destacado: [this.data.item.destacado, Validators.required],
-      publicado: [ this.data.item.publicado, Validators.required],
-      categoria: [ this.data.item.categoria, Validators.required],
-      nombre: [this.data.item.nombre, Validators.required],
-      descripcion: [this.data.item.descripcion],
-      precio: [this.data.item.precio, Validators.required],
-      // precioDescuento: [this.data.item.precioDescuento],
-      tipoPrecio: [this.data.item.tipoPrecio, Validators.required],
-      image: [''],
-      imageName: [''],
-      fechaEdicion: [firebase.firestore.Timestamp.fromDate(new Date())]
-    });
+    // this.formItem = this.fb.group({
+    //   id: [ this.data.item.id ],
+    //   destacado: [this.data.item.destacado, Validators.required],
+    //   publicado: [ this.data.item.publicado, Validators.required],
+    //   categoria: [ this.data.item.categoria, Validators.required],
+    //   nombre: [this.data.item.nombre, Validators.required],
+    //   descripcion: [this.data.item.descripcion],
+    //   precio: [this.data.item.precio, Validators.required],
+    //   // precioDescuento: [this.data.item.precioDescuento],
+    //   tipoPrecio: [this.data.item.tipoPrecio, Validators.required],
+    //   image: [''],
+    //   imageName: [''],
+    //   fechaEdicion: [firebase.firestore.Timestamp.fromDate(new Date())]
+    // });
 
-    if (this.data.item.tipoPrecio === 'Individual') {
-      this.individual = true;
-      this.multiple = false;
-    }
+    // if (this.data.item.tipoPrecio === 'Individual') {
+    //   this.individual = true;
+    //   this.multiple = false;
+    // }
 
 
-    if (this.data.item.tipoPrecio === 'Variable') {
-      this.individual = false;
-      this.multiple = true;
-      this.formItem.removeControl('precio');
-      this.formItem.removeControl('precioDescuento');
-      this.formItem.addControl('precios', this.fb.array([]));
-      this.data.item.precios.forEach(element => {
-        const arrayPrecios = this.formItem.controls.precios as UntypedFormArray;
-        arrayPrecios.push(
-          this.fb.group({
-            variante: [element.variante, Validators.required],
-            precio: [element.precio, Validators.required],
-          })
-        );
-      });
-    }
+    // if (this.data.item.tipoPrecio === 'Variable') {
+    //   this.individual = false;
+    //   this.multiple = true;
+    //   this.formItem.removeControl('precio');
+    //   this.formItem.removeControl('precioDescuento');
+    //   this.formItem.addControl('precios', this.fb.array([]));
+    //   this.data.item.precios.forEach(element => {
+    //     const arrayPrecios = this.formItem.controls.precios as FormArray;
+    //     arrayPrecios.push(
+    //       this.fb.group({
+    //         variante: [element.variante, Validators.required],
+    //         precio: [element.precio, Validators.required],
+    //       })
+    //     );
+    //   });
+    // }
 
-    this.formItem.get('tipoPrecio').valueChanges.subscribe( res => {
+    // this.formItem.get('tipoPrecio').valueChanges.subscribe( res => {
 
-      if (res === 'Individual') {
-        this.individual = true;
-        this.multiple = false;
-        this.formItem.removeControl('precios');
-        this.formItem.addControl('precio', this.fb.control('', Validators.required));
-        this.formItem.addControl('precioDescuento', this.fb.control(''));
-      }
+    //   if (res === 'Individual') {
+    //     this.individual = true;
+    //     this.multiple = false;
+    //     this.formItem.removeControl('precios');
+    //     this.formItem.addControl('precio', this.fb.control('', Validators.required));
+    //     this.formItem.addControl('precioDescuento', this.fb.control(''));
+    //   }
 
-      if (res === 'Variable') {
-        this.individual = false;
-        this.multiple = true;
-        this.formItem.removeControl('precio');
-        this.formItem.removeControl('precioDescuento');
-        this.formItem.addControl('precios', this.fb.array([
-          this.fb.group({
-            variante: ['', Validators.required],
-            precio: ['', Validators.required]
-          })
-        ]));
-        const arrayPrecios = this.formItem.controls.precios as UntypedFormArray;
-        this.formItem.controls.precios.valueChanges.subscribe( multiple => {
-          for (const i in multiple) {
-            arrayPrecios.at(+i).get('variante').setValidators(Validators.required);
-            arrayPrecios.at(+i).get('precio').setValidators(Validators.required);
-          }
+    //   if (res === 'Variable') {
+    //     this.individual = false;
+    //     this.multiple = true;
+    //     this.formItem.removeControl('precio');
+    //     this.formItem.removeControl('precioDescuento');
+    //     this.formItem.addControl('precios', this.fb.array([
+    //       this.fb.group({
+    //         variante: ['', Validators.required],
+    //         precio: ['', Validators.required]
+    //       })
+    //     ]));
+    //     const arrayPrecios = this.formItem.controls.precios as FormArray;
+    //     this.formItem.controls.precios.valueChanges.subscribe( multiple => {
+    //       for (const i in multiple) {
+    //         arrayPrecios.at(+i).get('variante').setValidators(Validators.required);
+    //         arrayPrecios.at(+i).get('precio').setValidators(Validators.required);
+    //       }
+    //     });
+    //   }
+    // });
+
+
+
+
+
+
+
+
+
+
+    this.afAuth.authState.subscribe( res => {
+
+      const user = res;
+
+      this.afs.collection('negocios').valueChanges().subscribe( (res: any) => {
+
+        // Traer negocio user
+        this.negocio = res.find( (find: Negocio) => find.autorId === user.uid );
+        this.negocioId = this.negocio.id;
+        console.log(this.negocioId);
+
+
+        // Traer categorías
+        this.afs.collection(`negocios/${this.negocioId}/categorias`).valueChanges().subscribe( res => {
+          this.categorias = res;
         });
-      }
+
+
+        this.activatedRoute.params.subscribe( res => {
+
+          this.itemId = res.id
+          console.log(this.itemId);
+    
+          this.afs.doc(`negocios/${this.negocioId}/items/${this.itemId}`).valueChanges().subscribe( (res: Item | undefined) => {
+    
+            this.item = res;
+            console.log(this.item);
+    
+            this.formItem = this.fb.group({
+              id: [ this.itemId ],
+              categoria: [this.item.categoria, Validators.required],
+              nombre: [this.item.nombre, Validators.required],
+              body: [this.item.body, Validators.required],
+              precio: [this.item.precio, Validators.required],
+              tipoPrecio: [this.item.tipoPrecio, Validators.required],
+              publicado: [true],
+              destacado: [false],
+              fechaEdicion: Timestamp.now()
+            });
+    
+            this.formItem.get('tipoPrecio').valueChanges.subscribe( res => {
+    
+              if (res === 'Precio único') {
+                this.unico = true;
+                this.multiple = false;
+                this.formItem.removeControl('precios');
+                this.formItem.addControl('precio', this.fb.control('', Validators.required));
+                this.formItem.addControl('precioDescuento', this.fb.control(''));
+              }
+        
+              if (res === 'Precio variable') {
+                this.unico = false;
+                this.multiple = true;
+                this.formItem.removeControl('precio');
+                this.formItem.removeControl('precioDescuento');
+                this.formItem.addControl('precios', this.fb.array([
+                  this.fb.group({
+                    variante: ['', Validators.required],
+                    precio: [0, Validators.required]
+                  })
+                ]) );
+        
+                const arrayPrecios = this.formItem.controls.precios as FormArray;
+                this.formItem.controls.precios.valueChanges.subscribe( multiple => {
+                  for (const i in multiple) {
+                    arrayPrecios.at(+i).get('variante').setValidators(Validators.required);
+                    arrayPrecios.at(+i).get('precio').setValidators(Validators.required);
+                  }
+                });
+              }
+            });
+            
+          });
+    
+        
+        });
+
+        
+      });
+      
     });
+
 
   }
+
+
 
   onSubmit() {
     if (this.formItem.valid) {
       this.loading = true;
-      if (this.formItem.get('image').value === '') {
-        this.guardarCambios();
-      } else {
-        this.uploadFileCrearItem();
-      }
+      this.updateItem();
     } else {
       this.validateAllFormFields(this.formItem);
     }
   }
 
-  guardarCambios() {
-    const item = this.formItem.value;
-    ['image', 'imageName'].forEach(e => delete item[e]);
-    this.afs.doc('negocios/' + this.data.idNegocio).collection('items').doc(this.data.item.id).update(item)
+
+  updateItem() {
+    this.afs.doc( `negocios/${this.negocioId}/items/${this.itemId}`).update(this.formItem.value)
     .then(() => {
-      this.bottomSheetRef.dismiss();
       console.log('item actualizado');
+      this.router.navigate(['/admin/productos']);
+      this.snackbar.open('Ítem actualizado', 'CERRAR', {
+        duration: 5000
+      });
     });
   }
 
   agregarPrecio() {
-    (this.formItem.controls.precios as UntypedFormArray).push(
+    (this.formItem.controls.precios as FormArray).push(
       this.fb.group({
         variante: [''],
-        precio: [''],
+        precio: [0],
       })
     );
   }
 
   eliminarPrecio(index: number): void {
-    (this.formItem.controls.precios as UntypedFormArray).removeAt(index);
+    (this.formItem.controls.precios as FormArray).removeAt(index);
   }
 
   actualizarPublicado(idItem, change: MatSlideToggleChange) {
@@ -183,12 +287,12 @@ export class EditarItemComponent implements OnInit {
     });
   }
 
-  validateAllFormFields(formGroup: UntypedFormGroup) {
+  validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof UntypedFormControl) {
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof UntypedFormGroup) {
+      } else if (control instanceof FormGroup) {
         this.validateAllFormFields(control);
       }
     });
@@ -196,8 +300,9 @@ export class EditarItemComponent implements OnInit {
 
   openModalCrearCategoriaItem() {
     const dialogRef = this.dialog.open(CrearCategoriaItemComponent, {
+      panelClass: 'dialogSmall',
       data: {
-        idNegocio: this.data.idNegocio,
+        idNegocio: this.negocioId,
         categoria: this.categoria
       }
     });
@@ -257,6 +362,10 @@ export class EditarItemComponent implements OnInit {
 
   cancelar() {
     this.bottomSheetRef.dismiss();
+  }
+
+  errorBody() {
+    return this.formItem.controls['body'].touched && this.formItem.controls['body'].hasError('required') ? 'Incluye una descripción' : '';
   }
 
 }

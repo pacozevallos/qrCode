@@ -16,6 +16,8 @@ import { DetalleNegocioComponent } from '../components/admin/detalle-negocio/det
 import { AdminRoutingModule } from './admin-routing.module';
 import { HeaderAdminComponent } from '../components/admin/header-admin/header-admin.component';
 import { AdminComponent } from '../components/admin/admin/admin.component';
+import { EditarItemComponent } from '../components/admin/editar-item/editar-item.component';
+import { EliminarCategoriaComponent } from './eliminar-categoria/eliminar-categoria.component';
 
 
 
@@ -24,9 +26,11 @@ import { AdminComponent } from '../components/admin/admin/admin.component';
     DetalleNegocioComponent,
     ListaItemsComponent,
     CrearItemComponent,
+    EditarItemComponent,
     UploadImagesComponent,
     HeaderAdminComponent,
-    AdminComponent
+    AdminComponent,
+    EliminarCategoriaComponent
     
   ],
   imports: [

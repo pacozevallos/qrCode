@@ -16,6 +16,7 @@ import { UploadImagesService } from 'src/app/services/upload-images.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FileItem } from 'src/app/classes/file-item';
 import { Item } from 'src/app/classes/item';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-crear-item',
@@ -54,7 +55,7 @@ export class CrearItemComponent implements OnInit {
 
   maxNumFotos: number;
 
-  item: Item | undefined;
+  item: Item;
   
 
   constructor(
@@ -67,7 +68,8 @@ export class CrearItemComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private afAuth: AngularFireAuth,
     private uploadImages: UploadImagesService,
-    private router: Router
+    private router: Router,
+    private snackbar: MatSnackBar
   ) {
 
    
@@ -89,70 +91,62 @@ export class CrearItemComponent implements OnInit {
         this.negocioId = this.negocio.id;
         console.log(this.negocioId);
 
-
         // Traer categorías
         this.afs.collection(`negocios/${this.negocioId}/categorias`).valueChanges().subscribe( res => {
           this.categorias = res;
         });
 
-
         this.activatedRoute.params.subscribe( res => {
 
           this.itemId = res.id
           console.log(this.itemId);
-    
-          this.afs.doc(`negocios/${this.negocioId}/items/${this.itemId}`).valueChanges().subscribe( (res: Item | undefined) => {
-    
-            this.item = res;
-            console.log(this.item);
-    
-            this.formItem = this.fb.group({
-              id: [ this.itemId ],
-              categoria: ['', Validators.required],
-              nombre: [this.item.nombre, Validators.required],
-              body: ['', Validators.required],
-              precio: ['', Validators.required],
-              tipoPrecio: ['Precio único', Validators.required],
-              publicado: [true],
-              destacado: [false],
-              fechaCreacion: Timestamp.now()
-            });
-    
-            this.formItem.get('tipoPrecio').valueChanges.subscribe( res => {
-    
-              if (res === 'Precio único') {
-                this.unico = true;
-                this.multiple = false;
-                this.formItem.removeControl('precios');
-                this.formItem.addControl('precio', this.fb.control('', Validators.required));
-                this.formItem.addControl('precioDescuento', this.fb.control(''));
-              }
-        
-              if (res === 'Precio variable') {
-                this.unico = false;
-                this.multiple = true;
-                this.formItem.removeControl('precio');
-                this.formItem.removeControl('precioDescuento');
-                this.formItem.addControl('precios', this.fb.array([
-                  this.fb.group({
-                    variante: ['', Validators.required],
-                    precio: [0, Validators.required]
-                  })
-                ]) );
-        
-                const arrayPrecios = this.formItem.controls.precios as FormArray;
-                this.formItem.controls.precios.valueChanges.subscribe( multiple => {
-                  for (const i in multiple) {
-                    arrayPrecios.at(+i).get('variante').setValidators(Validators.required);
-                    arrayPrecios.at(+i).get('precio').setValidators(Validators.required);
-                  }
-                });
-              }
-            });
-            
+
+
+          this.formItem = this.fb.group({
+            id: [ this.itemId ],
+            categoria: ['', Validators.required],
+            nombre: ['', Validators.required],
+            body: ['', Validators.required],
+            precio: ['', Validators.required],
+            tipoPrecio: ['Precio único', Validators.required],
+            publicado: [true],
+            destacado: [false],
+            fechaCreacion: Timestamp.now()
           });
-    
-        
+      
+          this.formItem.get('tipoPrecio').valueChanges.subscribe( res => {
+      
+            if (res === 'Precio único') {
+              this.unico = true;
+              this.multiple = false;
+              this.formItem.removeControl('precios');
+              this.formItem.addControl('precio', this.fb.control('', Validators.required));
+              this.formItem.addControl('precioDescuento', this.fb.control(''));
+            }
+      
+            if (res === 'Precio variable') {
+              this.unico = false;
+              this.multiple = true;
+              this.formItem.removeControl('precio');
+              this.formItem.removeControl('precioDescuento');
+              this.formItem.addControl('precios', this.fb.array([
+                this.fb.group({
+                  variante: ['', Validators.required],
+                  precio: [0, Validators.required]
+                })
+              ]) );
+      
+              const arrayPrecios = this.formItem.controls.precios as FormArray;
+              this.formItem.controls.precios.valueChanges.subscribe( multiple => {
+                for (const i in multiple) {
+                  arrayPrecios.at(+i).get('variante').setValidators(Validators.required);
+                  arrayPrecios.at(+i).get('precio').setValidators(Validators.required);
+                }
+              });
+            }
+          });
+
+
         });
 
         
@@ -163,17 +157,7 @@ export class CrearItemComponent implements OnInit {
 
     
 
-    // this.formItem = this.fb.group({
-    //   id: [ this.itemId ],
-    //   categoria: ['', Validators.required],
-    //   nombre: ['', Validators.required],
-    //   body: ['', Validators.required],
-    //   precio: ['', Validators.required],
-    //   tipoPrecio: ['Precio único', Validators.required],
-    //   publicado: [true],
-    //   destacado: [false],
-    //   fechaCreacion: Timestamp.now()
-    // });
+    
 
    
 
@@ -212,7 +196,10 @@ export class CrearItemComponent implements OnInit {
     this.afs.doc( `negocios/${this.negocioId}/items/${this.itemId}`).set(this.formItem.value, {merge: true})
     .then(() => {
       console.log('item creado');
-      this.router.navigate(['/admin/productos'])
+      this.router.navigate(['/admin/productos']);
+      this.snackbar.open('Ítem creado', 'CERRAR', {
+        duration: 5000
+      });
     });
   }
 
@@ -243,7 +230,7 @@ export class CrearItemComponent implements OnInit {
 
   openModalCrearCategoriaItem() {
     const dialogRef = this.dialog.open(CrearCategoriaItemComponent, {
-      // panelClass: 'dia',
+      panelClass: 'dialogSmall',
       data: {
         idNegocio: this.negocioId,
         categoria: this.categoria

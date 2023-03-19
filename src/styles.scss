@@ -514,6 +514,13 @@ table {
   padding: 2.35rem !important;
 }
 
+.dialogSmall {
+  width: 360px !important;
+  @include media-breakpoint-only(xs) {
+    width: initial !important;
+  }
+}
+
 .buttonClose {
   position: absolute;
   top: 0.4rem;
