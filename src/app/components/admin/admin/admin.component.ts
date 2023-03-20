@@ -20,6 +20,10 @@ export class AdminComponent implements OnInit {
       url: 'productos'
     },
     {
+      nombre: 'Categorías',
+      url: 'categorias'
+    },
+    {
       nombre: 'Configuración',
       url: 'configuracion'
     },

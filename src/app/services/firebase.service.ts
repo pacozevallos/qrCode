@@ -137,6 +137,7 @@ export class FirebaseService {
 
   }
 
+  
   getAllImagesItem(negocioId: string, itemId: string) {
 
     return this.afs.collection('negocios').doc(negocioId).collection('items').doc(itemId).collection('images', ref => ref

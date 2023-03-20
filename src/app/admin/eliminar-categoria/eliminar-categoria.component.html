@@ -6,7 +6,7 @@
     </button>
   </div>
 
-  <p class="h5 mb-3 mb-md-4">Eliminar categoría</p>
+  <p class="h5 mb-3">Eliminar categoría</p>
 
 
   <div class="d-flex justify-content-center align-items-center w-100 py-4" *ngIf="loading">
@@ -24,7 +24,7 @@
       <p class="small lh-sm">Algunos productos están usando esta categoría: <span class="fw-bold">{{data.categoria.nombre}}</span></p>
     </div>
 
-    <p class="small lh-sm text-muted">Cambia primero la categoría de dichos productos antes de eliminar.</p>
+    <p class="small lh-sm">Cambia la categoría de dichos productos antes de eliminar.</p>
 
     <form [formGroup]="formCategoria" (submit)="onSubmit()" novalidate>
 
@@ -36,16 +36,12 @@
       </mat-select>
     </mat-form-field>
 
-    <!-- <div class="d-grid">
-      <button class="btn btn-primary" [disabled]="formCategoria.invalid" >Actualizar y eliminar categoría</button>
-    </div> -->
-
     <div class="d-grid">
-      <button class="btn btn-primary myButton" [disabled]="formCategoria.invalid">
-        <span class="d-flex justify-content-center spinnerWhite" *ngIf="loading">
+      <button class="btn btn-primary" [disabled]="formCategoria.invalid">
+        <span class="d-flex justify-content-center spinnerWhite" *ngIf="!loading">
           <mat-spinner class="" [diameter]="24"></mat-spinner>
         </span>
-        <span *ngIf="!loading">Actualizar y eliminar categoría</span>
+        <span *ngIf="loading">Actualizar y eliminar categoría</span>
       </button>
     </div>
 
@@ -60,7 +56,7 @@
 
   <div *ngIf="!enUso">
 
-    <p class="small">Esta acción no se puede deshacer. ¿Desea eliminar la categoría <span class="fw-bold">{{data.categoria.nombre}}</span>?</p>
+    <p class="small mb-3">Esta acción no se puede deshacer. ¿Desea eliminar la categoría <span class="fw-bold">{{data.categoria.nombre}}</span>?</p>
 
     <!-- <div class="d-grid">
       <button class="btn btn-primary" (click)="deleteCategoriaFirestore()">Eliminar categoría</button>

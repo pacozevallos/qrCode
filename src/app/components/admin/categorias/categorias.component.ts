@@ -9,6 +9,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { CrearCategoriaItemComponent } from '../crear-categoria-item/crear-categoria-item.component';
 import { EliminarCategoriaComponent } from 'src/app/admin/eliminar-categoria/eliminar-categoria.component';
 import { EditarCategoriaComponent } from 'src/app/admin/editar-categoria/editar-categoria.component';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { map } from 'rxjs/operators';
+import { Categoria } from 'src/app/classes/categoria';
 
 @Component({
   selector: 'app-categorias',
@@ -17,66 +20,79 @@ import { EditarCategoriaComponent } from 'src/app/admin/editar-categoria/editar-
 })
 export class CategoriasComponent implements OnInit {
 
-  @Input() negocio: Negocio;
+  // @Input() negocio: Negocio;
+  negocio: Negocio;
   formCategorias: FormGroup;
   loading: boolean;
-  categorias = [];
+  categorias: Categoria[] = [];
+  categoriasNew = [];
+  sizeCategoria = 0;
 
 
-  displayedColumns = [ 'changeOrder', 'order', 'nombre', 'editar', 'eliminar'];
+  displayedColumns = [ 'changeOrder', 'nombre', 'editar', 'eliminar'];
   // categorias = new MatTableDataSource();
-
 
   constructor(
     private afs: AngularFirestore,
     private fb: FormBuilder,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private afAuth: AngularFireAuth
   ) { }
 
   ngOnInit(): void {
 
-    this.afs.collection(`negocios/${this.negocio.id}/categorias`, ref => ref
-    .orderBy('order', 'asc')
-    ).valueChanges().subscribe( (data: any) => {
-      // this.categorias.data = data;
-      this.categorias = data;
-    });
+    this.afAuth.authState.subscribe( res => {
+      const user = res;
+      this.afs.collection('negocios').valueChanges().subscribe( (res: any) => {
 
-    console.log(this.negocio);
+        this.negocio = res.find( (find: Negocio) => find.autorId === user.uid );
 
-    this.formCategorias = this.fb.group({
-      categorias: this.fb.array([])
-      // categorias: this.negocio.categorias
-    });
+        this.afs.collection(`negocios/${this.negocio.id}/categorias`, ref => ref
+        .orderBy('order', 'asc')
+        ).snapshotChanges().pipe(
+          map(actions => actions.map(a => {
+            const data = a.payload.doc.data() as Categoria;
+            const id = a.payload.doc.id;
+            let size = this.getSizeCategoria(data)
+            return { size, id, ...data };
+          }))
+        )
+        .subscribe( (data: Categoria[]) => {
 
-    const arrayCategorias = this.formCategorias.controls.categorias as FormArray;
+          this.categorias = data;
+          console.log(this.categorias);
 
-    if (this.negocio.categorias?.length === 0) {
-      arrayCategorias.push(
-        // this.fb.group({
-        //   nombre: ['', Validators.required],
-        //   url: ['', Validators.required],
-        //   icon: ['']
-        // })
-        this.fb.control('', Validators.required)
-      );
-    }
+          this.categorias.map( element => {
+            this.getSizeCategoria(element)
+          });
+          
 
-    if (this.negocio.categorias?.length >= 1 ) {
-      this.negocio.categorias.forEach( element => {
-        arrayCategorias.push(
-          // this.fb.group({
-          //   nombre: [element.nombre, Validators.required],
-          //   url: [element.url, Validators.required],
-          //   icon: [element.icon]
-          // })
-          // this.fb.control(element, Validators.required)
-          this.fb.control(element, Validators.required)
-        );
+        });
+
+        console.log(this.negocio);
+
       });
-    }
+    });
+
 
   }
+
+  getSizeCategoria(categoria) {
+
+    return this.afs.collection(`negocios/${this.negocio.id}/items`, ref => ref
+    .where('categoria', '==', categoria.nombre)
+    ).get().subscribe( (res) => {
+
+      console.log(res.size);
+      const size = res.size;
+      return size;
+      // const categoriaNew = { size, ...categoria };
+      // this.categoriasNew.push(categoriaNew);
+      
+    });
+
+  }
+
 
   drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.categorias, event.previousIndex, event.currentIndex);

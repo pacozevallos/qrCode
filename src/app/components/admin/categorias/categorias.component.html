@@ -1,4 +1,4 @@
-<div>
+<div class="col-md-7">
 
   <p class="h5 fw-normal mb-3">Categorías</p>
 
@@ -9,7 +9,9 @@
       <ng-container matColumnDef="changeOrder">
         <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
         <td mat-cell *matCellDef="let item">
-          <i-tabler name="grip-vertical"></i-tabler>
+          <button class="handle" mat-icon-button cdkDragHandle>
+            <i-tabler name="grip-vertical"></i-tabler>
+          </button>
         </td>
       </ng-container>
 
@@ -49,6 +51,8 @@
 
 
 
+
+
   <div class="row gy-1 list mb-3" cdkDropList (cdkDropListDropped)="drop($event)">
     <div class="col-12" *ngFor="let categoria of categorias" cdkDrag>
       <div class="d-flex justify-content-between bg-white border rounded py-1 px-2">
@@ -56,7 +60,10 @@
           <button class="handle" mat-icon-button cdkDragHandle>
             <i-tabler name="grip-vertical"></i-tabler>
           </button>
-          <p class="mb-0">{{categoria.nombre}}</p>
+          <div>
+            <p class="mb-0">{{categoria.nombre}}</p>
+            <p class="extraSmall text-muted mb-0">Usado en {{categoria.size}} ítems</p>
+          </div>
         </div>
         <div class="d-flex gap-1">
           <button mat-icon-button (click)="openModalEditCategoria(categoria)">
@@ -74,6 +81,7 @@
     <i-tabler name="plus" class="me-1"></i-tabler>
     Agregar categoría
   </a>
+
 
 
 

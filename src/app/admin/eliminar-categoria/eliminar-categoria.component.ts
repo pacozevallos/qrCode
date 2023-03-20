@@ -57,6 +57,7 @@ export class EliminarCategoriaComponent {
 
   onSubmit() {
     if (this.formCategoria.valid) {
+      this.loading = true;
       this.updateAndDeleteCategoriaFirestore();
     } else {
       this.validateAllFormFields(this.formCategoria);
@@ -65,17 +66,21 @@ export class EliminarCategoriaComponent {
 
   
   updateAndDeleteCategoriaFirestore() {
+
+    this.enUso = true;
     
     const promises = this.itemsEnUso.map( element => {
       return this.afs.doc(`negocios/${this.data.idNegocio}/items/${element.id}`).update({
         categoria: this.formCategoria.value.categoria
       }).then( () => {
-        return element.categoria
+        console.log(this.formCategoria.value.categoria);
+        this.enUso = true;
       });
     });
 
     Promise.all(promises).then( response =>{
       console.log(response);
+      this.enUso = true;
       this.deleteCategoriaFirestore();
     });
     

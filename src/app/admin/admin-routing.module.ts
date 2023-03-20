@@ -12,6 +12,7 @@ import { PagoExitoPLanMensualComponent } from '../components/admin/pago-exito-pl
 import { PagoExitoPLanAnualComponent } from '../components/admin/pago-exito-plan-anual/pago-exito-plan-anual.component';
 import { AdminComponent } from '../components/admin/admin/admin.component';
 import { EditarItemComponent } from '../components/admin/editar-item/editar-item.component';
+import { CategoriasComponent } from '../components/admin/categorias/categorias.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'productos', component: ListaItemsComponent },
       { path: 'productos/crearItem/:id', component: CrearItemComponent },
       { path: 'productos/editarItem/:id', component: EditarItemComponent },
+      { path: 'categorias', component: CategoriasComponent },
       { path: 'configuracion', component: ConfiguracionComponent },
       { path: 'cuenta', component: CuentaComponent },
       { path: 'cuenta/elegirPlan', component: SelectPLanComponent },
