@@ -3,5 +3,5 @@ export class Categoria {
 	order: number;
 	id: string;
 	fechaCreacion: any;
-	size!: number;
+	size!: any;
 }

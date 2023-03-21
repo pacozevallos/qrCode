@@ -36,22 +36,28 @@ export class EliminarCategoriaComponent {
       categoria: ['', Validators.required]
     });
 
-    this.afs.collection(`negocios/${this.data.idNegocio}/items`, ref => ref
-    .where('categoria', '==', this.data.categoria.nombre)
-    ).valueChanges().subscribe( res => {
+    if (this.data.categoria.size >= 1) {
+      this.enUso = true
+    } else {
+      this.enUso = false;
+    }
 
-      this.itemsEnUso = res;
-      console.log(this.itemsEnUso);
+    // this.afs.collection(`negocios/${this.data.idNegocio}/items`, ref => ref
+    // .where('categoria', '==', this.data.categoria.nombre)
+    // ).valueChanges().subscribe( res => {
 
-      if (this.itemsEnUso.length >= 1) {
-        this.loading = false
-        this.enUso = true;
-      } else {
-        this.loading = false
-        this.enUso = false;
-      }
+    //   this.itemsEnUso = res;
+    //   console.log(this.itemsEnUso);
+
+    //   if (this.itemsEnUso.length >= 1) {
+    //     this.loading = false
+    //     this.enUso = true;
+    //   } else {
+    //     this.loading = false
+    //     this.enUso = false;
+    //   }
       
-    });
+    // });
 
   }
 

@@ -9,9 +9,9 @@
   <p class="h5 mb-3">Eliminar categoría</p>
 
 
-  <div class="d-flex justify-content-center align-items-center w-100 py-4" *ngIf="loading">
+  <!-- <div class="d-flex justify-content-center align-items-center w-100 py-4" *ngIf="loading">
     <mat-spinner color="primary" diameter="36"></mat-spinner>
-  </div>
+  </div> -->
 
 
 
@@ -38,10 +38,10 @@
 
     <div class="d-grid">
       <button class="btn btn-primary" [disabled]="formCategoria.invalid">
-        <span class="d-flex justify-content-center spinnerWhite" *ngIf="!loading">
+        <span class="d-flex justify-content-center spinnerWhite" *ngIf="loading">
           <mat-spinner class="" [diameter]="24"></mat-spinner>
         </span>
-        <span *ngIf="loading">Actualizar y eliminar categoría</span>
+        <span *ngIf="!loading">Actualizar y eliminar categoría</span>
       </button>
     </div>
 

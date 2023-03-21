@@ -49,27 +49,19 @@ export class CategoriasComponent implements OnInit {
 
         this.afs.collection(`negocios/${this.negocio.id}/categorias`, ref => ref
         .orderBy('order', 'asc')
-        ).snapshotChanges().pipe(
-          map(actions => actions.map(a => {
-            const data = a.payload.doc.data() as Categoria;
-            const id = a.payload.doc.id;
-            let size = this.getSizeCategoria(data)
-            return { size, id, ...data };
-          }))
-        )
-        .subscribe( (data: Categoria[]) => {
+        ).valueChanges().subscribe( (data: any) => {
 
-          this.categorias = data;
-          console.log(this.categorias);
-
-          this.categorias.map( element => {
-            this.getSizeCategoria(element)
+          const loopCategoria = data.map( element => {
+            return this.getSizeCategoria(element);
           });
-          
+
+          Promise.all(loopCategoria).then( response => {
+            console.log(response);
+            this.categorias = response;
+          })
 
         });
 
-        console.log(this.negocio);
 
       });
     });
@@ -77,18 +69,14 @@ export class CategoriasComponent implements OnInit {
 
   }
 
-  getSizeCategoria(categoria) {
+  getSizeCategoria(element) {
 
     return this.afs.collection(`negocios/${this.negocio.id}/items`, ref => ref
-    .where('categoria', '==', categoria.nombre)
-    ).get().subscribe( (res) => {
-
+    .where('categoria', '==', element.nombre)
+    ).get().toPromise().then( res => {
       console.log(res.size);
       const size = res.size;
-      return size;
-      // const categoriaNew = { size, ...categoria };
-      // this.categoriasNew.push(categoriaNew);
-      
+      return { ...element, size };
     });
 
   }
