@@ -42,22 +42,22 @@ export class EliminarCategoriaComponent {
       this.enUso = false;
     }
 
-    // this.afs.collection(`negocios/${this.data.idNegocio}/items`, ref => ref
-    // .where('categoria', '==', this.data.categoria.nombre)
-    // ).valueChanges().subscribe( res => {
+    this.afs.collection(`negocios/${this.data.idNegocio}/items`, ref => ref
+    .where('categoria', '==', this.data.categoria.nombre)
+    ).valueChanges().subscribe( res => {
 
-    //   this.itemsEnUso = res;
-    //   console.log(this.itemsEnUso);
+      this.itemsEnUso = res;
+      console.log(this.itemsEnUso);
 
-    //   if (this.itemsEnUso.length >= 1) {
-    //     this.loading = false
-    //     this.enUso = true;
-    //   } else {
-    //     this.loading = false
-    //     this.enUso = false;
-    //   }
+      // if (this.itemsEnUso.length >= 1) {
+      //   this.loading = false
+      //   this.enUso = true;
+      // } else {
+      //   this.loading = false
+      //   this.enUso = false;
+      // }
       
-    // });
+    });
 
   }
 
@@ -73,20 +73,18 @@ export class EliminarCategoriaComponent {
   
   updateAndDeleteCategoriaFirestore() {
 
-    this.enUso = true;
+    this.loadingButton = true;
     
     const promises = this.itemsEnUso.map( element => {
       return this.afs.doc(`negocios/${this.data.idNegocio}/items/${element.id}`).update({
         categoria: this.formCategoria.value.categoria
       }).then( () => {
         console.log(this.formCategoria.value.categoria);
-        this.enUso = true;
       });
     });
 
     Promise.all(promises).then( response =>{
       console.log(response);
-      this.enUso = true;
       this.deleteCategoriaFirestore();
     });
     

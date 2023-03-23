@@ -38,10 +38,10 @@
 
     <div class="d-grid">
       <button class="btn btn-primary" [disabled]="formCategoria.invalid">
-        <span class="d-flex justify-content-center spinnerWhite" *ngIf="loading">
+        <span class="d-flex justify-content-center spinnerWhite" *ngIf="loadingButton">
           <mat-spinner class="" [diameter]="24"></mat-spinner>
         </span>
-        <span *ngIf="!loading">Actualizar y eliminar categoría</span>
+        <span *ngIf="!loadingButton">Actualizar y eliminar categoría</span>
       </button>
     </div>
 
