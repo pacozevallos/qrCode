@@ -133,6 +133,7 @@ export class CategoriasComponent implements OnInit {
 
   openModalAddCategoria() {
     this.matDialog.open(CrearCategoriaItemComponent, {
+      autoFocus: false,
       data: {
         idNegocio: this.negocio.id,
       }

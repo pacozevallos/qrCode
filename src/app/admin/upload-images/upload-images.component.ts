@@ -157,6 +157,7 @@ export class UploadImagesComponent {
 
 
   }
+  
 
   deleteImageFromFirebase(item) {
     this.afs.collection('negocios').doc(this.negocioId).collection('items').doc(this.itemId).collection('images').doc(item.id).delete().then( () => {

@@ -96,6 +96,7 @@ export class CrearItemComponent implements OnInit {
           this.categorias = res;
         });
 
+        
         this.activatedRoute.params.subscribe( res => {
 
           this.itemId = res.id

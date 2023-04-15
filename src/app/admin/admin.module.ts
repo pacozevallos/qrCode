@@ -19,6 +19,11 @@ import { AdminComponent } from '../components/admin/admin/admin.component';
 import { EditarItemComponent } from '../components/admin/editar-item/editar-item.component';
 import { EliminarCategoriaComponent } from './eliminar-categoria/eliminar-categoria.component';
 import { EditarCategoriaComponent } from './editar-categoria/editar-categoria.component';
+import { LogoNegocioComponent } from '../components/admin/logo-negocio/logo-negocio.component';
+import { ConfiguracionComponent } from '../components/admin/configuracion/configuracion.component';
+import { QrCodeComponent } from '../components/admin/qr-code/qr-code.component';
+import { QRCodeModule } from 'angularx-qrcode';
+
 
 
 
@@ -32,7 +37,10 @@ import { EditarCategoriaComponent } from './editar-categoria/editar-categoria.co
     HeaderAdminComponent,
     AdminComponent,
     EliminarCategoriaComponent,
-    EditarCategoriaComponent
+    EditarCategoriaComponent,
+    ConfiguracionComponent,
+    LogoNegocioComponent,
+    QrCodeComponent
     
   ],
   imports: [
@@ -42,7 +50,8 @@ import { EditarCategoriaComponent } from './editar-categoria/editar-categoria.co
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    EditorModule
+    EditorModule,
+    QRCodeModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { IconLoader } from 'angular-tabler-icons/icons';
 // import { FileValidator } from 'ngx-material-file-input';
@@ -18,7 +18,7 @@ export class LogoNegocioComponent implements OnInit {
 
   @Input() negocio: Negocio;
 
-  formLogoNegocio: UntypedFormGroup;
+  formLogoNegocio: FormGroup;
   loader = false;
 
 
@@ -34,17 +34,22 @@ export class LogoNegocioComponent implements OnInit {
   // imageLogo = new FormControl('', [FileValidator.maxContentSize(this.maxSize)])
 
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private storage: AngularFireStorage,
-    private bottomSheetRef: MatBottomSheetRef<LogoNegocioComponent>,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
+    // private bottomSheetRef: MatBottomSheetRef<LogoNegocioComponent>,
+    // @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
     private afs: AngularFirestore
   ) { }
 
   ngOnInit(): void {
+
+    console.log(this.negocio);
+    
+
     this.formLogoNegocio = this.fb.group({
       imageLogo: ['', [ Validators.required]]
     });
+
   }
 
   onSubmit() {
@@ -56,12 +61,12 @@ export class LogoNegocioComponent implements OnInit {
     }
   }
 
-  validateAllFormFields(formGroup: UntypedFormGroup) {
+  validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof UntypedFormControl) {
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof UntypedFormGroup) {
+      } else if (control instanceof FormGroup) {
         this.validateAllFormFields(control);
       }
     });
@@ -105,12 +110,12 @@ export class LogoNegocioComponent implements OnInit {
     this.loadingLogo = false;
   }
 
-  cancelar() {
-    this.bottomSheetRef.dismiss();
-  }
+  // cancelar() {
+  //   this.bottomSheetRef.dismiss();
+  // }
 
-  errorImagen() {
-    return this.formLogoNegocio.controls.imageLogo.hasError('maxContentSize') ? 'El peso no debe exceder los 5 MB' : '';
-  }
+  // errorImagen() {
+  //   return this.formLogoNegocio.controls.imageLogo.hasError('maxContentSize') ? 'El peso no debe exceder los 5 MB' : '';
+  // }
 
 }

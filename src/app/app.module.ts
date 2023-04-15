@@ -77,7 +77,7 @@ import { EliminarNegocioComponent } from './components/admin/eliminar-negocio/el
 import { AdicionalesComponent } from './components/admin/adicionales/adicionales.component';
 import { AgregarRedesComponent } from './components/admin/agregar-redes/agregar-redes.component';
 import { UpgradeComponent } from './components/admin/upgrade/upgrade.component';
-import { LogoNegocioComponent } from './components/admin/logo-negocio/logo-negocio.component';
+// import { LogoNegocioComponent } from './components/admin/logo-negocio/logo-negocio.component';
 import { CardNegocioAdminComponent } from './components/admin/card-negocio-admin/card-negocio-admin.component';
 import { CuentaComponent } from './components/admin/cuenta/cuenta.component';
 import { PlanComponent } from './components/admin/plan/plan.component';
@@ -142,7 +142,7 @@ import { FooterAdminComponent } from './components/admin/footer-admin/footer-adm
 		AdicionalesComponent,
 		AgregarRedesComponent,
 		UpgradeComponent,
-		LogoNegocioComponent,
+		// LogoNegocioComponent,
 		CardNegocioAdminComponent,
 		CuentaComponent,
 		PlanComponent,
@@ -165,8 +165,8 @@ import { FooterAdminComponent } from './components/admin/footer-admin/footer-adm
 		PagoExitoPLanAnualComponent,
 		CambiarPLanComponent,
 		DuplicarNegocioComponent,
-		QrCodeComponent,
-		ConfiguracionComponent,
+		// QrCodeComponent,
+		// ConfiguracionComponent,
 		ConfigurarNegocioComponent,
 		ShareAdminComponent,
 		CategoriasComponent,
