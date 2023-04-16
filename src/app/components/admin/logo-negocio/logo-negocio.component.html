@@ -1,38 +1,41 @@
-<div class="border">
+<div class="">
 
-  <p class="h5 mb-3">Logo 2</p>
+  <!-- <p class="h5 mb-3">Logo</p> -->
 
-  <!-- <div class="buttonClose">
-  <button mat-icon-button (click)="cancelar()">
-    <mat-icon>close</mat-icon>
-  </button>
-</div> -->
+  <input type="file" id="upload" (change)="getFileDetail($event)" hidden />
 
-  <form [formGroup]="formLogoNegocio" (submit)="onSubmit()" novalidate class="row gx-3 gx-md-4">
+  <div class="d-flex gap-3 align-items-center">
 
+    <div class="image position-relative">
 
-    <div class="d-flex gap-2">
-
-      <div class="image">
-        <img class="imageLogoEditAdmin rounded-circle border"
-          [src]="negocio.imageLogo || 'assets/images/imageFakerCamara.png' " (load)="detectarCargado()">
+      <div class="position-absolute" style="right: 0; bottom: 0;">
+        <label class="btnUploadLogo shadow" for="upload">
+          <i-tabler name="pencil"></i-tabler>
+        </label>
       </div>
+
+      <div class="imageLogoEditAdmin rounded-circle border" style="background-size: cover;"
+        [ngStyle]=" { 'background-image': 'url(' + fileImgUrl + ')' }" *ngIf="fileImgUrl"></div>
+
+      <div class="imageLogoEditAdmin rounded-circle border" style="background-size: cover;"
+        [ngStyle]=" { 'background-image': 'url(' + negocio.imageLogo + ')' }" *ngIf="!fileImgUrl">
+        <div class="d-flex justify-content-center align-items-center h-100" *ngIf="!negocio.imageLogo">
+          <span class="h3 mb-0 fw-bold">{{negocio.nombreNegocio | slice:0:1}}</span>
+        </div>
+      </div>
+
+      <!-- <div class="bg-white rounded-circle text-dark logoNegocio d-flex justify-content-center align-items-center" *ngIf="!negocio.imageLogo">
+        <span class="h3 mb-0 fw-bold">{{negocio.nombreNegocio | slice:0:1}}</span>
+      </div> -->
 
     </div>
 
-
-    <div class="mt-4" style="width: 180px;">
-      <div class="d-grid">
-        <button class="btn btn-primary">
-          <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loader">
-            <mat-spinner class="" [diameter]="24"></mat-spinner>
-          </span>
-          <span *ngIf="!loader">Agregar logo</span>
-        </button>
-      </div>
+    <div>
+      <p class="mb-0">Logo</p>
+      <p class="small text-muted">Usa una imagen JPG o PNG de hasta 5Mb.</p>
     </div>
 
-  </form>
+  </div>
 
-  
+
 </div>

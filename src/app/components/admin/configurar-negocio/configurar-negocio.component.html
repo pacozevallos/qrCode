@@ -1,6 +1,13 @@
 <div class="">
 
-  <p class="h5 mb-3">Datos de la tienda</p>
+  <p class="h5 mb-3 mb-md-4">Datos de la tienda</p>
+
+  <div class="mb-4 mb-md-5">
+    <app-logo-negocio [negocio]="negocio"></app-logo-negocio>
+  </div>
+
+  
+  
 
   <form [formGroup]="formNegocio" (submit)="onSubmit()" novalidate class="row gx-2">
 

@@ -721,7 +721,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 }
 
 .logoNegocio {
-  object-fit: contain;
+  object-fit: cover;
   width: 72px;
   height: 72px;
   @include media-breakpoint-only(xs) {
@@ -1033,4 +1033,39 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   .mat-mdc-progress-spinner {
     --mdc-circular-progress-active-indicator-color: #fff !important;
   }
+}
+
+// label {
+//   background-color: indigo;
+//   color: white;
+//   padding: 0.5rem;
+//   font-family: sans-serif;
+//   border-radius: 0.3rem;
+//   cursor: pointer;
+//   margin-top: 1rem;
+// }
+
+.btnUploadLogo {
+  background-color: $primary;
+  width: 32px;
+  height: 32px;
+  padding: 0px;
+  border-radius: 50%;
+  border: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  i-tabler {
+    width: 20px;
+    height: 20px;
+    stroke-width: 1.8;
+    color: white;
+    display: flex;
+  }
+}
+
+.btnUploadLogo:hover {
+  background-color: shade-color($primary, 10%)
 }

@@ -8,6 +8,9 @@ import { EditorModule } from "@tinymce/tinymce-angular";
 // Tabler icons
 import { TablerIconsAngularModule } from '../tabler-icons-angular.module';
 
+// Copy clipboard
+import { ClipboardModule } from '@angular/cdk/clipboard';
+
 
 import { UploadImagesComponent } from './upload-images/upload-images.component';
 import { ListaItemsComponent } from '../components/admin/lista-items/lista-items.component';
@@ -23,6 +26,8 @@ import { LogoNegocioComponent } from '../components/admin/logo-negocio/logo-nego
 import { ConfiguracionComponent } from '../components/admin/configuracion/configuracion.component';
 import { QrCodeComponent } from '../components/admin/qr-code/qr-code.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ShareAdminComponent } from '../components/admin/share-admin/share-admin.component';
+import { ConfigurarNegocioComponent } from '../components/admin/configurar-negocio/configurar-negocio.component';
 
 
 
@@ -40,7 +45,9 @@ import { QRCodeModule } from 'angularx-qrcode';
     EditarCategoriaComponent,
     ConfiguracionComponent,
     LogoNegocioComponent,
-    QrCodeComponent
+    QrCodeComponent,
+    ShareAdminComponent,
+    ConfigurarNegocioComponent
     
   ],
   imports: [
@@ -51,7 +58,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     FormsModule,
     ReactiveFormsModule,
     EditorModule,
-    QRCodeModule
+    QRCodeModule,
+    ClipboardModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

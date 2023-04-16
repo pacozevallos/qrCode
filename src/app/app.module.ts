@@ -167,8 +167,8 @@ import { FooterAdminComponent } from './components/admin/footer-admin/footer-adm
 		DuplicarNegocioComponent,
 		// QrCodeComponent,
 		// ConfiguracionComponent,
-		ConfigurarNegocioComponent,
-		ShareAdminComponent,
+		// ConfigurarNegocioComponent,
+		// ShareAdminComponent,
 		CategoriasComponent,
 		FooterAdminComponent
 	],

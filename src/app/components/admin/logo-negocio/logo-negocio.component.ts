@@ -1,8 +1,9 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { DomSanitizer } from '@angular/platform-browser';
 import { IconLoader } from 'angular-tabler-icons/icons';
 // import { FileValidator } from 'ngx-material-file-input';
 import { Observable } from 'rxjs';
@@ -31,6 +32,8 @@ export class LogoNegocioComponent implements OnInit {
 
   loadingLogo = true;
 
+  fileImgUrl: any;
+
   // imageLogo = new FormControl('', [FileValidator.maxContentSize(this.maxSize)])
 
   constructor(
@@ -38,7 +41,7 @@ export class LogoNegocioComponent implements OnInit {
     private storage: AngularFireStorage,
     // private bottomSheetRef: MatBottomSheetRef<LogoNegocioComponent>,
     // @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
   ) { }
 
   ngOnInit(): void {
@@ -52,14 +55,14 @@ export class LogoNegocioComponent implements OnInit {
 
   }
 
-  onSubmit() {
-    if (this.formLogoNegocio.valid) {
-      this.loader = true;
-      this.uploadLogoNegocio();
-    } else {
-      this.validateAllFormFields(this.formLogoNegocio);
-    }
-  }
+  // onSubmit() {
+  //   if (this.formLogoNegocio.valid) {
+  //     this.loader = true;
+  //     this.uploadLogoNegocio();
+  //   } else {
+  //     this.validateAllFormFields(this.formLogoNegocio);
+  //   }
+  // }
 
   validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
@@ -73,16 +76,28 @@ export class LogoNegocioComponent implements OnInit {
   }
 
 
+  getFileDetail (event: any) {
+
+    const file = event.target.files[0];
+    this.fileImgUrl = URL.createObjectURL(file);
+
+    console.log(file);
+    this.loader = true;
+    this.uploadLogoNegocio(file);
+
+  }
+
+
   detectFiles(event) {
     this.selectedFile = event.target.files[0];
     this.nameItem = event.target.files[0].name;
     console.log(this.nameItem);
   }
 
-  uploadLogoNegocio() {
-    const nombreImage = this.nameItem.split('.');
+  uploadLogoNegocio(file: File) {
+    const nombreImage = file.name.split('.');
 
-    const file = this.selectedFile;
+    // const file = this.selectedFile;
     const filePath = `imagesLogosNegocios/${this.negocio.id}.${nombreImage[1]}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);

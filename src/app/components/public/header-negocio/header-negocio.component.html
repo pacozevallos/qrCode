@@ -4,17 +4,20 @@
 
     <div class="d-flex justify-content-between align-items-center">
 
-      <div class="d-flex align-items-center">
+      <div class="d-flex gap-2 gap-md-3 align-items-center">
 
         <button class="me-2" mat-icon-button [routerLink]=" '/tienda/' + id" *ngIf="back">
           <i-tabler name="arrow-left"></i-tabler>
         </button>
 
-        <div class="bg-white rounded-circle me-2 me-md-3" *ngIf="!back">
-          <img [src]="negocio.imageLogo" class="logoNegocio p-2" *ngIf="negocio.imageLogo">
-          <div class="text-dark logoNegocio d-flex justify-content-center align-items-center" *ngIf="!negocio.imageLogo">
+        <div *ngIf="!back">
+
+          <img [src]="negocio.imageLogo" class="logoNegocio rounded-circle" *ngIf="negocio.imageLogo">
+
+          <div class="bg-white rounded-circle text-dark logoNegocio d-flex justify-content-center align-items-center" *ngIf="!negocio.imageLogo">
             <span class="h3 mb-0 fw-bold">{{negocio.nombreNegocio | slice:0:1}}</span>
           </div>
+          
         </div>
 
         <div class="">

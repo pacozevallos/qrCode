@@ -49,7 +49,8 @@ const routes: Routes = [
       { path: 'elegirPlan', component: SelectPLanComponent },
     ]
   },
-  { path: 'tienda/:id', component: NegocioComponent, children: [
+  { path: 'tienda/:id', component: NegocioComponent,
+    children: [
       { path: '', component: ContentNegocioComponent },
       { path: 'item/:id', component: DetalleItemComponent },
     ]
