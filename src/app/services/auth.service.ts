@@ -45,6 +45,7 @@ export class AuthService {
       displayName: dataFormRegistro.nombre,
       uid: user.uid,
       email: user.email,
+      imageLogo: '',
       plan: 'Plan Free',
       negocioId: dataFormRegistro.id,
       fechaCreacion: Timestamp.now(),

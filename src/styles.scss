@@ -1069,3 +1069,13 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .btnUploadLogo:hover {
   background-color: shade-color($primary, 10%)
 }
+
+.titleBloqueAdmin {
+  font-size: 1.45rem;
+  font-weight: 400;
+  margin-bottom: 1.75rem;
+  @include media-breakpoint-only(xs) {
+    font-size: 1.35rem;
+    margin-bottom: 1.5rem;
+  }
+}

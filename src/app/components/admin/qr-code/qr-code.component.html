@@ -8,9 +8,9 @@
   </button>
 </div> -->
 
-<div class="cardConfig">
+<div class="">
 
-  <p class="h5">Código QR</p>
+  <p class="lead">Código QR</p>
 
 
   <div *ngIf="!qrCodeImage">
@@ -32,7 +32,7 @@
 
   <div *ngIf="qrCodeImage">
     <div class="row gx-md-5 gy-3">
-      <div class="col-md-4">
+      <div class="col-lg-6">
         <div class="contenedorImage" >
           <div class="loader imageItemAdmin rounded w-100" *ngIf="loadingQr">
             <div class="d-flex justify-content-center align-items-center h-100">
@@ -46,18 +46,18 @@
           </div>
         </div>
       </div>
-      <div class="col-md-8">
-        <p class="lead">Comparte tu código QR</p>
+      <div class="col-md-7">
+        <!-- <p class="lead">Comparte tu código QR</p> -->
         <div class="d-flex py-1" *ngFor="let item of opciones">
           <span>
             <i-tabler name="check" class="me-2 text-success" style="width: 20px;"></i-tabler>
           </span>
-          <span class="small mt-1">{{item}}</span>  
+          <span class="mt-1">{{item}}</span>  
         </div>
-        <div class="d-grid d-md-flex gap-2 mt-3">
+        <!-- <div class="d-grid d-md-flex gap-2 mt-3">
           <button class="btn btn-primary">Copiar QR</button>
           <button class="btn btn-outline-primary">Descargar QR</button>
-        </div>
+        </div> -->
       </div>
 
     </div>

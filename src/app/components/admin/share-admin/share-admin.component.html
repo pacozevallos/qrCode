@@ -6,7 +6,7 @@
     <input matInput disabled [value]="urlShare" readonly>
   </mat-form-field>
 
-  <div class="d-flex flex-column flex-md-row gap-2">
+  <div class="d-flex gap-2">
 
     <div class="bg-white rounded-1 px-3 py-3 py-md-0 d-flex align-items-center w-100">
       <a class="small text-break" [href]="urlShare" target="blank">{{urlShare}}</a>
@@ -14,8 +14,7 @@
 
     <div class="d-grid flex-md-shrink-0">
         <button class="btn btn-primary" [cdkCopyToClipboard]="urlShare" (click)="hecho()">
-          <i-tabler name="link"></i-tabler>
-          <span class="ms-2">Copiar link</span>
+          <i-tabler name="copy"></i-tabler>
         </button>
 
     </div>

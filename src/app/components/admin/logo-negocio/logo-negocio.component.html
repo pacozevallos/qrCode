@@ -1,4 +1,4 @@
-<div class="">
+<div class="" *ngIf="negocio">
 
   <!-- <p class="h5 mb-3">Logo</p> -->
 
@@ -9,16 +9,15 @@
     <div class="image position-relative">
 
       <div class="position-absolute" style="right: 0; bottom: 0;">
-        <label class="btnUploadLogo shadow" for="upload">
+        <label class="btnUploadLogo shadow-sm" for="upload">
           <i-tabler name="pencil"></i-tabler>
         </label>
       </div>
 
-      <div class="imageLogoEditAdmin rounded-circle border" style="background-size: cover;"
-        [ngStyle]=" { 'background-image': 'url(' + fileImgUrl + ')' }" *ngIf="fileImgUrl"></div>
+      <div class="imageLogoEditAdmin rounded-circle border" style="background-size: cover;" [ngStyle]=" { 'background-image': 'url(' + fileImgUrl + ')' }" *ngIf="fileImgUrl"></div>
 
-      <div class="imageLogoEditAdmin rounded-circle border" style="background-size: cover;"
-        [ngStyle]=" { 'background-image': 'url(' + negocio.imageLogo + ')' }" *ngIf="!fileImgUrl">
+      <div class="imageLogoEditAdmin rounded-circle border bg-white" style="background-size: cover;"
+        [ngStyle]=" { 'background-image': 'url(' + negocio?.imageLogo + ')' }" *ngIf="!fileImgUrl">
         <div class="d-flex justify-content-center align-items-center h-100" *ngIf="!negocio.imageLogo">
           <span class="h3 mb-0 fw-bold">{{negocio.nombreNegocio | slice:0:1}}</span>
         </div>
