@@ -231,6 +231,7 @@ export class CrearItemComponent implements OnInit {
 
   openModalCrearCategoriaItem() {
     const dialogRef = this.dialog.open(CrearCategoriaItemComponent, {
+      autoFocus: false,
       panelClass: 'dialogSmall',
       data: {
         idNegocio: this.negocioId,

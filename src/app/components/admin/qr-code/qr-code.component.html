@@ -31,7 +31,9 @@
 
 
   <div *ngIf="qrCodeImage">
+
     <div class="row gx-md-5 gy-3">
+
       <div class="col-lg-6">
         <div class="contenedorImage" >
           <div class="loader imageItemAdmin rounded w-100" *ngIf="loadingQr">
@@ -46,7 +48,8 @@
           </div>
         </div>
       </div>
-      <div class="col-md-7">
+
+      <div class="col-lg-6">
         <!-- <p class="lead">Comparte tu código QR</p> -->
         <div class="d-flex py-1" *ngFor="let item of opciones">
           <span>

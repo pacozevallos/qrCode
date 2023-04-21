@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Item } from 'src/app/classes/item';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { SwiperOptions } from 'swiper';
+import SwiperCore, { Autoplay, Navigation, Pagination, Scrollbar, A11y, EffectFlip, EffectCreative } from 'swiper';
+SwiperCore.use([Autoplay, Navigation, Pagination, Scrollbar, A11y, EffectFlip, EffectCreative  ]);
 
 @Component({
   selector: 'app-destacados-negocio',
@@ -59,6 +61,8 @@ export class DestacadosNegocioComponent implements OnInit {
 
       this.fs.getItemsDestacados(this.id).subscribe( res => {
         this.itemsDestacados = res;
+        console.log(this.itemsDestacados);
+        
       });
 
       this.fs.getItemsDocument(this.id).subscribe( res => {

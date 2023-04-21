@@ -41,6 +41,8 @@ import { ColorChromeModule } from 'ngx-color/chrome';
 
 import { EditorModule } from "@tinymce/tinymce-angular";
 
+import { SwiperModule } from 'swiper/angular';
+
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -140,7 +142,7 @@ import { FooterAdminComponent } from './components/admin/footer-admin/footer-adm
 		DetalleItemAdminComponent,
 		EliminarNegocioComponent,
 		AdicionalesComponent,
-		AgregarRedesComponent,
+		// AgregarRedesComponent,
 		UpgradeComponent,
 		// LogoNegocioComponent,
 		CardNegocioAdminComponent,
@@ -192,7 +194,8 @@ import { FooterAdminComponent } from './components/admin/footer-admin/footer-adm
 		DragDropModule,
 		ClipboardModule,
 		ColorChromeModule,
-		TablerIconsAngularModule
+		TablerIconsAngularModule,
+		SwiperModule
 		// TablerIconsModule.pick(TablerIcons),
 		// EditorModule,
 		// SwiperModule,

@@ -1,11 +1,20 @@
 <div class="py-3 bg-light">
   <div class="container pe-0" *ngIf="itemsDestacados.length > 0">
-    <p class="h3 mb-2">Lo más pedido</p>
-    <swiper-container [config]="config">
+    <p class="lead mb-2">Lo más pedido</p>
+
+    <!-- <swiper-container [config]="config">
       <swiper-slide *ngFor="let item of itemsDestacados">
         <app-card-item-destacado [idNegocio]="id" [item]="item"></app-card-item-destacado>
       </swiper-slide>
       <div class="swiper-pagination"></div>
-    </swiper-container>
+    </swiper-container> -->
+
+    <swiper [config]="config">
+      <ng-template swiperSlide *ngFor="let item of itemsDestacados">
+        <app-card-item-destacado [idNegocio]="id" [item]="item"></app-card-item-destacado>
+      </ng-template>
+    </swiper>
+
+  
   </div>
 </div>

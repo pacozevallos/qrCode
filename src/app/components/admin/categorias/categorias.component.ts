@@ -154,6 +154,7 @@ export class CategoriasComponent implements OnInit {
 
   openModalDeleteCategoria(categoria) {
     this.matDialog.open( EliminarCategoriaComponent, {
+      autoFocus: false,
       panelClass: 'dialogSmall',
       data: {
         idNegocio: this.negocio.id,

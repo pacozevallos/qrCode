@@ -90,11 +90,19 @@ export class UploadImagesService {
       });
 
       // upadte date images
+      // this.afs.collection('negocios').doc(negocioId).collection('items').doc(itemId).set({
+      //   dateImages: Timestamp.now(),
+      //   id: itemId,
+      //   image: this.resultados[0].urlImage
+      // });
+
+      // update data Proyecto
       this.afs.collection('negocios').doc(negocioId).collection('items').doc(itemId).set({
-        dateImages: Timestamp.now(),
+        fechaCreacion: Timestamp.now(),
         id: itemId,
-        image: this.resultados[0].urlImage
-      });
+        image: this.resultados[0].urlImage,
+        // order: 1
+      }, {merge: true});
      
     })
     .catch( error => {

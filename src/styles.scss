@@ -77,6 +77,10 @@ $enable-cssgrid: true;
 // @import "swiper/swiper.scss";
 // @import "~swiper/swiper-bundle";
 
+// Swiper Angular
+@import "swiper/css";
+@import "swiper/css/bundle";
+
 // Fonts Google
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600;700&display=swap');
@@ -170,12 +174,12 @@ table {
   width: 100% !important;
 }
 
-.dialogSmall {
-  width: 420px !important;
-  @include media-breakpoint-only(xs) {
-    width: initial !important;
-  }
-}
+// .dialogSmall {
+//   width: 420px !important;
+//   @include media-breakpoint-only(xs) {
+//     width: initial !important;
+//   }
+// }
 
 .grillaItems {
   display: grid;

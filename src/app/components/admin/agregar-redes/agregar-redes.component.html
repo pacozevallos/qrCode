@@ -1,4 +1,4 @@
-<div class="cardConfig">
+<div class="">
 
   <!-- <div class="buttonClose">
     <button mat-icon-button (click)="cancelar()">
@@ -6,7 +6,7 @@
     </button>
   </div> -->
 
-  <p class="h5">Redes sociales</p>
+  <p class="lead">Redes sociales</p>
 
   <form [formGroup]="formRedes" (submit)="onSubmit()" novalidate class="row">
 
@@ -14,13 +14,13 @@
       <div *ngFor="let precio of formRedes.controls['redes']['controls']; let i = index;">
         <div [formGroupName]="i" class="d-flex">
           <div class="row gx-2 gx-md-4 w-100">
-            <mat-form-field appearance="fill" class="col-5">
+            <mat-form-field appearance="outline" class="col-5">
               <mat-label>Red social</mat-label>
               <mat-select formControlName="nombre">
                 <mat-option *ngFor="let red of redesSociales" [value]="red.nombre">{{red.nombre}}</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="fill" class="col-7">
+            <mat-form-field appearance="outline" class="col-7">
               <mat-label>Link</mat-label>
               <input matInput type="text" formControlName="url">
             </mat-form-field>
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div class="col-12 mb-3 mb-md-5">
+    <div class="col-12 mb-3">
       <button type="button" class="btn btn-link btn-sm px-0" (click)="agregarRed()">
         <i-tabler name="plus" class="me-1" style="width: 18px; height: 18px;"></i-tabler>
         Agregar red social
