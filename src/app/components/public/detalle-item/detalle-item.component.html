@@ -7,7 +7,7 @@
       <!-- <div class="imageDetalleItem rounded" [style.background-image]=" 'url(' + item.image + ')' ">
       </div> -->
  
-      <img class="imageDetalleItem rounded bg-light"  [src]="item.image" alt="" width="100%">
+      <img class="imageDetalleItem bg-light"  [src]="item.image" alt="" width="100%">
 
       
     </div>
@@ -22,8 +22,19 @@
             <i-tabler name="share"></i-tabler>
           </button>
         </div>
-        <p class="h2 fw-bold my-2">S/. {{item.precio}}</p>
-        <p class="small">{{item.descripcion}}</p>
+
+        <!-- <p class="h2 fw-bold my-2">S/. {{item.precio}}</p> -->
+        <!-- <p class="small">{{item.descripcion}}</p> -->
+
+        <div class="d-flex gap-3">
+          <div *ngFor="let precio of item.precios">
+            <span class="extraSmall">{{precio.variante}}</span>
+            <!-- <p><span class="me-1">{{negocio.moneda}}</span><span class="h6">{{precio.precio}}</span></p> -->
+            <p class="h5">{{negocio.moneda}} {{precio.precio}}</p>
+          </div>
+        </div>
+
+        <div class="bodyNoticia" [innerHTML]="item.body | safe: 'html' "></div>
 
         <a class="btn btn-primary d-none d-md-inline-block" [style.background-color]="negocio.color" [style.borderColor]="negocio.color" [href]="messageWhatsApp" target="_blank" *ngIf="negocio.numeroWhatsApp">
           <i-tabler class="me-2" name="brand-whatsApp"></i-tabler>

@@ -108,6 +108,7 @@ import { ConfigurarNegocioComponent } from './components/admin/configurar-negoci
 import { ShareAdminComponent } from './components/admin/share-admin/share-admin.component';
 import { CategoriasComponent } from './components/admin/categorias/categorias.component';
 import { FooterAdminComponent } from './components/admin/footer-admin/footer-admin.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 
 @NgModule({
@@ -172,7 +173,8 @@ import { FooterAdminComponent } from './components/admin/footer-admin/footer-adm
 		// ConfigurarNegocioComponent,
 		// ShareAdminComponent,
 		CategoriasComponent,
-		FooterAdminComponent
+		FooterAdminComponent,
+		SafePipe,
 	],
 	imports: [
 		BrowserModule,
