@@ -16,7 +16,8 @@
     <div class="col-md-6">
 
       <div>
-        <div class="d-flex justify-content-between align-items-center">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
           <p class="h5 mb-0">{{item.nombre}}</p>
           <button mat-icon-button class="ms-5" (click)="compartirItem()">
             <i-tabler name="share"></i-tabler>
@@ -26,17 +27,20 @@
         <!-- <p class="h2 fw-bold my-2">S/. {{item.precio}}</p> -->
         <!-- <p class="small">{{item.descripcion}}</p> -->
 
-        <div class="d-flex gap-3">
-          <div *ngFor="let precio of item.precios">
-            <span class="extraSmall">{{precio.variante}}</span>
-            <!-- <p><span class="me-1">{{negocio.moneda}}</span><span class="h6">{{precio.precio}}</span></p> -->
-            <p class="h5">{{negocio.moneda}} {{precio.precio}}</p>
+        <div *ngIf="item.precio">
+          <p class="h5 mb-0">{{negocio.moneda}} {{item.precio}}</p>
+        </div>
+
+        <div class="d-flex gap-2" *ngIf="!item.precio">
+          <div class="border rounded px-3 py-2" *ngFor="let precio of item.precios">
+            <span class="small">{{precio.variante}}</span>
+            <p class="h5 mb-0">{{negocio.moneda}} {{precio.precio}}</p>
           </div>
         </div>
 
-        <div class="bodyNoticia" [innerHTML]="item.body | safe: 'html' "></div>
+        <div class="bodyNoticia mt-3" [innerHTML]="item.body | safe: 'html' "></div>
 
-        <a class="btn btn-primary d-none d-md-inline-block" [style.background-color]="negocio.color" [style.borderColor]="negocio.color" [href]="messageWhatsApp" target="_blank" *ngIf="negocio.numeroWhatsApp">
+        <a class="btn btn-primary d-none d-md-inline-block mt-3" [style.background-color]="negocio.color" [style.borderColor]="negocio.color" [href]="messageWhatsApp" target="_blank" *ngIf="negocio.numeroWhatsApp">
           <i-tabler class="me-2" name="brand-whatsApp"></i-tabler>
           <span>Pedir por WhatsApp</span>
         </a>

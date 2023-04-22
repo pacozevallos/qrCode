@@ -10,7 +10,7 @@
 
 
 
-  <div class="row" *ngIf="negocio">
+  <div class="row" *ngIf="item">
 
     <div class="col-md-6">
 
@@ -78,7 +78,7 @@
           </div>
         </div>
 
-        <div *ngIf="multiple" class="">
+        <div *ngIf="multiple">
           <div formArrayName="precios" class="col-12">
             <div *ngFor="let precio of formItem.controls['precios']['controls']; let i = index;">
               <div [formGroupName]="i" class="d-flex gap-1">
@@ -125,9 +125,9 @@
     </div>
 
 
-    <!-- <div class="col-md-4" *ngIf="item">
+    <div class="col-md-4" *ngIf="item">
       <pre>{{formItem.value | json}}</pre>
-    </div> -->
+    </div>
 
 
   </div>
