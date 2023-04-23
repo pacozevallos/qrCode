@@ -1,35 +1,26 @@
 <div class="rounded-3 position-relative">
 
-  <img class="imageItemDestacado rounded-3 shadow-sm" [src]="item.image || 'assets/images/imageFakerCamara.png'" *ngIf="item.image">
+  <img class="imageItemDestacado border rounded-3 shadow-sm" [src]="item.image || 'assets/images/imageFakerCamara.png'" *ngIf="item.image">
 
-  <div class="d-flex justify-content-center align-items-center imageItemDestacado rounded-3 shadow-sm" *ngIf="!item.image">
-    <i-tabler class="opacity-50" name="camera-plus" style="width: 86px; height: 86px; stroke-width: 0.75;"></i-tabler>
+  <div class="bg-white d-flex justify-content-center align-items-center imageItemDestacado rounded-3 shadow-sm" *ngIf="!item.image">
+    <i-tabler class="opacity-25" name="camera-plus" style="width: 86px; height: 86px; stroke-width: 0.65;"></i-tabler>
   </div>
 
   <p class="nombreItemDestacado mb-1 mt-2">{{item.nombre}}</p>
 
-  <div *ngIf="!item.precios">
-    <!-- <span class="precioItemDestacado">S/. {{item.precio}}</span> -->
-    <span class="me-2" [ngClass]=" !item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " *ngIf="item.precioDescuento">S/. {{item.precioDescuento}}</span>
-      <span [ngClass]=" item.precioDescuento ? 'text-decoration-line-through small text-muted' : 'precioItem' " >S/. {{item.precio}}</span>
-  </div>
+  <div class="fw-normal" *ngIf="negocio">
 
-  <!-- <span class="precioItemDestacado">S/. {{item.precio}}</span>
-  <a class="stretched-link" [routerLink]="'item/' + item.id"></a> -->
-
-  <!-- <a type="button" class="stretched-link" (click)=" openBottomSheetDetalle(item)"></a> -->
-
-  <!-- <div class="grillaPreciosMultiple">
-    <div *ngFor="let precio of item.precios">
-      <p class="text-muted mb-0 extraSmall">{{precio.variante}}</p>
-      <span class="fw-bold small">S/. {{precio.precio}}</span>
+    <div *ngIf="unico">
+      <span class="">{{negocio.moneda}} {{item.precio}}</span>
     </div>
-  </div> -->
+  
+    <div *ngIf="variable">
+      <span class="">{{negocio.moneda}} {{precioMin}}</span>
+    </div>
 
-  <div *ngIf="item.precios">
-    <span class="text-muted extraSmall me-2">Desde</span>
-    <span class="precioItemDestacado">S/. {{precioMin}}</span>
   </div>
+
+ 
 
   <a class="stretched-link" [routerLink]="'item/' + item.id"></a>
 

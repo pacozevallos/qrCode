@@ -8,6 +8,10 @@ import { ShareComponent } from '../share/share.component';
 import { Negocio } from 'src/app/classes/negocio';
 import { CompartirItemComponent } from '../compartir-item/compartir-item.component';
 
+import { SwiperOptions } from 'swiper';
+import SwiperCore, { Autoplay, Navigation, Pagination, Scrollbar, A11y, EffectFlip, EffectCreative, Thumbs } from 'swiper';
+SwiperCore.use([Autoplay, Navigation, Pagination, Scrollbar, A11y, EffectFlip, EffectCreative, Thumbs  ]);
+
 @Component({
   selector: 'app-detalle-item',
   templateUrl: './detalle-item.component.html',
@@ -21,6 +25,16 @@ export class DetalleItemComponent implements OnInit {
   item: any;
   negocio: Negocio;
   messageWhatsApp: string;
+  images = [];
+
+  config: SwiperOptions = {
+
+    // thumbs: {
+    //   swiper: thumbsSwiper
+    // },
+    pagination: true,
+    // thumbs: true
+  };
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,7 +49,15 @@ export class DetalleItemComponent implements OnInit {
     this.idItem = this.activatedRoute.snapshot.params.id;
 
     this.afs.collection('negocios').doc(this.idNegocio).collection('items').doc(this.idItem).valueChanges().subscribe( data => {
+
+      // Data item
       this.item = data;
+
+      // Data images item
+      this.afs.collection(`negocios/${this.idNegocio}/items/${this.idItem}/images`, ref => ref
+      .orderBy('order', 'asc')).valueChanges().subscribe( (res) => {
+        this.images = res;
+      });
 
       this.afs.collection('negocios').doc(this.idNegocio).valueChanges().subscribe( (res: Negocio) => {
         this.negocio = res;

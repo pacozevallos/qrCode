@@ -13,7 +13,7 @@ SwiperCore.use([Autoplay, Navigation, Pagination, Scrollbar, A11y, EffectFlip, E
 })
 export class DestacadosNegocioComponent implements OnInit {
 
-  id: string;
+  idNegocio: string;
   items: Item[] = [];
   itemsGroup = [];
   itemsDestacados = [];
@@ -43,7 +43,7 @@ export class DestacadosNegocioComponent implements OnInit {
         spaceBetween: 20
       },
       1400: {
-        slidesPerView: 5,
+        slidesPerView: 6,
         spaceBetween: 20
       },
     }
@@ -57,15 +57,15 @@ export class DestacadosNegocioComponent implements OnInit {
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe( params => {
-      this.id = params.id;
+      this.idNegocio = params.id;
 
-      this.fs.getItemsDestacados(this.id).subscribe( res => {
+      this.fs.getItemsDestacados(this.idNegocio).subscribe( res => {
         this.itemsDestacados = res;
         console.log(this.itemsDestacados);
         
       });
 
-      this.fs.getItemsDocument(this.id).subscribe( res => {
+      this.fs.getItemsDocument(this.idNegocio).subscribe( res => {
         this.items = res;
         this.itemsGroup = this.items.reduce((prev, { categoria, ...items }) => {
           const id = prev.findIndex((item) => item.categoria === categoria);

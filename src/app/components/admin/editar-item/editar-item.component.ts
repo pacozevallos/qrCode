@@ -32,6 +32,7 @@ export class EditarItemComponent implements OnInit {
   itemRef: any;
 
 
+
   selectedFile: FileList | null;
   nameItem: any;
   uploadPercent: Observable<number>;
@@ -194,10 +195,40 @@ export class EditarItemComponent implements OnInit {
               body: [this.item.body, Validators.required],
               precio: [this.item.precio, Validators.required],
               tipoPrecio: [this.item.tipoPrecio, Validators.required],
-              publicado: [true],
-              destacado: [false],
+              // publicado: [true],
+              // destacado: [false],
               fechaEdicion: Timestamp.now()
             });
+
+
+            if (this.item.tipoPrecio === 'Precio único') {
+              this.unico = true;
+              this.multiple = false;
+              this.formItem.removeControl('precios');
+              this.formItem.addControl('precio', this.fb.control('', Validators.required));
+            }
+
+
+
+            if (this.item.tipoPrecio === 'Precio variable') {
+              this.unico = false;
+              this.multiple = true;
+              this.formItem.removeControl('precio');
+              this.formItem.removeControl('precioDescuento');
+              this.formItem.addControl('precios', this.fb.array([]));
+              this.item.precios.forEach(element => {
+                const arrayPrecios = this.formItem.controls.precios as FormArray;
+                arrayPrecios.push(
+                  this.fb.group({
+                    variante: [element.variante, Validators.required],
+                    precio: [element.precio, Validators.required],
+                  })
+                );
+              });
+            }
+
+
+
     
             this.formItem.get('tipoPrecio').valueChanges.subscribe( res => {
     
@@ -206,14 +237,12 @@ export class EditarItemComponent implements OnInit {
                 this.multiple = false;
                 this.formItem.removeControl('precios');
                 this.formItem.addControl('precio', this.fb.control('', Validators.required));
-                this.formItem.addControl('precioDescuento', this.fb.control(''));
               }
         
               if (res === 'Precio variable') {
                 this.unico = false;
                 this.multiple = true;
                 this.formItem.removeControl('precio');
-                this.formItem.removeControl('precioDescuento');
                 this.formItem.addControl('precios', this.fb.array([
                   this.fb.group({
                     variante: ['', Validators.required],
@@ -229,7 +258,13 @@ export class EditarItemComponent implements OnInit {
                   }
                 });
               }
+
             });
+
+
+
+
+
             
           });
     

@@ -7,7 +7,24 @@
       <!-- <div class="imageDetalleItem rounded" [style.background-image]=" 'url(' + item.image + ')' ">
       </div> -->
  
-      <img class="imageDetalleItem bg-light"  [src]="item.image" alt="" width="100%">
+      <!-- <img class="imageDetalleItem bg-light"  [src]="item.image" alt="" width="100%"> -->
+
+      <div class="bg-light d-flex justify-content-center align-items-center" style="aspect-ratio: 1 / 1;">
+
+        <swiper class="w-100 h-100" [config]="config" *ngIf="item.image">
+          <ng-template swiperSlide *ngFor="let item of images">
+            <img class="imageDetalleItem" [src]="item.urlImage">
+          </ng-template>
+          <!-- <div class="swiper-pagination"></div> -->
+        </swiper>
+
+        <div class="" *ngIf="!item.image">
+          <i-tabler class="opacity-25" name="camera-plus" style="width: 120px; height: 120px; stroke-width: 0.5;"></i-tabler>
+        </div>
+
+      </div>
+
+     
 
       
     </div>
