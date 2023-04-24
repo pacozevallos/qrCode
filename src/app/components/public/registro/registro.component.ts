@@ -38,31 +38,30 @@ export class RegistroComponent implements OnInit {
     this.paises = this.ds.paises;
 
     this.formRegistro = this.fb.group ({
-      nombre: ['', Validators.required],
+      // nombre: ['', Validators.required],
       email: [ '', [Validators.required, Validators.email] ],
       password: [ '', [Validators.required, Validators.minLength(6)]],
-
-      nombreNegocio: ['', Validators.required],
+      nombreNegocio: ['', [Validators.required]],
       id: ['', [Validators.required], [this.idValidator]],
       pais: ['Perú', Validators.required],
       moneda: ['PEN', Validators.required],
-      prefijo: ['51', Validators.required],
-      numeroWhatsApp: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
+      // prefijo: ['51', Validators.required],
+      // numeroWhatsApp: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
       color: ['#1456D8', Validators.required],
-      // autorId: [user.uid],
-      // redes: this.fb.array([]),
       fechaCreacion: [Timestamp.now()]
     });
 
     this.formRegistro.get('nombreNegocio').valueChanges.subscribe( res => {
       const negocioIdSpace = res.replace(/ /g, '-');
       this.negocioId = negocioIdSpace.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+      this.formRegistro.controls.id.invalid ? this.negocioId + 1 : this.negocioId;
       this.formRegistro.get('id').setValue(this.negocioId);
     });
 
     this.formRegistro.get('id').valueChanges.subscribe( res => {
       const negocioIdSpace = res.replace(/ /g, '-');
       this.negocioId = negocioIdSpace.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+      this.formRegistro.controls.id.invalid ? this.negocioId + 1 : this.negocioId;
       this.formRegistro.get('id').patchValue(this.negocioId, {emitEvent: false});
     });
 
@@ -120,6 +119,16 @@ export class RegistroComponent implements OnInit {
 
   errorNombreNegocio() {
     return this.formRegistro.controls.nombreNegocio.hasError('required') ? 'Ingresa un nombre' : '';
+
+  }
+
+  errorId() {
+    return this.formRegistro.controls.id.hasError('required') ? 'Ingresa una url' :
+    this.formRegistro.controls.id.invalid ? 'Esta url ya está tomada ' : '';
+  }
+
+  errorId2() {
+    return 'xxx'
   }
 
   errorPais() {
@@ -138,9 +147,6 @@ export class RegistroComponent implements OnInit {
     this.formRegistro.controls.image.hasError('maxContentSize') ? 'El peso no debe exceder los 5 MB' : '';
   }
 
-  errorId() {
-    return this.formRegistro.controls.id.hasError('required') ? 'Ingresa una url' :
-    this.formRegistro.controls.id.invalid ? 'Esta url ya está tomada ' : '';
-  }
+
 
 }

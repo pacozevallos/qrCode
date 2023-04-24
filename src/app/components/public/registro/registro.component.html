@@ -9,7 +9,7 @@
 
     <div class="col-md-6">
       <div class="bg-warning p-4 p-md-6 boxForm">
-        <p class="h1 mb-0 mb-md-3">¡Comienza gratis!</p>
+        <p class="h2 mb-3 mb-md-4">¡Comienza gratis!</p>
 
         <!-- <div class="d-grid my-3">
         <button class="btn btn-danger" (click)="googleLogin()">
@@ -20,13 +20,50 @@
 
         <!-- <p class="text-muted">o</p> -->
 
-        <form [formGroup]="formRegistro" (ngSubmit)="onSubmit()" novalidate class="row gx-2">
+        <form [formGroup]="formRegistro" (ngSubmit)="onSubmit()" novalidate class="row gx-2 gy-1">
 
-          <mat-form-field appearance="fill" class="w-100">
+          <!-- <mat-form-field appearance="fill" class="w-100">
             <mat-label>Tu nombre</mat-label>
             <input type="text" matInput placeholder="Ingresa tu nombre" formControlName="nombre">
             <mat-error *ngIf="formRegistro.controls['nombre'].invalid">{{ errorNombre() }}</mat-error>
+          </mat-form-field> -->
+
+          
+
+          
+
+          <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Nombre de tu tienda</mat-label>
+            <input matInput type="text" formControlName="nombreNegocio">
+            <mat-hint>{{hrefCurrent}}/tienda/{{negocioId}}</mat-hint>
+            <mat-error *ngIf="errorNombreNegocio()">{{errorNombreNegocio()}}</mat-error>
+            <!-- <mat-error>{{errorId2()}}</mat-error> -->
           </mat-form-field>
+
+           <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Link tienda</mat-label>
+            <input matInput type="text" formControlName="id">
+            <mat-hint>Esta será la URL de tu tienda</mat-hint>
+            <mat-error *ngIf="errorId()">{{errorId()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="col-8">
+            <mat-label>País</mat-label>
+            <mat-select formControlName="pais">
+              <mat-option *ngFor="let pais of paises" [value]="pais.nombre">{{pais.nombre}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="errorPais()">{{errorPais()}}</mat-error>
+          </mat-form-field>
+        
+          <mat-form-field appearance="fill" class="col-4">
+            <mat-label>Moneda</mat-label>
+            <mat-select formControlName="moneda">
+              <mat-option *ngFor="let pais of paises" [value]="pais.moneda">{{pais.moneda}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="errorPais()">{{errorPais()}}</mat-error>
+          </mat-form-field>
+        
+         
 
           <mat-form-field appearance="fill" class="w-100">
             <mat-label>Email</mat-label>
@@ -46,39 +83,10 @@
             <mat-error *ngIf="formRegistro.controls['password'].invalid">{{ errorPassword() }}</mat-error>
             <mat-hint align="end">Mínimo 6 caracteres.</mat-hint>
           </mat-form-field>
-
-          
-
-          <mat-form-field appearance="fill" class="col-12">
-            <mat-label>Nombre de tu tienda</mat-label>
-            <input matInput type="text" formControlName="nombreNegocio">
-            <mat-error *ngIf="errorNombreNegocio()">{{errorNombreNegocio()}}</mat-error>
-          </mat-form-field>
         
-          <mat-form-field appearance="fill" class="col-12">
-            <mat-label>{{hrefCurrent}}/</mat-label>
-            <input matInput type="text" formControlName="id">
-            <mat-hint>Esta será la URL de tu tienda</mat-hint>
-            <mat-error *ngIf="errorId()">{{errorId()}}</mat-error>
-          </mat-form-field>
+         
         
-          <mat-form-field appearance="fill" class="col-8">
-            <mat-label>País</mat-label>
-            <mat-select formControlName="pais">
-              <mat-option *ngFor="let pais of paises" [value]="pais.nombre">{{pais.nombre}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="errorPais()">{{errorPais()}}</mat-error>
-          </mat-form-field>
-        
-          <mat-form-field appearance="fill" class="col-4">
-            <mat-label>Moneda</mat-label>
-            <mat-select formControlName="moneda">
-              <mat-option *ngFor="let pais of paises" [value]="pais.moneda">{{pais.moneda}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="errorPais()">{{errorPais()}}</mat-error>
-          </mat-form-field>
-        
-          <mat-form-field appearance="fill" class="col-4">
+          <!-- <mat-form-field appearance="fill" class="col-4">
             <mat-label>Prefijo</mat-label>
             <mat-select formControlName="prefijo">
               <mat-option *ngFor="let pais of paises" [value]="pais.prefijo">+{{pais.prefijo}}</mat-option>
@@ -89,7 +97,7 @@
             <mat-label>Número whatsApp</mat-label>
             <input matInput type="tel" formControlName="numeroWhatsApp" placeholder="999999999">
             <mat-error *ngIf="errorWhatsApp()">{{errorWhatsApp()}}</mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
 
 
 

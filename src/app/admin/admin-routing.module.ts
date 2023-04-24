@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: '', component: AdminComponent,
     children: [
-      { path: '', component: ListaItemsComponent },
+      { path: '', redirectTo: 'productos', pathMatch: 'full' },
       { path: 'productos', component: ListaItemsComponent },
       { path: 'productos/crearItem/:id', component: CrearItemComponent },
       { path: 'productos/editarItem/:id', component: EditarItemComponent },
@@ -31,6 +31,7 @@ const routes: Routes = [
       { path: 'cuenta/pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
     ]
   },
+  // { path: '', redirectTo: 'productos', pathMatch : 'full' },
 ]
 
 
