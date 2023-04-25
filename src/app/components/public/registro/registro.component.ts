@@ -35,9 +35,7 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.paises = this.ds.paises.sort( (a: any, b: any) => (a.nombre > b.nombre) ? 1 : -1 );
-    console.log(this.paises);
-    
+    this.paises = this.ds.paises.sort( (a: any, b: any) => (a.nombre > b.nombre) ? 1 : -1 );    
 
     this.formRegistro = this.fb.group ({
       // nombre: ['', Validators.required],
@@ -47,8 +45,9 @@ export class RegistroComponent implements OnInit {
       id: ['', [Validators.required], [this.idValidator]],
       pais: ['', Validators.required],
       moneda: ['', Validators.required],
-      // prefijo: ['51', Validators.required],
+      prefijo: ['', Validators.required],
       // numeroWhatsApp: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
+      imageLogo: [''],
       color: ['#1456D8', Validators.required],
       fechaCreacion: [Timestamp.now()]
     });
@@ -68,13 +67,12 @@ export class RegistroComponent implements OnInit {
     this.formRegistro.get('id').valueChanges.subscribe( res => {
       const negocioIdSpace = res.replace(/ /g, '-');
       this.negocioId = negocioIdSpace.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
-      // this.formRegistro.controls.id.invalid ? this.negocioId + 1 : this.negocioId;
       this.formRegistro.get('id').patchValue(this.negocioId, {emitEvent: false});
     });
 
     this.formRegistro.get('pais').valueChanges.subscribe( res => {
       const paisSelect = this.paises.find( find => find.nombre === res);
-      // this.formRegistro.get('prefijo').setValue(paisSelect.prefijo);
+      this.formRegistro.get('prefijo').setValue(paisSelect.prefijo);
       this.formRegistro.get('moneda').setValue(paisSelect.moneda);
     });
 

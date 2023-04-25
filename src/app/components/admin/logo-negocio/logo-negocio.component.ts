@@ -46,7 +46,7 @@ export class LogoNegocioComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.negocio);
+    // console.log(this.negocio);
     
 
     this.formLogoNegocio = this.fb.group({

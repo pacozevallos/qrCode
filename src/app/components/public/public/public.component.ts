@@ -16,7 +16,7 @@ export class PublicComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.router.url);
+    // console.log(this.router.url);
 
     if (this.router.url === '/') {
       this.float = true;

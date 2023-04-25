@@ -45,7 +45,7 @@ export class QrCodeComponent implements OnInit {
     // console.log(this.data);
 
     this.qrCodeData = `${window.location.origin}/tienda/${this.negocio.id}`;
-    console.log(this.qrCodeData);
+    // console.log(this.qrCodeData);
 
     this.qrCodeImage = false;
 
@@ -67,41 +67,41 @@ export class QrCodeComponent implements OnInit {
 
 
 
-  createQrCode() {
+  // createQrCode() {
 
-    this.loading = true;
+  //   this.loading = true;
 
-    const canvas = document.getElementsByTagName('canvas');
-    const dataURL = canvas[0].toDataURL();
-    const myBase64 = dataURL.split(',');
+  //   const canvas = document.getElementsByTagName('canvas');
+  //   const dataURL = canvas[0].toDataURL();
+  //   const myBase64 = dataURL.split(',');
 
-    const contentType = 'image/png';
-    const b64Data = myBase64[1];
-    const myBlob = base64StringToBlob(b64Data, contentType);
+  //   const contentType = 'image/png';
+  //   const b64Data = myBase64[1];
+  //   const myBlob = base64StringToBlob(b64Data, contentType);
 
-    const filePath = `imagesQrCodes/${this.negocio.id}.png`;
-    const ref = this.storage.ref(filePath);
-    const task = ref.put(myBlob);
+  //   const filePath = `imagesQrCodes/${this.negocio.id}.png`;
+  //   const ref = this.storage.ref(filePath);
+  //   const task = ref.put(myBlob);
 
-    // this.uploadPercent = task.percentageChanges();
-    task.snapshotChanges().pipe(
-      finalize(() => {
-        ref.getDownloadURL().toPromise().then( (url) => {
-          this.downloadURL = url;
+  //   // this.uploadPercent = task.percentageChanges();
+  //   task.snapshotChanges().pipe(
+  //     finalize(() => {
+  //       ref.getDownloadURL().toPromise().then( (url) => {
+  //         this.downloadURL = url;
 
-          this.afs.collection('negocios').doc(this.negocio.id).update({
-            qrCodeImage: this.downloadURL,
-            qrCodeImageName: filePath,
-          });
+  //         this.afs.collection('negocios').doc(this.negocio.id).update({
+  //           qrCodeImage: this.downloadURL,
+  //           qrCodeImageName: filePath,
+  //         });
 
-          this.loading = false;
-          this.qrCodeImage = true;
-          console.log( this.downloadURL );
-        }).catch(err => { console.log(err); } );
-      })
-    )
-    .subscribe();
-  }
+  //         this.loading = false;
+  //         this.qrCodeImage = true;
+  //         console.log( this.downloadURL );
+  //       }).catch(err => { console.log(err); } );
+  //     })
+  //   )
+  //   .subscribe();
+  // }
 
   detectarCargado() {
     return this.loadingQr = false;

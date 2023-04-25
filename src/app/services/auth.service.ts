@@ -7,6 +7,7 @@ import * as firebase from 'firebase/compat/app';
 import { Timestamp } from 'firebase/firestore';
 import { Negocio } from '../classes/negocio';
 import { User } from '../classes/user';
+import { QrCodeService } from './qr-code.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class AuthService {
     public router: Router,
     public snackBar: MatSnackBar,
     public readonly ngZone: NgZone,
+    private qrs: QrCodeService
   ) { }
 
 
@@ -56,7 +58,8 @@ export class AuthService {
     ['password', 'email'].forEach(e => delete dataNoPassword[e]);
     this.afs.doc('negocios/' + dataFormRegistro.id).set({...dataNoPassword, autorId: user.uid})
     .then(() => {
-      console.log('Megocio creado');
+      console.log('Negocio creado');
+      // this.qrs.createQrCode(dataFormRegistro.id);
     });
   }
 
@@ -121,7 +124,7 @@ export class AuthService {
 
   signOut() {
     this.auth.signOut().then(() => {
-        this.router.navigate(['/login']);
+      this.router.navigate(['/login']);
     });
   }
 

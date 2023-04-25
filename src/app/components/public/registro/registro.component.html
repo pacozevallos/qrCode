@@ -1,24 +1,17 @@
 <div class="container">
 
-  <div class="row gx-0">
+  <div class="row justify-content-between">
 
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="imgRegistro">
       </div>
     </div>
 
-    <div class="col-md-6">
-      <div class="bg-white p-4 p-md-6 boxForm">
+    <div class="col-md-5">
+
+      <div class="">
+
         <p class="h2 mb-3 mb-md-4">¡Comienza gratis!</p>
-
-        <!-- <div class="d-grid my-3">
-        <button class="btn btn-danger" (click)="googleLogin()">
-          <i-tabler name="brand-google" class="me-2"></i-tabler>
-          Regístrate con Google
-        </button>
-        </div> -->
-
-        <!-- <p class="text-muted">o</p> -->
 
         <form [formGroup]="formRegistro" (ngSubmit)="onSubmit()" novalidate class="row gx-2 gy-1">
 
@@ -27,8 +20,6 @@
             <input type="text" matInput placeholder="Ingresa tu nombre" formControlName="nombre">
             <mat-error *ngIf="formRegistro.controls['nombre'].invalid">{{ errorNombre() }}</mat-error>
           </mat-form-field> -->
-
-          
 
           
 

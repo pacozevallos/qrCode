@@ -32,10 +32,10 @@ export class PlanComponent implements OnInit {
 
     this.fs.getUsersFirestore().subscribe( res => {
       this.users = res;
-      console.log(this.users);
+      // console.log(this.users);
 
       this.planActual = this.users.find( user => user.uid === this.user.uid).plan;
-      console.log(this.planActual);
+      // console.log(this.planActual);
 
       if (this.planActual === 'Plan Free') {
         this.caracteristicasPlan = this.ds.planes.find( plan => plan.nombre === 'Plan Free').caracteristicas;
