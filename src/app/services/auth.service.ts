@@ -28,9 +28,9 @@ export class AuthService {
   emailSignUp(dataFormRegistro) {
     return this.auth.createUserWithEmailAndPassword(dataFormRegistro.email, dataFormRegistro.password)
       .then( credential => {
-        credential.user.updateProfile({
-          displayName: dataFormRegistro.nombre
-        });
+        // credential.user.updateProfile({
+        //   displayName: dataFormRegistro.nombre
+        // });
         this.saveUser(dataFormRegistro, credential.user);
         this.saveNegocio(dataFormRegistro, credential.user);
         this.router.navigate([`/admin/productos`]);
@@ -42,10 +42,9 @@ export class AuthService {
 
   saveUser(dataFormRegistro, user) {
     return this.afs.collection('users').doc(user.uid).set({
-      displayName: dataFormRegistro.nombre,
+      // displayName: dataFormRegistro.nombre,
       uid: user.uid,
       email: user.email,
-      imageLogo: '',
       plan: 'Plan Free',
       negocioId: dataFormRegistro.id,
       fechaCreacion: Timestamp.now(),

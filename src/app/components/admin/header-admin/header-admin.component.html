@@ -2,17 +2,27 @@
 	<div class="container">
 		<div class="py-3 d-flex justify-content-between align-items-center">
 
-			<a class="h4 mb-0 text-dark" [routerLink]=" '/admin/productos' ">
-				{{negocio.nombreNegocio}}
-			</a>
+
+			<div class="d-flex gap-2 align-items-center">
+
+				<a class="h4 mb-0 text-dark" [routerLink]=" '/admin/productos' ">{{negocio.nombreNegocio}}</a>
+
+				<a class="btn btn-light btn-sm text-primary" [href]="urlTienda" target="_blank">
+					<span class="me-1 d-none d-md-inline-block">Ver tienda</span>
+					<i-tabler name="external-link"></i-tabler>
+				</a>
+
+			</div>
+
+	
 
 
 			<div class="d-flex align-items-center gap-2 gap-md-3">
 
-				<a class="btn btn-light btn-sm text-primary" [href]="urlTienda" target="_blank">
+				<!-- <a class="btn btn-light btn-sm text-primary" [href]="urlTienda" target="_blank">
 					<span class="me-1 d-none d-md-inline-block">Ver tienda</span>
 					<i-tabler name="building-store"></i-tabler>
-				</a>
+				</a> -->
 
 				<a class="btn btn-outline-primary btn-sm" routerLink="/admin/cuenta">
 					<span class="me-1 d-none d-md-inline-block">Mejorar plan</span>
@@ -20,7 +30,7 @@
 				</a>
 
 				<div class="text-end d-none d-md-block">
-					<p class="fw-normal d-block mb-0">{{user.displayName}}</p>
+					<p class="fw-normal d-block mb-0">{{user.email}}</p>
 					<!-- <p class="extraSmall mb-0">{{user.email}}</p> -->
 				</div>
 

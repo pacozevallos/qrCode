@@ -6,6 +6,7 @@ import { Negocio } from 'src/app/classes/negocio';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { QrCodeService } from 'src/app/services/qr-code.service';
 
 @Component({
   selector: 'app-qr-code',
@@ -34,7 +35,8 @@ export class QrCodeComponent implements OnInit {
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: Negocio,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private qrs: QrCodeService
   ) {
       // this.changeDetectorRef.markForCheck();
     }
@@ -58,6 +60,12 @@ export class QrCodeComponent implements OnInit {
     });
 
   }
+
+  onSubmit() {
+    this.qrs.createQrCode(this.negocio.id)
+  }
+
+
 
   createQrCode() {
 
