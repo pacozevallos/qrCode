@@ -115,9 +115,9 @@ import { SafePipe } from './pipes/safe.pipe';
 	declarations: [
 		AppComponent,
 		PublicComponent,
-		HeaderComponent,
-		FooterComponent,
-		InicioComponent,
+		// HeaderComponent,
+		// FooterComponent,
+		// InicioComponent,
 		// AdminComponent,
 		// HeaderAdminComponent,
 		InicioAdminComponent,

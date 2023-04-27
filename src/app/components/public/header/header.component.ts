@@ -12,6 +12,23 @@ export class HeaderComponent implements OnInit {
 
   user;
 
+  links = [
+ 
+    {
+      nombre: 'Características',
+      url: '/caracteristicas'
+    },
+    {
+      nombre: 'Precios',
+      url: '/precios'
+    },
+    {
+      nombre: 'Contacto',
+      url: '/contacto'
+    },
+
+  ]
+
   linksAdmin = [
     {
       nombre: 'Ir a mi panel',

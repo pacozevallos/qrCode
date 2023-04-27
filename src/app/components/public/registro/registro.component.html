@@ -60,7 +60,8 @@
             <mat-label>Email</mat-label>
             <input type="email" matInput placeholder="Ingresa tu E-mail" formControlName="email">
             <mat-error *ngIf="formRegistro.controls['email'].invalid">{{ errorEmail() }}</mat-error>
-            <mat-hint>Asegúrate de tener acceso a este email</mat-hint>
+            <!-- <mat-hint>Asegúrate de tener acceso a este email</mat-hint> -->
+            <i-tabler matSuffix name="mail" class="text-muted me-2"></i-tabler>
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="w-100">

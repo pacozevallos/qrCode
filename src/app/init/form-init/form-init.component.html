@@ -1,0 +1,18 @@
+<div>
+
+  <!-- <mat-form-field class="w-100">
+    <input matInput type="text" placeholder="nombre-de-tu-tienda">
+    <span matTextPrefix>{{hrefCurrent}}/</span>
+  </mat-form-field> -->
+
+  <!-- <label for="basic-url" class="form-label">Your vanity URL</label> -->
+  <div class="input-group">
+    <span class="input-group-text" id="basic-addon3">{{hrefCurrent}}</span>
+    <input type="text" class="form-control" placeholder="nombre-tienda" [formControl]="nombreTienda">
+    <button class="btn btn-primary" type="button" id="button-addon2">
+      <i-tabler name="arrow-right"></i-tabler>
+    </button>
+  </div>
+  <!-- <div class="form-text" id="basic-addon4">Example help text goes outside the input group.</div> -->
+
+</div>

@@ -32,69 +32,29 @@ import { ConfiguracionComponent } from './components/admin/configuracion/configu
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
 
 const routes: Routes = [
-  {
-    path: '', component: PublicComponent,
-    children: [
-      { path: '', component: InicioComponent },
-      // { path: 'negocio/:id', component: NegocioComponent, children: [
-      //     { path: '', component: ContentNegocioComponent },
-      //     { path: 'item/:id', component: DetalleItemComponent },
-      //   ]
-      // },
-      // { path: 'negocio/:id/item/:id', component: DetalleItemComponent },
-      { path: 'registro', component: RegistroComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'recuperarContrasenia', component: ContraseniaPublicComponent },
-      { path: 'graciasContrasenia', component: ContraseniaGraciasComponent},
-      { path: 'elegirPlan', component: SelectPLanComponent },
-    ]
-  },
+
+  // {
+  //   path: '', component: PublicComponent,
+  //   children: [
+  //     { path: '', component: InicioComponent },
+  //     { path: 'registro', component: RegistroComponent },
+  //     { path: 'login', component: LoginComponent },
+  //     { path: 'recuperarContrasenia', component: ContraseniaPublicComponent },
+  //     { path: 'graciasContrasenia', component: ContraseniaGraciasComponent},
+  //     { path: 'elegirPlan', component: SelectPLanComponent },
+  //   ]
+  // },
+
+  { path: '', loadChildren: () => import('./init/init.module').then( m => m.InitModule) },
+
   { path: 'tienda/:id', component: NegocioComponent,
     children: [
       { path: '', component: ContentNegocioComponent },
       { path: 'item/:id', component: DetalleItemComponent },
     ]
   },
-  // {
-  //   path: 'admin', component: AdminComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin},
-  //   children: [
-  //     { path: '', component: DetalleNegocioComponent },
-  //     { path: 'contrasenia', component: ContraseniaComponent },
-  //     { path: 'plan', component: PlanComponent },
-  //     { path: 'actualizarDatos', component: ActualizarDatosComponent },
-  //     { path: 'elegirPlan', component: SelectPLanComponent },
-  //     { path: 'graciasPlan', component: GraciasPlanComponent },
-  //     { path: 'pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
-  //     { path: 'pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
-  //     { path: 'productos', component: ListaItemsComponent},
-  //     { path: 'configuracion', component: ConfiguracionComponent },
-  //     { path: ':id', component: DetalleNegocioComponent, children: [
-  //       { path: 'productos', component: ListaItemsComponent},
-  //       { path: 'configuracion', component: ConfiguracionComponent },
-  //       { path: 'cuenta', component: CuentaComponent },
-  //     ] },
-  //   ]
-  // },
-
-
-
-
-  // {
-  //   path: 'admin', component: DetalleNegocioComponent, canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin},
-  //   children: [
-  //     { path: '', component: ListaItemsComponent },
-  //     { path: 'productos', component: ListaItemsComponent },
-  //     { path: 'productos/crearItem', component: CrearItemComponent },
-  //     { path: 'configuracion', component: ConfiguracionComponent },
-  //     { path: 'cuenta', component: CuentaComponent },
-  //     { path: 'cuenta/elegirPlan', component: SelectPLanComponent },
-  //     { path: 'cuenta/pagoExitoPlanMensual', component: PagoExitoPLanMensualComponent },
-  //     { path: 'cuenta/pagoExitoPlanAnual', component: PagoExitoPLanAnualComponent },
-  //   ]
-  // },
 
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then( m => m.AdminModule), canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
-
 
   {
     path: 'owner', component: ListaNegociosComponent, data: {
