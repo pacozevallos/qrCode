@@ -195,7 +195,7 @@ import { SafePipe } from './pipes/safe.pipe';
 		QRCodeModule,
 		DragDropModule,
 		ClipboardModule,
-		ColorChromeModule,
+		// ColorChromeModule,
 		TablerIconsAngularModule,
 		SwiperModule
 		// TablerIconsModule.pick(TablerIcons),
