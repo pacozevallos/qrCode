@@ -1,12 +1,23 @@
-<div class="container">
+<div class="container py-4 py-md-6 pb-md-9">
 
-	<p class="h1">Características</p>
+	<!-- <p class="h1">Características</p> -->
 
-	<div class="row gy-4 gy-md-6">
+	<div class="row justify-content-center mb-4 mb-md-7">
+		<div class="col-md-7">
+			<div class="text-center">
+				<p class="display-4">Tu tienda online simple y sencilla</p>
+				<p class="lead">¿Vendes algo? muéstrales a tus compradores tu catálogo de productos</p>
+			</div>
+			
+		</div>
+	
+	</div>
 
-		<div class="col-12" *ngFor="let item of caracteristicas">
+	<div class="row g-5 g-md-7">
 
-			<div class="row gx-3 gx-md-5 justify-content-center align-items-center">
+		<div class="col-12 col-md-6" *ngFor="let item of caracteristicas">
+
+			<div class="row gx-3 gx-md-4 align-items-md-center">
 
 				<div class="col-5 col-md-4">
 					<div class="">
@@ -14,10 +25,10 @@
 					</div>
 				</div>
 
-				<div class="col-7 col-md-5">
+				<div class="col-7 col-md-8">
 					<div>
-						<p class="h2 fw-normal">{{item.titulo}}</p>
-						<p class="lead text-muted">{{item.descripcion}}</p>
+						<p class="h5 fw-normal">{{item.titulo}}</p>
+						<p class="text-muted">{{item.descripcion}}</p>
 					</div>
 				</div>
 
