@@ -12,6 +12,9 @@ import { MaterialModule } from '../material.module';
 import { FormInitComponent } from './form-init/form-init.component';
 import { InicioComponent } from '../components/public/inicio/inicio.component';
 import { TablerIconsAngularModule } from '../tabler-icons-angular.module';
+import { FormRegistroComponent } from './form-registro/form-registro.component';
+import { MenuComponent } from './menu/menu.component';
+import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-condiciones.component';
 
 
 
@@ -25,6 +28,9 @@ import { TablerIconsAngularModule } from '../tabler-icons-angular.module';
     HeaderComponent,
 		FooterComponent,
     FormInitComponent,
+    FormRegistroComponent,
+    MenuComponent,
+    TerminosCondicionesComponent,
   ],
   imports: [
     CommonModule,

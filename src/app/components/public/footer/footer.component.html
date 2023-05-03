@@ -1,20 +1,12 @@
 <div class="bg-primary">
+
   <div class="container py-4 py-md-6">
+
     <div class="row pb-4 justify-content-between">
+
       <div class="col-md-4">
         <img class="logoQatu mb-3" src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/logoQatuWhite.svg?alt=media&token=d401f2d3-d066-4c8b-976a-55db443f19dd" alt="">
         <p class="small fw-light text-white opacity-50">Una marca de <a class="text-reset text-decoration-underline" href="https://faunalab.pe" target="blank">Fauna Lab</a> </p>
-        <!-- <div>
-          <a class="btn btn-outline-light btn-circle me-2" href="https://www.facebook.com/Eagles-Corredores-de-Seguros-SAC-100946348651663" target="blank">
-            <i-tabler name="brand-facebook"></i-tabler>
-          </a>
-          <a class="btn btn-outline-light btn-circle me-2" href="https://www.linkedin.com/company/eagles-corredores-de-seguros-sac" target="blank">
-            <i-tabler name="brand-linkedin"></i-tabler>
-          </a>
-          <a class="btn btn-outline-light btn-circle" href="https://instagram.com/seguros360.pe?utm_medium=copy_link" target="blank">
-            <i-tabler name="brand-instagram"></i-tabler>
-          </a>
-        </div> -->
       </div>
 
       <!-- <div class="d-flex flex-column col-md-4">
@@ -22,14 +14,23 @@
         <a class="text-white fw-light small mb-2" *ngFor="let legal of legales" [routerLink]="legal.url">{{legal.nombre}}</a>
       </div> -->
 
-      <div class="col-md-4">
+      <div class="col-md-4" *ngFor="let bloque of bloquesFooter">
+        <div>
+          <p class="lead text-white fw-light">{{bloque.title}}</p>
+          <div class="text-white d-flex flex-column fw-light">
+            <a class="text-reset mb-2" href="" *ngFor="let link of bloque.links">{{link.nombre}}</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-4">
         <p class="lead text-white fw-light">Contacto</p>
         <div class="text-white small d-flex flex-column fw-light">
           <a class="text-reset mb-2" href="tel:999905016">C. 999905016</a>
-          <!-- <a class="text-reset mb-2" href="mailto:pastor@taaripay.com" target="blank">pastor@taaripay.com</a> -->
           <a class="text-reset mb-2" href="https://goo.gl/maps/TWqeKsaGkwewZJCw8" target="blank">Wanchaq, Cusco - Perú</a>
         </div>
-      </div>
+      </div> -->
+
     </div>
 
     <!-- <hr>

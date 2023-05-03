@@ -1,0 +1,31 @@
+<div class="buttonClose">
+  <button class="btn btn-link btn-circle-xl" (click)="closeSidenav()">
+    <i-tabler class="text-primary" name="x" style="stroke-width: 2.5; stroke-linecap: square;"></i-tabler>
+  </button>
+</div>
+
+
+
+<div class="p-4 p-md-5 ">
+
+  <mat-nav-list>
+    <a mat-list-item [routerLink]="link.url" *ngFor="let link of links" (click)="closeSidenav()">
+      <span class="lead">{{link.nombre}}</span>
+    </a>
+  </mat-nav-list>
+
+  <mat-divider class="my-4 my-md-5"></mat-divider>
+
+  <div class="d-grid gap-2" *ngIf="!user">
+    <button class="btn btn-primary shadow-sm" (click)="goToRegistro()">Crea tu cuenta</button>
+    <button class="btn btn-light" (click)="goToLogin()">Ingresar</button>
+  </div>
+
+  <div class="d-flex flex-column text-center gap-3" *ngIf="user">
+    <p class="mb-0 me-2 fw-normal">Hola {{user.displayName || user.email}},</p>
+    <a class="btn btn-primary" routerLink="/admin" target="_blank">Ir a mi panel</a>
+    <button class="btn btn-light" (click)="signOut()">Cerrar sesión</button>
+  </div>
+
+
+</div>

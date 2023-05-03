@@ -7,6 +7,17 @@ export class DataService {
 
   constructor() { }
 
+  links = [
+    {
+      nombre: 'Características',
+      url: '/caracteristicas'
+    },
+    {
+      nombre: 'Precios',
+      url: '/precios'
+    },
+  ]
+
   tiposNegocio: string[] = [
     'Restaurante',
     'Hotelería',
@@ -87,42 +98,10 @@ export class DataService {
     },
   ];
 
+
   planes = [
     {
-      nombre: 'Plan Power',
-      subtitulo: '',
-      descuento: '-50%',
-      opciones: [
-        {
-          nombre: 'Mensual',
-          precio: 9.90,
-          selected: true,
-          description: 'al mes',
-          url: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c93808482584b4d01825cbd109e02ee'
-        },
-        {
-          nombre: 'Anual',
-          precio: 99,
-          selected: false,
-          description: 'al año',
-          url: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c93808482584b4d01825cc05d9f02ef'
-        },
-      ],
-      caracteristicas : [
-        'Productos ilimitados',
-        'Vende por WhatsApp',
-        'Personaliza tu negocio',
-        'Cambios en tiempo real',
-        'Comparte con código QR',
-        'Asistencia técnica para crear tu catálogo'
-      ],
-      nameButton: 'Plan Power',
-      urlButton: 'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-8K665214Y89547137MLSBCUQ'
-      // urlButton: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c93808481e5f3990181e9845f3b00fb'
-      // urlButton: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c938084822156eb0182380e3363071f'
-    },
-    {
-      nombre: 'Plan Free',
+      nombre: 'Free',
       subtitulo: 'Gratis siempre',
       descuento: '',
       caracteristicas : [
@@ -132,9 +111,44 @@ export class DataService {
         'Cambios en tiempo real',
         'Comparte con código QR',
       ],
-      nameButton: 'Lo quiero',
-      urlButton: '/admin'
+      nameButton: 'Empieza gratis',
+      urlButton: '/registro'
     },
+    {
+      nombre: 'Power',
+      subtitulo: '',
+      descuento: '-50%',
+      opciones: [
+        {
+          nombre: 'Mensual',
+          precio: 1.90,
+          periodo: 'mes',
+          selected: true,
+          
+          url: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c93808482584b4d01825cbd109e02ee'
+        },
+        {
+          nombre: 'Anual',
+          precio: 19.90,
+          periodo: 'año',
+          selected: false,
+          url: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c93808482584b4d01825cc05d9f02ef'
+        },
+      ],
+      caracteristicas : [
+        'Productos ilimitados',
+        'Vende por WhatsApp',
+        'Personaliza tu negocio',
+        'Cambios en tiempo real',
+        'Comparte con código QR',
+        'Asistencia técnica'
+      ],
+      nameButton: 'Plan Power',
+      urlButton: 'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-8K665214Y89547137MLSBCUQ'
+      // urlButton: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c93808481e5f3990181e9845f3b00fb'
+      // urlButton: 'https://www.mercadopago.com.pe/subscriptions/checkout?preapproval_plan_id=2c938084822156eb0182380e3363071f'
+    },
+ 
   ];
 
   paises = [

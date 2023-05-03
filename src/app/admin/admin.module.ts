@@ -58,7 +58,7 @@ import { AgregarRedesComponent } from '../components/admin/agregar-redes/agregar
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    EditorModule,
+    // EditorModule,
     QRCodeModule,
     ClipboardModule
   ],

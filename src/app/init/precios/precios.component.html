@@ -1,3 +1,145 @@
-<div class="container py-4 py-md-6 pb-md-9">
-  
+<div class="">
+
+
+	<div class="container pt-3 pb-7 pt-md-6 pb-md-9">
+
+		<div class="row gx-md-6">
+
+			<div class="col-md-4">
+
+				<div class="">
+
+					<p class="h1 fw-light">Tu tienda online al precio más bajo</p>
+					<p class="text-muted">Siempre puedes usar todas nuestras características de manera gratuita.</p>
+
+				</div>
+
+			</div>
+
+
+			<div class="col-md-8">
+
+				<div class="row gy-3 gx-md-4">
+
+					<!-- <div class="col-md-6">
+
+						<div class="bg-white rounded-3 p-4 p-md-5 border h-100">
+							<p class="lead">Free</p>
+							<p>
+								<span class="h2 me-1">USD 0,00</span>
+								<span class="h6">/ mes</span>
+							</p>
+							<div class="mb-3 mb-md-4">
+								<div *ngFor="let caracateristica of caracteristicasPlanFree" class="d-flex">
+									<span class="me-2">
+										<i-tabler name="check"></i-tabler>
+									</span>
+									<span class="small pt-1">{{caracateristica}}</span>
+								</div>
+							</div>
+
+							<div class="d-grid">
+								<button class="btn btn-outline-primary">Empieza gratis</button>
+							</div>
+						</div>
+
+					</div>
+
+
+
+
+
+					<div class="col-md-6">
+
+						<div class="bg-white border border-primary border-3 shadow rounded-3 p-4 p-md-5 h-100">
+							<p class="lead">Power</p>
+							<mat-radio-group color="primary">
+								<mat-radio-button class="me-3" *ngFor="let opcion of power.opciones" [checked]="opcion.selected"
+									(change)="radioChange($event)" [value]="opcion.nombre">{{opcion.nombre}}</mat-radio-button>
+							</mat-radio-group>
+
+							<div class="d-flex gap-2 mt-2" *ngFor="let opcion of power.opciones">
+								<p *ngIf="estado === opcion.nombre">
+									<span class="h2 me-1">USD {{opcion.precio | number:'1.2-2'}}</span>
+									<span class="h6">/ {{opcion.periodo}}</span>
+								</p>
+							</div>
+
+							<div class="d-flex flex-column gap-1 mb-3 mb-md-4">
+								<div *ngFor="let caracateristica of caracteristicasPlanPower" class="d-flex">
+									<span class="me-2">
+										<i-tabler name="check"></i-tabler>
+									</span>
+									<span class="small pt-1">{{caracateristica}}</span>
+								</div>
+							</div>
+
+							<div class="d-grid" *ngFor="let opcion of power.opciones">
+								<a class="btn btn-primary" [href]="opcion.url" target="_blank"
+									*ngIf="estado === opcion.nombre">{{opcion.nombre}}</a>
+							</div>
+
+						</div>
+
+					</div> -->
+
+
+
+
+					<div class="col-md-6" *ngFor="let plan of planes">
+
+						<div class="bg-white rounded p-4 p-md-5 h-100" [ngClass]=" plan.nombre === 'Power' ? 'border border-3 border-primary shadow' : 'border border-3' "   >
+	
+							<p class="h4 fw-normal mb-3">{{plan.nombre}}</p>
+	
+							<div>
+
+								<div class="mb-2">
+									<mat-radio-group class="" color="primary">
+										<mat-radio-button class="me-3" *ngFor="let opcion of plan.opciones" [checked]="opcion.selected"
+											(change)="radioChange($event)" [value]="opcion.nombre">{{opcion.nombre}}</mat-radio-button>
+									</mat-radio-group>
+								</div>
+								
+								<div class="d-flex gap-2" *ngFor="let opcion of plan.opciones">
+									<p *ngIf="estado === opcion.nombre">
+										<span class="h2 me-1">USD {{opcion.precio | number:'1.2-2'}}</span>
+										<span class="h6">/ {{opcion.periodo}}</span>
+									</p>
+								</div>
+
+							</div>
+
+							<div class="d-flex flex-column gap-1 mb-3 mb-md-4">
+								<div *ngFor="let caracateristica of plan.caracteristicas" class="d-flex">
+									<span class="me-2">
+										<i-tabler name="check" [ngClass]=" plan.nombre === 'Plan Power' ? 'text-success' : '' "></i-tabler>
+									</span>
+									<span class="small pt-1">{{caracateristica}}</span>
+								</div>
+							</div>
+	
+							<div class="d-grid">
+								<a [ngClass]=" plan.nombre === 'Power' ? 'btn btn-primary shadow' : 'btn btn-outline-dark' " [href]="goToUrl(plan.nombre)">{{plan.nameButton}}
+									<span *ngIf="plan.nombre === 'Power' ">
+										<span *ngFor="let opcion of plan.opciones">
+											<span *ngIf="estado === opcion.nombre ">{{opcion.nombre}} USD {{opcion.precio |
+												number:'1.2-2'}}</span>
+										</span>
+									</span>
+								</a>
+							</div>
+	
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+
+		</div>
+
+	</div>
+
 </div>

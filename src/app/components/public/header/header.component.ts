@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { SidenavService } from 'src/app/services/sidenav.service';
 
 @Component({
   selector: 'app-header',
@@ -22,10 +23,10 @@ export class HeaderComponent implements OnInit {
       nombre: 'Precios',
       url: '/precios'
     },
-    {
-      nombre: 'Contacto',
-      url: '/contacto'
-    },
+    // {
+    //   nombre: 'Contacto',
+    //   url: '/contacto'
+    // },
 
   ]
 
@@ -45,13 +46,18 @@ export class HeaderComponent implements OnInit {
   constructor(
     public auth: AuthService,
     public afAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private sidenav: SidenavService
   ) { }
 
   ngOnInit(): void {
     this.afAuth.authState.subscribe( user => {
       this.user = user;
     });
+  }
+
+  openSidenav() {
+    this.sidenav.toggle();
   }
 
   goToAdmin() {

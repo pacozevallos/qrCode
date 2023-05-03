@@ -1,0 +1,57 @@
+<div>
+
+  <form [formGroup]="formRegistro" (ngSubmit)="onSubmit()" novalidate class="row gx-2 gy-1">    
+
+    <mat-form-field appearance="fill" class="col-12">
+      <mat-label>Nombre de tu tienda</mat-label>
+      <input matInput type="text" formControlName="nombreNegocio">
+      <mat-hint>{{hrefCurrent}}/tienda/{{negocioId}}</mat-hint>
+      <mat-error *ngIf="errorNombreNegocio()">{{errorNombreNegocio()}}</mat-error>
+    </mat-form-field>
+
+    <!-- <mat-form-field appearance="fill" class="col-8">
+      <mat-label>País</mat-label>
+      <mat-select formControlName="pais">
+        <mat-option *ngFor="let pais of paises" [value]="pais.nombre">{{pais.nombre}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="errorPais()">{{errorPais()}}</mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="col-4">
+      <mat-label>Moneda</mat-label>
+      <mat-select formControlName="moneda">
+        <mat-option *ngFor="let pais of paises" [value]="pais.moneda">{{pais.moneda}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="errorPais()">{{errorPais()}}</mat-error>
+    </mat-form-field> -->
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput placeholder="Ingresa tu E-mail" formControlName="email">
+      <mat-error *ngIf="formRegistro.controls['email'].invalid">{{ errorEmail() }}</mat-error>
+      <i-tabler matSuffix name="mail" class="text-muted me-2"></i-tabler>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Contraseña</mat-label>
+      <input type="password" matInput formControlName="password" placeholder="Crea una contraseña" [type]="hide ? 'password' : 'text'" autocomplete="username">
+      <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon class="text-muted">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="formRegistro.controls['password'].invalid">{{ errorPassword() }}</mat-error>
+      <mat-hint align="end">Mínimo 6 caracteres.</mat-hint>
+    </mat-form-field>
+
+    <div class="d-grid mt-3">
+      <button type="submit" class="btn btn-primary shadow">
+        <span class="myColorSpinnerWhite d-flex justify-content-center" *ngIf="loading">
+          <mat-spinner class="text-center" [diameter]="24" class="float-left mr-2"></mat-spinner>
+        </span>
+        <span *ngIf="!loading">Registrarme</span>
+      </button>
+    </div>
+
+  </form>
+
+</div>

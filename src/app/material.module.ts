@@ -21,8 +21,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatBottomSheetModule,  MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatListModule} from '@angular/material/list';
 
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 
@@ -47,8 +49,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatBottomSheetModule,
     MatSnackBarModule,
     // MaterialFileInputModule,
-    MatTabsModule
-  ],
+    MatTabsModule,
+    MatListModule
+,  ],
   exports: [
     MatButtonModule,
     MatDialogModule,
@@ -68,7 +71,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatSnackBarModule,
     // MaterialFileInputModule,
     MatTabsModule,
-    DragDropModule
+    DragDropModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [
     { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },

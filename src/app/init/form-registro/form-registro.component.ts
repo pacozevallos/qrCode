@@ -9,11 +9,11 @@ import { DataService } from 'src/app/services/data.service';
 import { IdValidatorService } from 'src/app/services/id-validator.service';
 
 @Component({
-  selector: 'app-registro',
-  templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.scss']
+  selector: 'app-form-registro',
+  templateUrl: './form-registro.component.html',
+  styleUrls: ['./form-registro.component.scss']
 })
-export class RegistroComponent implements OnInit {
+export class FormRegistroComponent {
 
   formRegistro: FormGroup;
   hide = true;
@@ -152,7 +152,5 @@ export class RegistroComponent implements OnInit {
     return this.formRegistro.controls.image.hasError('required') ? 'La imagen es necesaria' :
     this.formRegistro.controls.image.hasError('maxContentSize') ? 'El peso no debe exceder los 5 MB' : '';
   }
-
-
 
 }

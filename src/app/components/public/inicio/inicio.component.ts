@@ -18,9 +18,9 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {
     this.caracteristicas = this.ds.caracteristicas;
-    this.afs.collection('negocios').doc('alsa').valueChanges().subscribe( res => {
-      console.log(res);
-    });
+    // this.afs.collection('negocios').doc('alsa').valueChanges().subscribe( res => {
+    //   console.log(res);
+    // });
   }
 
 }

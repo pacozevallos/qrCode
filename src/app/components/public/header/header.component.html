@@ -1,4 +1,4 @@
-<div class="shadow-sm">
+<div class="bg-white shadow-sm">
 
   <div class="container py-3 py-md-4 d-flex justify-content-between align-items-center">
 
@@ -7,36 +7,41 @@
         alt="">
     </a>
 
-    <div class="d-flex">
+    <div class="d-none d-md-block">
+      <a class="btn btn-link" [routerLink]="link.url" *ngFor="let link of links">{{link.nombre}}</a>
+    </div>
 
-      <div>
-        <a class="btn btn-link" [routerLink]="link.url" *ngFor="let link of links">{{link.nombre}}</a>
-      </div>
+    <div class="">
 
-      <div class="" *ngIf="!user">
-        <div class="d-none d-md-block">
-          <a class="btn btn-outline-dark" routerLink="/login">Ingresar</a>
-          <a class="btn btn-primary ms-2" routerLink="/registro">Registro</a>
+      <div class="d-md-flex d-none align-items-center">
+
+        <div class="d-flex gap-2" *ngIf="!user">
+          <a class="btn btn-outline-primary" routerLink="/login">Ingresar</a>
+          <a class="btn btn-primary shadow" routerLink="/registro">Crea tu cuenta</a>
         </div>
-        <div class="d-block d-md-none">
-          <a class="btn btn-outline-dark btn-sm" routerLink="/login">Ingresar</a>
-          <a class="btn btn-primary btn-sm ms-2" routerLink="/registro">Registro</a>
-        </div>
-      </div>
 
-      <div *ngIf="user">
-        <div class="d-flex align-items-center">
-          <p class="mb-0 me-2">{{user.displayName || user.email}}</p>
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <i-tabler name="menu"></i-tabler>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="item.function()" *ngFor="let item of linksAdmin">
-              <i-tabler [name]="item.icon" class="me-2 text-muted"></i-tabler>
-              <span>{{item.nombre}}</span>
+        <div class="d-flex gap-1 align-items-center" *ngIf="user">
+            <p class="mb-0 me-2 fw-normal">{{user.displayName || user.email}}</p>
+            <a class="btn btn-sm btn-primary" routerLink="/admin" target="_blank">Ir a mi panel</a>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <i-tabler name="dots-vertical"></i-tabler>
             </button>
-          </mat-menu>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="item.function()" *ngFor="let item of linksAdmin">
+                <i-tabler [name]="item.icon" class="me-2 text-muted"></i-tabler>
+                <span>{{item.nombre}}</span>
+              </button>
+            </mat-menu>
         </div>
+
+      </div>
+
+      <div class="d-block d-md-none">
+
+        <button class="btn btn-link btn-circle-xl" (click)="openSidenav()">
+          <i-tabler name="menu"></i-tabler>
+        </button>
+
       </div>
 
 
