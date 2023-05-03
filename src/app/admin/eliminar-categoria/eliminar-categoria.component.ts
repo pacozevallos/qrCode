@@ -19,6 +19,7 @@ export class EliminarCategoriaComponent {
   loading = true;
   loadingButton = false;
 
+  
   constructor(
     public dialogRef: MatDialogRef<EliminarCategoriaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,

@@ -56,7 +56,7 @@
         
          
 
-          <mat-form-field appearance="fill" class="w-100">
+          <mat-form-field appearance="fill" class="col-12">
             <mat-label>Email</mat-label>
             <input type="email" matInput placeholder="Ingresa tu E-mail" formControlName="email">
             <mat-error *ngIf="formRegistro.controls['email'].invalid">{{ errorEmail() }}</mat-error>
@@ -64,7 +64,7 @@
             <i-tabler matSuffix name="mail" class="text-muted me-2"></i-tabler>
           </mat-form-field>
 
-          <mat-form-field appearance="fill" class="w-100">
+          <mat-form-field appearance="fill" class="col-12">
             <mat-label>Contraseña</mat-label>
             <input type="password" matInput formControlName="password" placeholder="Crea una contraseña" [type]="hide ? 'password' : 'text'" autocomplete="username">
             <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
@@ -92,25 +92,36 @@
           </mat-form-field> -->
 
 
+          <div class="col-12 mt-3">
+            <mat-checkbox formControlName="aceptaTerminosCondiciones">
+              <span class="small text-muted">He leído y acepto los <button type="button" class="myButtonCheckboxModal text-primary" (click)="openModalTerminos()"><u>términos del servicio</u></button> y la <button type="button" class="myButtonCheckboxModal text-primary" (click)="openModalPolitica()"><u>política de privacidad</u></button></span>
+             
+            </mat-checkbox>
+
+            <div class="mt-1" style="height: 20px;">
+              <mat-error class="extraSmall fw-normal" *ngIf="errorAceptaTerminosCondiciones()">{{errorAceptaTerminosCondiciones()}}</mat-error>
+            </div>
+
+          </div>
 
 
 
 
-          <div class="d-grid mt-3">
+          <div class="d-grid mt-2">
             <button type="submit" class="btn btn-primary shadow">
               <span class="myColorSpinnerWhite d-flex justify-content-center" *ngIf="loading">
                 <mat-spinner class="text-center" [diameter]="24" class="float-left mr-2"></mat-spinner>
               </span>
-              <span *ngIf="!loading">Registrarme</span>
+              <span *ngIf="!loading">Crear cuenta</span>
             </button>
           </div>
 
         </form>
 
-        <div class="mt-3">
+        <!-- <div class="mt-3">
           <p class="extraSmall text-muted mb-0">Al hacer clic en "Regístrarme" está aceptando los <u><a class=""
                 [routerLink]="['/terminosCondiciones']">términos y condiciones</a></u> del servicio.</p>
-        </div>
+        </div> -->
 
       </div>
 

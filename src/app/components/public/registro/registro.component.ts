@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar as MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
+import { ModalPoliticaComponent } from 'src/app/init/modal-politica/modal-politica.component';
+import { ModalTerminosComponent } from 'src/app/init/modal-terminos/modal-terminos.component';
+import { TerminosCondicionesComponent } from 'src/app/init/terminos-condiciones/terminos-condiciones.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 import { IdValidatorService } from 'src/app/services/id-validator.service';
@@ -29,7 +33,8 @@ export class RegistroComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private ds: DataService,
-    private idValidator: IdValidatorService
+    private idValidator: IdValidatorService,
+    private matDialog: MatDialog,
 
   ) { }
 
@@ -49,7 +54,8 @@ export class RegistroComponent implements OnInit {
       // numeroWhatsApp: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
       imageLogo: [''],
       color: ['#1456D8', Validators.required],
-      fechaCreacion: [Timestamp.now()]
+      fechaCreacion: [Timestamp.now()],
+      aceptaTerminosCondiciones: [false, Validators.requiredTrue],
     });
 
     this.formRegistro.get('nombreNegocio').valueChanges.subscribe( res => {
@@ -109,6 +115,19 @@ export class RegistroComponent implements OnInit {
     });
   }
 
+
+  openModalTerminos() {
+    this.matDialog.open(ModalTerminosComponent, {
+      autoFocus: false
+    });
+  }
+
+  openModalPolitica() {
+    this.matDialog.open(ModalPoliticaComponent, {
+      autoFocus: false
+    });
+  }
+
   errorNombre() {
     return this.formRegistro.controls.nombre.hasError('required') ? 'El nombre es necesario.' : '';
   }
@@ -151,6 +170,11 @@ export class RegistroComponent implements OnInit {
   errorImagen() {
     return this.formRegistro.controls.image.hasError('required') ? 'La imagen es necesaria' :
     this.formRegistro.controls.image.hasError('maxContentSize') ? 'El peso no debe exceder los 5 MB' : '';
+  }
+
+  errorAceptaTerminosCondiciones() {
+    return this.formRegistro.controls.aceptaTerminosCondiciones.hasError('required') &&
+    this.formRegistro.controls.aceptaTerminosCondiciones.touched ? 'Es necesario aceptar los términos' : '';
   }
 
 

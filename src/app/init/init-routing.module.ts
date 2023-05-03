@@ -11,6 +11,9 @@ import { SelectPLanComponent } from '../components/admin/select-plan/select-plan
 import { CaracteristicasComponent } from './caracteristicas/caracteristicas.component';
 import { PreciosComponent } from './precios/precios.component';
 import { ContactoComponent } from './contacto/contacto.component';
+import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-condiciones.component';
+import { PageTerminosComponent } from './page-terminos/page-terminos.component';
+import { PagePoliticaComponent } from './page-politica/page-politica.component';
 
 
 const routes: Routes = [
@@ -26,6 +29,8 @@ const routes: Routes = [
       { path: 'recuperarContrasenia', component: ContraseniaPublicComponent },
       { path: 'graciasContrasenia', component: ContraseniaGraciasComponent},
       { path: 'elegirPlan', component: SelectPLanComponent },
+      { path: 'terminosCondiciones', component: PageTerminosComponent },
+      { path: 'politicaPrivacidad', component: PagePoliticaComponent },
     ]
   },
 ]

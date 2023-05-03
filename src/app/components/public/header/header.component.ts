@@ -31,15 +31,15 @@ export class HeaderComponent implements OnInit {
   ]
 
   linksAdmin = [
-    {
-      nombre: 'Ir a mi panel',
-      icon: 'settings',
-      function: () => this.goToAdmin()
-    },
+    // {
+    //   nombre: 'Ir a mi panel',
+    //   icon: 'settings',
+    //   function: () => this.goToAdmin()
+    // },
     {
       nombre: 'Cerrar sesión',
       icon: 'power',
-      function: () => this.logout()
+      function: () => this.signOut()
     }
   ];
 
@@ -78,6 +78,11 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.auth.signOut();
+  }
+
+  signOut() {
+    this.afAuth.signOut().then(() => {
+    });
   }
 
 }

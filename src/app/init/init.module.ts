@@ -15,6 +15,11 @@ import { TablerIconsAngularModule } from '../tabler-icons-angular.module';
 import { FormRegistroComponent } from './form-registro/form-registro.component';
 import { MenuComponent } from './menu/menu.component';
 import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-condiciones.component';
+import { PageTerminosComponent } from './page-terminos/page-terminos.component';
+import { ModalTerminosComponent } from './modal-terminos/modal-terminos.component';
+import { PoliticaPrivacidadComponent } from './politica-privacidad/politica-privacidad.component';
+import { PagePoliticaComponent } from './page-politica/page-politica.component';
+import { ModalPoliticaComponent } from './modal-politica/modal-politica.component';
 
 
 
@@ -31,6 +36,11 @@ import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-co
     FormRegistroComponent,
     MenuComponent,
     TerminosCondicionesComponent,
+    PageTerminosComponent,
+    ModalTerminosComponent,
+    PoliticaPrivacidadComponent,
+    PagePoliticaComponent,
+    ModalPoliticaComponent,
   ],
   imports: [
     CommonModule,

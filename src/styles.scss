@@ -110,6 +110,10 @@ a, .btn-link {
   text-decoration: none;
 }
 
+// a:hover {
+//   text-decoration: underline;
+// }
+
 *:focus {
   // outline: 0px !important;
   box-shadow: none !important;
@@ -519,7 +523,10 @@ table {
 .mat-mdc-dialog-container .mdc-dialog__surface {
   position: relative !important;
   border-radius: $border-radius-lg !important;
-  padding: 2.35rem !important;
+  padding: 3rem !important;
+  @include media-breakpoint-only(xs) {
+    padding: 1.35rem !important;
+  }
 }
 
 .dialogSmall {
@@ -1093,4 +1100,74 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 	@include media-breakpoint-only(xs) {
 		width: 100% !important;
 	}
+}
+
+.terminos {
+
+  h2 {
+    font-size: 1.85rem;
+    @include media-breakpoint-only(xs) {
+      font-size: 1.55rem;
+    }
+  }
+
+  h5 {
+    font-size: 1.2rem;
+    @include media-breakpoint-only(xs) {
+      font-size: 1rem;
+    }
+  }
+  p, li {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    // line-height: 140%;
+    @include media-breakpoint-only(xs) {
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+  // ul {
+  //   li {
+  //     font-size: 1rem;
+  //     margin-bottom: 0.75rem;
+  //     @include media-breakpoint-only(xs) {
+  //       font-size: 0.85rem;
+  //       margin-bottom: 0.5rem;
+  //     }
+     
+  //   }
+  // }
+}
+
+// .terminosCheckbox {
+//   .mat-checkbox-label {
+//     font-size: 0.75rem;
+//     line-height: 120% !important;
+//   }
+// }
+
+.myButtonCheckboxModal {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  white-space: normal;
+  word-break: normal;
+}
+
+.mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+.mat-checkbox-inner-container {
+  margin-top: 0px !important;
+}
+
+
+.mdc-dialog__content {
+  color: inherit !important;
+  font-weight: inherit !important;
+  padding: 0px !important;
+  line-height: inherit !important;
 }

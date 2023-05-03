@@ -28,6 +28,31 @@ export class FooterComponent implements OnInit {
 
   bloquesFooter: any = [
     {
+      title: 'Qatu',
+      links: [
+        {
+          nombre: 'Inicio',
+          url: '/'
+        },
+        {
+          nombre: 'Caracteristicas',
+          url: '/caracteristicas'
+        },
+        {
+          nombre: 'Precios',
+          url: '/precios'
+        },
+        {
+          nombre: 'Ingresar',
+          url: '/login'
+        },
+        {
+          nombre: 'Crear cuenta',
+          url: '/registro'
+        },
+      ]
+    },
+    {
       title: 'Legales',
       links: [
         {
@@ -41,15 +66,11 @@ export class FooterComponent implements OnInit {
       ]
     },
     {
-      title: 'Contacto',
+      title: 'Soporte',
       links: [
         {
-          nombre: '999 905 016',
-          href: 'tel:999905016'
-        },
-        {
-          nombre: 'Wanchaq, Cusco - Perú',
-          href: 'https://goo.gl/maps/TWqeKsaGkwewZJCw8'
+          nombre: 'owner@qatu.app',
+          href: 'mailto:owner@qatu.app'
         },
       ]
     },
