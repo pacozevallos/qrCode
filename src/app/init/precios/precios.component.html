@@ -119,15 +119,28 @@
 								</div>
 							</div>
 	
+
 							<div class="d-grid">
-								<a [ngClass]=" plan.nombre === 'Power' ? 'btn btn-primary shadow' : 'btn btn-outline-dark' " [href]="goToUrl(plan.nombre)">{{plan.nameButton}}
+
+								<!-- <a [ngClass]=" plan.nombre === 'Power' ? 'btn btn-primary shadow' : 'btn btn-outline-dark' " [href]="goToUrl(plan.nombre)">{{plan.nameButton}}
 									<span *ngIf="plan.nombre === 'Power' ">
 										<span *ngFor="let opcion of plan.opciones">
 											<span *ngIf="estado === opcion.nombre ">{{opcion.nombre}} USD {{opcion.precio |
 												number:'1.2-2'}}</span>
 										</span>
 									</span>
+								</a> -->
+
+								<a class="btn btn-outline-dark" *ngIf="plan.nombre === 'Free' " routerLink="/registro">Empieza gratis</a>
+
+								<a class="btn btn-primary shadow" *ngIf="plan.nombre === 'Power' " [href]="goToUrl(plan.nombre)" target="_blank">Plan
+									<span *ngFor="let opcion of plan.opciones">
+										<span *ngIf="estado === opcion.nombre ">{{opcion.nombre}} USD {{opcion.precio |
+											number:'1.2-2'}}</span>
+									</span>
 								</a>
+								
+
 							</div>
 	
 						</div>
