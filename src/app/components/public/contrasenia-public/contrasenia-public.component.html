@@ -1,42 +1,48 @@
-<div class="container py-3">
+<div class="pt-2">
 
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb extraSmall">
-      <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
-      <li class="breadcrumb-item active">Recuperar contraseña</li>
-    </ol>
-  </nav>
+  <div class="buttonClose">
+    <button mat-icon-button (click)="cancelar()">
+      <i-tabler class="text-primary" name="x"></i-tabler>
+    </button>
+  </div>
 
-  <div class="border rounded p-3 p-md-4 mb-3" >
-    <p class="h2">Recuperar contraseña</p>
-    <p class="my-4">Te enviaremos un enlace a tu correo con las instrucciones para actualizar tu contraseña.</p>
 
   
-    <div class="row">
-      <mat-form-field appearance="outline" class="col-md-5">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" placeholder="Ingresa tu email" [formControl]="email">
-      </mat-form-field>
-    </div>
 
-    <div class="buttonLiquid">
-      <div class="d-grid">
-        <button class="btn btn-primary" (click)="cambiarContrasenia()">
-          <span class="myColorSpinnerWhite d-flex justify-content-center" *ngIf="loading">
-            <mat-spinner class="text-center" [diameter]="24" class="float-left mr-2"></mat-spinner>
-          </span>
-          <span *ngIf="!loading">Enviar instrucciones</span>
-        </button>
-      </div>
-      
-    </div>
 
+  <div class="" *ngIf="form">
+
+    <p class="lead">Recuperar contraseña</p>
+    <p class="small text-muted">Te enviaremos un enlace a tu correo con las instrucciones para actualizar tu contraseña.</p>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="Ingresa tu email" [formControl]="email">
+    </mat-form-field>
+
+    <div class="d-grid">
+      <button class="btn btn-primary" (click)="onSubmit()">
+        <span class="spinnerWhite d-flex justify-content-center" *ngIf="loading">
+          <mat-spinner class="text-center" [diameter]="24" class="float-left mr-2"></mat-spinner>
+        </span>
+        <span *ngIf="!loading">Enviar instrucciones</span>
+      </button>
+    </div>
 
   </div>
 
-  <!-- <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="aviso">
-    Hemos enviado las instrucciones a tu correo. Recuerda revisar tu bandeja de SPAM.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div> -->
+
+  <div class="text-center" *ngIf="avisoSuccess">
+    <i-tabler class="text-success mb-2" name="circle-check" style="width: 72px; height: 72px; stroke-width: 0.75;"></i-tabler>
+    <p class="small text-success-emphasis">Se enviaron las inctrucciones a <span class="fw-bold">{{email.value}}</span>. No olvides revisar tu carpeta de SPAM.</p>
+  </div>
+
+  <div class="text-center" *ngIf="avisoError">
+    <i-tabler class="text-danger mb-2" name="exclamation-circle" style="width: 72px; height: 72px; stroke-width: 0.75;"></i-tabler>
+    <p class="small text-danger-emphasis">Ocurrió un error, por favor inténtalo nuevamente.</p>
+  </div>
+
+  
+    
 
 </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
+import { ContraseniaPublicComponent } from '../contrasenia-public/contrasenia-public.component';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: UntypedFormBuilder,
     public auth: AuthService,
+    private matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -51,6 +54,13 @@ export class LoginComponent implements OnInit {
         this.validateAllFormFields(control);
       }
     });
+  }
+
+  openModalRecuperarContrasenia() {
+    this.matDialog.open(ContraseniaPublicComponent, {
+      panelClass: 'dialogSmall',
+      autoFocus: false
+    })
   }
 
   errorEmail() {

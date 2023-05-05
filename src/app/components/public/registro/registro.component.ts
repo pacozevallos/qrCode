@@ -118,13 +118,15 @@ export class RegistroComponent implements OnInit {
 
   openModalTerminos() {
     this.matDialog.open(ModalTerminosComponent, {
-      autoFocus: false
+      autoFocus: false,
+      panelClass: 'dialogLarge'
     });
   }
 
   openModalPolitica() {
     this.matDialog.open(ModalPoliticaComponent, {
-      autoFocus: false
+      autoFocus: false,
+      panelClass: 'dialogLarge'
     });
   }
 

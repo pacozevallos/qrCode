@@ -520,19 +520,30 @@ table {
   }
 }
 
-.mat-mdc-dialog-container .mdc-dialog__surface {
+
+.mdc-dialog__surface {
   position: relative !important;
   border-radius: $border-radius-lg !important;
-  padding: 3rem !important;
-  @include media-breakpoint-only(xs) {
-    padding: 1.35rem !important;
+}
+
+.dialogLarge {
+  .mdc-dialog__surface {
+    padding: 3rem !important;
+    @include media-breakpoint-only(xs) {
+      width: initial !important;
+      padding: 2rem !important;
+    }
   }
 }
 
 .dialogSmall {
-  width: 360px !important;
-  @include media-breakpoint-only(xs) {
-    width: initial !important;
+  .mdc-dialog__surface {
+    width: 360px !important;
+    padding: 3rem !important;
+    @include media-breakpoint-only(xs) {
+      width: initial !important;
+      padding: 2rem !important;
+    }
   }
 }
 

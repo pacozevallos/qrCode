@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 // import firebase from 'firebase/app';
 import * as firebase from 'firebase/compat/app';
@@ -25,7 +25,7 @@ import { Timestamp } from '@angular/fire/firestore';
 })
 export class AgregarNegocioComponent implements OnInit {
 
-  formNegocio: UntypedFormGroup;
+  formNegocio: FormGroup;
   idNegocio: string;
   loading = false;
   negocioRef: any;
@@ -51,7 +51,7 @@ export class AgregarNegocioComponent implements OnInit {
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<AgregarNegocioComponent>,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
     private router: Router,
@@ -168,7 +168,7 @@ export class AgregarNegocioComponent implements OnInit {
   }
 
   agregarRed() {
-    (this.formNegocio.controls.redes as UntypedFormArray).push(
+    (this.formNegocio.controls.redes as FormArray).push(
       this.fb.group({
         nombre: [''],
         url: [''],
@@ -178,7 +178,7 @@ export class AgregarNegocioComponent implements OnInit {
   }
 
   eliminarRed(index: number): void {
-    (this.formNegocio.controls.redes as UntypedFormArray).removeAt(index);
+    (this.formNegocio.controls.redes as FormArray).removeAt(index);
   }
 
   saveImageQrCode() {
@@ -205,12 +205,12 @@ export class AgregarNegocioComponent implements OnInit {
   //   }, 'image/png');
   // }
 
-  validateAllFormFields(formGroup: UntypedFormGroup) {
+  validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof UntypedFormControl) {
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof UntypedFormGroup) {
+      } else if (control instanceof FormGroup) {
         this.validateAllFormFields(control);
       }
     });
