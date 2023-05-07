@@ -10,6 +10,7 @@ import { ModalTerminosComponent } from 'src/app/init/modal-terminos/modal-termin
 import { TerminosCondicionesComponent } from 'src/app/init/terminos-condiciones/terminos-condiciones.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
+import { EmailValidatorService } from 'src/app/services/email-validator.service';
 import { IdValidatorService } from 'src/app/services/id-validator.service';
 
 @Component({
@@ -35,7 +36,7 @@ export class RegistroComponent implements OnInit {
     private ds: DataService,
     private idValidator: IdValidatorService,
     private matDialog: MatDialog,
-
+    private emailValidator: EmailValidatorService,
   ) { }
 
   ngOnInit(): void {
@@ -44,7 +45,7 @@ export class RegistroComponent implements OnInit {
 
     this.formRegistro = this.fb.group ({
       // nombre: ['', Validators.required],
-      email: [ '', [Validators.required, Validators.email] ],
+      email: [ '', [Validators.required, Validators.email], [this.emailValidator] ],
       password: [ '', [Validators.required, Validators.minLength(6)]],
       nombreNegocio: ['', [Validators.required]],
       id: ['', [Validators.required], [this.idValidator]],
@@ -136,7 +137,9 @@ export class RegistroComponent implements OnInit {
 
   errorEmail() {
     return this.formRegistro.controls.email.hasError('required') ? 'El email es necesario.' :
-    this.formRegistro.controls.email.hasError('email') ? 'No es un correo válido' : '';
+    this.formRegistro.controls.email.hasError('email') ? 'No es un correo válido' : 
+    this.formRegistro.controls.email.invalid ? 'Este email ya esá en uso' : '';
+    '';
   }
   errorPassword() {
     return this.formRegistro.controls.password.hasError('required') ? 'La contraseña es necesaria.' :
@@ -149,10 +152,9 @@ export class RegistroComponent implements OnInit {
 
   errorId() {
     return this.formRegistro.controls.id.hasError('required') ? 'Ingresa una url' :
-    this.formRegistro.controls.id.invalid ? 'Esta url ya está tomada' : 
-    // this.formRegistro.controls.id.invalid ? this.negocioId = `${this.formRegistro.value.id}2` : 
-    '';
+    this.formRegistro.controls.id.invalid ? 'Esta url ya está tomada' : '';
   }
+
 
   changeIdNegocio() {
     this.formRegistro.controls.id.invalid ? this.negocioId = 'xxx' : 'zzz'

@@ -18,6 +18,7 @@ export class ContraseniaPublicComponent implements OnInit {
   avisoSuccess = false;
   avisoError = false;
   email = new FormControl('', Validators.required);
+  errorFirebase: any;
 
   constructor(
     public auth : AuthService,
@@ -55,33 +56,26 @@ export class ContraseniaPublicComponent implements OnInit {
     })
     .catch((error) => {
       console.log(error);
+      this.errorFirebase = error;
       this.avisoError = true;
       this.form = false;
+      
     });
   }
 
   validateAllFormFields(email: FormControl) {
-
-    // Object.keys(formGroup.controls).forEach(field => {
-    //   const control = formGroup.get(field);
-    //   if (control instanceof FormControl) {
-    //     control.markAsTouched({ onlySelf: true });
-    //   } else if (control instanceof FormGroup) {
-    //     this.validateAllFormFields(control);
-    //   }
-    // });
-
     const control = email;
-
     if (control instanceof FormControl) {
       control.markAsTouched({ onlySelf: true });
     }
-
-
   }
 
   cancelar() {
     this.dialogRef.close();
+  }
+
+  errorEmail() {
+    return this.email.hasError('required') ? 'Ingresa tu email' : '';
   }
 
 }

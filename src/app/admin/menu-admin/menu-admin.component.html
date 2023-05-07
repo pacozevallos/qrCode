@@ -1,0 +1,12 @@
+<div class="bg-dark h-100">
+
+  <mat-nav-list>
+    <a mat-list-item class="ps-md-4 pe-md-6" [routerLink]="link.url" *ngFor="let link of linksAdmin"  [activated]="rla.isActive" routerLinkActive="bg-light bg-opacity-10" #rla="routerLinkActive">
+      <div [ngClass]=" rla.isActive ? 'text-white' : 'text-white-50' ">
+        <i-tabler class="me-2" [name]="link.icon" style="stroke-width: 0.95;"></i-tabler>
+        <span class="fw-light" >{{link.nombre}}</span>
+      </div>
+    </a>
+  </mat-nav-list>
+
+</div>

@@ -1,5 +1,5 @@
 
-<div *ngIf="negocio">
+<!-- <div *ngIf="negocio">
   <app-header-admin [negocio]="negocio"></app-header-admin>
 </div>
 
@@ -11,10 +11,30 @@
 </div>
 
 
-<div #tabPanel class="bg-light">
+<div #tabPanel class="">
   <div class="container py-4 py-md-5 pb-6 pb-md-9">
     <router-outlet></router-outlet> 
   </div>
 </div>
 
-<app-footer-admin></app-footer-admin>
+<app-footer-admin></app-footer-admin> -->
+
+
+
+
+
+
+<mat-drawer-container>
+
+  <mat-drawer class="position-fixed" #drawer [fixedInViewport]="true" mode="side" opened>
+    <app-menu-admin [user]="user"></app-menu-admin>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <!-- <app-header></app-header> -->
+    <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
+    <router-outlet></router-outlet>
+    <!-- <app-footer></app-footer> -->
+  </mat-drawer-content>
+
+</mat-drawer-container>

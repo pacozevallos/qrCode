@@ -29,6 +29,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { ShareAdminComponent } from '../components/admin/share-admin/share-admin.component';
 import { ConfigurarNegocioComponent } from '../components/admin/configurar-negocio/configurar-negocio.component';
 import { AgregarRedesComponent } from '../components/admin/agregar-redes/agregar-redes.component';
+import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 
 
 
@@ -50,6 +51,7 @@ import { AgregarRedesComponent } from '../components/admin/agregar-redes/agregar
     ShareAdminComponent,
     ConfigurarNegocioComponent,
     AgregarRedesComponent,
+    MenuAdminComponent,
   ],
   imports: [
     CommonModule,

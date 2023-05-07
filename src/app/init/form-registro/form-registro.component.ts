@@ -133,6 +133,7 @@ export class FormRegistroComponent {
     '';
   }
 
+  
   changeIdNegocio() {
     this.formRegistro.controls.id.invalid ? this.negocioId = 'xxx' : 'zzz'
   }

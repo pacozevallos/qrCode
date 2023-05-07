@@ -3,27 +3,25 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
-import { Negocio } from '../classes/negocio';
+import { User } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
 })
-export class IdValidatorService implements AsyncValidator {
-
-  private existingUsernames = ['Batman', 'Superman', 'Joker', 'Luthor'];
+export class EmailValidatorService {
   
-  idsArray = [];
+  emailsArray = [];
 
   constructor(
     public afs: AngularFirestore
   ) {
-    this.afs.collection('negocios').valueChanges().subscribe( res => {
-      this.idsArray = res.map((fil: Negocio) => fil.id);
+    this.afs.collection('users').valueChanges().subscribe( res => {
+      this.emailsArray = res.map((fil: User) => fil.email);
     })
   }
 
   checkIfIdExists(value: string) {
-    return of(this.idsArray.some((a) => a === value)).pipe();
+    return of(this.emailsArray.some((a) => a === value)).pipe();
   }
 
   validate(control: AbstractControl): Observable<ValidationErrors> | null {
@@ -35,6 +33,5 @@ export class IdValidatorService implements AsyncValidator {
     );
   
   }
-
 
 }
