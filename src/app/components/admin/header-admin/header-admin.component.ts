@@ -51,7 +51,7 @@ export class HeaderAdminComponent implements OnInit {
     this.afAuth.authState.subscribe( user => {
       this.user = user;
     });
-    this.urlTienda = `${window.location.origin}/tienda/${this.negocio.id}`;
+    this.urlTienda = `${window.location.origin}/tienda/${this.negocio?.id}`;
   }
 
   goToCuenta() {

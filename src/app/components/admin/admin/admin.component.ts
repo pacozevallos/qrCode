@@ -35,6 +35,7 @@ export class AdminComponent implements OnInit {
 
   activeLink = this.links[0];
   user;
+  visible: boolean;
 
   constructor(
     private afs: AngularFirestore,
@@ -47,14 +48,17 @@ export class AdminComponent implements OnInit {
     // traer solo el negocio del usuario
     this.afAuth.authState.subscribe( user => {
       this.user = user;
-
       this.afs.collection('negocios').valueChanges().subscribe( res => {
         this.negocio = res.find( (find: Negocio) => find.autorId === this.user.uid );
       });
-
     });
 
+    this.visible = (window.innerWidth <= 400) ? false : true;
 
+  }
+
+  onResize(event: any) {
+    this.visible = (event.target.innerWidth <= 400) ? false : true
   }
 
 

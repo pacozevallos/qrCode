@@ -1,4 +1,11 @@
-<div class="bg-dark h-100">
+<div class="bg-dark h-100 py-3 py-md-4">
+
+  <div class="ps-md-4 pe-md-6">
+    <a routerLink="/admin">
+      <img src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/logoQatuColor.svg?alt=media&token=a8b22d70-3af4-4f09-9ca1-c270c559f2ce" alt="" width="100%">
+    </a>
+  </div>
+
 
   <mat-nav-list>
     <a mat-list-item class="ps-md-4 pe-md-6" [routerLink]="link.url" *ngFor="let link of linksAdmin"  [activated]="rla.isActive" routerLinkActive="bg-light bg-opacity-10" #rla="routerLinkActive">

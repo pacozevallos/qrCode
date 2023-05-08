@@ -26,15 +26,16 @@
 
 <mat-drawer-container>
 
-  <mat-drawer class="position-fixed" #drawer [fixedInViewport]="true" mode="side" opened>
+  <mat-drawer class="position-fixed" #drawer [fixedInViewport]="true" mode="side" [opened]="visible" (window:resize)="onResize($event)">
     <app-menu-admin [user]="user"></app-menu-admin>
   </mat-drawer>
 
   <mat-drawer-content>
-    <!-- <app-header></app-header> -->
     <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
-    <router-outlet></router-outlet>
-    <!-- <app-footer></app-footer> -->
+    <app-header-admin [negocio]="negocio"></app-header-admin>
+    <div class="p-3 p-md-5">
+      <router-outlet></router-outlet>
+    </div>
   </mat-drawer-content>
 
 </mat-drawer-container>
