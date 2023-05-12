@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDrawerMode } from '@angular/material/sidenav';
 import { Negocio } from 'src/app/classes/negocio';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -36,6 +37,7 @@ export class AdminComponent implements OnInit {
   activeLink = this.links[0];
   user;
   visible: boolean;
+  mode: MatDrawerMode;
 
   constructor(
     private afs: AngularFirestore,
@@ -54,11 +56,13 @@ export class AdminComponent implements OnInit {
     });
 
     this.visible = (window.innerWidth <= 400) ? false : true;
+    this.mode = (window.innerWidth <= 400) ? 'over' : 'side';
 
   }
 
   onResize(event: any) {
     this.visible = (event.target.innerWidth <= 400) ? false : true
+    this.mode = (event.target.innerWidth <= 400) ? 'over' : 'side';
   }
 
 

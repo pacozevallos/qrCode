@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { MatDrawer, MatDrawerToggleResult } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Negocio } from 'src/app/classes/negocio';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,6 +14,7 @@ export class HeaderAdminComponent implements OnInit {
 
   
   @Input() negocio: Negocio;
+  @Input() drawer: MatDrawer;
 
   user;
 

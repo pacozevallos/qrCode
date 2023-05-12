@@ -1,5 +1,63 @@
-<div class="bg-white" *ngIf="user && negocio">
+<!-- <div class="bg-white" *ngIf="user && negocio">
+
 	<div class="container">
+
+		<div class="py-3 d-flex justify-content-between align-items-center">
+
+			<div class="d-flex gap-2 align-items-center">
+
+				<a class="h4 mb-0 text-dark" [routerLink]=" '/admin/productos' ">{{negocio.nombreNegocio}}</a>
+
+				<a class="btn btn-light btn-sm text-primary" [href]="urlTienda" target="_blank">
+					<span class="me-1 d-none d-md-inline-block">Ver tienda</span>
+					<i-tabler name="external-link"></i-tabler>
+				</a>
+
+			</div>
+
+			<div>
+				<button mat-icon-button class="btn btn-circle" (click)="drawer.toggle()">
+					<i-tabler name="menu"></i-tabler>
+				</button>
+			</div>
+
+			<div class="d-flex align-items-center gap-2 gap-md-3">
+
+				<a class="btn btn-outline-primary btn-sm" routerLink="/admin/cuenta">
+					<span class="me-1 d-none d-md-inline-block">Mejorar plan</span>
+					<i-tabler name="rocket"></i-tabler>
+				</a>
+
+				<div class="text-end d-none d-md-block">
+					<p class="fw-normal d-block mb-0">{{user.email}}</p>
+				</div>
+
+				<button mat-icon-button [matMenuTriggerFor]="menu">
+					<i-tabler name="dots-vertical"></i-tabler>
+				</button>
+				<mat-menu #menu="matMenu">
+					<button mat-menu-item (click)="item.function()" *ngFor="let item of linksAdmin">
+						<i-tabler [name]="item.icon" class="me-2 text-muted"></i-tabler>
+						<span>{{item.nombre}}</span>
+					</button>
+				</mat-menu>
+
+			</div>
+
+		</div>
+	</div>
+</div> -->
+
+
+
+
+
+
+
+<div class="bg-light" *ngIf="user && negocio">
+
+	<div class="container">
+		
 		<div class="py-3 d-flex justify-content-between align-items-center">
 
 
@@ -12,6 +70,13 @@
 					<i-tabler name="external-link"></i-tabler>
 				</a>
 
+			</div>
+
+
+			<div>
+				<button mat-icon-button class="btn btn-circle" (click)="drawer.toggle()">
+					<i-tabler name="menu"></i-tabler>
+				</button>
 			</div>
 
 
