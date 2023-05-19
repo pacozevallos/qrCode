@@ -15,6 +15,7 @@ import { EditarItemComponent } from '../components/admin/editar-item/editar-item
 import { CategoriasComponent } from '../components/admin/categorias/categorias.component';
 
 
+
 const routes: Routes = [
   {
     path: '', component: AdminComponent,

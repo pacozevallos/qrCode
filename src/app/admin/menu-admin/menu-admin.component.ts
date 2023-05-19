@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { UserProfile } from 'firebase/auth';
+import { Negocio } from 'src/app/classes/negocio';
 
 @Component({
   selector: 'app-menu-admin',
@@ -6,6 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu-admin.component.scss']
 })
 export class MenuAdminComponent {
+
+  @Input() user: UserProfile;
+  @Input() negocio: Negocio;
+
+  urlTienda: string;
+
+  origin = window.location.origin;
 
   linksAdmin = [
     {
@@ -30,5 +39,20 @@ export class MenuAdminComponent {
       icon: 'user-circle',
     },
   ];
+
+  constructor(
+    private cd: ChangeDetectorRef
+  ) {}
+
+  // ngOnInit(): void {
+  //   this.urlTienda = `${window.location.origin}/tienda/${this.negocio?.id}`;
+  // }
+
+  ngAfterViewInit() {
+    
+    this.urlTienda = `${window.location.origin}/tienda/${this.negocio?.id}`;
+    this.cd.detectChanges();
+  
+  }
 
 }

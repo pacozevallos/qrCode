@@ -12,9 +12,6 @@ $my-theme: mat.define-dark-theme((
 @include mat.all-component-themes($my-theme);
 
 
-
-
-
 $border-radius-sm: 0.5rem;
 $border-radius: 0.75rem;
 $border-radius-lg: 1rem;
@@ -37,12 +34,12 @@ $btn-border-width: 2px;
 $btn-font-weight: 400;
 $btn-padding-y: 0.75rem;
 $btn-padding-x: 1.1rem;
-$btn-padding-y-sm: 0.5rem;
-$btn-padding-x-sm: 0.6rem;
+$btn-padding-y-sm: 0.45rem;
+$btn-padding-x-sm: 1rem;
 $btn-padding-y-lg: 1rem;
 $btn-padding-x-lg: 1.5rem;
 $btn-border-radius: 0.4rem;
-$btn-border-radius-sm: 0.3rem;
+$btn-border-radius-sm: 0.35rem;
 $btn-border-radius-lg: 0.5rem;
 
 
@@ -114,10 +111,10 @@ a, .btn-link {
 //   text-decoration: underline;
 // }
 
-*:focus {
-  // outline: 0px !important;
-  box-shadow: none !important;
-}
+// *:focus {
+//   // outline: 0px !important;
+//   box-shadow: none !important;
+// }
 
 .textPrimaryDark {
   color: darken($primary, 10%);
@@ -964,18 +961,25 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   object-fit: cover;
 }
 
+.imageLogoDrawer {
+  width: 66px;
+  height: 66px;
+  object-fit: cover;
+}
+
 .mat-tab-nav-bar, .mat-tab-header {
   // border-bottom: 1px solid rgba(0,0,0,.12);
   border-bottom: none !important;
 }
 
 .cardConfig {
-  background-color: white;
-  padding: 2.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0px 1px 2px rgba($dark, 0.2);
+  // background-color: white;
+  padding: 1.5rem 2rem;
+  border: 1px solid rgba($dark, 0.15);
+  border-radius: 0.6rem;
+  // box-shadow: 0px 1px 2px rgba($dark, 0.2);
   @include media-breakpoint-only(xs) {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   .h5 {
@@ -1181,4 +1185,16 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   font-weight: inherit !important;
   padding: 0px !important;
   line-height: inherit !important;
+}
+
+.sizeDrawer {
+  width: 280px;
+  @include media-breakpoint-only(xs) {
+    width: 70%;
+  }
+}
+
+.mat-drawer-container {
+  background-color: white !important
+  // color: rgba(0,0,0,.87);
 }

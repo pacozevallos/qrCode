@@ -14,6 +14,10 @@ export class AdminComponent implements OnInit {
 
   idNegocio: string;
   negocio;
+  
+  user;
+  visible: boolean;
+  mode: MatDrawerMode;
 
   links = [
     {
@@ -35,9 +39,8 @@ export class AdminComponent implements OnInit {
   ];
 
   activeLink = this.links[0];
-  user;
-  visible: boolean;
-  mode: MatDrawerMode;
+
+  
 
   constructor(
     private afs: AngularFirestore,

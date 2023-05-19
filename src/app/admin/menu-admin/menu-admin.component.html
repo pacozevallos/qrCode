@@ -1,24 +1,68 @@
 <div class="bg-dark h-100 py-3 py-md-4">
 
-  <div class="ps-md-4 pe-md-6">
-    <a routerLink="/admin">
-      <img src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/logoQatuColor.svg?alt=media&token=a8b22d70-3af4-4f09-9ca1-c270c559f2ce" alt="" width="100%">
-    </a>
-  </div>
+  <div class="d-flex flex-column h-100 ">
 
+    <div class="d-flex flex-column gap-4">
 
-  <mat-nav-list>
-    <a mat-list-item class="ps-md-4 pe-md-6" [routerLink]="link.url" *ngFor="let link of linksAdmin"  [activated]="rla.isActive" routerLinkActive="bg-light bg-opacity-10" #rla="routerLinkActive">
-      <div [ngClass]=" rla.isActive ? 'text-white' : 'text-white-50' ">
-        <i-tabler class="me-2" [name]="link.icon" style="stroke-width: 1;"></i-tabler>
-        <span class="fw-light" >{{link.nombre}}</span>
+      <!-- <div class="">
+        <a routerLink="/admin">
+          <img src="https://firebasestorage.googleapis.com/v0/b/qrcode-3b121.appspot.com/o/logoQatuColor.svg?alt=media&token=a8b22d70-3af4-4f09-9ca1-c270c559f2ce" alt="" width="100%">
+        </a>
+      </div> -->
+
+      <div class="d-flex gap-2 px-4 px-md-5">
+
+        <!-- <div class="imageLogoDrawer rounded-circle border bg-white" style="background-size: cover;"
+          [ngStyle]=" { 'background-image': 'url(' + negocio?.imageLogo + ')' }">
+          <div class="d-flex justify-content-center align-items-center h-100" *ngIf="!negocio?.imageLogo">
+            <span class="h3 mb-0 fw-bold">{{negocio?.nombreNegocio | slice:0:1}}</span>
+          </div>
+        </div> -->
+
+        <div>
+          <p class="h4 fw-light mb-2 text-white">{{negocio?.nombreNegocio}}</p>
+          <a class="link-secondary small" [href]=" origin + '/tienda/' + negocio?.id " target="_blank">
+            <span class="me-1">Ver tienda</span>
+            <i-tabler name="external-link"></i-tabler>
+          </a>
+        </div>
+       
       </div>
-    </a>
-  </mat-nav-list>
+    
+      <mat-nav-list>
+        <a mat-list-item class="px-4 px-md-5" [routerLink]="link.url" *ngFor="let link of linksAdmin"  [activated]="rla.isActive" routerLinkActive="bg-light bg-opacity-10" #rla="routerLinkActive">
+          <div [ngClass]=" rla.isActive ? 'text-white' : 'text-white-50' ">
+            <i-tabler class="me-2" [name]="link.icon" style="stroke-width: 1.5;"></i-tabler>
+            <span class="fw-light" >{{link.nombre}}</span>
+          </div>
+        </a>
+      </mat-nav-list>
 
-  <div class="ps-md-4 pe-md-6">
-    <i-tabler class="me-2" name="logout" style="stroke-width: 1;"></i-tabler>
-    <span class="fw-light" >Cerrar sesión</span>
+    </div>
+
+  
+    <div class="d-flex flex-column gap-2 mt-auto px-4 px-md-5">
+
+      <button class="btn btn-outline-success">
+        <i-tabler name="rocket"></i-tabler>
+        <span class="ms-1">Mejorar plan</span>
+      </button>
+
+      <mat-nav-list>
+        <a mat-list-item class="px-0">
+          <div class="text-white-50">
+            <i-tabler class="me-2" name="logout" style="stroke-width: 1.5;"></i-tabler>
+            <span class="fw-light" >Cerrar sesión</span>
+          </div>
+          
+        </a>
+      </mat-nav-list>
+     
+      
+    </div>
+
   </div>
+
+  
 
 </div>

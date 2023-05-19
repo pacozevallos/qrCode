@@ -37,11 +37,11 @@ export class PlanComponent implements OnInit {
       this.planActual = this.users.find( user => user.uid === this.user.uid).plan;
       // console.log(this.planActual);
 
-      if (this.planActual === 'Plan Free') {
-        this.caracteristicasPlan = this.ds.planes.find( plan => plan.nombre === 'Plan Free').caracteristicas;
+      if (this.planActual === 'Free') {
+        this.caracteristicasPlan = this.ds.planes.find( plan => plan.nombre === 'Free').caracteristicas;
       }
-      if (this.planActual === 'Plan Power Mensual') {
-        this.caracteristicasPlan = this.ds.planes.find( plan => plan.nombre === 'Plan Power').caracteristicas;
+      if (this.planActual === 'Power Mensual') {
+        this.caracteristicasPlan = this.ds.planes.find( plan => plan.nombre === 'Power').caracteristicas;
       }
 
     });

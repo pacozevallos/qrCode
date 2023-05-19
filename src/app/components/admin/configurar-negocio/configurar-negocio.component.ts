@@ -30,6 +30,7 @@ export class ConfigurarNegocioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     const user = firebase.default.auth().currentUser;
     this.paises = this.ds.paises;
 
@@ -49,6 +50,10 @@ export class ConfigurarNegocioComponent implements OnInit {
       this.formNegocio.get('prefijo').setValue(paisSelect.prefijo);
       this.formNegocio.get('moneda').setValue(paisSelect.moneda);
     });
+
+    // this.formNegocio.valueChanges.subscribe(value => {
+    //   console.log(value);
+    // });
 
   }
 

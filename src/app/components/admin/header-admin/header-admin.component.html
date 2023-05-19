@@ -58,50 +58,30 @@
 
 	<div class="container">
 		
-		<div class="py-3 d-flex justify-content-between align-items-center">
+		<div class="py-1 px-0 px-md-5 d-flex justify-content-between align-items-center">
 
-
-			<div class="d-flex gap-2 align-items-center">
-
+			<!-- <div class="d-flex gap-2 align-items-center">
 				<a class="h4 mb-0 text-dark" [routerLink]=" '/admin/productos' ">{{negocio.nombreNegocio}}</a>
-
 				<a class="btn btn-light btn-sm text-primary" [href]="urlTienda" target="_blank">
 					<span class="me-1 d-none d-md-inline-block">Ver tienda</span>
 					<i-tabler name="external-link"></i-tabler>
 				</a>
-
-			</div>
-
+			</div> -->
 
 			<div>
 				<button mat-icon-button class="btn btn-circle" (click)="drawer.toggle()">
-					<i-tabler name="menu"></i-tabler>
+					<i-tabler name="menu" class="text-primary"></i-tabler>
 				</button>
 			</div>
 
 
 
 
-			<div class="d-flex align-items-center gap-2 gap-md-3">
+			<div class="d-flex align-items-center gap-1">
 
-				<!-- <a class="btn btn-light btn-sm text-primary" [href]="urlTienda" target="_blank">
-					<span class="me-1 d-none d-md-inline-block">Ver tienda</span>
-					<i-tabler name="building-store"></i-tabler>
-				</a> -->
-
-				<a class="btn btn-outline-primary btn-sm" routerLink="/admin/cuenta">
-					<span class="me-1 d-none d-md-inline-block">Mejorar plan</span>
-					<i-tabler name="rocket"></i-tabler>
-				</a>
-
-				<div class="text-end d-none d-md-block">
-					<p class="fw-normal d-block mb-0">{{user.email}}</p>
-					<!-- <p class="extraSmall mb-0">{{user.email}}</p> -->
+				<div class="text-end d-md-block">
+					<p class="text-muted mb-0">{{user.email}}</p>
 				</div>
-
-				<!-- <button class="photoUser" [matMenuTriggerFor]="menu">
-						<img class="" src="https://media-exp1.licdn.com/dms/image/C5603AQETYOc7RHHB9Q/profile-displayphoto-shrink_200_200/0/1517498194143?e=1661990400&v=beta&t=9oQl4SMZUmgpperLo9voBNSEFV8YxJcXup-6XRV0khM" alt="">
-				</button> -->
 
 				<button mat-icon-button [matMenuTriggerFor]="menu">
 					<i-tabler name="dots-vertical"></i-tabler>
