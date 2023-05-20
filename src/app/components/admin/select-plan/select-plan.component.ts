@@ -18,6 +18,7 @@ export class SelectPLanComponent implements OnInit {
   opcionSelect;
 
   planFree;
+  
 
   constructor(
     private ds: DataService
@@ -26,6 +27,8 @@ export class SelectPLanComponent implements OnInit {
   ngOnInit(): void {
     this.planes = this.ds.planes;
     this.estado = 'Mensual';
+    this.planPower = this.ds.planes.find( find => find.nombre === 'Power');
+    console.log(this.planPower);
   }
 
   radioChange(event: MatRadioChange) {

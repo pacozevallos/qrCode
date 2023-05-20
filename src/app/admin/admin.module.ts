@@ -30,6 +30,8 @@ import { ShareAdminComponent } from '../components/admin/share-admin/share-admin
 import { ConfigurarNegocioComponent } from '../components/admin/configurar-negocio/configurar-negocio.component';
 import { AgregarRedesComponent } from '../components/admin/agregar-redes/agregar-redes.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
+import { MejoraPlanComponent } from './mejora-plan/mejora-plan.component';
+import { SelectPLanComponent } from '../components/admin/select-plan/select-plan.component';
 
 
 
@@ -52,6 +54,8 @@ import { MenuAdminComponent } from './menu-admin/menu-admin.component';
     ConfigurarNegocioComponent,
     AgregarRedesComponent,
     MenuAdminComponent,
+    MejoraPlanComponent,
+    SelectPLanComponent
   ],
   imports: [
     CommonModule,

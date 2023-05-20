@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { UserProfile } from 'firebase/auth';
 import { Negocio } from 'src/app/classes/negocio';
+import { MejoraPlanComponent } from '../mejora-plan/mejora-plan.component';
 
 @Component({
   selector: 'app-menu-admin',
@@ -41,7 +43,8 @@ export class MenuAdminComponent {
   ];
 
   constructor(
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private matDialog: MatDialog
   ) {}
 
   // ngOnInit(): void {
@@ -53,6 +56,12 @@ export class MenuAdminComponent {
     this.urlTienda = `${window.location.origin}/tienda/${this.negocio?.id}`;
     this.cd.detectChanges();
   
+  }
+
+  openModalMejorarPlan() {
+    this.matDialog.open(MejoraPlanComponent, {
+      panelClass: 'dialogLarge'
+    })
   }
 
 }

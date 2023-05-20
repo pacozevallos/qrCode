@@ -151,7 +151,7 @@ import { SafePipe } from './pipes/safe.pipe';
 		PlanComponent,
 		ContraseniaComponent,
 		ActualizarDatosComponent,
-		SelectPLanComponent,
+		// SelectPLanComponent,
 		AgregarCelularComponent,
 		HeaderNegocioComponent,
 		ContentNegocioComponent,
