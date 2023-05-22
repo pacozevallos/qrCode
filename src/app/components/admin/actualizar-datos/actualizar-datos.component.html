@@ -9,7 +9,7 @@
 
   <div class="cardConfig" *ngIf="user">
 
-    <p class="h5">Actualizar datos</p>
+    <p class="lead">Actualizar datos</p>
 
     <form [formGroup]="formDatos" (submit)="onSubmit()" novalidate class="row">
 
@@ -25,16 +25,16 @@
         <mat-error *ngIf="formDatos.controls['email'].invalid">{{ errorEmail() }}</mat-error>
       </mat-form-field>
 
-      <div style="width: 200px;">
-        <div class="d-grid gap-2">
-          <button class="btn btn-outline-primary">
-            <span class="spinnerOutlinePrimary d-flex justify-content-center" *ngIf="loading">
-              <mat-spinner class="text-center" [diameter]="24" class="float-left mr-2"></mat-spinner>
-            </span>
-            <span *ngIf="!loading">Actualizar datos</span>
-          </button>
-        </div>
+      
+      <div class="text-end">
+        <button class="btn btn-primary btn-sm" [disabled]="disabled">
+          <span class="spinnerOutlinePrimary d-flex justify-content-center" *ngIf="loading">
+            <mat-spinner class="text-center" [diameter]="24" class="float-left mr-2"></mat-spinner>
+          </span>
+          <span *ngIf="!loading">GUARDAR</span>
+        </button>
       </div>
+      
 
     </form>
 

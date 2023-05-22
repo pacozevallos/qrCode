@@ -53,13 +53,29 @@
     </mat-form-field>
 
     <div class="d-flex justify-content-end mt-2">
-      <button class="btn btn-primary btn-sm">
-        <span class="d-flex justify-content-center myColorSpinnerWhite" *ngIf="loading">
+      <button class="btn btn-primary btn-sm text-uppercase" [disabled]="disabled">
+        <span class="d-flex justify-content-center spinnerWhite" *ngIf="loading">
           <mat-spinner class="" [diameter]="24"></mat-spinner>
         </span>
         <span *ngIf="!loading">Guardar</span>
       </button>
     </div>
+
+    <!-- <div class="text-end mt-2">
+
+      <button class="btn btn-primary" [disabled]="disabled">
+        <span class="spinner-border spinner-border-sm"></span>
+        <span>Guardar</span>
+      </button>
+
+      <button class="btn btn-primary text-uppercase" type="button" [disabled]="disabled">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span class="">Loading...</span>
+      </button>
+
+    </div> -->
+
+    
 
   </form>
 

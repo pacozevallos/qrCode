@@ -17,6 +17,8 @@ export class PlanComponent implements OnInit {
   planActual;
   caracteristicasPlan = [];
 
+  planFree:any;
+
   constructor(
     private fs: FirebaseService,
     private ds: DataService,
@@ -25,6 +27,8 @@ export class PlanComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.planFree = this.ds.planes.find(find => find.nombre ==='Free')
 
     this.afAuth.authState.subscribe( user => {
       this.user = user;

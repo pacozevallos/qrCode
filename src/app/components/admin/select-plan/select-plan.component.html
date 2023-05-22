@@ -89,85 +89,32 @@
 
 
 <div class="">
-  
 
-  <!-- <div class="d-flex align-items-center mb-3 mb-md-4">
-    <button mat-icon-button routerLink="/admin/cuenta" class="me-2">
-      <i-tabler name="arrow-left"></i-tabler>
-    </button>
-    <p class="fs-3 mb-0">Plan Power</p>
-  </div> -->
+  <p class="lead">Cámbiate al Plan Power</p>
 
+  <div class="d-flex flex-column flex-md-row gap-3 gap-md-4">
 
-  <p class="fs-3 mb-0">Cámbiate al Plan Power</p>
-
-
-
-  <div class="row">
-
-    <div class="col-md-6">
-
-      <!-- <p class="h4 fw-normal mb-3">{{planPower.nombre}}</p> -->
-
-      <!-- <div>
-
-        <div class="mb-2">
-          <mat-radio-group class="" color="primary">
-            <mat-radio-button class="me-3" *ngFor="let opcion of planPower.opciones" [checked]="opcion.selected"
-              (change)="radioChange($event)" [value]="opcion.nombre">{{opcion.nombre}}</mat-radio-button>
-          </mat-radio-group>
-        </div>
-        
-        <div class="d-flex gap-2" *ngFor="let opcion of planPower.opciones">
-          <p *ngIf="estado === opcion.nombre">
-            <span class="h2 me-1">USD {{opcion.precio | number:'1.2-2'}}</span>
-            <span class="h6">/ {{opcion.periodo}}</span>
-          </p>
-        </div>
-
-      </div> -->
-
+    <div class="">
       <div class="d-flex flex-column gap-1">
         <div *ngFor="let caracateristica of planPower.caracteristicas" class="d-flex">
           <span class="me-2">
-            <i-tabler name="check" [ngClass]=" planPower.nombre === 'Plan Power' ? 'text-success' : '' "></i-tabler>
+            <i-tabler class="text-success" name="check"></i-tabler>
           </span>
-          <span class="small pt-1">{{caracateristica}}</span>
+          <span class="pt-1 small">{{caracateristica}}</span>
         </div>
       </div>
-
-
-      <!-- <div class="d-grid">
-
-        <a class="btn btn-primary shadow" [href]="goToUrl(planPower.nombre)" target="_blank">Plan
-          <span *ngFor="let opcion of planPower.opciones">
-            <span *ngIf="estado === opcion.nombre ">{{opcion.nombre}} USD {{opcion.precio |
-              number:'1.2-2'}}</span>
-          </span>
-        </a>
-        
-
-      </div> -->
-
     </div>
 
-    <div class="col-md-6">
-
-      <div class="d-flex flex-column align-items-stretch gap-3 h-100">
-
-        <a class="btn h-100 rounded" [ngClass]=" opcion.nombre === 'Anual' ? 'btn-primary shadow' : 'btn-outline-primary' " *ngFor="let opcion of planPower.opciones.reverse()" [href]="goToUrl(planPower.nombre)" target="_blank">
-          <div class="d-flex justify-content-center gap-3 align-items-center h-100">
-            <span class="lead"> Plan {{opcion.nombre}} USD {{opcion.precio | number:'1.2-2'}}</span>
+    <div class="flex-md-shrink-0">
+      <div class="d-grid gap-3">
+        <a class="btn btn-lg h-100" [ngClass]=" opcion.nombre === 'Anual' ? 'btn-primary shadow' : 'btn-outline-primary' " *ngFor="let opcion of planPower.opciones.reverse()" [href]="goToUrl(planPower.nombre)" target="_blank">
+          <span class="me-2">Power {{opcion.nombre}} USD {{opcion.precio | number:'1.2-2'}}</span>
+          <!-- <span>
             <i-tabler name="arrow-right"></i-tabler>
-          </div>
+          </span> -->
         </a>
-
       </div>
-
     </div>
-
-
-
 
   </div>
 

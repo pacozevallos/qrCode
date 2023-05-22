@@ -108,9 +108,7 @@ export class DataService {
       caracteristicas : [
         'Hasta 20 productos',
         'Vende por WhatsApp',
-        'Personaliza tu negocio',
         'Cambios en tiempo real',
-        'Comparte con código QR',
       ],
       nameButton: 'Empieza gratis',
       urlButton: '/registro'
@@ -142,7 +140,7 @@ export class DataService {
         'Personaliza tu negocio',
         'Cambios en tiempo real',
         'Comparte con código QR',
-        'Asistencia técnica'
+        'Asistencia técnica para crear tu tienda'
       ],
       nameButton: 'Plan Power',
       urlButton: 'https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-8K665214Y89547137MLSBCUQ'

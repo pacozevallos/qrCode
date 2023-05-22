@@ -60,6 +60,7 @@ export class MenuAdminComponent {
 
   openModalMejorarPlan() {
     this.matDialog.open(MejoraPlanComponent, {
+      autoFocus: false,
       panelClass: 'dialogLarge'
     })
   }

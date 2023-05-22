@@ -525,6 +525,7 @@ table {
 
 .dialogLarge {
   .mdc-dialog__surface {
+    // width: 80wh !important;
     padding: 3rem !important;
     @include media-breakpoint-only(xs) {
       width: initial !important;
@@ -974,7 +975,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 
 .cardConfig {
   // background-color: white;
-  padding: 1.5rem 2rem;
+  padding: 2.5rem 3rem;
   border: 1px solid rgba($dark, 0.15);
   border-radius: 0.6rem;
   // box-shadow: 0px 1px 2px rgba($dark, 0.2);

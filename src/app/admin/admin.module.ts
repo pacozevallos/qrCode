@@ -32,6 +32,43 @@ import { AgregarRedesComponent } from '../components/admin/agregar-redes/agregar
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { MejoraPlanComponent } from './mejora-plan/mejora-plan.component';
 import { SelectPLanComponent } from '../components/admin/select-plan/select-plan.component';
+import { ActualizarDatosComponent } from '../components/admin/actualizar-datos/actualizar-datos.component';
+import { AdicionalesComponent } from '../components/admin/adicionales/adicionales.component';
+import { AgregarCelularComponent } from '../components/admin/agregar-celular/agregar-celular.component';
+import { AgregarNegocioComponent } from '../components/admin/agregar-negocio/agregar-negocio.component';
+import { CambiarPLanComponent } from '../components/admin/cambiar-plan/cambiar-plan.component';
+import { CardItemAdminComponent } from '../components/admin/card-item-admin/card-item-admin.component';
+import { CardNegocioAdminComponent } from '../components/admin/card-negocio-admin/card-negocio-admin.component';
+import { CategoriasComponent } from '../components/admin/categorias/categorias.component';
+import { ContraseniaComponent } from '../components/admin/contrasenia/contrasenia.component';
+import { CrearCategoriaItemComponent } from '../components/admin/crear-categoria-item/crear-categoria-item.component';
+import { CuentaComponent } from '../components/admin/cuenta/cuenta.component';
+import { DetalleItemAdminComponent } from '../components/admin/detalle-item-admin/detalle-item-admin.component';
+import { DuplicarNegocioComponent } from '../components/admin/duplicar-negocio/duplicar-negocio.component';
+import { EditarNegocioComponent } from '../components/admin/editar-negocio/editar-negocio.component';
+import { EliminarItemComponent } from '../components/admin/eliminar-item/eliminar-item.component';
+import { EliminarNegocioComponent } from '../components/admin/eliminar-negocio/eliminar-negocio.component';
+import { FooterAdminComponent } from '../components/admin/footer-admin/footer-admin.component';
+import { GraciasPlanPowerComponent } from '../components/admin/gracias-plan-power/gracias-plan-power.component';
+import { GraciasPlanComponent } from '../components/admin/gracias-plan/gracias-plan.component';
+import { ListaNegociosComponent } from '../components/admin/lista-negocios/lista-negocios.component';
+import { PagoExitoPLanAnualComponent } from '../components/admin/pago-exito-plan-anual/pago-exito-plan-anual.component';
+import { PagoExitoPLanMensualComponent } from '../components/admin/pago-exito-plan-mensual/pago-exito-plan-mensual.component';
+import { PlanComponent } from '../components/admin/plan/plan.component';
+import { UpgradeComponent } from '../components/admin/upgrade/upgrade.component';
+import { VistaQrComponent } from '../components/admin/vista-qr/vista-qr.component';
+import { ColorComponent } from '../components/public/color/color.component';
+import { CompartirItemComponent } from '../components/public/compartir-item/compartir-item.component';
+import { CompartirNegocioComponent } from '../components/public/compartir-negocio/compartir-negocio.component';
+import { ContentNegocioComponent } from '../components/public/content-negocio/content-negocio.component';
+import { ContraseniaGraciasComponent } from '../components/public/contrasenia-gracias/contrasenia-gracias.component';
+import { DestacadosNegocioComponent } from '../components/public/destacados-negocio/destacados-negocio.component';
+import { FooterNegocioComponent } from '../components/public/footer-negocio/footer-negocio.component';
+import { HeaderNegocioComponent } from '../components/public/header-negocio/header-negocio.component';
+import { ItemsNegocioComponent } from '../components/public/items-negocio/items-negocio.component';
+import { SafePipe } from '../pipes/safe.pipe';
+import { CloseDialogComponent } from './close-dialog/close-dialog.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 
@@ -55,7 +92,44 @@ import { SelectPLanComponent } from '../components/admin/select-plan/select-plan
     AgregarRedesComponent,
     MenuAdminComponent,
     MejoraPlanComponent,
-    SelectPLanComponent
+    SelectPLanComponent,
+
+    ListaNegociosComponent,
+		AgregarNegocioComponent,
+		CrearCategoriaItemComponent,
+		EliminarItemComponent,
+		CardItemAdminComponent,
+		ColorComponent,
+		EditarNegocioComponent,
+		VistaQrComponent,
+		DetalleItemAdminComponent,
+		EliminarNegocioComponent,
+		AdicionalesComponent,
+		UpgradeComponent,
+		CardNegocioAdminComponent,
+		CuentaComponent,
+		PlanComponent,
+		ContraseniaComponent,
+		ActualizarDatosComponent,
+		AgregarCelularComponent,
+		HeaderNegocioComponent,
+		ContentNegocioComponent,
+		ItemsNegocioComponent,
+		FooterNegocioComponent,
+		CompartirNegocioComponent,
+		CompartirItemComponent,
+		GraciasPlanPowerComponent,
+		GraciasPlanComponent,
+		ContraseniaGraciasComponent,
+		PagoExitoPLanMensualComponent,
+		PagoExitoPLanAnualComponent,
+		CambiarPLanComponent,
+		DuplicarNegocioComponent,
+		CategoriasComponent,
+		FooterAdminComponent,
+  CloseDialogComponent,
+  LoadingComponent,
+    
   ],
   imports: [
     CommonModule,

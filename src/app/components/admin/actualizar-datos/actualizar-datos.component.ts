@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/classes/user';
 
@@ -13,11 +13,12 @@ export class ActualizarDatosComponent implements OnInit {
 
   user: User;
   loading: boolean;
-  formDatos: UntypedFormGroup;
+  formDatos: FormGroup;
+  disabled = true;
 
   constructor(
     private afAuth: AngularFireAuth,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private router: Router
   ) { }
 
@@ -29,6 +30,10 @@ export class ActualizarDatosComponent implements OnInit {
       this.formDatos = this.fb.group({
         nombre: [this.user.displayName, Validators.required],
         email: [ {value: this.user.email, disabled: true}, [Validators.required, Validators.email] ],
+      });
+
+      this.formDatos.get('nombre').valueChanges.subscribe( res => {
+        res === this.user.displayName ? this.disabled = true : this.disabled = false
       });
 
     });
@@ -70,12 +75,12 @@ export class ActualizarDatosComponent implements OnInit {
     // });
   }
 
-  validateAllFormFields(formGroup: UntypedFormGroup) {
+  validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof UntypedFormControl) {
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof UntypedFormGroup) {
+      } else if (control instanceof FormGroup) {
         this.validateAllFormFields(control);
       }
     });

@@ -1,11 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Timestamp } from '@angular/fire/firestore';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as firebase from 'firebase/compat/app';
 import { DataService } from 'src/app/services/data.service';
 import { IdValidatorService } from 'src/app/services/id-validator.service';
 import { Negocio } from '../../../classes/negocio';
+import { MatDialog } from '@angular/material/dialog';
+import { LoadingComponent } from 'src/app/admin/loading/loading.component';
 
 @Component({
   selector: 'app-configurar-negocio',
@@ -16,34 +18,52 @@ export class ConfigurarNegocioComponent implements OnInit {
 
   @Input() negocio: Negocio;
 
-  formNegocio: UntypedFormGroup;
+  formNegocio: FormGroup;
   loading: boolean;
   negocioId: string;
   hrefCurrent = window.location.origin;
   paises = [];
+  disabled = true;
+  newNegocio;
 
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private idValidator: IdValidatorService,
     private afs: AngularFirestore,
-    private ds: DataService
+    private ds: DataService,
+    private matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
+
+    // console.log(this.negocio);
+
+    this.newNegocio = {
+      nombreNegocio: this.negocio.nombreNegocio,
+      pais: this.negocio.pais,
+      moneda: this.negocio.moneda,
+      prefijo: this.negocio.prefijo,
+      numeroWhatsApp: this.negocio.numeroWhatsApp,
+    };
+
+    console.log(this.newNegocio);
+    
+    
 
     const user = firebase.default.auth().currentUser;
     this.paises = this.ds.paises;
 
     this.formNegocio = this.fb.group({
       nombreNegocio: [this.negocio.nombreNegocio, Validators.required],
-      id: [{value: this.negocio.id, disabled: true}],
+      // id: [{value: this.negocio.id, disabled: true}],
       pais: [this.negocio.pais, Validators.required],
       moneda: [this.negocio.moneda, Validators.required],
       prefijo: [this.negocio.prefijo, Validators.required],
       numeroWhatsApp: [this.negocio.numeroWhatsApp, [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(9), Validators.maxLength(9)]],
-      autorId: [user.uid],
-      fechaModificacion: [Timestamp.now()]
+      // autorId: [user.uid],
+      // fechaModificacion: [Timestamp.now()]
     });
+
 
     this.formNegocio.get('pais').valueChanges.subscribe( res => {
       const paisSelect = this.paises.find( find => find.nombre === res);
@@ -51,15 +71,15 @@ export class ConfigurarNegocioComponent implements OnInit {
       this.formNegocio.get('moneda').setValue(paisSelect.moneda);
     });
 
-    // this.formNegocio.valueChanges.subscribe(value => {
-    //   console.log(value);
-    // });
+
+    this.formNegocio.valueChanges.subscribe( value => {
+      JSON.stringify(this.newNegocio) === JSON.stringify(value) ? this.disabled = true : this.disabled = false;
+    });
 
   }
 
   onSubmit() {
     if (this.formNegocio.valid) {
-      this.loading = true;
       this.guardarCambios();
     } else {
       this.validateAllFormFields(this.formNegocio);
@@ -67,22 +87,28 @@ export class ConfigurarNegocioComponent implements OnInit {
   }
 
   guardarCambios() {
+    this.loading = true;
     this.afs.doc('negocios/' + this.negocio.id).update(this.formNegocio.value)
     .then(() => {
       console.log('Negocio actualizado');
       this.loading = false;
+      this.disabled = true;
     });
   }
 
-  validateAllFormFields(formGroup: UntypedFormGroup) {
+  validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if (control instanceof UntypedFormControl) {
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof UntypedFormGroup) {
+      } else if (control instanceof FormGroup) {
         this.validateAllFormFields(control);
       }
     });
+  }
+
+  openModalLoading() {
+    this.matDialog.open(LoadingComponent)
   }
 
   errorNombreNegocio() {
