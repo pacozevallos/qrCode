@@ -23,6 +23,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class UploadImagesComponent {
 
+  
   @Input() itemId!: string;
   // @Output() archivos = new EventEmitter<FileItem[]>();
   @Output() maxNumFiles = new EventEmitter<number>();
